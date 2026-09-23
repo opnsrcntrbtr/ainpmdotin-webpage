@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEBI Circular RAG — AI-Native PM Case Study · AINPM.in</title>
+<meta name="description" content="How Ian Pinto built SEBI Circular RAG, an open-source AI-native MVP that answers questions over 1,490 SEBI circulars with citations, supersession awareness, as-of-date answers and abstention. Evals, trade-offs and open data.">
+<meta name="author" content="Ian Pinto">
+<link rel="canonical" href="https://ainpm.in/sebi-rag/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SEBI Circular RAG — an AI-native PM case study">
+<meta property="og:description" content="Cited answers over 1,490 SEBI circulars, or an honest abstention. Evals as the spec, trade-offs and open data.">
+<meta property="og:url" content="https://ainpm.in/sebi-rag/">
+<meta property="og:image" content="https://raw.githubusercontent.com/opnsrcntrbtr/sebi-circular-rag/main/docs/assets/demo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23fff'%3Eai%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%23e8871e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SEBI Circular RAG","applicationCategory":"BusinessApplication","operatingSystem":"Web",
+ "url":"https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo","codeRepository":"https://github.com/opnsrcntrbtr/sebi-circular-rag",
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},
+ "author":{"@type":"Person","name":"Ian Pinto","url":"https://ainpm.in/","sameAs":["https://www.linkedin.com/in/ian1980/","https://github.com/opnsrcntrbtr"]}}
+</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><i></i>AINPM.in</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#evals">Evals</a></li>
+      <li><a href="#decisions">Decisions</a></li>
+      <li><a href="#demo">Live demo</a></li>
+      <li><a href="#data">Open data</a></li>
+    </ul></nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle colour theme">◐</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Case study</div>
+
+  <div class="wrap phero" style="padding-top:28px">
+    <div>
+      <span class="pill-live">MVP · Live · Open source</span>
+      <h1>SEBI Circular RAG: <em>trustworthy answers</em> over Indian securities regulation</h1>
+      <p class="lede">Compliance and product teams at AMCs, brokers and fintechs work from hundreds of SEBI circulars, many of them amended, consolidated into master circulars, or superseded. I built an AI-native assistant that finds the right circular, cites it, tells you whether it's still in force, and says so when it doesn't know.</p>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Try it on this page</a>
+        <a class="btn ghost" href="https://github.com/opnsrcntrbtr/sebi-circular-rag" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+      <ul class="chips" style="margin-top:22px">
+        <li>Role: product owner &amp; builder</li><li>Jul–Sep 2026</li><li>Python · FAISS · BM25 · BGE-M3</li><li>Gradio on Hugging Face</li><li>Data: CC-BY-4.0</li>
+      </ul>
+    </div>
+    <figure class="shot">
+      <div class="bar"><i></i><i></i><i></i><span>Citations with in-force / superseded status</span></div>
+      <img src="https://raw.githubusercontent.com/opnsrcntrbtr/sebi-circular-rag/main/docs/assets/demo.webp" alt="SEBI Circular RAG interface showing numbered citations with circular numbers, supersession status, successor circulars and underlying regulations" width="1512" height="806">
+      <figcaption>A cited answer. Superseded circulars carry a warning and point to their successor.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div><b>1,490</b><span>circulars · 83,752 chunks</span></div>
+      <div><b>0.943</b><span>Recall@10 (full pipeline)</span></div>
+      <div><b>0.881</b><span>Citation recall</span></div>
+      <div><b>0.981</b><span>Abstention accuracy</span></div>
+    </div>
+    <p class="note">Full evaluation on 15 Aug 2026 over golden_v7 (260 adjudicated queries), measured when the corpus had 728 circulars. On 15 Sep 2026 the pipeline was re-run on the 1,490-circular index and still cleared all six quality gates.</p>
+  </div>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · The problem</span>
+        <h2>In regulation, a confident wrong answer is worse than no answer</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Rules change underneath you</h3><p>SEBI regularly amends circulars and folds them into master circulars. An answer based on a superseded circular can look right and still be non-compliant.</p></article>
+        <article class="card"><h3>"What applied then?" matters</h3><p>Audits, disputes and product reviews often need the rule as it stood on a specific date, not today's version.</p></article>
+        <article class="card"><h3>Generic chatbots guess</h3><p>General LLMs hallucinate circular numbers and rarely admit gaps. Every answer has to be checkable against the source.</p></article>
+      </div>
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card"><h3>Who it's for</h3><p>Compliance officers and product managers at mutual fund AMCs, brokers, depositories, RTAs and fintechs; RegTech builders; researchers working on Indian legal NLP.</p></div>
+        <div class="card"><h3>Job to be done</h3><p>"Help me find the circular that governs this, show me the exact text, tell me whether it still applies, and don't make anything up."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · Product principles</span>
+        <h2>Trust was the product requirement, not a feature</h2>
+        <p class="muted">These six rules shaped every design and model decision.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Cite everything</h3><p>Each claim links to a numbered circular and the exact passage it came from.</p></div></div>
+        <div class="step"><div><h3>Abstain when unsure</h3><p>A calibrated gate refuses out-of-scope or weakly supported questions, such as RBI or GST topics, instead of stretching SEBI text to fit.</p></div></div>
+        <div class="step"><div><h3>Know what's superseded</h3><p>A lineage graph of 4,577 supersession and amendment links demotes superseded circulars and names the one that replaced them.</p></div></div>
+        <div class="step"><div><h3>Answer "as of" a date</h3><p>Pick a date and retrieval scores against the rules in force then, excluding circulars issued later.</p></div></div>
+        <div class="step"><div><h3>Check its own work</h3><p>A faithfulness check flags any cited circular that wasn't in the retrieved context and adds a caution.</p></div></div>
+        <div class="step"><div><h3>Stay honest about limits</h3><p>Not legal advice, not SEBI-endorsed, and the coverage caveats are published with the data.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · How it works</span>
+        <h2>From SEBI PDFs to a grounded, checkable answer</h2>
+      </div>
+      <ol class="pipeline">
+        <li><h3>Ingest</h3><p>Scrape SEBI circulars and master circulars, extract PDF text, and validate corpus integrity.</p></li>
+        <li><h3>Section-aware chunking</h3><p>Split along the circular's own structure; prefix each chunk with circular number, subject and section.</p></li>
+        <li><h3>Lineage graph</h3><p>Mine references to build supersedes / amends edges and link circulars to the regulations they rely on.</p></li>
+        <li><h3>Hybrid retrieval</h3><p>BGE-M3 dense vectors (FAISS) plus BM25 keywords, fused with reciprocal rank fusion.</p></li>
+        <li><h3>Rerank</h3><p>A bge-reranker-v2-m3 cross-encoder re-scores the top 50 candidates.</p></li>
+        <li class="trust"><h3>Supersession &amp; as-of</h3><p>Demote superseded circulars; for dated questions, filter to what was in force on that date.</p></li>
+        <li class="trust"><h3>Abstention gate</h3><p>Topic-similarity thresholds decide whether there's enough evidence to answer at all.</p></li>
+        <li><h3>Grounded generation</h3><p>A small Qwen2.5 model writes the answer using only the retrieved passages.</p></li>
+        <li class="trust"><h3>Citation filter &amp; faithfulness</h3><p>Keep only citations the answer actually uses; flag any unsupported ones.</p></li>
+      </ol>
+      <div class="legend"><span><i style="background:var(--teal-soft);border:1px solid var(--teal)"></i>Retrieval &amp; generation</span><span><i style="background:var(--accent-soft);border:1px solid var(--saffron)"></i>Trust controls</span></div>
+      <p class="muted" style="margin-top:18px;font-size:.92rem">Runs local-first on Apple Silicon (MLX), with a FastAPI service and API keys. The public demo runs the same retrieval on a free Hugging Face CPU Space using a prebuilt index, so results match the local system.</p>
+    </div>
+  </section>
+
+  <section id="evals">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Evals as the spec</span>
+        <h2>260 adjudicated questions decide what ships</h2>
+        <p class="muted">Instead of a PRD with "should be accurate", the spec is a golden set. It is stratified by the ways regulatory search fails, reviewed row by row, and wired into gates that block regressions.</p>
+      </div>
+      <ul class="strata">
+        <li><b>40</b> title lookups</li><li><b>60</b> paraphrased body text</li><li><b>30</b> numbers &amp; tables</li><li><b>40</b> lineage / supersession</li><li><b>20</b> multi-hop</li><li><b>20</b> repealed legal basis</li><li><b>40</b> hard negatives</li><li><b>10</b> far negatives</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:22px">
+        <table>
+          <thead><tr><th>Metric</th><th>Result</th><th>What it tells a PM</th></tr></thead>
+          <tbody>
+            <tr><td>Recall@10</td><td class="v">0.943</td><td>The right circular is in the top 10 for 94% of answerable questions.</td></tr>
+            <tr><td>Context recall</td><td class="v">0.916</td><td>The passages sent to the model contain the needed evidence.</td></tr>
+            <tr><td>nDCG@10</td><td class="v">0.697</td><td>Ranking quality: how high the right circular appears.</td></tr>
+            <tr><td>Citation recall</td><td class="v">0.881</td><td>Answers cite the circulars they should.</td></tr>
+            <tr><td>Citation precision</td><td class="v">0.194</td><td>Still extra citations per answer. The known weak spot and the next target.</td></tr>
+            <tr><td>Abstention accuracy</td><td class="v">0.981</td><td>Correctly refuses or answers across both answerable and out-of-scope questions.</td></tr>
+            <tr><td>Warm answer latency</td><td class="v">~2.1 s</td><td>Local generation on Apple Silicon.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Source: project status log, full evaluation 15 Aug 2026 (728-circular corpus). Faithfulness is checked per answer but not yet reported as an aggregate metric. The test suite had 1,131 passing tests on 16 Sep 2026.</p>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · PM decisions &amp; trade-offs</span>
+        <h2>What I shipped, and what I deliberately didn't</h2>
+        <p class="muted">Every change was an experiment measured against the golden set. Saying no to plausible ideas was as important as saying yes.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Decision</th><th>Evidence</th><th>Call</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Enrich chunks with circular number, subject &amp; section</strong></td><td>Citation precision 0.60 → 0.74 on the earlier eval set</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Retrieve 10 contexts instead of 5</strong></td><td>Citation recall 0.772 → 0.888, but precision 0.177 → 0.119. Missing a governing circular costs more than an extra citation.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Post-hoc citation filter (cross-encoder, margin 0.35)</strong></td><td>Prompting the 1.5B model to cite selectively was a no-op. It emitted no parseable citations. A model-agnostic filter raised citation precision 88% at the chosen margin.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Fix mislabeled eval rows before tuning</strong></td><td>Re-labeling mislabeled abstain rows moved abstention accuracy 0.849 → 0.973. The model was right; the test was wrong.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td>HyDE (hypothetical-answer retrieval)</td><td>Recall@10 −2.3 pp (not significant) at 41× latency</td><td><span class="badge no">Rejected</span></td></tr>
+            <tr><td>SPLADE sparse retrieval leg</td><td>Looked promising (nDCG +0.029) but failed a pre-registered held-out confirmation</td><td><span class="badge no">Rejected</span></td></tr>
+            <tr><td>Qwen3-Reranker-0.6B instead of bge-reranker</td><td>Lower AUROC (0.799 vs 0.812), worse precision, 2× latency</td><td><span class="badge no">Rejected</span></td></tr>
+            <tr><td>Fine-tuning BGE-M3 on SEBI text</td><td>No significant nDCG@10 gain on any arm, so the base model stays</td><td><span class="badge no">Rejected</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:22px"><strong>The PM lesson:</strong> the biggest quality jump came from fixing evaluation data, not from a new model. In AI-native products, the eval set is the product spec, so it deserves the same review rigour as code.</div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · Live demo</span>
+        <h2>Try it: ask a question about SEBI circulars</h2>
+        <p class="muted">Example questions: "How many nominees can an investor add to a demat account or mutual fund folio?" · "Which circular governs mutual fund nominations, and is it still in force?" · Try an out-of-scope question like GST e-invoicing to see it abstain.</p>
+      </div>
+      <div class="embed">
+        <div class="embed-head"><span>Hugging Face Space · free CPU hardware. The first question can take a few minutes while models load.</span><a href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo" target="_blank" rel="noopener">Open full screen ↗</a></div>
+        <div id="embedSlot" class="embed-load">
+          <p class="muted" style="margin:0;max-width:52ch">The demo loads on request to keep this page fast.</p>
+          <button class="btn primary" id="loadDemo" type="button">Load the live demo</button>
+        </div>
+      </div>
+      <p class="note">Modes: <strong>rag</strong> (full answer with citations), <strong>retrieval_only</strong> (no LLM, still shows citations and lineage), and an optional <strong>as-of date</strong>. Answers are informational, not legal advice. Always verify on sebi.gov.in.</p>
+    </div>
+  </section>
+
+  <section id="data">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">07 · Open data</span>
+        <h2>Published so others can build and benchmark</h2>
+        <p class="muted">The corpus, annotations and a ready-to-use index are public on Hugging Face. Annotations are CC-BY-4.0; the underlying SEBI circulars are government works with source links on every record.</p>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3><a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars" target="_blank" rel="noopener">sebi-circulars dataset ↗</a></h3>
+          <p>Snapshot v2026.08 · 728 circulars (2010–2026), including SEBI's master circulars.</p>
+          <ul class="strata">
+            <li><b>728</b> corpus</li><li><b>78,585</b> chunks</li><li><b>4,577</b> lineage edges</li><li><b>2,769</b> supersession pairs</li><li><b>8,903</b> normalized citations</li><li><b>56</b> eval queries</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3><a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index" target="_blank" rel="noopener">sebi-circulars-index ↗</a></h3>
+          <p>The prebuilt index the live demo uses: 1,490 circulars, 83,752 chunks, 1024-dim BGE-M3 vectors in FAISS, a BM25 index and the lineage graph.</p>
+          <ul class="strata"><li><b>1,490</b> circulars</li><li><b>83,752</b> chunks</li><li>FAISS + BM25</li><li>lineage.json</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">08 · What's next</span>
+        <h2>Roadmap</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Raise citation precision</h3><p>Cut extra citations without losing recall. This is the clearest quality gap today.</p></article>
+        <article class="card"><h3>Measure faithfulness end-to-end</h3><p>Report faithfulness as a gated aggregate metric, not just a per-answer flag.</p></article>
+        <article class="card"><h3>Refresh the public dataset</h3><p>Publish the 1,490-circular snapshot and expand the adjudicated golden set.</p></article>
+      </div>
+      <div class="cta" style="margin-top:32px">
+        <a class="btn primary" href="https://github.com/opnsrcntrbtr/sebi-circular-rag" target="_blank" rel="noopener">Star or fork on GitHub ↗</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/ian1980/" target="_blank" rel="noopener">Talk to me on LinkedIn ↗</a>
+        <a class="btn ghost" href="/">Back to AINPM.in</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink)">Sources</strong> <span>(accessed 24 September 2026)</span>
+    <ol>
+      <li><a href="https://github.com/opnsrcntrbtr/sebi-circular-rag">sebi-circular-rag repository and README</a></li>
+      <li><a href="https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md">Project status and evaluation log (docs/status.md)</a></li>
+      <li><a href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo">Hugging Face Space: sebi-circular-rag-demo</a></li>
+      <li><a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars">Dataset card: opnsrcntrbtrian/sebi-circulars</a></li>
+      <li><a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index">Index repo: opnsrcntrbtrian/sebi-circulars-index</a></li>
+    </ol>
+    <p class="fine">© 2026 Ian Pinto · AINPM.in · Independent project, not affiliated with or endorsed by the Securities and Exchange Board of India. Answers and data are informational, not legal or financial advice. Verify against <a href="https://www.sebi.gov.in/">sebi.gov.in</a>. Views are my own and not those of any employer.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{var s=localStorage.getItem('ainpm-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('ainpm-theme',next);}catch(e){}
+  });
+  document.getElementById('loadDemo').addEventListener('click',function(){
+    var slot=document.getElementById('embedSlot'), f=document.createElement('iframe');
+    f.src='https://opnsrcntrbtrian-sebi-circular-rag-demo.hf.space/?__theme=light';
+    f.title='SEBI Circular RAG live demo'; f.loading='lazy';
+    f.allow='clipboard-write';
+    slot.replaceWith(f);
+  });
+})();
+</script>
+</body>
+</html>
