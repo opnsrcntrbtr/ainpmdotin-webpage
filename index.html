@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AINPM.in — AI-Native Product Management, from India</title>
+<meta name="description" content="AINPM.in by Ian Pinto: a practical, India-first guide to AI-native product management — the shifts, the regulation radar, and a playbook for PMs, founders and leaders. Updated 23 September 2026.">
+<meta name="author" content="Ian Pinto">
+<link rel="canonical" href="https://ainpm.in/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AINPM.in — AI-Native Product Management, from India">
+<meta property="og:description" content="The shifts, the India regulation radar, and a playbook for building AI-native products. By Ian Pinto.">
+<meta property="og:url" content="https://ainpm.in/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23fff'%3Eai%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%23e8871e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"AINPM.in","url":"https://ainpm.in/","dateModified":"2026-09-23",
+ "author":{"@type":"Person","name":"Ian Pinto","jobTitle":"Technical Product / Program Manager",
+ "sameAs":["https://www.linkedin.com/in/ian1980/","https://github.com/opnsrcntrbtr"]}}
+</script>
+<style>
+:root{
+  --bg:#faf7f2; --surface:#ffffff; --surface-2:#f3eee6; --ink:#1c1917; --ink-2:#57534e; --line:#e7e0d5;
+  --saffron:#c2620a; --teal:#0f766e; --accent-soft:#fdf1e3; --teal-soft:#e6f4f2;
+  --shadow:0 1px 2px rgba(28,25,23,.05),0 8px 24px rgba(28,25,23,.06);
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
+    --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
+  --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-underline-offset:3px}
+a:hover{color:var(--saffron)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+@media(min-width:720px){.wrap{padding:0 32px}}
+h1,h2,h3{font-family:var(--serif);line-height:1.15;letter-spacing:-.01em;margin:0}
+h2{font-size:clamp(1.7rem,3.2vw,2.4rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1em}
+.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:14px;display:block}
+.muted{color:var(--ink-2)}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{font:700 1.15rem var(--serif);color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--saffron),var(--teal));display:inline-block}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:24px}
+.nav ul a{color:var(--ink-2);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav ul a:hover{color:var(--ink)}
+@media(min-width:820px){.nav ul{display:flex}}
+.theme-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:1rem}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);max-width:15ch}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--saffron),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:var(--ink-2);max-width:60ch;margin:24px 0 32px}
+.stamp{display:inline-flex;gap:8px;align-items:center;font:500 .78rem var(--mono);color:var(--teal);background:var(--teal-soft);padding:6px 12px;border-radius:999px;margin-bottom:24px}
+.stamp::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--line)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.ghost{color:var(--ink);background:var(--surface)}
+
+section{padding:64px 0;border-top:1px solid var(--line)}
+.section-head{display:grid;gap:12px;margin-bottom:36px;max-width:70ch}
+
+/* cards */
+.grid{display:grid;gap:16px}
+@media(min-width:680px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.card h3{margin-bottom:8px}
+.card p{color:var(--ink-2);font-size:.95rem;margin:0}
+.shift .from{font:500 .78rem var(--mono);color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--saffron)}
+.shift .to{font:600 1.15rem var(--serif);margin:4px 0 10px;display:block}
+.num{font:700 clamp(1.8rem,3vw,2.3rem) var(--serif);color:var(--teal);display:block;line-height:1.1}
+.num small{font-size:.55em;color:var(--ink-2);font-weight:500}
+.card .src{display:block;margin-top:12px;font-size:.78rem}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--saffron),var(--teal))}
+.timeline li{position:relative;padding:0 0 26px 36px}
+.timeline li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--teal)}
+.timeline li.next::before{border-color:var(--saffron);background:var(--accent-soft)}
+.timeline time{font:500 .78rem var(--mono);color:var(--saffron);letter-spacing:.04em}
+.timeline h3{font-size:1.08rem;margin:2px 0 4px}
+.timeline p{color:var(--ink-2);font-size:.95rem;margin:0}
+.tag{display:inline-block;font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:6px;margin-left:6px;vertical-align:middle;background:var(--accent-soft);color:var(--saffron)}
+
+/* playbook */
+.steps{counter-reset:s;display:grid;gap:14px}
+@media(min-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.step::before{content:counter(s,decimal-leading-zero);font:700 1.3rem var(--serif);color:var(--saffron)}
+.step h3{font-size:1.05rem;margin-bottom:6px}
+.step p{margin:0;color:var(--ink-2);font-size:.94rem}
+
+/* audience tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tabs button{font:600 .9rem var(--sans);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.panel{display:none}
+.panel.active{display:block}
+.panel ul{margin:0;padding-left:1.1em;display:grid;gap:8px}
+.panel li{color:var(--ink-2)}
+.panel li strong{color:var(--ink)}
+
+/* coming soon */
+.soon .card{position:relative}
+.soon .card::after{content:"Coming soon";position:absolute;top:18px;right:18px;font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--teal);background:var(--teal-soft);padding:3px 8px;border-radius:6px}
+.soon .card h3{padding-right:96px}
+
+/* about */
+.about{display:grid;gap:28px;align-items:start}
+@media(min-width:820px){.about{grid-template-columns:200px 1fr}}
+.avatar{width:160px;height:160px;border-radius:28px;background:linear-gradient(135deg,var(--saffron),var(--teal));display:grid;place-items:center;color:#fff;font:700 3.2rem var(--serif)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px;padding:0;list-style:none}
+.chips li{font-size:.84rem;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
+
+footer{border-top:1px solid var(--line);padding:40px 0 56px;font-size:.86rem;color:var(--ink-2)}
+footer ol{padding-left:1.2em;margin:12px 0 24px;display:grid;gap:4px}
+footer .fine{font-size:.8rem}
+:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>AINPM.in</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="#shifts">The shifts</a></li>
+      <li><a href="#india">India lens</a></li>
+      <li><a href="#radar">Regulation radar</a></li>
+      <li><a href="#playbook">Playbook</a></li>
+      <li><a href="#about">About</a></li>
+    </ul></nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle colour theme">◐</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <span class="stamp">Updated 23 September 2026</span>
+    <h1>AI-native product management, <em>built from India.</em></h1>
+    <p class="lede">A practical field guide for PMs, founders and leaders who build products where AI is the core, not a feature — grounded in India's languages, digital public infrastructure and fast-moving regulation.</p>
+    <div class="cta">
+      <a class="btn primary" href="#playbook">Read the playbook</a>
+      <a class="btn ghost" href="#radar">India regulation radar</a>
+    </div>
+  </div>
+
+  <section id="shifts">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · What changes</span>
+        <h2>Six shifts that make a PM "AI-native"</h2>
+        <p class="muted">AI-native product management isn't adding a chatbot to a roadmap. It changes what a spec is, how quality is proven, and what a unit of work costs.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card shift"><span class="from">Static PRDs</span><span class="to">Evals are the spec</span><p>Acceptance criteria become test sets and graded rubrics. If you can't measure "good", you can't ship a probabilistic product.</p></article>
+        <article class="card shift"><span class="from">Features &amp; screens</span><span class="to">Agents &amp; workflows</span><p>Design the job to be done end-to-end — tools, memory, hand-offs and where a human approves — not just the UI.</p></article>
+        <article class="card shift"><span class="from">Fixed-cost software</span><span class="to">₹ per outcome</span><p>Every task has an inference bill. Model choice, context size and caching are product decisions with margin impact.</p></article>
+        <article class="card shift"><span class="from">Annual roadmaps</span><span class="to">Learning loops</span><p>Models improve monthly. Plan in short bets, instrument everything, and re-run evals whenever the model underneath changes.</p></article>
+        <article class="card shift"><span class="from">Compliance at the end</span><span class="to">Trust by design</span><p>Consent, labelling, audit trails and kill-switches belong in the first sprint — regulators in India now expect them.</p></article>
+        <article class="card shift"><span class="from">English-first UX</span><span class="to">Bharat-first UX</span><p>Voice, vernacular and low-bandwidth are defaults, not localisation tasks — Indic models make this practical today.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="india">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · India lens</span>
+        <h2>Why India is a distinct place to build AI products</h2>
+        <p class="muted">Sovereign compute, Indic foundation models, population-scale digital rails and the world's largest pool of capability centres — a combination no other market has.</p>
+      </div>
+      <div class="grid g4">
+        <article class="card"><span class="num">38,000<small>+ GPUs</small></span><h3>IndiaAI compute</h3><p>Subsidised national compute under the ₹10,372 crore IndiaAI Mission, with 20,000+ more GPUs announced in February 2026.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
+        <article class="card"><span class="num">22<small> languages</small></span><h3>Indic models</h3><p>BharatGen Param2 (17B) spans 22 Indian languages; Sarvam launched 30B and 105B models plus speech and vision at the AI Impact Summit.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
+        <article class="card"><span class="num">2,117<small> GCCs</small></span><h3>Capability centres</h3><p>2.36 million professionals in India's GCCs (FY2026) — increasingly owning global AI products, not just delivery.</p><a class="src" href="https://zinnov.com/centers-of-excellence/zinnov-nasscom-india-gcc-landscape-2026-report/">Source ↗</a></article>
+        <article class="card"><span class="num">DPI<small> rails</small></span><h3>Public infrastructure</h3><p>UPI, Aadhaar, DigiLocker, Account Aggregator and ONDC give AI agents identity, consent and payment rails to act on.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="radar">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Regulation radar</span>
+        <h2>What an Indian AI PM must track</h2>
+        <p class="muted">India has chosen principles-based guidelines plus sector regulators over a single AI Act. That means your obligations depend on your domain — and several dates are close.</p>
+      </div>
+      <ol class="timeline">
+        <li><time>AUG 2025</time><h3>RBI FREE-AI framework</h3><p>Seven "sutras" for responsible AI in regulated finance — trust, people first, fairness, accountability, understandable by design, safety and resilience.</p></li>
+        <li><time>NOV 2025</time><h3>MeitY India AI Governance Guidelines</h3><p>Principles-based, techno-legal approach relying on existing law and sector regulators rather than a standalone AI statute.</p></li>
+        <li><time>14 NOV 2025</time><h3>DPDP Rules notified</h3><p>Data Protection Board provisions active; the rest of the Digital Personal Data Protection regime phases in.</p></li>
+        <li><time>20 FEB 2026</time><h3>IT Rules amendment on synthetic content</h3><p>AI-generated media must be prominently labelled; takedown windows cut to 3 hours (2 hours for deepfake intimate imagery).</p></li>
+        <li class="next"><time>SOON · ANNOUNCED AUG 2026</time><h3>SEBI AI/ML guidelines <span class="tag">Pending</span></h3><p>SEBI's chairman has said guidelines will mandate human-in-the-loop, kill-switches and data governance for AI in securities markets.</p></li>
+        <li class="next"><time>13 NOV 2026</time><h3>DPDP consent managers go live <span class="tag">7 weeks</span></h3><p>Registered consent managers become operational — design your consent UX to interoperate.</p></li>
+        <li class="next"><time>13 MAY 2027</time><h3>DPDP full compliance <span class="tag">Deadline</span></h3><p>Consent, itemised notices, security safeguards, breach reporting and Significant Data Fiduciary duties apply; penalties up to ₹250 crore per instance.</p></li>
+      </ol>
+      <p class="muted" style="font-size:.85rem;margin-top:8px">This summary is for orientation only and is not legal advice.</p>
+    </div>
+  </section>
+
+  <section id="playbook">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Playbook</span>
+        <h2>An India-first AI-native PM loop</h2>
+        <p class="muted">Eight steps I use to take an AI product from problem to production — each one a future deep-dive on this site.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Frame the job, not the model</h3><p>Start from a user outcome and a baseline. Is AI 10× better here, or just novel?</p></div></div>
+        <div class="step"><div><h3>Write evals before prompts</h3><p>Golden datasets in the languages and dialects your users actually speak; rubric-graded, versioned, owned by the PM.</p></div></div>
+        <div class="step"><div><h3>Choose models by ₹ per task</h3><p>Compare frontier APIs, open-weight and Indic models on quality, latency, cost and data residency.</p></div></div>
+        <div class="step"><div><h3>Ground it in your data (RAG)</h3><p>Retrieval over trusted sources with citations — essential for BFSI, health and government use cases.</p></div></div>
+        <div class="step"><div><h3>Design agents with guardrails</h3><p>Scoped tools, approval gates, audit logs and a kill-switch. Human-in-the-loop where money or rights move.</p></div></div>
+        <div class="step"><div><h3>Consent &amp; privacy by design</h3><p>Purpose-limited data, itemised notices and consent-manager readiness for DPDP.</p></div></div>
+        <div class="step"><div><h3>Ship small, observe everything</h3><p>Trace every call, sample outputs for review, track cost and quality drift per cohort.</p></div></div>
+        <div class="step"><div><h3>Measure outcomes, then scale</h3><p>Task success, time saved and trust signals — not just DAUs. Re-run evals on every model change.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · Start here</span>
+        <h2>Where to begin, depending on who you are</h2>
+      </div>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-t="pm">Working PMs</button>
+        <button role="tab" aria-selected="false" data-t="new">Aspiring PMs</button>
+        <button role="tab" aria-selected="false" data-t="lead">Founders &amp; leaders</button>
+        <button role="tab" aria-selected="false" data-t="hire">Recruiters</button>
+      </div>
+      <div class="card">
+        <div class="panel active" id="p-pm"><ul>
+          <li><strong>Build one eval set</strong> for a feature you own this month — even 50 labelled examples change the conversation.</li>
+          <li><strong>Learn the cost model:</strong> tokens, context windows, caching and model routing.</li>
+          <li><strong>Prototype yourself</strong> with AI coding tools — PMs who can ship a working demo move faster than specs.</li>
+          <li><strong>Map your data flows</strong> against DPDP before May 2027.</li>
+        </ul></div>
+        <div class="panel" id="p-new"><ul>
+          <li><strong>Show, don't tell:</strong> publish two small AI products on GitHub with a written eval and a cost breakdown.</li>
+          <li><strong>Pick a Bharat problem</strong> — vernacular, voice or low-connectivity — and use an Indic model.</li>
+          <li><strong>Learn the basics</strong> of RAG, agents, prompt design and evaluation; skip hype, keep notes.</li>
+          <li><strong>Target GCCs and AI-first startups</strong> — both are hiring for AI product skills.</li>
+        </ul></div>
+        <div class="panel" id="p-lead"><ul>
+          <li><strong>Fund evaluation infrastructure</strong> as seriously as feature work — it is your quality moat.</li>
+          <li><strong>Price for inference:</strong> make unit economics visible per workflow, per customer.</li>
+          <li><strong>Use IndiaAI compute</strong> and Indic models where sovereignty, cost or language fit matter.</li>
+          <li><strong>Assign an owner</strong> for AI governance — RBI, SEBI, MeitY and DPDP obligations overlap.</li>
+        </ul></div>
+        <div class="panel" id="p-hire"><ul>
+          <li><strong>Ask for evals, not buzzwords:</strong> how did the candidate define and measure "good"?</li>
+          <li><strong>Probe trade-offs:</strong> quality vs latency vs cost vs risk, with numbers.</li>
+          <li><strong>Look for shipped artefacts</strong> — prototypes, agents, write-ups — over certificates alone.</li>
+          <li><strong>Check regulatory fluency</strong> for BFSI, health and public-sector roles.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="soon" class="soon">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · The portal</span>
+        <h2>What's coming to AINPM.in</h2>
+        <p class="muted">This page is the front door. The portal will grow into open, practical resources — built in public on GitHub.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Eval templates</h3><p>Reusable rubrics and golden-set formats for multilingual AI features.</p></article>
+        <article class="card"><h3>Regulation tracker</h3><p>A living timeline of DPDP, RBI, SEBI and MeitY AI obligations for product teams.</p></article>
+        <article class="card"><h3>BFSI &amp; mutual fund case studies</h3><p>RAG and agentic patterns for AMCs, distributors and fintech platforms.</p></article>
+        <article class="card"><h3>Agentic PRD</h3><p>A spec template for agents: tools, autonomy levels, approvals and failure modes.</p></article>
+        <article class="card"><h3>₹-per-task calculator</h3><p>Estimate inference cost across models before you commit to an architecture.</p></article>
+        <article class="card"><h3>Community notes</h3><p>Write-ups from Indian PMs shipping AI — contributions welcome via GitHub.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="avatar" aria-hidden="true">IP</div>
+      <div>
+        <span class="eyebrow">About the author</span>
+        <h2>Ian Pinto</h2>
+        <p class="muted" style="margin-top:12px;max-width:65ch">Technical Product / Program Manager working on Mutual Fund AMC products and platforms, cloud-native systems, RAG and agentic AI. I started AINPM.in to share what I'm learning about building AI-native products in India — openly and iteratively.</p>
+        <ul class="chips">
+          <li>MBA</li><li>BE (IT)</li><li>PMP</li><li>CSM</li>
+          <li>AI Product Management — IIT Kharagpur (upGrad)</li><li>AI Product Management — ISB</li>
+          <li>Certified AI &amp; cloud-native engineering</li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="https://www.linkedin.com/in/ian1980/" rel="me noopener" target="_blank">Connect on LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/opnsrcntrbtr" rel="me noopener" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink)">Sources</strong> <span>(accessed 23 September 2026)</span>
+    <ol>
+      <li><a href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">India AI Impact Summit 2026 — overview</a></li>
+      <li><a href="https://www.kapyn.app/blog/indiaai-mission-explained-2026">IndiaAI Mission explained (outlay, GPUs)</a></li>
+      <li><a href="https://zinnov.com/centers-of-excellence/zinnov-nasscom-india-gcc-landscape-2026-report/">Zinnov–nasscom India GCC Landscape Report 2026</a></li>
+      <li><a href="https://rbidocs.rbi.org.in/rdocs/PublicationReport/Pdfs/FREEAIR130820250A24FF2D4578453F824C72ED9F5D5851.PDF">RBI FREE-AI Committee Report (Aug 2025)</a></li>
+      <li><a href="https://www.lexology.com/library/detail.aspx?g=ffc0c58c-3727-4472-9914-5fa6a33ffffd">MeitY AI Governance Guidelines — analysis</a></li>
+      <li><a href="https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines">DPDP Act &amp; Rules 2025 phased timeline</a></li>
+      <li><a href="https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026">MeitY IT Amendment Rules 2026 (synthetic content)</a></li>
+      <li><a href="https://www.indiasnews.net/news/279251495/sebi-to-soon-issue-aiml-guidelines-for-capital-markets-mandate-human-oversight-kill-switch-controls-chairman-pandey">SEBI chairman on forthcoming AI/ML guidelines (Aug 2026)</a></li>
+    </ol>
+    <p class="fine">© 2026 Ian Pinto · AINPM.in · Views are my own and not those of any employer. Content is general information, not legal or financial advice. Source on <a href="https://github.com/opnsrcntrbtr/ainpmdotin-webpage">GitHub</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{var s=localStorage.getItem('ainpm-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('ainpm-theme',next);}catch(e){}
+  });
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});
+      document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+      b.setAttribute('aria-selected','true');
+      document.getElementById('p-'+b.dataset.t).classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>
