@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AINPM.in — AI-Native Product Management, from India</title>
-<meta name="description" content="AINPM.in by Ian Pinto: a practical, India-first guide to AI-native product management — the shifts, the regulation radar, and a playbook for PMs, founders and leaders. Updated 23 September 2026.">
+<meta name="description" content="AINPM.in by Ian Pinto: a practical, India-first guide to AI-native product management — the shifts, the regulation radar, and a playbook for PMs, founders and leaders. Featuring SEBI Circular RAG, a live AI-native MVP. Updated 24 September 2026.">
 <meta name="author" content="Ian Pinto">
 <link rel="canonical" href="https://ainpm.in/">
 <meta property="og:type" content="website">
@@ -18,128 +18,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"AINPM.in","url":"https://ainpm.in/","dateModified":"2026-09-23",
+{"@context":"https://schema.org","@type":"WebSite","name":"AINPM.in","url":"https://ainpm.in/","dateModified":"2026-09-24",
  "author":{"@type":"Person","name":"Ian Pinto","jobTitle":"Technical Product / Program Manager",
  "sameAs":["https://www.linkedin.com/in/ian1980/","https://github.com/opnsrcntrbtr"]}}
 </script>
-<style>
-:root{
-  --bg:#faf7f2; --surface:#ffffff; --surface-2:#f3eee6; --ink:#1c1917; --ink-2:#57534e; --line:#e7e0d5;
-  --saffron:#c2620a; --teal:#0f766e; --accent-soft:#fdf1e3; --teal-soft:#e6f4f2;
-  --shadow:0 1px 2px rgba(28,25,23,.05),0 8px 24px rgba(28,25,23,.06);
-  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
-    --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
-  --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--teal);text-underline-offset:3px}
-a:hover{color:var(--saffron)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-@media(min-width:720px){.wrap{padding:0 32px}}
-h1,h2,h3{font-family:var(--serif);line-height:1.15;letter-spacing:-.01em;margin:0}
-h2{font-size:clamp(1.7rem,3.2vw,2.4rem)}
-h3{font-size:1.2rem}
-p{margin:0 0 1em}
-.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:14px;display:block}
-.muted{color:var(--ink-2)}
-
-/* nav */
-header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.brand{font:700 1.15rem var(--serif);color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
-.brand i{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--saffron),var(--teal));display:inline-block}
-.nav ul{display:none;list-style:none;margin:0;padding:0;gap:24px}
-.nav ul a{color:var(--ink-2);text-decoration:none;font-size:.92rem;font-weight:500}
-.nav ul a:hover{color:var(--ink)}
-@media(min-width:820px){.nav ul{display:flex}}
-.theme-btn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:1rem}
-
-/* hero */
-.hero{padding:72px 0 56px}
-.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);max-width:15ch}
-.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--saffron),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .lede{font-size:clamp(1.05rem,1.8vw,1.25rem);color:var(--ink-2);max-width:60ch;margin:24px 0 32px}
-.stamp{display:inline-flex;gap:8px;align-items:center;font:500 .78rem var(--mono);color:var(--teal);background:var(--teal-soft);padding:6px 12px;border-radius:999px;margin-bottom:24px}
-.stamp::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--line)}
-.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn.primary:hover{background:var(--teal);border-color:var(--teal);color:#fff}
-.btn.ghost{color:var(--ink);background:var(--surface)}
-
-section{padding:64px 0;border-top:1px solid var(--line)}
-.section-head{display:grid;gap:12px;margin-bottom:36px;max-width:70ch}
-
-/* cards */
-.grid{display:grid;gap:16px}
-@media(min-width:680px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
-.card h3{margin-bottom:8px}
-.card p{color:var(--ink-2);font-size:.95rem;margin:0}
-.shift .from{font:500 .78rem var(--mono);color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--saffron)}
-.shift .to{font:600 1.15rem var(--serif);margin:4px 0 10px;display:block}
-.num{font:700 clamp(1.8rem,3vw,2.3rem) var(--serif);color:var(--teal);display:block;line-height:1.1}
-.num small{font-size:.55em;color:var(--ink-2);font-weight:500}
-.card .src{display:block;margin-top:12px;font-size:.78rem}
-
-/* timeline */
-.timeline{list-style:none;margin:0;padding:0;position:relative}
-.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--saffron),var(--teal))}
-.timeline li{position:relative;padding:0 0 26px 36px}
-.timeline li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--teal)}
-.timeline li.next::before{border-color:var(--saffron);background:var(--accent-soft)}
-.timeline time{font:500 .78rem var(--mono);color:var(--saffron);letter-spacing:.04em}
-.timeline h3{font-size:1.08rem;margin:2px 0 4px}
-.timeline p{color:var(--ink-2);font-size:.95rem;margin:0}
-.tag{display:inline-block;font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:6px;margin-left:6px;vertical-align:middle;background:var(--accent-soft);color:var(--saffron)}
-
-/* playbook */
-.steps{counter-reset:s;display:grid;gap:14px}
-@media(min-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
-.step{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
-.step::before{content:counter(s,decimal-leading-zero);font:700 1.3rem var(--serif);color:var(--saffron)}
-.step h3{font-size:1.05rem;margin-bottom:6px}
-.step p{margin:0;color:var(--ink-2);font-size:.94rem}
-
-/* audience tabs */
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.tabs button{font:600 .9rem var(--sans);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
-.panel{display:none}
-.panel.active{display:block}
-.panel ul{margin:0;padding-left:1.1em;display:grid;gap:8px}
-.panel li{color:var(--ink-2)}
-.panel li strong{color:var(--ink)}
-
-/* coming soon */
-.soon .card{position:relative}
-.soon .card::after{content:"Coming soon";position:absolute;top:18px;right:18px;font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--teal);background:var(--teal-soft);padding:3px 8px;border-radius:6px}
-.soon .card h3{padding-right:96px}
-
-/* about */
-.about{display:grid;gap:28px;align-items:start}
-@media(min-width:820px){.about{grid-template-columns:200px 1fr}}
-.avatar{width:160px;height:160px;border-radius:28px;background:linear-gradient(135deg,var(--saffron),var(--teal));display:grid;place-items:center;color:#fff;font:700 3.2rem var(--serif)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px;padding:0;list-style:none}
-.chips li{font-size:.84rem;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
-
-footer{border-top:1px solid var(--line);padding:40px 0 56px;font-size:.86rem;color:var(--ink-2)}
-footer ol{padding-left:1.2em;margin:12px 0 24px;display:grid;gap:4px}
-footer .fine{font-size:.8rem}
-:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
@@ -147,6 +30,7 @@ footer .fine{font-size:.8rem}
   <div class="wrap">
     <a class="brand" href="#top"><i></i>AINPM.in</a>
     <nav aria-label="Primary"><ul>
+      <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
       <li><a href="#shifts">The shifts</a></li>
       <li><a href="#india">India lens</a></li>
       <li><a href="#radar">Regulation radar</a></li>
@@ -158,14 +42,40 @@ footer .fine{font-size:.8rem}
 </header>
 
 <main id="top">
-  <div class="wrap hero">
-    <span class="stamp">Updated 23 September 2026</span>
-    <h1>AI-native product management, <em>built from India.</em></h1>
-    <p class="lede">A practical field guide for PMs, founders and leaders who build products where AI is the core, not a feature — grounded in India's languages, digital public infrastructure and fast-moving regulation.</p>
-    <div class="cta">
-      <a class="btn primary" href="#playbook">Read the playbook</a>
-      <a class="btn ghost" href="#radar">India regulation radar</a>
+  <div class="wrap phero">
+    <div>
+      <span class="pill-live">Featured MVP · Live on Hugging Face</span>
+      <h1>Ask SEBI circulars. Get <em>cited answers</em> — or an honest "not in the corpus".</h1>
+      <p class="lede"><strong>SEBI Circular RAG</strong> is an open-source, AI-native product I built to answer questions over 1,490 SEBI circulars. It cites every claim, flags circulars that have been superseded, answers "as of" a past date, and refuses to guess when the evidence isn't there.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo" target="_blank" rel="noopener">Try the live demo ↗</a>
+        <a class="btn ghost" href="/sebi-rag/">Read the PM case study</a>
+      </div>
+      <div class="links-row">
+        <a href="https://github.com/opnsrcntrbtr/sebi-circular-rag" target="_blank" rel="noopener">GitHub repo ↗</a>
+        <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars" target="_blank" rel="noopener">Open dataset ↗</a>
+        <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index" target="_blank" rel="noopener">Prebuilt index ↗</a>
+      </div>
     </div>
+    <figure class="shot">
+      <div class="bar"><i></i><i></i><i></i><span>sebi-circular-rag · cited answer with supersession status</span></div>
+      <img src="https://raw.githubusercontent.com/opnsrcntrbtr/sebi-circular-rag/main/docs/assets/demo.webp" alt="SEBI Circular RAG interface showing numbered citations, in-force and superseded status for each circular, and the regulations each circular relies on" width="1512" height="806" loading="eager">
+      <figcaption>Every citation shows whether the circular is in force or superseded, and by what.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <div class="stats">
+      <div><b>1,490</b><span>SEBI circulars indexed</span></div>
+      <div><b>0.943</b><span>Recall@10 on 260 test queries</span></div>
+      <div><b>0.881</b><span>Citation recall</span></div>
+      <div><b>0.981</b><span>Abstention accuracy</span></div>
+    </div>
+    <p class="note">Metrics are from a full run on 15 Aug 2026 against the 260-query golden_v7 set (728-circular corpus at the time). A 15 Sep 2026 check on the 1,490-circular index still cleared every quality gate. Not legal advice.</p>
+  </div>
+
+  <div class="wrap" style="padding-top:56px">
+    <span class="stamp">Field guide · updated 24 September 2026</span>
+    <p class="lede muted" style="max-width:62ch;font-size:1.1rem">AINPM.in is my practical guide to AI-native product management, built from India. It covers what changes for PMs, the Indian AI and regulation landscape, and a playbook — with the SEBI RAG MVP as the working example.</p>
   </div>
 
   <section id="shifts">
@@ -227,7 +137,7 @@ footer .fine{font-size:.8rem}
       <div class="section-head">
         <span class="eyebrow">04 · Playbook</span>
         <h2>An India-first AI-native PM loop</h2>
-        <p class="muted">Eight steps I use to take an AI product from problem to production — each one a future deep-dive on this site.</p>
+        <p class="muted">Eight steps I use to take an AI product from problem to production. <a href="/sebi-rag/">See them applied in the SEBI RAG case study →</a></p>
       </div>
       <div class="steps">
         <div class="step"><div><h3>Frame the job, not the model</h3><p>Start from a user outcome and a baseline. Is AI 10× better here, or just novel?</p></div></div>
@@ -293,7 +203,7 @@ footer .fine{font-size:.8rem}
       <div class="grid g3">
         <article class="card"><h3>Eval templates</h3><p>Reusable rubrics and golden-set formats for multilingual AI features.</p></article>
         <article class="card"><h3>Regulation tracker</h3><p>A living timeline of DPDP, RBI, SEBI and MeitY AI obligations for product teams.</p></article>
-        <article class="card"><h3>BFSI &amp; mutual fund case studies</h3><p>RAG and agentic patterns for AMCs, distributors and fintech platforms.</p></article>
+        <article class="card"><h3>More BFSI &amp; mutual fund case studies</h3><p>RAG and agentic patterns for AMCs, distributors and fintech platforms, following the <a href="/sebi-rag/">SEBI RAG case study</a>.</p></article>
         <article class="card"><h3>Agentic PRD</h3><p>A spec template for agents: tools, autonomy levels, approvals and failure modes.</p></article>
         <article class="card"><h3>₹-per-task calculator</h3><p>Estimate inference cost across models before you commit to an architecture.</p></article>
         <article class="card"><h3>Community notes</h3><p>Write-ups from Indian PMs shipping AI — contributions welcome via GitHub.</p></article>
@@ -324,7 +234,7 @@ footer .fine{font-size:.8rem}
 
 <footer>
   <div class="wrap">
-    <strong style="color:var(--ink)">Sources</strong> <span>(accessed 23 September 2026)</span>
+    <strong style="color:var(--ink)">Sources</strong> <span>(accessed 23–24 September 2026)</span>
     <ol>
       <li><a href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">India AI Impact Summit 2026 — overview</a></li>
       <li><a href="https://www.kapyn.app/blog/indiaai-mission-explained-2026">IndiaAI Mission explained (outlay, GPUs)</a></li>
@@ -333,6 +243,7 @@ footer .fine{font-size:.8rem}
       <li><a href="https://www.lexology.com/library/detail.aspx?g=ffc0c58c-3727-4472-9914-5fa6a33ffffd">MeitY AI Governance Guidelines — analysis</a></li>
       <li><a href="https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines">DPDP Act &amp; Rules 2025 phased timeline</a></li>
       <li><a href="https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026">MeitY IT Amendment Rules 2026 (synthetic content)</a></li>
+      <li><a href="https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md">SEBI Circular RAG — project status and eval log</a></li>
       <li><a href="https://www.indiasnews.net/news/279251495/sebi-to-soon-issue-aiml-guidelines-for-capital-markets-mandate-human-oversight-kill-switch-controls-chairman-pandey">SEBI chairman on forthcoming AI/ML guidelines (Aug 2026)</a></li>
     </ol>
     <p class="fine">© 2026 Ian Pinto · AINPM.in · Views are my own and not those of any employer. Content is general information, not legal or financial advice. Source on <a href="https://github.com/opnsrcntrbtr/ainpmdotin-webpage">GitHub</a>.</p>
