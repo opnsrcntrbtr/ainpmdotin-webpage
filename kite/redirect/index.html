@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kite login callback · AINPM.in</title>
+<meta name="description" content="OAuth callback page for a personal Kite Connect app. Displays the request token returned by Zerodha so it can be exchanged for an access token locally.">
+<meta name="author" content="Ian Pinto">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://ainpm.in/kite/redirect/">
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23fff'%3Eai%3C/text%3E%3Ccircle cx='50' cy='16' r='5' fill='%23e8871e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  .token-box{font:500 1.05rem/1.5 var(--mono);word-break:break-all;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:0 0 14px}
+  .copy-btn{font:600 .92rem var(--sans);padding:10px 18px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .copy-btn:hover{background:var(--saffron);border-color:var(--saffron)}
+  .status-line{font:500 1rem var(--sans);margin:0 0 16px}
+  .steps-list{margin:0;padding-left:1.15em;display:grid;gap:8px;color:var(--ink-2);font-size:.95rem}
+  .steps-list code,.prose code{font:500 .86em var(--mono);background:var(--surface-2);padding:2px 6px;border-radius:6px;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><i></i>AINPM.in</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
+      <li><a href="/#shifts">The shifts</a></li>
+      <li><a href="/#india">India lens</a></li>
+      <li><a href="/#radar">Regulation radar</a></li>
+      <li><a href="/#playbook">Playbook</a></li>
+      <li><a href="/#about">About</a></li>
+    </ul></nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle colour theme">◐</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Kite login callback</div>
+
+  <div class="wrap" style="padding:28px 16px 64px;max-width:780px;margin:0 auto">
+    <span class="eyebrow">Personal automation · Kite Connect</span>
+    <h1 style="font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:14px">Kite login callback</h1>
+    <p class="lede muted" style="max-width:58ch;margin:0 0 28px">Zerodha sends you here after a Kite Connect login. This page reads the request token from the URL and shows it — nothing is stored, logged or transmitted anywhere.</p>
+
+    <div class="card" style="margin-bottom:16px">
+      <p class="status-line" id="status">Reading callback…</p>
+      <div id="tokenWrap" hidden>
+        <span class="eyebrow" style="margin-bottom:8px">request_token</span>
+        <p class="token-box" id="token"></p>
+        <button class="copy-btn" id="copyBtn" type="button">Copy token</button>
+        <p class="note">Single-use and valid for a few minutes. Exchange it for an access token from your own machine.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="margin-bottom:10px">Next steps, locally</h3>
+      <ol class="steps-list">
+        <li>Paste the token into your script or <code>.env</code> as <code>KITE_REQUEST_TOKEN</code>.</li>
+        <li>POST <code>api_key</code>, <code>request_token</code> and the SHA-256 checksum of <code>api_key + request_token + api_secret</code> to <code>/session/token</code>.</li>
+        <li>Keep the returned <code>access_token</code> on disk locally. It expires around 06:00 IST the next day.</li>
+      </ol>
+    </div>
+
+    <div class="callout">
+      <strong>Why this page does nothing else.</strong> It is served by GitHub Pages to anyone who visits, so it never touches <code>api_secret</code> and never performs the token exchange. A leaked request token is useless on its own and expires; a leaked API secret is not and does not.
+    </div>
+
+    <div class="links-row">
+      <a href="https://kite.trade/docs/connect/v3/user/" target="_blank" rel="noopener">Kite Connect v3 — login flow ↗</a>
+      <a href="https://developers.kite.trade/apps" target="_blank" rel="noopener">Developer console ↗</a>
+      <a href="/">Back to AINPM.in</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="fine">© 2026 Ian Pinto · AINPM.in · Personal project, not affiliated with or endorsed by Zerodha. Informational only, not investment advice.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{var s=localStorage.getItem('ainpm-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('ainpm-theme',next);}catch(e){}
+  });
+
+  var p=new URLSearchParams(location.search);
+  var token=p.get('request_token'), st=p.get('status');
+  var statusEl=document.getElementById('status'), wrap=document.getElementById('tokenWrap');
+
+  if(token){
+    statusEl.innerHTML='<span class="badge ok">Login successful</span> &nbsp;Copy the token below.';
+    document.getElementById('token').textContent=token;
+    wrap.hidden=false;
+  } else if(st && st!=='success'){
+    statusEl.innerHTML='<span class="badge no">Login failed</span> &nbsp;Zerodha returned status “'+st.replace(/[<>&"]/g,'')+'”. Start the login again from your script.';
+  } else {
+    statusEl.innerHTML='<span class="badge no">No token</span> &nbsp;This page is only meant to be opened through the Kite login flow.';
+  }
+
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    var b=this;
+    navigator.clipboard.writeText(token||'').then(function(){
+      b.textContent='Copied'; setTimeout(function(){b.textContent='Copy token';},1600);
+    }).catch(function(){ b.textContent='Select the token and copy manually'; });
+  });
+})();
+</script>
+</body>
+</html>
