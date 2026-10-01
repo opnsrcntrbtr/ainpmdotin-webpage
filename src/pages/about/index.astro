@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { AUTHOR, breadcrumb } from '../../data/site';
+
+const updated = new Date('2026-10-02');
+const schema = [
+  {
+    '@type': 'ProfilePage',
+    '@id': 'https://ainpm.in/about/#profile',
+    url: 'https://ainpm.in/about/',
+    name: 'About Ian Pinto',
+    mainEntity: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    dateModified: updated.toISOString(),
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'About Ian Pinto', path: '/about/' }]),
+];
+---
+<Base
+  title="About Ian Pinto, AI-Native Product Manager | AINPM.in"
+  description="Ian Pinto is a Technical Product / Program Manager in India working on mutual fund platforms, RAG and agentic AI. He writes AINPM.in and built SEBI Circular RAG."
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / About</div>
+  <div class="wrap about" style="padding-top:28px;padding-bottom:64px">
+    <div class="avatar" aria-hidden="true">IP</div>
+    <div>
+      <span class="eyebrow">About the author</span>
+      <h1 style="font-size:clamp(2rem,4.4vw,3rem)">Ian Pinto</h1>
+      <p class="answer" style="margin-top:14px"><strong>Ian Pinto is a Technical Product / Program Manager based in India who works on mutual fund AMC products and platforms, cloud-native systems, RAG and agentic AI.</strong> He writes AINPM.in and built SEBI Circular RAG, an open-source assistant over SEBI circulars.</p>
+      <div class="md">
+        <h2>Why I started AINPM.in</h2>
+        <p>I started AINPM.in to share what I'm learning about building AI-native products in India, openly and iteratively. Most writing on AI product management assumes a US context. Indian product teams deal with different languages, different digital rails and a different regulatory map, so I wanted a guide that starts from here.</p>
+        <h2>What I work on</h2>
+        <ul>
+          <li><strong>Mutual fund AMC products and platforms</strong> — the domain behind the SEBI Circular RAG case study.</li>
+          <li><strong>RAG and agentic AI</strong> — retrieval, evaluation, citations and abstention.</li>
+          <li><strong>Cloud-native systems</strong> — designing and running services at scale.</li>
+          <li><strong>Technical product and program management</strong> — taking products from problem to production.</li>
+        </ul>
+        <h2>Credentials</h2>
+      </div>
+      <ul class="chips">
+        <li>MBA</li><li>BE (IT)</li><li>PMP</li><li>CSM</li>
+        <li>AI Product Management — IIT Kharagpur (upGrad)</li><li>AI Product Management — ISB</li>
+        <li>Certified AI &amp; cloud-native engineering</li>
+      </ul>
+      <div class="md">
+        <h2>Open work</h2>
+        <ul>
+          <li><a href="/sebi-rag/">SEBI Circular RAG case study</a> — how it was built and evaluated.</li>
+          <li><a href="https://github.com/opnsrcntrbtr/sebi-circular-rag" rel="noopener">sebi-circular-rag on GitHub</a> — code, evaluation log and tests.</li>
+          <li><a href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo" rel="noopener">Live demo on Hugging Face</a>.</li>
+          <li><a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars" rel="noopener">SEBI Circulars dataset</a> — CC-BY-4.0 annotations.</li>
+        </ul>
+      </div>
+      <div class="cta" style="margin-top:24px">
+        {AUTHOR.sameAs.slice(0, 2).map((u, i) => (
+          <a class={i === 0 ? 'btn primary' : 'btn ghost'} href={u} rel="me noopener" target="_blank">{i === 0 ? 'Connect on LinkedIn ↗' : 'GitHub ↗'}</a>
+        ))}
+        <a class="btn ghost" href="/articles/">Read the articles</a>
+      </div>
+      <p class="note" style="margin-top:20px">Views on this site are my own and not those of any employer.</p>
+    </div>
+  </div>
+</Base>

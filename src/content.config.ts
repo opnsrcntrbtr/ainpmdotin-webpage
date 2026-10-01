@@ -1,0 +1,20 @@
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const articles = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+  schema: z.object({
+    title: z.string().max(70),
+    description: z.string().min(110).max(170),
+    tldr: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date(),
+    tags: z.array(z.string()),
+    readingMinutes: z.number(),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    sources: z.array(z.object({ href: z.string().url(), label: z.string() })).default([]),
+  }),
+});
+
+export const collections = { articles };

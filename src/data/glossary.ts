@@ -1,0 +1,28 @@
+export interface Term { id: string; term: string; def: string; }
+
+export const GLOSSARY: Term[] = [
+  { id: 'abstention', term: 'Abstention', def: 'When an AI product deliberately declines to answer because the evidence is missing or the question is out of scope. Abstention accuracy measures how often it refuses, or answers, correctly.' },
+  { id: 'agentic-ai', term: 'Agentic AI', def: 'AI systems that plan and take multi-step actions with tools, such as searching, calling APIs or writing files, to complete a goal, usually with human approval at defined points.' },
+  { id: 'ai-native-product', term: 'AI-native product', def: 'A product whose core value is delivered by an AI model, so it would not exist without the model. It contrasts with an AI-enabled product, where AI is added to an existing workflow.' },
+  { id: 'ai-native-product-management', term: 'AI-native product management', def: 'The practice of defining, building and improving AI-native products: specifying behaviour with evaluation sets, measuring quality as rates, managing inference cost per task and designing trust controls from the start.' },
+  { id: 'bm25', term: 'BM25', def: 'A keyword-based ranking method that scores documents by how often query terms appear, adjusted for document length. It is often combined with vector search in hybrid retrieval.' },
+  { id: 'chunking', term: 'Chunking', def: 'Splitting documents into smaller passages before indexing so that retrieval returns focused evidence. Section-aware chunking follows the document’s own structure.' },
+  { id: 'citation-precision', term: 'Citation precision', def: 'Of the sources an answer cites, the share that are actually relevant. Low citation precision means extra, unnecessary citations.' },
+  { id: 'citation-recall', term: 'Citation recall', def: 'Of the sources an answer should cite, the share it does cite. Low citation recall means the governing source is being missed.' },
+  { id: 'consent-manager', term: 'Consent manager', def: 'Under India’s DPDP framework, a registered intermediary that lets people give, review and withdraw consent across services. The framework starts on 13 November 2026.' },
+  { id: 'cross-encoder', term: 'Cross-encoder reranker', def: 'A model that reads a query and a candidate passage together and scores their relevance. It is slower than vector search but more accurate, so it is used to reorder the top results.' },
+  { id: 'dpdp', term: 'DPDP Act', def: 'India’s Digital Personal Data Protection Act, 2023. Its Rules were notified on 14 November 2025 and apply in phases, with full obligations from 13 May 2027.' },
+  { id: 'dpi', term: 'Digital public infrastructure (DPI)', def: 'India’s shared digital rails, including UPI for payments, Aadhaar for identity, DigiLocker for documents, Account Aggregator for consented financial data and ONDC for commerce.' },
+  { id: 'eval', term: 'Eval (evaluation)', def: 'A repeatable test that scores an AI product against a fixed set of examples with known good answers, reporting quality as rates so changes can be compared.' },
+  { id: 'faithfulness', term: 'Faithfulness', def: 'Whether an AI answer is supported by the sources it was given. A faithfulness check flags claims or citations that the retrieved context does not back.' },
+  { id: 'free-ai', term: 'FREE-AI', def: 'The Reserve Bank of India’s Framework for Responsible and Ethical Enablement of AI, published in August 2025, with seven guiding principles for AI in regulated finance.' },
+  { id: 'gcc', term: 'Global capability centre (GCC)', def: 'An offshore unit of a multinational company that performs technology, product and business work. India had 2,117 GCCs employing 2.36 million people in FY2026.' },
+  { id: 'golden-set', term: 'Golden set', def: 'A reviewed collection of test questions with expected answers or sources, used as the reference for evaluating an AI product. It acts as the product specification.' },
+  { id: 'hybrid-retrieval', term: 'Hybrid retrieval', def: 'Combining keyword search such as BM25 with vector search, then fusing the two ranked lists. It handles both exact terms and paraphrased questions.' },
+  { id: 'inference-cost', term: 'Inference cost', def: 'The cost of running a model to produce one output, driven by model choice, input and output tokens and caching. AI-native PMs track it per task.' },
+  { id: 'quality-gate', term: 'Quality gate', def: 'A minimum score for each evaluation metric that a change must clear before release. Gates should be re-derived when the model, data or test set changes.' },
+  { id: 'rag', term: 'Retrieval-augmented generation (RAG)', def: 'A pattern where the system first retrieves relevant passages from a trusted corpus and then asks a language model to answer using only those passages, usually with citations.' },
+  { id: 'recall-at-k', term: 'Recall@k', def: 'The share of questions for which a relevant document appears in the top k retrieved results. Recall@10 of 0.943 means the right document is in the top ten 94.3% of the time.' },
+  { id: 'supersession', term: 'Supersession', def: 'When a newer regulation or circular replaces an older one. Supersession-aware systems flag the older document and point to its replacement.' },
+  { id: 'synthetically-generated-information', term: 'Synthetically generated information (SGI)', def: 'The term used in India’s IT Rules for AI-generated or AI-altered content. From 20 February 2026 it must carry prominent labels.' },
+];

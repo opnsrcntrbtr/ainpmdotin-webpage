@@ -1,0 +1,171 @@
+---
+import { SITE, AUTHOR, NAV, personSchema, websiteSchema, fmtDate } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  schema?: Record<string, unknown>[];
+  updated?: Date;
+  published?: Date;
+  noindex?: boolean;
+  sources?: { href: string; label: string }[];
+  footnote?: string;
+}
+
+const {
+  title,
+  description,
+  ogType = 'website',
+  ogImage = '/og/default.png',
+  schema = [],
+  updated,
+  published,
+  noindex = false,
+  sources = [],
+  footnote,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const image = new URL(ogImage, SITE.url).href;
+const graph = { '@context': 'https://schema.org', '@graph': [websiteSchema, personSchema, ...schema] };
+// XSS-safe JSON-LD
+const jsonLd = JSON.stringify(graph).replace(/</g, '\\u003c');
+const path = Astro.url.pathname;
+---
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="author" content={AUTHOR.name}>
+<link rel="canonical" href={canonical}>
+{noindex ? <meta name="robots" content="noindex, nofollow"> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">}
+{SITE.googleVerification && <meta name="google-site-verification" content={SITE.googleVerification}>}
+{SITE.bingVerification && <meta name="msvalidate.01" content={SITE.bingVerification}>}
+<meta property="og:site_name" content={SITE.name}>
+<meta property="og:type" content={ogType}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={image}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_IN">
+{published && <meta property="article:published_time" content={published.toISOString()}>}
+{updated && <meta property="article:modified_time" content={updated.toISOString()}>}
+{ogType === 'article' && <meta property="article:author" content={AUTHOR.url}>}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={image}>
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="AINPM.in articles" href="/rss.xml">
+<link rel="sitemap" href="/sitemap-index.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script is:inline>try{var t=localStorage.getItem('ainpm-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script type="application/ld+json" set:html={jsonLd}></script>
+<slot name="head" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="AINPM.in home"><i></i>AINPM.in</a>
+    <nav aria-label="Primary"><ul>
+      {NAV.map((n) => (
+        <li><a href={n.href} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a></li>
+      ))}
+    </ul></nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+  </div>
+</header>
+
+<main id="main">
+  <slot />
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul class="foot-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
+      <li><a href="/articles/">Articles</a></li>
+      <li><a href="/glossary/">Glossary</a></li>
+      <li><a href="/about/">About Ian Pinto</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li><a href="/llms.txt">llms.txt</a></li>
+    </ul>
+    {sources.length > 0 && (
+      <Fragment>
+        <strong style="color:var(--ink)">Sources</strong>
+        <ol>
+          {sources.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a></li>)}
+        </ol>
+      </Fragment>
+    )}
+    <p class="fine">
+      © 2026 <a href="/about/">Ian Pinto</a> · AINPM.in{' · '}
+      {updated && <Fragment>Last updated <time datetime={updated.toISOString().slice(0, 10)}>{fmtDate(updated)}</time>{' · '}</Fragment>}
+      {footnote ?? 'Views are my own and not those of any employer. Content is general information, not legal or financial advice.'}{' '}
+      Source on <a href="https://github.com/opnsrcntrbtr/ainpmdotin-webpage" rel="noopener">GitHub</a>.
+    </p>
+    {!noindex && (
+      <p class="views" id="gcViews" hidden aria-live="off">
+        This page: <span id="gcPage">–</span> views · Site: <span id="gcTotal">–</span> views
+      </p>
+    )}
+  </div>
+</footer>
+
+<script is:inline>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  if(btn) btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('ainpm-theme',next);}catch(e){}
+  });
+})();
+</script>
+{!noindex && (
+  <Fragment>
+    <script is:inline define:vars={{ gc: SITE.goatcounter }}>
+      // Privacy: count the path only, never the query string.
+      window.goatcounter = { path: function () { return location.pathname; } };
+      (function () {
+        var box = document.getElementById('gcViews');
+        if (!box || !window.fetch) return;
+        function get(p) {
+          return fetch(gc + '/counter/' + encodeURIComponent(p) + '.json', { credentials: 'omit' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (j) { return j && j.count ? j.count : null; })
+            .catch(function () { return null; });
+        }
+        function show() {
+          Promise.all([get(location.pathname), get('TOTAL')]).then(function (v) {
+            if (!v[1]) return; // counters not public or blocked: stay hidden
+            document.getElementById('gcPage').textContent = v[0] || '1';
+            document.getElementById('gcTotal').textContent = v[1];
+            box.hidden = false;
+          });
+        }
+        var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1200); };
+        if (document.readyState === 'complete') idle(show);
+        else window.addEventListener('load', function () { idle(show); });
+      })();
+    </script>
+    <script is:inline data-goatcounter={SITE.goatcounter + '/count'} async src="https://gc.zgo.at/count.js"></script>
+  </Fragment>
+)}
+</body>
+</html>

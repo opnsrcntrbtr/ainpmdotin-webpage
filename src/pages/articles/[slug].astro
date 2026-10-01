@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { AUTHOR, breadcrumb, faqSchema, fmtDate } from '../../data/site';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const url = `https://ainpm.in/articles/${entry.id}/`;
+const others = (await getCollection('articles')).filter((a) => a.id !== entry.id);
+
+const schema = [
+  {
+    '@type': 'BlogPosting',
+    '@id': url + '#article',
+    headline: d.title,
+    description: d.description,
+    abstract: d.tldr,
+    url,
+    mainEntityOfPage: url,
+    datePublished: d.pubDate.toISOString(),
+    dateModified: d.updatedDate.toISOString(),
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    publisher: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    image: 'https://ainpm.in/og/default.png',
+    keywords: d.tags.join(', '),
+    inLanguage: 'en-IN',
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    citation: d.sources.map((s) => s.href),
+  },
+  breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Articles', path: '/articles/' },
+    { name: d.title, path: `/articles/${entry.id}/` },
+  ]),
+  ...(d.faq.length ? [faqSchema(d.faq)] : []),
+];
+---
+<Base
+  title={`${d.title} | AINPM.in`}
+  description={d.description}
+  ogType="article"
+  schema={schema}
+  published={d.pubDate}
+  updated={d.updatedDate}
+  sources={d.sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/articles/">Articles</a></div>
+  <div class="wrap">
+    <article class="article">
+      <span class="eyebrow">{d.tags.join(' · ')}</span>
+      <h1>{d.title}</h1>
+      <p class="byline">
+        <span>By <a href="/about/" rel="author">{AUTHOR.name}</a>, {AUTHOR.jobTitle}</span>
+        <span>Published <time datetime={d.pubDate.toISOString().slice(0, 10)}>{fmtDate(d.pubDate)}</time></span>
+        <span>Last updated <time datetime={d.updatedDate.toISOString().slice(0, 10)}>{fmtDate(d.updatedDate)}</time></span>
+        <span>{d.readingMinutes} min read</span>
+      </p>
+      <div class="tldr"><strong>Short answer</strong><p>{d.tldr}</p></div>
+      <div class="md"><Content /></div>
+
+      {d.faq.length > 0 && (
+        <section style="border:0;padding:40px 0 0">
+          <h2 style="font-size:1.6rem;margin-bottom:16px">Frequently asked questions</h2>
+          <div class="faq">
+            {d.faq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section style="border:0;padding:40px 0 0">
+        <h2 style="font-size:1.3rem;margin-bottom:14px">Keep reading</h2>
+        <div class="grid g2">
+          {others.map((a) => (
+            <a class="card" href={`/articles/${a.id}/`}>
+              <span class="meta">{a.data.tags[0]}</span>
+              <h3>{a.data.title}</h3>
+            </a>
+          ))}
+          <a class="card" href="/sebi-rag/"><span class="meta">Case study</span><h3>SEBI Circular RAG: an AI-native PM case study</h3></a>
+        </div>
+      </section>
+    </article>
+  </div>
+</Base>

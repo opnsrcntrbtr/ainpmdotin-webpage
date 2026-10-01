@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import { GLOSSARY } from '../../data/glossary';
+import { breadcrumb } from '../../data/site';
+
+const updated = new Date('2026-10-02');
+const schema = [
+  {
+    '@type': 'DefinedTermSet',
+    '@id': 'https://ainpm.in/glossary/#terms',
+    name: 'AI-native product management glossary',
+    url: 'https://ainpm.in/glossary/',
+    inLanguage: 'en-IN',
+    hasDefinedTerm: GLOSSARY.map((t) => ({
+      '@type': 'DefinedTerm',
+      '@id': `https://ainpm.in/glossary/#${t.id}`,
+      name: t.term,
+      description: t.def,
+      inDefinedTermSet: 'https://ainpm.in/glossary/#terms',
+    })),
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Glossary', path: '/glossary/' }]),
+];
+---
+<Base
+  title="AI-Native Product Management Glossary | AINPM.in"
+  description={`Plain-English definitions of ${GLOSSARY.length} terms for AI-native product managers in India: evals, RAG, abstention, recall@k, DPDP, FREE-AI, consent managers and more.`}
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Glossary</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Glossary</span>
+    <h1>AI-native product management glossary</h1>
+    <p class="lede muted">{GLOSSARY.length} terms a product manager meets when building AI products in India, each defined in one or two sentences.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:64px">
+    <ul class="strata" style="margin:0 0 20px">
+      {GLOSSARY.map((t) => <li><a href={`#${t.id}`}>{t.term}</a></li>)}
+    </ul>
+    <dl class="gloss">
+      {GLOSSARY.map((t) => (
+        <div id={t.id}>
+          <dt>{t.term}</dt>
+          <dd>{t.def}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="note" style="margin-top:24px">See these terms in use in <a href="/articles/what-is-ai-native-product-management/">What is AI-native product management?</a> and the <a href="/sebi-rag/">SEBI Circular RAG case study</a>.</p>
+  </div>
+</Base>

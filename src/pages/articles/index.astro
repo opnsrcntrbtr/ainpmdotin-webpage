@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { breadcrumb, fmtDate } from '../../data/site';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const updated = articles.map((a) => a.data.updatedDate).sort((a, b) => b.valueOf() - a.valueOf())[0];
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    name: 'Articles on AI-native product management',
+    url: 'https://ainpm.in/articles/',
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    hasPart: articles.map((a) => ({
+      '@type': 'BlogPosting',
+      headline: a.data.title,
+      url: `https://ainpm.in/articles/${a.id}/`,
+      datePublished: a.data.pubDate.toISOString(),
+    })),
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Articles', path: '/articles/' }]),
+];
+---
+<Base
+  title="Articles on AI-Native Product Management | AINPM.in"
+  description="Answer-first guides for AI-native product managers in India: fundamentals, evals, RAG and AI regulation. Written by Ian Pinto with sources and real product data."
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Articles</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Articles</span>
+    <h1>Guides for AI-native product managers</h1>
+    <p class="lede muted">Each guide leads with the answer, cites its sources and uses real numbers from a shipped product. Updated as the rules and tools change.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:64px">
+    <div class="grid g2">
+      {articles.map((a) => (
+        <a class="card" href={`/articles/${a.id}/`}>
+          <span class="meta">{a.data.tags.join(' · ')}</span>
+          <h2 style="font-size:1.35rem;margin-bottom:8px">{a.data.title}</h2>
+          <p>{a.data.description}</p>
+          <span class="more">{a.data.readingMinutes} min read · Updated {fmtDate(a.data.updatedDate)} →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
