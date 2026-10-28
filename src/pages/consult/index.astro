@@ -1,0 +1,226 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, AUTHOR, breadcrumb, faqSchema } from '../../data/site';
+
+const updated = new Date('2026-10-28');
+const bookingEmbed = SITE.booking + '?gv=true';
+
+const services = [
+  {
+    id: 'ai-product-strategy',
+    name: 'AI product strategy & MVP scoping',
+    for: 'Founders, product heads, GCC leaders',
+    summary: 'Turn an AI idea into a scoped, testable MVP with a clear case for building it.',
+    points: [
+      'Where AI is 10× better than today’s workflow, and where it isn’t',
+      'Build vs buy, model choice and cost per task in rupees',
+      'MVP scope, success metrics and a first evaluation set',
+    ],
+  },
+  {
+    id: 'rag-agent-evals',
+    name: 'RAG & agent evaluation and architecture review',
+    for: 'Product and engineering teams shipping RAG or agents',
+    summary: 'Review of retrieval, generation and trust controls, anchored on a golden set and quality gates.',
+    points: [
+      'Golden-set design grouped by failure type',
+      'Metrics and release gates: recall, citations, abstention, latency',
+      'Hybrid retrieval, reranking, citation filtering and faithfulness checks',
+    ],
+  },
+  {
+    id: 'bfsi-compliance-by-design',
+    name: 'BFSI AI compliance-by-design',
+    for: 'Mutual fund AMCs, brokers, NBFCs, fintechs',
+    summary: 'Design AI features that meet SEBI, RBI FREE-AI and DPDP expectations from the first sprint.',
+    points: [
+      'Human-in-the-loop, kill-switch and audit-trail patterns',
+      'Consent and data-flow mapping for DPDP timelines',
+      'Supersession-aware, cited answers over regulatory text',
+    ],
+  },
+  {
+    id: 'private-local-ai-mac',
+    name: 'Privacy-first local AI on Apple Mac',
+    for: 'Professionals and teams handling sensitive data',
+    summary: 'Run capable language models entirely on a Mac with at least 48 GB of unified memory, so data never leaves the machine.',
+    points: [
+      'Choosing models and quantisation that fit 48 GB+ unified memory',
+      'Local runtimes such as MLX, Ollama and OpenAI/Anthropic-compatible local servers',
+      'Local RAG over your own documents, with evaluation and safe defaults',
+    ],
+  },
+  {
+    id: 'ai-pm-mentoring',
+    name: 'AI PM career mentoring',
+    for: 'PMs and aspiring PMs moving into AI-native roles',
+    summary: 'A practical plan to build AI-native product skills and evidence that hiring managers trust.',
+    points: [
+      'Portfolio project with an evaluation and cost breakdown',
+      'Interview preparation for AI product roles',
+      'A 90-day skills plan: evals, RAG, agents, regulation',
+    ],
+  },
+];
+
+const faq = [
+  { q: 'How do I book a consultation with Ian Pinto?', a: 'Choose a 30-minute slot in the booking calendar on ainpm.in/consult. Google Calendar shows times in your own time zone and sends a confirmation email with the meeting details and a link to reschedule or cancel.' },
+  { q: 'How much does a consultation cost?', a: 'Consultations are paid. Pricing depends on the service and scope and is shared on request: email ianpinto@ainpm.in, or mention it in the booking form, and you will receive a quote before any paid work begins.' },
+  { q: 'What happens after I book?', a: 'You receive a calendar invite. During the 30-minute call we clarify your goal, constraints and timeline. Afterwards you get a short written summary of the recommended next steps and, if useful, a proposal with scope and price.' },
+  { q: 'Who are the consultations for?', a: 'Founders, product leaders and engineering teams building AI-native products; mutual fund, broking and fintech teams working under SEBI, RBI and DPDP rules; professionals who want private AI on their own Mac; and product managers moving into AI roles.' },
+  { q: 'What do I need for private local AI on a Mac?', a: 'An Apple Silicon Mac with at least 48 GB of unified memory is recommended, so that capable models fit in memory with room for long documents. The consultation covers model choice, quantisation, local runtimes and a local document search set-up.' },
+  { q: 'Should I share confidential information when booking?', a: 'No. Please describe your goal at a high level in the booking form. Confidentiality terms can be agreed before any detailed or paid work begins.' },
+  { q: 'Is the consultation legal or investment advice?', a: 'No. Consultations cover product, technology and compliance-by-design practice. For legal interpretation of SEBI, RBI or DPDP requirements, involve your legal and compliance teams.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': 'https://ainpm.in/consult/#webpage',
+    url: 'https://ainpm.in/consult/',
+    name: 'Book an AI product consultation with Ian Pinto',
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    about: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    dateModified: updated.toISOString(),
+    inLanguage: 'en-IN',
+    potentialAction: {
+      '@type': 'ReserveAction',
+      name: 'Book a 30-minute consultation',
+      target: { '@type': 'EntryPoint', urlTemplate: SITE.booking, actionPlatform: ['https://schema.org/DesktopWebPlatform', 'https://schema.org/MobileWebPlatform'] },
+    },
+  },
+  ...services.map((s) => ({
+    '@type': 'Service',
+    '@id': `https://ainpm.in/consult/#${s.id}`,
+    name: s.name,
+    description: s.summary,
+    serviceType: s.name,
+    provider: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    areaServed: [{ '@type': 'Country', name: 'India' }, 'Worldwide'],
+    audience: { '@type': 'Audience', audienceType: s.for },
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: SITE.booking,
+      availableLanguage: 'English',
+    },
+    offers: { '@type': 'Offer', availability: 'https://schema.org/InStock', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', description: 'Price on request' } },
+  })),
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Book a consultation', path: '/consult/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="Book an AI Product Consultation with Ian Pinto | AINPM.in"
+  description="Book a 30-minute paid consultation with Ian Pinto: AI product strategy, RAG and agent evals, BFSI AI compliance, private local AI on Mac, AI PM mentoring."
+  schema={schema}
+  updated={updated}
+  ogImage="/og/consult.png"
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Book a consultation</div>
+
+  <div class="wrap phero" style="padding-top:28px">
+    <div>
+      <span class="pill-live">Consultancy · India &amp; remote</span>
+      <h1><span class="kicker">Work with Ian Pinto</span>Book an AI product <em>consultation</em></h1>
+      <p class="lede"><strong>Ian Pinto offers paid consultations for teams and professionals building AI-native products.</strong> Pick a 30-minute slot below to discuss AI product strategy, RAG and agent evaluation, AI compliance-by-design for financial services, private local AI on a Mac, or moving into an AI PM role. Pricing is shared on request.</p>
+      <div class="cta">
+        <a class="btn primary" href="#book" data-goatcounter-click="consult-hero-see-times">See available times</a>
+        <a class="btn ghost" href={`mailto:${AUTHOR.email}?subject=Consultation%20pricing%20request`} data-goatcounter-click="consult-hero-email">Ask for pricing</a>
+      </div>
+      <ul class="chips" style="margin-top:22px">
+        <li>30-minute sessions</li><li>Online, your time zone</li><li>Paid · price on request</li><li>Booked via Google Calendar</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Why work with me</span>
+      <ul class="md" style="padding-left:1.1em;margin:0">
+        <li>Built and evaluated <a href="/sebi-rag/">SEBI Circular RAG</a>: 1,490 circulars, recall@10 0.943, abstention accuracy 0.981.</li>
+        <li>Technical Product / Program Manager on mutual fund AMC products and platforms.</li>
+        <li>Runs RAG and evaluation pipelines locally on Apple Silicon with MLX.</li>
+        <li>MBA, BE (IT), PMP, CSM; AI product management at IIT Kharagpur (upGrad) and ISB.</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · Services</span>
+        <h2>What can we work on together?</h2>
+        <p class="muted">Five areas, each grounded in work I have shipped. Every engagement starts with a 30-minute consultation.</p>
+      </div>
+      <div class="grid g3 svc">
+        {services.map((s) => (
+          <article class="card" id={s.id}>
+            <span class="for">{s.for}</span>
+            <h3>{s.name}</h3>
+            <p>{s.summary}</p>
+            <ul>{s.points.map((p) => <li>{p}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · How it works</span>
+        <h2>What happens when you book?</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Pick a time</h3><p>Choose a 30-minute slot. Times show in your own time zone.</p></div></div>
+        <div class="step"><div><h3>Share context</h3><p>Add a line about your goal in the booking form. Please keep confidential details out.</p></div></div>
+        <div class="step"><div><h3>Meet</h3><p>Google Calendar sends the invite with meeting details and a link to reschedule or cancel.</p></div></div>
+        <div class="step"><div><h3>Get next steps</h3><p>You receive a short written summary and, if useful, a proposal with scope and price.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Book</span>
+        <h2>Choose a time</h2>
+        <p class="muted">Consultations are paid; pricing is shared on request at <a class="mail" href={`mailto:${AUTHOR.email}?subject=Consultation%20pricing%20request`}>{AUTHOR.email}</a>. The calendar is provided by Google, which handles the booking details you enter.</p>
+      </div>
+      <div class="cal">
+        <div class="embed-head"><span>Google Calendar · 30 min with Ian</span><a href={SITE.booking} target="_blank" rel="noopener" data-goatcounter-click="consult-open-google">Open in Google Calendar ↗</a></div>
+        <div id="calSlot" class="embed-load">
+          <p class="muted" style="margin:0;max-width:52ch">The calendar loads when you ask for it, so this page stays fast and Google is only contacted if you want to book.</p>
+          <button class="btn primary" id="loadCal" type="button" data-goatcounter-click="consult-load-calendar">Show available times</button>
+        </div>
+      </div>
+      <noscript><p class="note">JavaScript is off. <a href={SITE.booking}>Book on Google Calendar</a>.</p></noscript>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <p class="note" style="margin-top:20px">Prefer email? Write to <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. More about me on the <a href="/about/">About page</a>.</p>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ src: bookingEmbed }}>
+    document.getElementById('loadCal').addEventListener('click', function () {
+      var slot = document.getElementById('calSlot'), f = document.createElement('iframe');
+      f.src = src;
+      f.title = 'Book a 30-minute consultation with Ian Pinto (Google Calendar)';
+      f.loading = 'lazy';
+      slot.replaceWith(f);
+      f.focus();
+    });
+  </script>
+</Base>

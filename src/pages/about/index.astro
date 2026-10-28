@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { AUTHOR, breadcrumb } from '../../data/site';
 
-const updated = new Date('2026-10-02');
+const updated = new Date('2026-10-28');
 const schema = [
   {
     '@type': 'ProfilePage',
@@ -38,6 +38,8 @@ const schema = [
           <li><strong>Cloud-native systems</strong> — designing and running services at scale.</li>
           <li><strong>Technical product and program management</strong> — taking products from problem to production.</li>
         </ul>
+        <h2>Consulting</h2>
+        <p>I take a small number of paid consultations on AI product strategy, RAG and agent evaluation, AI compliance-by-design for financial services, privacy-first local AI on Apple Mac, and AI PM careers. <a href="/consult/">See services and book a time</a>, or email <a href="mailto:ianpinto@ainpm.in">ianpinto@ainpm.in</a>.</p>
         <h2>Credentials</h2>
       </div>
       <ul class="chips">
@@ -55,8 +57,9 @@ const schema = [
         </ul>
       </div>
       <div class="cta" style="margin-top:24px">
+        <a class="btn primary" href="/consult/" data-goatcounter-click="cta-about-book">Book a consultation</a>
         {AUTHOR.sameAs.slice(0, 2).map((u, i) => (
-          <a class={i === 0 ? 'btn primary' : 'btn ghost'} href={u} rel="me noopener" target="_blank">{i === 0 ? 'Connect on LinkedIn ↗' : 'GitHub ↗'}</a>
+          <a class="btn ghost" href={u} rel="me noopener" target="_blank">{i === 0 ? 'Connect on LinkedIn ↗' : 'GitHub ↗'}</a>
         ))}
         <a class="btn ghost" href="/articles/">Read the articles</a>
       </div>

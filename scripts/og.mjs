@@ -27,6 +27,11 @@ const cards = {
     lines: ['AI-native product', 'management,', 'built from India.'],
     foot: 'By Ian Pinto · ainpm.in',
   }),
+  'consult.png': card({
+    kicker: 'Consultancy · Book a call',
+    lines: ['Book an AI product', 'consultation with', 'Ian Pinto.'],
+    foot: 'Strategy · RAG & agent evals · BFSI · Local AI · ainpm.in/consult',
+  }),
   'sebi-rag.png': card({
     kicker: 'AI-native PM case study',
     lines: ['SEBI Circular RAG:', 'cited answers over', '1,490 SEBI circulars.'],

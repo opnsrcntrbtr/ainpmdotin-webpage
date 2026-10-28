@@ -6,6 +6,9 @@ export const SITE = {
     'AINPM.in is a practical, India-first guide to AI-native product management by Ian Pinto, with a live open-source case study: SEBI Circular RAG.',
   locale: 'en-IN',
   goatcounter: 'https://ainpmdotin.goatcounter.com',
+  // Google Calendar appointment schedule (Google Workspace, ianpinto@ainpm.in)
+  booking:
+    'https://calendar.google.com/calendar/appointments/schedules/AcZssZ00dNiqYT_nZaKJHxPnDtd02QKFXNNuIr8r564Kww0XOIw_yKW0Y0OQ62TTQJpILI2FZri55l8c',
   // Paste verification codes from Google Search Console / Bing Webmaster Tools here.
   googleVerification: '',
   bingVerification: '',
@@ -15,6 +18,7 @@ export const AUTHOR = {
   name: 'Ian Pinto',
   url: 'https://ainpm.in/about/',
   jobTitle: 'Technical Product / Program Manager',
+  email: 'ianpinto@ainpm.in',
   description:
     'Technical Product / Program Manager working on mutual fund AMC products and platforms, cloud-native systems, RAG and agentic AI.',
   sameAs: [
@@ -40,6 +44,7 @@ export const NAV = [
   { href: '/#playbook', label: 'Playbook' },
   { href: '/#radar', label: 'Regulation' },
   { href: '/about/', label: 'About' },
+  { href: '/consult/', label: 'Book a call', cta: true },
 ];
 
 export const personSchema = {
@@ -48,6 +53,7 @@ export const personSchema = {
   name: AUTHOR.name,
   url: AUTHOR.url,
   jobTitle: AUTHOR.jobTitle,
+  email: 'mailto:' + AUTHOR.email,
   description: AUTHOR.description,
   sameAs: AUTHOR.sameAs,
   knowsAbout: AUTHOR.knowsAbout,

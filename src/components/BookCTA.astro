@@ -1,0 +1,17 @@
+---
+interface Props { heading?: string; text?: string; id: string; level?: 'h2' | 'h3'; }
+const {
+  heading = 'Building an AI-native product?',
+  text = 'Book a 30-minute consultation with Ian Pinto on AI product strategy, RAG and agent evaluation, BFSI compliance-by-design, private local AI or AI PM careers.',
+  id,
+  level = 'h2',
+} = Astro.props;
+const H = level;
+---
+<aside class="book-cta" aria-label="Book a consultation">
+  <div>
+    <H>{heading}</H>
+    <p>{text}</p>
+  </div>
+  <a class="btn primary" href="/consult/" data-goatcounter-click={`cta-${id}-book`}>Book a consultation</a>
+</aside>

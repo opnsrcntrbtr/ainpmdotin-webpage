@@ -6,7 +6,7 @@ import { faqSchema } from '../data/site';
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const updated = new Date('2026-10-02');
+const updated = new Date('2026-10-28');
 
 const faq = [
   { q: 'What is AI-native product management?', a: 'AI-native product management is the practice of building products where an AI model is the core of the experience rather than an add-on. The product manager specifies behaviour with evaluation sets, measures quality as a rate, manages inference cost per task and designs trust controls such as citations, abstention and consent from the start.' },
@@ -64,6 +64,7 @@ const schema = [
         <a href="https://github.com/opnsrcntrbtr/sebi-circular-rag" target="_blank" rel="noopener">GitHub repo ↗</a>
         <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars" target="_blank" rel="noopener">Open dataset ↗</a>
         <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index" target="_blank" rel="noopener">Prebuilt index ↗</a>
+        <a href="/consult/" data-goatcounter-click="cta-home-hero-book">Book a consultation →</a>
       </div>
     </div>
     <figure class="shot">
@@ -258,7 +259,8 @@ const schema = [
         <h2>Ian Pinto</h2>
         <p class="muted" style="margin-top:12px;max-width:65ch">Technical Product / Program Manager working on mutual fund AMC products and platforms, cloud-native systems, RAG and agentic AI. I started AINPM.in to share what I'm learning about building AI-native products in India, openly and iteratively.</p>
         <div class="cta" style="margin-top:20px">
-          <a class="btn primary" href="/about/">More about me</a>
+          <a class="btn primary" href="/consult/" data-goatcounter-click="cta-home-about-book">Book a consultation</a>
+          <a class="btn ghost" href="/about/">More about me</a>
           <a class="btn ghost" href="https://www.linkedin.com/in/ian1980/" rel="me noopener" target="_blank">LinkedIn ↗</a>
           <a class="btn ghost" href="https://github.com/opnsrcntrbtr" rel="me noopener" target="_blank">GitHub ↗</a>
         </div>

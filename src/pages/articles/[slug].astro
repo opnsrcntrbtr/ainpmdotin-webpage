@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 import { AUTHOR, breadcrumb, faqSchema, fmtDate } from '../../data/site';
+import BookCTA from '../../components/BookCTA.astro';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -63,6 +64,8 @@ const schema = [
       </p>
       <div class="tldr"><strong>Short answer</strong><p>{d.tldr}</p></div>
       <div class="md"><Content /></div>
+
+      <BookCTA id={`article-${entry.id}`} heading="Want help applying this?" />
 
       {d.faq.length > 0 && (
         <section style="border:0;padding:40px 0 0">
