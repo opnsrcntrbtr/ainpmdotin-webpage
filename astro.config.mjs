@@ -5,11 +5,15 @@ import { readdirSync, readFileSync } from 'node:fs';
 // Real "last modified" dates for the sitemap, so crawlers can trust them.
 // Articles: read from frontmatter. Other pages: set here when their content changes.
 const lastmod = {
-  '/': '2026-10-28',
-  '/sebi-rag/': '2026-10-28',
-  '/about/': '2026-10-28',
+  '/': '2026-10-29',
+  '/sebi-rag/': '2026-10-29',
+  '/about/': '2026-10-29',
+  '/work/': '2026-10-29',
+  '/work/trustvault/': '2026-10-29',
+  '/work/webauthn-prf-zktv/': '2026-10-29',
+  '/work/lecture-lens/': '2026-10-29',
   '/consult/': '2026-10-28',
-  '/glossary/': '2026-10-02',
+  '/glossary/': '2026-10-29',
   '/articles/': '2026-10-02',
 };
 const dir = './src/content/articles';

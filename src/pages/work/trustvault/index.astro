@@ -1,0 +1,227 @@
+---
+import Base from '../../../layouts/Base.astro';
+import LayerDiagram from '../../../components/LayerDiagram.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import ProjectCards from '../../../components/ProjectCards.astro';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-10-29');
+const repo = 'https://github.com/opnsrcntrbtr/TrustVault-PWA';
+const app = 'https://trust-vault-pwa.vercel.app';
+
+const faq = [
+  { q: 'What is TrustVault?', a: 'TrustVault is an open-source, zero-knowledge password manager built as a progressive web app by Ian Pinto. It encrypts every credential on the device with AES-256-GCM, stores only ciphertext in IndexedDB, works offline, and can unlock with a passkey through the WebAuthn PRF extension.' },
+  { q: 'What does zero-knowledge mean in TrustVault?', a: 'It means that the stored data alone cannot be decrypted. The vault key is wrapped under a key derived either from the master password with memory-hard scrypt or from a passkey PRF output that only the authenticator can produce after biometric or PIN verification. Neither input is ever stored.' },
+  { q: 'How does passkey unlock work?', a: 'During unlock the browser asks the authenticator for a PRF output tied to the passkey. TrustVault derives a wrap key from it with HKDF-SHA256 and uses it to unwrap the AES-256-GCM vault key, which stays in memory as a non-extractable CryptoKey. A password wrap of the same key is always kept, so deleting a passkey never destroys data.' },
+  { q: 'Does the on-device AI send my passwords anywhere?', a: 'No. Password-strength explanations and breach-impact analysis run on local models (Gemini Nano, WebLLM or LiteRT-LM depending on the device), so no credential data leaves the device. Breach checks use the Have I Been Pwned k-anonymity range API, which sends only a short hash prefix.' },
+  { q: 'Can I try TrustVault?', a: 'Yes. A staging build runs at trust-vault-pwa.vercel.app and the source is on GitHub. Use test data only: it is a personal open-source project, not an audited commercial product.' },
+];
+
+const schema = [
+  {
+    '@type': 'SoftwareApplication',
+    '@id': 'https://ainpm.in/work/trustvault/#software',
+    name: 'TrustVault PWA',
+    description: 'Zero-knowledge, offline-first password manager progressive web app with WebAuthn PRF passkey unlock, AES-256-GCM encryption and on-device AI assistance.',
+    applicationCategory: 'SecurityApplication',
+    operatingSystem: 'Web, Android',
+    url: app,
+    codeRepository: repo,
+    softwareVersion: '1.0.0',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    screenshot: 'https://ainpm.in/work/trustvault-dashboard.webp',
+  },
+  {
+    '@type': 'TechArticle',
+    headline: 'TrustVault: a zero-knowledge password manager case study',
+    url: 'https://ainpm.in/work/trustvault/',
+    dateModified: updated.toISOString(),
+    datePublished: updated.toISOString(),
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    about: { '@id': 'https://ainpm.in/work/trustvault/#software' },
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    inLanguage: 'en-IN',
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'TrustVault', path: '/work/trustvault/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: repo, label: 'TrustVault-PWA repository and README' },
+  { href: repo + '/blob/main/docs/status/PROJECT_STATUS.md', label: 'Project status (6 July 2026)' },
+  { href: repo + '/blob/main/docs/security/SECURITY.md', label: 'Security documentation' },
+  { href: repo + '/blob/main/docs/architecture/ARCHITECTURE.md', label: 'Architecture' },
+  { href: 'https://doi.org/10.6084/m9.figshare.32915411.v1', label: 'Preprint: WebAuthn PRF-Based Vault Key Wrapping (figshare)' },
+];
+---
+<Base
+  title="TrustVault: Zero-Knowledge Password Manager PWA | AINPM.in"
+  description="Case study of TrustVault, an offline-first zero-knowledge password manager PWA with passkey (WebAuthn PRF) unlock, AES-256-GCM encryption and on-device AI."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Personal open-source project; use test data in the staging app. Security claims are the project's own and have not been independently audited. Views are my own."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / TrustVault</div>
+
+  <div class="wrap phero" style="padding-top:28px">
+    <div>
+      <span class="pill-live">Case study · Security · PWA</span>
+      <h1><span class="kicker">Zero-knowledge password manager</span>TrustVault: credentials that <em>only you</em> can decrypt</h1>
+      <p class="lede"><strong>TrustVault is an open-source, offline-first password manager built as a progressive web app, in which every credential is encrypted on the device and stored data alone can never be decrypted.</strong> It unlocks with a master password or a passkey through the WebAuthn PRF extension, and explains password risk with AI models that run on the device.</p>
+      <div class="cta">
+        <a class="btn primary" href={app} target="_blank" rel="noopener">Open the staging app ↗</a>
+        <a class="btn ghost" href={repo} target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+      <ul class="chips" style="margin-top:22px">
+        <li>React 19 · TypeScript · Vite</li><li>IndexedDB (Dexie)</li><li>WebAuthn PRF</li><li>Capacitor (Android)</li><li>Apache-2.0 licence</li>
+      </ul>
+    </div>
+    <figure class="shot">
+      <div class="bar"><i></i><i></i><i></i><span>TrustVault · dashboard with test data</span></div>
+      <img src="/work/trustvault-dashboard.webp" alt="TrustVault dashboard showing credential categories, password strength summary, a security score and a test credential flagged as breached" width="1280" height="800" fetchpriority="high" decoding="async">
+      <figcaption>Dashboard with a test credential flagged by the breach check.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div><b>4,139</b><span>automated tests passing</span></div>
+      <div><b>AES-256</b><span>GCM encryption on device</span></div>
+      <div><b>N=2<sup>17</sup></b><span>scrypt cost for key wrapping</span></div>
+      <div><b>0</b><span>bytes of credential data sent to AI</span></div>
+    </div>
+    <p class="note">Test count from the project status report of 6 July 2026 (4,139 passed, 3 failing). Security properties are as designed and documented by the project; there has been no independent audit.</p>
+  </div>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · The problem</span>
+        <h2>Why build another password manager?</h2>
+        <p class="muted">To prove that a web app can meet native-app security expectations without a server that holds your secrets.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Trust shouldn't depend on a server</h3><p>Most vaults ask you to trust a provider's backend. A browser can now do the cryptography locally, so the server can be optional.</p></article>
+        <article class="card"><h3>Passkeys are not encryption keys</h3><p>Passkeys sign in, but they don't encrypt data. The WebAuthn PRF extension can derive a secret from a passkey; few apps use it safely.</p></article>
+        <article class="card"><h3>AI help without data leaks</h3><p>Explaining why a password is weak is useful, but sending credentials to a cloud model is unacceptable in a vault.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · Product principles</span>
+        <h2>What makes it zero-knowledge?</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Storage alone is never enough</h3><p>IndexedDB holds only AES-256-GCM ciphertext, salts and nonces. No stored value can rebuild the vault key.</p></div></div>
+        <div class="step"><div><h3>Two ways in, never zero</h3><p>The vault key is wrapped under both the master password and, optionally, a passkey PRF, so losing a passkey never means losing data.</p></div></div>
+        <div class="step"><div><h3>Keys can't be exported</h3><p>Session vault keys are non-extractable WebCrypto keys, so even injected script cannot copy their raw bytes.</p></div></div>
+        <div class="step"><div><h3>Expensive to guess</h3><p>Master passwords are hashed and the vault key wrapped with memory-hard scrypt (N=131,072, r=8, p=1).</p></div></div>
+        <div class="step"><div><h3>Local intelligence only</h3><p>Strength and breach explanations run on Gemini Nano, WebLLM or LiteRT-LM on the device.</p></div></div>
+        <div class="step"><div><h3>Hardened by default</h3><p>Strict hash-based CSP, HSTS, COOP/CORP headers, clipboard auto-clear after 30 seconds and tab-aware auto-lock.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · How it works</span>
+        <h2>How is TrustVault built?</h2>
+        <p class="muted">A clean four-layer architecture keeps the cryptography free of UI and storage dependencies.</p>
+      </div>
+      <LayerDiagram
+        title="TrustVault layered architecture"
+        desc="Four layers from top to bottom: presentation, data, domain and core. Each layer imports only from the layer below. The core layer holds cryptography and authentication."
+        caption="Each layer imports only from the layer below. Highlighted: where secrets are handled."
+        layers={[
+          { title: 'Presentation', items: 'React 19 pages and components · Zustand stores · auto-lock · install prompt' },
+          { title: 'Data', items: 'Dexie (IndexedDB) repositories · migrations · encrypted .tvault import/export' },
+          { title: 'Domain', items: 'User, Credential and VaultProfile entities · repository interfaces' },
+          { title: 'Core', items: 'Crypto (scrypt, PBKDF2, AES-256-GCM, HKDF) · WebAuthn PRF · TOTP · breach checks · OCR · autofill', trust: true },
+        ]}
+      />
+      <div class="grid g2" style="margin-top:20px">
+        <figure class="shot">
+          <div class="bar"><i></i><i></i><i></i><span>trust-vault-pwa.vercel.app · create account</span></div>
+          <img src="/work/trustvault-signup.webp" alt="TrustVault create-account screen with username, optional email stored locally, master password and the note: end-to-end encrypted, zero-knowledge architecture" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>Account creation: the email is optional and stays on the device.</figcaption>
+        </figure>
+        <div class="card">
+          <h3>Features</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>Credential vault with logins, cards, bank, identity, API and SSH keys, notes</li>
+            <li>Password generator and TOTP (RFC 6238) codes</li>
+            <li>Passkey unlock through WebAuthn PRF</li>
+            <li>Breach checks via Have I Been Pwned k-anonymity</li>
+            <li>OCR capture of credentials with Tesseract</li>
+            <li>Encrypted import and export, backup codes, multi-vault profiles</li>
+            <li>Installable PWA, Android build with Capacitor, browser-extension autofill bridge</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Decisions &amp; trade-offs</span>
+        <h2>What was changed, and why?</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Decision</th><th>Reason</th><th>Call</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Argon2id replaced by scrypt</strong></td><td>The WebAssembly Argon2 build conflicted with the strict Content Security Policy. Scrypt from @noble/hashes is memory-hard and pure JavaScript.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Vault key re-wrapped with scrypt</strong></td><td>Legacy PBKDF2-wrapped vaults are upgraded transparently to scrypt-v1 at unlock, with no user action.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Always keep a password wrap</strong></td><td>Tying data to a passkey alone means a deleted passkey destroys the vault.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Extract the crypto into a library</strong></td><td>The PRF key-wrapping engine became <a href="/work/webauthn-prf-zktv/">webauthn-prf-zktv</a>, with its own tests and preprint.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td>Passkey unlock inside the Android app</td><td>PRF does not pass through Android WebView to Credential Manager, so the Capacitor app uses the password scheme.</td><td><span class="badge no">Not possible yet</span></td></tr>
+            <tr><td>Cloud AI for password advice</td><td>Would send credential metadata off the device. On-device models were chosen instead.</td><td><span class="badge no">Rejected</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · What's next</span>
+        <h2>Roadmap</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Benchmark against Bitwarden</h3><p>Feature and security benchmark workstreams added to the test-driven improvement plan in August 2026.</p></article>
+        <article class="card"><h3>Close quality debt</h3><p>Fix the remaining failing tests and lint findings, and complete a full WCAG 2.1 AA audit.</p></article>
+        <article class="card"><h3>Independent review</h3><p>Invite external security review of the key-wrapping design described in the preprint.</p></article>
+      </div>
+      <BookCTA id="trustvault" heading="Designing a privacy-first product?" text="Book a consultation on zero-knowledge architecture, passkeys, on-device AI and security trade-offs." />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">More work</span><h2>Other case studies</h2></div>
+      <ProjectCards exclude="trustvault" />
+    </div>
+  </section>
+</Base>

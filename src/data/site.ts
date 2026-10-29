@@ -38,7 +38,7 @@ export const AUTHOR = {
 };
 
 export const NAV = [
-  { href: '/sebi-rag/', label: 'SEBI RAG' },
+  { href: '/work/', label: 'Work' },
   { href: '/articles/', label: 'Articles' },
   { href: '/glossary/', label: 'Glossary' },
   { href: '/#playbook', label: 'Playbook' },

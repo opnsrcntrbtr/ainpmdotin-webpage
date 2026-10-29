@@ -83,7 +83,7 @@ const path = Astro.url.pathname;
     <a class="brand" href="/" aria-label="AINPM.in home"><i></i>AINPM.in</a>
     <nav aria-label="Primary"><ul>
       {NAV.map((n) => (
-        <li><a href={n.href} class={n.cta ? 'nav-cta' : undefined} data-goatcounter-click={n.cta ? 'cta-nav-book' : undefined} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a></li>
+        <li><a href={n.href} class={n.cta ? 'nav-cta' : undefined} data-goatcounter-click={n.cta ? 'cta-nav-book' : undefined} aria-current={path === n.href || (n.href !== '/' && !n.href.includes('#') && path.startsWith(n.href)) ? 'page' : undefined}>{n.label}</a></li>
       ))}
     </ul></nav>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
@@ -98,6 +98,7 @@ const path = Astro.url.pathname;
   <div class="wrap">
     <ul class="foot-nav">
       <li><a href="/">Home</a></li>
+      <li><a href="/work/">Work</a></li>
       <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
       <li><a href="/articles/">Articles</a></li>
       <li><a href="/glossary/">Glossary</a></li>

@@ -2,11 +2,12 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { faqSchema } from '../data/site';
+import ProjectCards from '../components/ProjectCards.astro';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const updated = new Date('2026-10-28');
+const updated = new Date('2026-10-29');
 
 const faq = [
   { q: 'What is AI-native product management?', a: 'AI-native product management is the practice of building products where an AI model is the core of the experience rather than an add-on. The product manager specifies behaviour with evaluation sets, measures quality as a rate, manages inference cost per task and designs trust controls such as citations, abstention and consent from the start.' },
@@ -206,6 +207,17 @@ const schema = [
           <li><strong>Check regulatory fluency</strong> for BFSI, health and public-sector roles.</li>
         </ul></div>
       </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Portfolio</span>
+        <h2>What else have I built?</h2>
+        <p class="muted">Privacy-first and AI-native products with their evidence and trade-offs. <a href="/work/">See the full portfolio →</a></p>
+      </div>
+      <ProjectCards exclude="sebi-rag" />
     </div>
   </section>
 

@@ -1,6 +1,6 @@
 export interface Term { id: string; term: string; def: string; }
 
-export const GLOSSARY: Term[] = [
+const TERMS: Term[] = [
   { id: 'abstention', term: 'Abstention', def: 'When an AI product deliberately declines to answer because the evidence is missing or the question is out of scope. Abstention accuracy measures how often it refuses, or answers, correctly.' },
   { id: 'agentic-ai', term: 'Agentic AI', def: 'AI systems that plan and take multi-step actions with tools, such as searching, calling APIs or writing files, to complete a goal, usually with human approval at defined points.' },
   { id: 'ai-native-product', term: 'AI-native product', def: 'A product whose core value is delivered by an AI model, so it would not exist without the model. It contrasts with an AI-enabled product, where AI is added to an existing workflow.' },
@@ -20,9 +20,15 @@ export const GLOSSARY: Term[] = [
   { id: 'golden-set', term: 'Golden set', def: 'A reviewed collection of test questions with expected answers or sources, used as the reference for evaluating an AI product. It acts as the product specification.' },
   { id: 'hybrid-retrieval', term: 'Hybrid retrieval', def: 'Combining keyword search such as BM25 with vector search, then fusing the two ranked lists. It handles both exact terms and paraphrased questions.' },
   { id: 'inference-cost', term: 'Inference cost', def: 'The cost of running a model to produce one output, driven by model choice, input and output tokens and caching. AI-native PMs track it per task.' },
+  { id: 'key-wrapping', term: 'Key wrapping', def: 'Encrypting one cryptographic key with another. A vault key wrapped under a password- or passkey-derived key can be stored safely, because the stored ciphertext is useless without the wrapping key.' },
+  { id: 'passkey', term: 'Passkey', def: 'A WebAuthn credential that replaces a password with a key pair held by the device or a password manager and unlocked with biometrics or a PIN. Passkeys are often synced across a user\u2019s devices.' },
+  { id: 'webauthn-prf', term: 'WebAuthn PRF extension', def: 'A WebAuthn extension that asks a passkey authenticator for a high-entropy secret, computed in hardware after user verification. Because it is never stored, it can serve as the root of client-side encryption.' },
+  { id: 'zero-knowledge-storage', term: 'Zero-knowledge storage', def: 'A storage design in which the provider, or anyone holding a copy of the stored data, cannot read it. Only the user, with a password or passkey, can derive the key.' },
   { id: 'quality-gate', term: 'Quality gate', def: 'A minimum score for each evaluation metric that a change must clear before release. Gates should be re-derived when the model, data or test set changes.' },
   { id: 'rag', term: 'Retrieval-augmented generation (RAG)', def: 'A pattern where the system first retrieves relevant passages from a trusted corpus and then asks a language model to answer using only those passages, usually with citations.' },
   { id: 'recall-at-k', term: 'Recall@k', def: 'The share of questions for which a relevant document appears in the top k retrieved results. Recall@10 of 0.943 means the right document is in the top ten 94.3% of the time.' },
   { id: 'supersession', term: 'Supersession', def: 'When a newer regulation or circular replaces an older one. Supersession-aware systems flag the older document and point to its replacement.' },
   { id: 'synthetically-generated-information', term: 'Synthetically generated information (SGI)', def: 'The term used in India’s IT Rules for AI-generated or AI-altered content. From 20 February 2026 it must carry prominent labels.' },
 ];
+
+export const GLOSSARY: Term[] = [...TERMS].sort((a, b) => a.term.localeCompare(b.term));

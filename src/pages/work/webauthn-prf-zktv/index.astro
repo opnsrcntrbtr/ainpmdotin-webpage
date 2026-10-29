@@ -1,0 +1,264 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import ProjectCards from '../../../components/ProjectCards.astro';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-10-29');
+const repo = 'https://github.com/opnsrcntrbtr/webauthn-prf-zktv';
+const npm = 'https://www.npmjs.com/package/webauthn-prf-zktv';
+const doi = 'https://doi.org/10.6084/m9.figshare.32915411.v1';
+const figshare = 'https://figshare.com/articles/preprint/WebAuthn_PRF-Based_Vault_Key_Wrapping_and_Zero-Knowledge_PWA_Storage_Architecture/32915411';
+
+const faq = [
+  { q: 'What is webauthn-prf-zktv?', a: 'webauthn-prf-zktv is an MIT-licensed TypeScript library by Ian Pinto that wraps a vault key under a WebAuthn PRF output (a secret derived from a passkey after biometric or PIN verification) or under a master password stretched with scrypt. A stored record dump alone can never reconstruct the vault key. Version 0.2.0 is published on npm.' },
+  { q: 'What is the WebAuthn PRF extension?', a: 'The WebAuthn pseudo-random function (PRF) extension lets a web app ask a passkey authenticator for a high-entropy secret, computed in hardware with the CTAP2 hmac-secret feature after user verification. Because it is never stored, it can safely act as the root of a client-side encryption key.' },
+  { q: 'Why does the library keep a password wrap as well as the passkey wrap?', a: 'Because tying encryption to a passkey alone is dangerous: deleting the passkey would destroy the data. The password wrap (pw-v1) is the safety net that makes PRF unlock (prf-v1) safe to deploy.' },
+  { q: 'Which browsers support WebAuthn PRF in 2026?', a: 'According to the library documentation: Chrome and Edge (with PRF evaluated during registration from Chrome 147), Safari on macOS 15+ and iOS 18+ via iCloud Keychain, Firefox 147 or 148 and later, Android Credential Manager, and Windows Hello on Windows 11 25H2+. PRF does not pass through Android WebView or Capacitor, where the password scheme is used.' },
+  { q: 'Is there a paper describing the design?', a: 'Yes. "WebAuthn PRF-Based Vault Key Wrapping and Zero-Knowledge PWA Storage Architecture" by Ian Pinto was published as a preprint on figshare on 6 July 2026 under CC BY 4.0, DOI 10.6084/m9.figshare.32915411.v1.' },
+  { q: 'Is it quantum-safe?', a: 'The wrap path uses only symmetric primitives: AES-256-GCM, HKDF-SHA256 and scrypt. Grover\'s algorithm halves effective symmetric strength, which leaves about a 128-bit post-quantum margin for AES-256. WebAuthn signatures authenticate but never protect secrecy in this design.' },
+];
+
+const schema = [
+  {
+    '@type': 'SoftwareSourceCode',
+    '@id': 'https://ainpm.in/work/webauthn-prf-zktv/#code',
+    name: 'webauthn-prf-zktv',
+    description: 'Zero-knowledge vault key wrapping with WebAuthn PRF (HKDF-SHA256 to AES-256-GCM) or scrypt passwords, with IndexedDB storage helpers.',
+    codeRepository: repo,
+    programmingLanguage: 'TypeScript',
+    runtimePlatform: 'Node.js 20+, modern browsers',
+    license: 'https://opensource.org/licenses/MIT',
+    version: '0.2.0',
+    url: npm,
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+  },
+  {
+    '@type': 'ScholarlyArticle',
+    '@id': 'https://ainpm.in/work/webauthn-prf-zktv/#preprint',
+    headline: 'WebAuthn PRF-Based Vault Key Wrapping and Zero-Knowledge PWA Storage Architecture',
+    name: 'WebAuthn PRF-Based Vault Key Wrapping and Zero-Knowledge PWA Storage Architecture',
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    datePublished: '2026-07-06',
+    publisher: { '@type': 'Organization', name: 'figshare' },
+    identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: '10.6084/m9.figshare.32915411.v1' },
+    sameAs: [doi, figshare],
+    url: figshare,
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+    keywords: 'WebAuthn, PRF, passkeys, zero-knowledge, IndexedDB, PWA, cryptography',
+    abstract: 'A client-side security architecture that combines the WebAuthn pseudo-random function (PRF) extension with symmetric cryptography and browser storage patterns to achieve strong zero-knowledge properties for web-based credential vaults.',
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'webauthn-prf-zktv', path: '/work/webauthn-prf-zktv/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: repo, label: 'webauthn-prf-zktv repository, README and SECURITY.md' },
+  { href: npm, label: 'webauthn-prf-zktv on npm (v0.2.0, 5 July 2026)' },
+  { href: figshare, label: 'Preprint on figshare (6 July 2026)' },
+];
+---
+<Base
+  title="webauthn-prf-zktv: Passkey Vault Key Wrapping | AINPM.in"
+  description="webauthn-prf-zktv wraps a vault key under a WebAuthn PRF passkey secret or scrypt password, so stored data alone can't decrypt it. npm library, threat model and preprint."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Open-source research software; security claims are the project's own and have not been independently audited. Views are my own."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / webauthn-prf-zktv</div>
+
+  <div class="wrap page-head">
+    <span class="pill-live">Case study · Library · Research preprint</span>
+    <h1><span class="kicker">Passkey-derived encryption for the web</span>webauthn-prf-zktv: zero-knowledge vault key wrapping</h1>
+    <p class="answer"><strong>webauthn-prf-zktv is an open-source TypeScript library that wraps a vault key under a secret derived from a passkey (the WebAuthn PRF extension) or under a scrypt-stretched master password, so that a dump of everything stored can never reconstruct the key.</strong> It was extracted from <a href="/work/trustvault/">TrustVault</a> and is the reference implementation for a published research preprint.</p>
+    <div class="cta" style="margin-top:22px">
+      <a class="btn primary" href={npm} target="_blank" rel="noopener">npm install webauthn-prf-zktv ↗</a>
+      <a class="btn ghost" href={doi} target="_blank" rel="noopener">Read the preprint ↗</a>
+      <a class="btn ghost" href={repo} target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div><b>v0.2.0</b><span>on npm, MIT licence</span></div>
+      <div><b>1</b><span>runtime dependency (@noble/hashes)</span></div>
+      <div><b>2</b><span>wrap schemes: prf-v1 and pw-v1</span></div>
+      <div><b>~128-bit</b><span>post-quantum symmetric margin</span></div>
+    </div>
+  </div>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · The problem</span>
+        <h2>Why do web vaults need PRF key wrapping?</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Passkeys don't encrypt</h3><p>Passkeys prove who you are with signatures. To encrypt data you need a symmetric secret, which only the PRF extension provides.</p></article>
+        <article class="card"><h3>Easy to get wrong</h3><p>Probe credentials, skipped origin checks or a passkey-only design that loses data when the passkey is deleted are common mistakes.</p></article>
+        <article class="card"><h3>No reusable reference</h3><p>Teams re-implement the ceremony, key derivation and storage each time. A small, tested library and a written design make it reviewable.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · How it works</span>
+        <h2>How is the vault key wrapped?</h2>
+        <p class="muted">Two independent paths derive a wrap key. Either one can unwrap the same 32-byte vault key; neither input is ever stored.</p>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 760 330" role="img" aria-labelledby="kwT kwD" xmlns="http://www.w3.org/2000/svg">
+          <title id="kwT">Vault key wrapping with webauthn-prf-zktv</title>
+          <desc id="kwD">Path one: a passkey authenticator, after biometric or PIN verification, returns a PRF output, which HKDF-SHA256 turns into a wrap key. Path two: the master password is stretched with scrypt into a wrap key. Each wrap key encrypts the vault key with AES-256-GCM into a record of type prf-v1 or pw-v1, stored in IndexedDB. Unwrapping yields a non-extractable AES-256-GCM CryptoKey.</desc>
+          <defs><marker id="kwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink-2)"/></marker></defs>
+          <g style="font:13.5px var(--sans)">
+            <rect x="2" y="20" width="190" height="64" rx="12" style="fill:var(--accent-soft);stroke:var(--saffron);stroke-width:1.5"/>
+            <text x="18" y="46" style="font:600 15px var(--serif);fill:var(--ink)">Passkey + biometric</text>
+            <text x="18" y="68" style="fill:var(--ink-2)">PRF output (hardware)</text>
+            <rect x="2" y="200" width="190" height="64" rx="12" style="fill:var(--accent-soft);stroke:var(--saffron);stroke-width:1.5"/>
+            <text x="18" y="226" style="font:600 15px var(--serif);fill:var(--ink)">Master password</text>
+            <text x="18" y="248" style="fill:var(--ink-2)">typed by the user</text>
+            <rect x="232" y="20" width="160" height="64" rx="12" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"/>
+            <text x="248" y="46" style="font:600 15px var(--serif);fill:var(--ink)">HKDF-SHA256</text>
+            <text x="248" y="68" style="fill:var(--ink-2)">→ wrap key</text>
+            <rect x="232" y="200" width="160" height="64" rx="12" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"/>
+            <text x="248" y="226" style="font:600 15px var(--serif);fill:var(--ink)">scrypt</text>
+            <text x="248" y="248" style="fill:var(--ink-2)">N=2¹⁷, r=8, p=1</text>
+            <rect x="432" y="110" width="150" height="64" rx="12" style="fill:var(--teal-soft);stroke:var(--teal);stroke-width:1.5"/>
+            <text x="448" y="136" style="font:600 15px var(--serif);fill:var(--ink)">AES-256-GCM</text>
+            <text x="448" y="158" style="fill:var(--ink-2)">wraps vault key</text>
+            <rect x="618" y="20" width="138" height="64" rx="12" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"/>
+            <text x="632" y="46" style="font:600 15px var(--serif);fill:var(--ink)">prf-v1 record</text>
+            <text x="632" y="68" style="fill:var(--ink-2)">IndexedDB</text>
+            <rect x="618" y="200" width="138" height="64" rx="12" style="fill:var(--surface);stroke:var(--line);stroke-width:1.5"/>
+            <text x="632" y="226" style="font:600 15px var(--serif);fill:var(--ink)">pw-v1 record</text>
+            <text x="632" y="248" style="fill:var(--ink-2)">IndexedDB</text>
+            <line x1="192" y1="52" x2="228" y2="52" style="stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <line x1="192" y1="232" x2="228" y2="232" style="stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <path d="M392,52 C420,52 410,128 428,134" style="fill:none;stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <path d="M392,232 C420,232 410,156 428,150" style="fill:none;stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <path d="M582,134 C600,130 596,58 614,54" style="fill:none;stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <path d="M582,150 C600,154 596,226 614,230" style="fill:none;stroke:var(--ink-2);stroke-width:1.5" marker-end="url(#kwA)"/>
+            <text x="380" y="310" text-anchor="middle" style="fill:var(--ink-2)">Unwrap returns a non-extractable CryptoKey · stored records hold only ciphertext, salts and nonces</text>
+          </g>
+        </svg>
+        <figcaption>Highlighted: the two secrets that never touch storage.</figcaption>
+      </figure>
+      <div class="tbl-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr><th>Module</th><th>What it gives you</th></tr></thead>
+          <tbody>
+            <tr><td><code>webauthn-prf-zktv</code></td><td><code>wrapSecret</code> / <code>unwrapSecret</code> for prf-v1 and pw-v1, HKDF and scrypt derivation, versioned JSON records, TrustVault migration, typed errors, <code>zeroize</code></td></tr>
+            <tr><td><code>/webauthn</code></td><td>Tri-state PRF detection without probe credentials, adaptive one- or two-ceremony enrollment, assertion with challenge, origin and counter checks, <code>enrollVault</code> / <code>unlockVault</code></td></tr>
+            <tr><td><code>/indexeddb</code></td><td>Vault, credential and meta stores; PRF and password wraps of one vault side by side; targeted and full wipes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="threat-model">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Threat model</span>
+        <h2>What does it protect against?</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Full storage dump</h3><p>An attacker with every stored byte holds only ciphertext, salts, nonces and credential metadata. Recovering the key needs the PRF output or the password.</p></article>
+        <article class="card"><h3>Script injection (XSS)</h3><p>Keys are non-extractable, so injected script can misuse an unlocked key while the page is open but cannot copy it or unlock later sessions.</p></article>
+        <article class="card"><h3>Cloned or synced passkeys</h3><p>Synced passkeys often report a counter of 0. The library exposes backup flags so apps can apply their own risk policy.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="compat">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Compatibility</span>
+        <h2>Which platforms support WebAuthn PRF in 2026?</h2>
+      </div>
+      <div class="tbl-wrap compat">
+        <table>
+          <thead><tr><th>Platform</th><th>PRF</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Chrome / Edge</td><td>Yes</td><td>PRF evaluated during registration from Chrome 147, so enrollment is a single ceremony</td></tr>
+            <tr><td>Safari</td><td>Yes</td><td>macOS 15+ and iOS 18+ via iCloud Keychain</td></tr>
+            <tr><td>Firefox</td><td>Yes</td><td>147/148 and later</td></tr>
+            <tr><td>Android (Credential Manager)</td><td>Yes</td><td>Robust</td></tr>
+            <tr><td>Windows Hello</td><td>Yes</td><td>Windows 11 25H2+ (WebAuthn API v8)</td></tr>
+            <tr><td>Android WebView / Capacitor</td><td>No</td><td>PRF does not pass through to Credential Manager; use the password scheme</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Source: library README, 2026.</p>
+    </div>
+  </section>
+
+  <section id="paper">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · Research</span>
+        <h2>What does the preprint contribute?</h2>
+        <p class="muted">Published on figshare on 6 July 2026 under CC BY 4.0.</p>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Contributions</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>A formal description of PRF-based vault key wrapping for PWAs</li>
+            <li>An IndexedDB schema and migration strategy that reinforce zero-knowledge properties</li>
+            <li>A reusable open-source implementation, this library</li>
+            <li>Post-quantum considerations and migration paths</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cite</h3>
+          <p class="cite">Pinto, Ian (2026). WebAuthn PRF-Based Vault Key Wrapping and Zero-Knowledge PWA Storage Architecture. figshare. Preprint. https://doi.org/10.6084/m9.figshare.32915411.v1</p>
+          <p class="links-row"><a href={doi} target="_blank" rel="noopener">DOI ↗</a><a href={figshare} target="_blank" rel="noopener">figshare ↗</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · Decisions</span>
+        <h2>Which design choices were deliberate?</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Decision</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td><strong>No SimpleWebAuthn dependency</strong></td><td>Native <code>navigator.credentials</code> calls with strict PRF validation keep the attack surface and bundle small.</td></tr>
+            <tr><td><strong>No probe credentials</strong></td><td>Capability detection uses <code>getClientCapabilities()</code>; enrollment hard-verifies PRF only when support is unknown.</td></tr>
+            <tr><td><strong>Password wrap is mandatory in the docs</strong></td><td>A deleted passkey must never mean data loss.</td></tr>
+            <tr><td><strong>Known-answer interop vectors</strong></td><td>Lets other languages implement the same format and check their output byte for byte.</td></tr>
+            <tr><td><strong>Symmetric-only wrap path</strong></td><td>No asymmetric secrecy dependency, so the design keeps a post-quantum margin.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">07 · FAQ</span><h2>Frequently asked questions</h2></div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+      <BookCTA id="zktv" heading="Adding passkeys or client-side encryption?" text="Book a consultation on WebAuthn PRF, key management and zero-knowledge storage design." />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">More work</span><h2>Other case studies</h2></div>
+      <ProjectCards exclude="webauthn-prf-zktv" />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,241 @@
+---
+import Base from '../../../layouts/Base.astro';
+import LayerDiagram from '../../../components/LayerDiagram.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import ProjectCards from '../../../components/ProjectCards.astro';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-10-29');
+const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
+const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
+
+const faq = [
+  { q: 'What is Lecture Lens?', a: 'Lecture Lens is an open-source macOS app and toolkit by Ian Pinto that turns online lectures into a timecoded transcript, slide-linked notes with citations, and flashcards. It runs entirely on an Apple silicon Mac with local models, and nothing is uploaded.' },
+  { q: 'What do I need to run Lecture Lens?', a: 'macOS 15 or later on Apple silicon, with 32 GB of memory or more being realistic for the models; screenpipe installed separately for capture; a local OpenAI-compatible model server with a text model, a vision-capable model and a second model as evaluation judge; Python 3.11+, ffmpeg and Xcode command line tools.' },
+  { q: 'Does Lecture Lens record copy-protected video?', a: 'No. On DRM-protected course players, screen capture pauses and only audio is kept, so the video stays watchable. Notes and flashcards for those lectures are built from the audio transcript.' },
+  { q: 'How is the quality of notes and answers checked?', a: 'A local evaluation harness generates answers, notes and cards, then swaps in a different local model as judge and scores them with DeepEval metrics such as faithfulness and answer relevancy. A separate judge benchmark measures how often the judge itself is right.' },
+  { q: 'How does it keep course material out of a public repository?', a: 'Three layers: .gitignore excludes capture output and recordings; a content guard scans every commit for blocked names stored as hashes, forbidden file types, secrets and personal data; and plain git push is disabled in favour of a publish script that runs the guard, which CI runs again.' },
+];
+
+const schema = [
+  {
+    '@type': 'SoftwareApplication',
+    '@id': 'https://ainpm.in/work/lecture-lens/#software',
+    name: 'Lecture Lens',
+    description: 'macOS app and toolkit that turns online lectures into transcripts, slide-linked notes and flashcards with local models; nothing is uploaded.',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'macOS 15+ (Apple silicon)',
+    url: docs,
+    codeRepository: repo,
+    license: 'https://www.apache.org/licenses/LICENSE-2.0',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+  },
+  {
+    '@type': 'TechArticle',
+    headline: 'Lecture Lens: a local-AI study app case study',
+    url: 'https://ainpm.in/work/lecture-lens/',
+    datePublished: updated.toISOString(),
+    dateModified: updated.toISOString(),
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    about: { '@id': 'https://ainpm.in/work/lecture-lens/#software' },
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    inLanguage: 'en-IN',
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Lecture Lens', path: '/work/lecture-lens/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: repo, label: 'lecture-lens repository and README' },
+  { href: docs, label: 'Lecture Lens documentation' },
+  { href: docs + 'project/roadmap', label: 'Roadmap' },
+  { href: docs + 'guides/evaluation', label: 'Evaluation guide' },
+];
+---
+<Base
+  title="Lecture Lens: Private Local-AI Study App for Mac | AINPM.in"
+  description="Case study of Lecture Lens, a macOS app that turns online lectures into transcripts, slide-linked notes and flashcards with local models. Nothing is uploaded."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Independent open-source project, unaffiliated with any university, course provider or the makers of screenpipe. Views are my own."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / Lecture Lens</div>
+
+  <div class="wrap phero" style="padding-top:28px">
+    <div>
+      <span class="pill-live">Case study · Local AI · macOS</span>
+      <h1><span class="kicker">Private study tool for online courses</span>Lecture Lens: lectures into notes, <em>on your Mac</em></h1>
+      <p class="lede"><strong>Lecture Lens is an open-source macOS app that turns the online lectures you attend into a timecoded transcript, slide-linked notes and flashcards, using models that run on your own Mac.</strong> Nothing is uploaded, copy-protected video is never recorded, and every prompt or model change can be checked with a local evaluation.</p>
+      <div class="cta">
+        <a class="btn primary" href={docs} target="_blank" rel="noopener">Read the docs ↗</a>
+        <a class="btn ghost" href={repo} target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+      <ul class="chips" style="margin-top:22px">
+        <li>SwiftUI app</li><li>zsh + Python toolkit</li><li>screenpipe capture</li><li>Local models</li><li>Apache-2.0</li>
+      </ul>
+    </div>
+    <figure class="shot light">
+      <div class="bar"><i></i><i></i><i></i><span>opnsrcntrbtr.github.io/lecture-lens</span></div>
+      <img src="/work/lecture-lens-docs.webp" alt="Lecture Lens documentation site overview page describing the toolkit, the macOS app and who it is for" width="1280" height="800" fetchpriority="high" decoding="async">
+      <figcaption>Documentation site built with Docusaurus.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div><b>0</b><span>bytes uploaded to the cloud</span></div>
+      <div><b>~10 min</b><span>to build a 90-minute class</span></div>
+      <div><b>6</b><span>cases in the 12-minute smoke eval</span></div>
+      <div><b>3</b><span>layers keeping course material private</span></div>
+    </div>
+    <p class="note">Figures from the project documentation, October 2026. Status: early, single maintainer, Apple silicon only.</p>
+  </div>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · The problem</span>
+        <h2>Who is it for, and what job does it do?</h2>
+        <p class="muted">A working professional in a part-time online course, with recorded lectures during the week, a live class at the weekend, and little time to re-watch either.</p>
+      </div>
+      <div class="callout"><strong>Job to be done:</strong> when I attend a class, I want it captured and turned into material I can trust and will remember, without watching the tooling.</div>
+      <div class="tbl-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr><th>You do</th><th>Lecture Lens does</th></tr></thead>
+          <tbody>
+            <tr><td>Watch a recorded lecture in the browser</td><td>Records the audio, pauses screen capture on copy-protected players, logs which page you were on</td></tr>
+            <tr><td>Sit in a live class in a meeting app</td><td>Captures slides and audio, picks the distinct slides, describes them with a vision model</td></tr>
+            <tr><td>Click Build</td><td>Writes a timecoded transcript, notes with slide and time citations, and flashcards</td></tr>
+            <tr><td>Ask a question</td><td>Answers from your own captures, with sources</td></tr>
+            <tr><td>Change a prompt or a model</td><td>Runs a local evaluation so you can see whether quality moved</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · How it works</span>
+        <h2>How does Lecture Lens fit together?</h2>
+      </div>
+      <LayerDiagram
+        title="Lecture Lens architecture"
+        desc="Three layers. The SwiftUI app starts and stops capture and shows lectures, questions and evaluations. It calls the zsh and Python toolkit with arguments and reads JSON back. The toolkit talks over HTTP on localhost to screenpipe and a local model server, and reads local files."
+        caption="Everything runs on 127.0.0.1 and local files. Highlighted: components the user installs and controls."
+        layers={[
+          { title: 'Lecture Lens.app (SwiftUI)', items: 'Start/stop capture · health lights · lectures · ask · evaluations' },
+          { title: 'Toolkit (zsh + Python)', items: 'sp-start · sp-mode · lecture build · study ask · evaluation runner — argv in, JSON out' },
+          { title: 'On your Mac', items: 'screenpipe capture · local OpenAI-compatible model server · your files', trust: true },
+        ]}
+      />
+      <div class="tbl-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr><th>Output per lecture</th><th>What it is</th></tr></thead>
+          <tbody>
+            <tr><td><code>transcript.md</code></td><td>Timecoded speech-to-text</td></tr>
+            <tr><td><code>slides.md</code></td><td>Distinct slides with a description and on-screen text</td></tr>
+            <tr><td><code>notes.md</code></td><td>Notes with time and slide citations, action items and open questions</td></tr>
+            <tr><td><code>cards.tsv</code></td><td>Flashcards for a spaced-repetition app</td></tr>
+            <tr><td><code>manifest.json</code></td><td>What was built, from what, with which models and prompt versions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="evals">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Evaluation</span>
+        <h2>How do you know the notes are right?</h2>
+        <p class="muted">Every prompt or model change can be measured locally. The judge is a different model from the generator, and the judge itself is benchmarked.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Suite</th><th>What it checks</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td>Smoke</td><td>6 fixed cases: 2 questions, 2 notes, 2 card sets</td><td class="v">~12 min</td></tr>
+            <tr><td>Full</td><td>All cases, scored with DeepEval faithfulness, answer relevancy and G-Eval criteria</td><td class="v">1 h+</td></tr>
+            <tr><td>Judge benchmark</td><td>Labelled claim/context pairs: how often is the judge right?</td><td class="v">~10 min</td></tr>
+            <tr><td>Slide reading</td><td>Synthetic slides with exact answers</td><td class="v">minutes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:20px"><strong>Lesson learned:</strong> in the first full baseline, most failed question-answering cases were the judge penalising the answer's source list, which it couldn't see. The harness now scores the answer body only. Check what a failure is before fixing the model.</div>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Decisions &amp; trade-offs</span>
+        <h2>What was decided, and what was dropped?</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Decision</th><th>Reason</th><th>Call</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pause screen capture on DRM players, keep audio</strong></td><td>Protected video goes black while screen capture runs. The protection is respected; transcripts come from audio (ADR-004).</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Three-layer content guard</strong></td><td>A public repo about a private activity: ignore rules, a hashed blocklist scan on every commit, and a guarded publish script.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td><strong>Evals refuse to run during a live class</strong></td><td>Evaluation swaps the model and would disrupt capture.</td><td><span class="badge ok">Shipped</span></td></tr>
+            <tr><td>Record everything, filter later</td><td>Breaks the privacy rule and the protected-video constraint.</td><td><span class="badge no">Dropped</span></td></tr>
+            <tr><td>Longer notes and weekly digests</td><td>Feels productive; the evidence says summaries you didn't write do little.</td><td><span class="badge no">Dropped</span></td></tr>
+            <tr><td>Hosted evaluation dashboards</td><td>Captured text would leave the machine.</td><td><span class="badge no">Dropped</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · Limits &amp; roadmap</span>
+        <h2>What are the limits, and what's next?</h2>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Known limits</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>macOS on Apple silicon only</li>
+            <li>In one measured live class, about a quarter of spoken words were missing compared with the meeting app's own transcript</li>
+            <li>Local models are slow: a full evaluation takes over an hour</li>
+            <li>Depends on screenpipe, a separate product it does not control</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Next</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>Capture guard that alerts within 60 seconds when nothing is being saved</li>
+            <li>Cancellable evaluations that show the change against the previous run</li>
+            <li>Recall-first notes and a flashcard review log</li>
+            <li>A read-only local MCP server so an assistant can list, build and ask about lectures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">06 · FAQ</span><h2>Frequently asked questions</h2></div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+      <BookCTA id="lecture-lens" heading="Want private AI on your own Mac?" text="Book a consultation on running local models, local document search and evaluation on an Apple silicon Mac with 48 GB or more." />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">More work</span><h2>Other case studies</h2></div>
+      <ProjectCards exclude="lecture-lens" />
+    </div>
+  </section>
+</Base>

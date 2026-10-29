@@ -1,9 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
+import ProjectCards from '../../components/ProjectCards.astro';
 
 const published = new Date('2026-09-24');
-const updated = new Date('2026-10-28');
+const updated = new Date('2026-10-29');
 
 const faq = [
   { q: 'What is SEBI Circular RAG?', a: 'SEBI Circular RAG is an open-source retrieval-augmented generation system built by Ian Pinto that answers questions over 1,490 SEBI circulars. It combines FAISS and BM25 hybrid retrieval, cross-encoder reranking, supersession-aware citations, an abstention gate and a faithfulness check.' },
@@ -300,6 +301,13 @@ const schema = [
       </div>
     </div>
   </section>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">More work</span><h2>Other case studies</h2></div>
+      <ProjectCards exclude="sebi-rag" />
+    </div>
+  </section>
+
 <script is:inline>
 document.getElementById('loadDemo').addEventListener('click',function(){
   var slot=document.getElementById('embedSlot'), f=document.createElement('iframe');

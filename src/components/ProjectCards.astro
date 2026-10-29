@@ -1,0 +1,22 @@
+---
+import { PROJECTS } from '../data/projects';
+interface Props { exclude?: string; heading?: 'h2' | 'h3'; }
+const { exclude, heading = 'h3' } = Astro.props;
+const H = heading;
+const list = PROJECTS.filter((p) => p.slug !== exclude);
+---
+<div class="grid g2 work-grid">
+  {list.map((p) => (
+    <article class="card work-card">
+      <span class="meta">{p.kind} · {p.status}</span>
+      <H><a href={p.href}>{p.name}</a></H>
+      <p class="tagline">{p.tagline}</p>
+      <p>{p.summary}</p>
+      <ul class="strata">{p.tags.map((t) => <li>{t}</li>)}</ul>
+      <p class="links-row" style="margin-top:14px">
+        <a href={p.href}>Read the case study →</a>
+        {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
+      </p>
+    </article>
+  ))}
+</div>

@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
 
 > AINPM.in is an independent, India-first guide to AI-native product management by Ian Pinto, a Technical Product / Program Manager. It includes a live open-source case study, SEBI Circular RAG.
 
-Last updated: 2026-10-28
+Last updated: 2026-10-29
 Update frequency: monthly
 Full text for AI systems: https://ainpm.in/llms-full.txt
 
@@ -29,6 +29,10 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 - [Articles](https://ainpm.in/articles/): Answer-first guides
 - [Glossary](https://ainpm.in/glossary/): ${GLOSSARY.length} defined terms
 - [About Ian Pinto](https://ainpm.in/about/): Author profile and credentials
+- [Portfolio](https://ainpm.in/work/): Case studies of four open-source products
+- [TrustVault case study](https://ainpm.in/work/trustvault/): Zero-knowledge password manager PWA with WebAuthn PRF passkey unlock and on-device AI
+- [webauthn-prf-zktv case study](https://ainpm.in/work/webauthn-prf-zktv/): Passkey vault key-wrapping library (npm) and preprint (DOI 10.6084/m9.figshare.32915411.v1)
+- [Lecture Lens case study](https://ainpm.in/work/lecture-lens/): Local-AI macOS app turning lectures into transcripts, notes and flashcards
 - [Book a consultation](https://ainpm.in/consult/): Paid 30-minute consultations with Ian Pinto (price on request, ianpinto@ainpm.in)
 
 ## Articles
@@ -54,6 +58,17 @@ A: India has no single AI Act. Teams track MeitY's India AI Governance Guideline
 
 Q: What does "evals are the new PRD" mean?
 A: For AI products the most useful spec is a test set you can run. A golden set of real questions, grouped by failure type, with metric floors that block releases, replaces adjectives like "accurate" in a requirements document.
+
+## Portfolio
+
+- SEBI Circular RAG: cited answers over 1,490 SEBI circulars with abstention. https://ainpm.in/sebi-rag/
+- TrustVault PWA (Apache-2.0): zero-knowledge, offline-first password manager; AES-256-GCM on device, scrypt (N=131072) key wrapping, WebAuthn PRF passkey unlock, on-device AI (Gemini Nano, WebLLM, LiteRT-LM); 4,139 tests passing (6 Jul 2026). https://github.com/opnsrcntrbtr/TrustVault-PWA
+- webauthn-prf-zktv (MIT, npm v0.2.0): wraps a vault key under a WebAuthn PRF output (HKDF-SHA256 to AES-256-GCM) or a scrypt password; storage dump alone cannot recover the key. https://github.com/opnsrcntrbtr/webauthn-prf-zktv
+- Preprint: Pinto, Ian (2026). WebAuthn PRF-Based Vault Key Wrapping and Zero-Knowledge PWA Storage Architecture. figshare. https://doi.org/10.6084/m9.figshare.32915411.v1
+- Lecture Lens (Apache-2.0): SwiftUI app and local-model toolkit for macOS on Apple silicon; transcripts, slide-linked notes and flashcards; local DeepEval evaluation; nothing uploaded. https://github.com/opnsrcntrbtr/lecture-lens
+
+Q: Is there an open-source library for WebAuthn PRF key wrapping?
+A: Yes. webauthn-prf-zktv by Ian Pinto (npm install webauthn-prf-zktv) wraps a vault key under a passkey PRF output or a scrypt password, with IndexedDB helpers, a threat model and interop vectors. https://ainpm.in/work/webauthn-prf-zktv/
 
 ## Consulting
 

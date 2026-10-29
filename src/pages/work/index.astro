@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCards from '../../components/ProjectCards.astro';
+import BookCTA from '../../components/BookCTA.astro';
+import { PROJECTS } from '../../data/projects';
+import { breadcrumb } from '../../data/site';
+
+const updated = new Date('2026-10-29');
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': 'https://ainpm.in/work/#page',
+    name: 'Portfolio of Ian Pinto',
+    url: 'https://ainpm.in/work/',
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    dateModified: updated.toISOString(),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: PROJECTS.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: p.name,
+        url: 'https://ainpm.in' + p.href,
+      })),
+    },
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }]),
+];
+---
+<Base
+  title="Portfolio: AI-Native and Privacy-First Products | AINPM.in"
+  description="Ian Pinto's portfolio: SEBI Circular RAG, the TrustVault zero-knowledge PWA, the webauthn-prf-zktv library and preprint, and the Lecture Lens local-AI macOS app."
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Work</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Portfolio</span>
+    <h1>Products I've built and shipped</h1>
+    <p class="answer"><strong>Ian Pinto's portfolio covers four open-source products: an AI assistant for SEBI regulation, a zero-knowledge password manager, a passkey cryptography library with a research preprint, and a local-AI study app for macOS.</strong> Each case study shows the problem, the trust design, the evidence and the trade-offs.</p>
+  </div>
+  <div class="wrap" style="padding-top:12px;padding-bottom:24px">
+    <ProjectCards heading="h2" />
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Common threads</span>
+        <h2>What do these projects have in common?</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card"><h3>Evidence before claims</h3><p>Every project ships with tests or evaluations, and publishes its weak numbers alongside the strong ones.</p></article>
+        <article class="card"><h3>Privacy by architecture</h3><p>Keys stay on the device, models run locally, and storage alone is never enough to read user data.</p></article>
+        <article class="card"><h3>Decisions written down</h3><p>Rejected ideas, threat models and architecture decision records are part of the product, not an afterthought.</p></article>
+      </div>
+      <BookCTA id="work" heading="Want a second pair of eyes on your product?" text="Book a 30-minute consultation on AI product strategy, evaluation, privacy-first architecture or local AI." />
+    </div>
+  </section>
+</Base>
