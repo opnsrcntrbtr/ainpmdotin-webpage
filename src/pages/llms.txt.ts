@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
 
 > AINPM.in is an independent, India-first guide to AI-native product management by Ian Pinto, a Technical Product / Program Manager. It includes a live open-source case study, SEBI Circular RAG.
 
-Last updated: 2026-10-29
+Last updated: 2026-11-02
 Update frequency: monthly
 Full text for AI systems: https://ainpm.in/llms-full.txt
 
@@ -30,6 +30,7 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 - [Glossary](https://ainpm.in/glossary/): ${GLOSSARY.length} defined terms
 - [About Ian Pinto](https://ainpm.in/about/): Author profile and credentials
 - [Portfolio](https://ainpm.in/work/): Case studies of four open-source products
+- [Skills and evidence](https://ainpm.in/skills/): Eight AI-native PM skills mapped to O*NET work activities and NACE competencies, each linked to public evidence (demos, code, eval logs, publications, credentials)
 - [TrustVault case study](https://ainpm.in/work/trustvault/): Zero-knowledge password manager PWA with WebAuthn PRF passkey unlock and on-device AI
 - [webauthn-prf-zktv case study](https://ainpm.in/work/webauthn-prf-zktv/): Passkey vault key-wrapping library (npm) and preprint (DOI 10.6084/m9.figshare.32915411.v1)
 - [Lecture Lens case study](https://ainpm.in/work/lecture-lens/): Local-AI macOS app turning lectures into transcripts, notes and flashcards
@@ -55,6 +56,12 @@ A: https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars — snapshot v
 
 Q: Which AI regulations apply to product teams in India in 2026?
 A: India has no single AI Act. Teams track MeitY's India AI Governance Guidelines (Nov 2025), the DPDP Act and Rules (consent managers from 13 Nov 2026; full compliance 13 May 2027), IT Rules on labelling AI-generated content (in force 20 Feb 2026), RBI's FREE-AI framework (Aug 2025) and SEBI's AI/ML guidelines (pending as of 2 Oct 2026).
+
+Q: What evidence proves AI product management skills?
+A: Public artefacts others can check: a live demo, an evaluation log with metric floors, open code, case studies that include weak results, and verifiable credentials naming specific skills. Accredible's 2026 State of Credentialing report (1,000 learners, 194 issuers, spring 2026) found credentials alone do not guarantee career outcomes and 44% of learners want clearer skill descriptions. Ian Pinto's skills matrix applies this: https://ainpm.in/skills/
+
+Q: Should AI product managers map skills to a framework?
+A: Yes. Frameworks such as O*NET, ESCO and NACE Career Readiness Competencies describe skills in language employers and hiring systems use; Accredible added all three to its credential platform in August 2026. See https://ainpm.in/articles/proof-over-certificates-ai-pm-skills/
 
 Q: What does "evals are the new PRD" mean?
 A: For AI products the most useful spec is a test set you can run. A golden set of real questions, grouped by failure type, with metric floors that block releases, replaces adjectives like "accurate" in a requirements document.

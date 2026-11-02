@@ -22,6 +22,8 @@ npm run check    # SEO checks on the built site (also runs in CI)
 | `src/pages/index.astro` | Home page |
 | `src/pages/sebi-rag/index.astro` | SEBI Circular RAG case study |
 | `src/content/articles/*.md` | Articles. Add a Markdown file to publish a new one |
+| `src/pages/skills/index.astro` | Skills matrix: each skill mapped to O*NET and NACE, linked to public evidence |
+| `src/data/skills.ts` | Skills, evidence links and credentials. Add a credential's `verifyUrl` (Accredible, Credly, Open Badges 3.0) to show a Verify link and add it to the Person schema |
 | `src/data/glossary.ts` | Glossary terms |
 | `src/data/site.ts` | Site name, author details, navigation, search-console verification codes |
 | `src/layouts/Base.astro` | Shared head tags, JSON-LD, navigation, footer, visit counter |
@@ -60,4 +62,4 @@ sources:
 
 [GoatCounter](https://www.goatcounter.com) (no cookies) records page views. The footer line reads counts from GoatCounter's public counter API; it stays hidden unless "Allow adding visitor counts on your website" is enabled in the GoatCounter settings.
 
-Content last reviewed: 2 October 2026. General information only; not legal advice.
+Content last reviewed: 2 November 2026. General information only; not legal advice.

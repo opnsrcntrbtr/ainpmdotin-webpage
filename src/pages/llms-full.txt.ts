@@ -9,7 +9,7 @@ export const GET: APIRoute = async () => {
   const parts = [
     '# AINPM.in — full text for AI systems',
     '',
-    'Author: Ian Pinto (https://ainpm.in/about/). Last updated: 2026-10-02. Summary: https://ainpm.in/llms.txt',
+    'Author: Ian Pinto (https://ainpm.in/about/). Last updated: 2026-11-02. Summary: https://ainpm.in/llms.txt',
     '',
     ...articles.flatMap((a) => [
       '---',

@@ -1,3 +1,5 @@
+import { credentialSchema } from './skills';
+
 export const SITE = {
   name: 'AINPM.in',
   url: 'https://ainpm.in',
@@ -34,11 +36,13 @@ export const AUTHOR = {
     'Mutual fund platforms',
     'SEBI regulation',
     'Cloud-native systems',
+    'Skills-based hiring and verifiable credentials',
   ],
 };
 
 export const NAV = [
   { href: '/work/', label: 'Work' },
+  { href: '/skills/', label: 'Skills' },
   { href: '/articles/', label: 'Articles' },
   { href: '/glossary/', label: 'Glossary' },
   { href: '/#playbook', label: 'Playbook' },
@@ -57,6 +61,7 @@ export const personSchema = {
   description: AUTHOR.description,
   sameAs: AUTHOR.sameAs,
   knowsAbout: AUTHOR.knowsAbout,
+  hasCredential: credentialSchema,
   address: { '@type': 'PostalAddress', addressCountry: 'IN' },
 };
 
