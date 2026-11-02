@@ -305,6 +305,7 @@ const schema = [
 
 <script is:inline>
 document.getElementById('loadDemo').addEventListener('click',function(){
+  window.ainpmTrack && window.ainpmTrack('demo_loaded', { product: 'sebi-rag' });
   var slot=document.getElementById('embedSlot'), f=document.createElement('iframe');
   f.src='https://opnsrcntrbtrian-sebi-circular-rag-demo.hf.space/?__theme=light';
   f.title='SEBI Circular RAG live demo'; f.loading='lazy'; f.allow='clipboard-write';

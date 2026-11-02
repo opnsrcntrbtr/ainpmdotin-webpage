@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE, AUTHOR, breadcrumb, faqSchema } from '../../data/site';
+
+const updated = new Date('2026-11-02');
+const faq = [
+  { q: 'Does AINPM.in use cookies?', a: 'No. Neither analytics tool on AINPM.in sets cookies or stores identifiers in your browser. The only thing saved in your browser is your light or dark theme choice, and an opt-out flag if you choose to opt out.' },
+  { q: 'Does AINPM.in record my session?', a: 'Some page views are recorded as masked replays to find confusing layouts. All text and every input are masked, embedded content such as the booking calendar is blocked, and each replay covers one page view because nothing links visits together.' },
+  { q: 'How do I opt out of analytics on AINPM.in?', a: 'Open any page with ?notrack=1 at the end of the address, for example ainpm.in/?notrack=1. This stops both GoatCounter and PostHog in that browser. Use ?track=1 to opt back in. Browsers that send a Do Not Track or Global Privacy Control signal are not tracked by PostHog.' },
+];
+const schema = [
+  { '@type': 'WebPage', name: 'Privacy and analytics', url: 'https://ainpm.in/privacy/', dateModified: updated.toISOString(), isPartOf: { '@id': 'https://ainpm.in/#website' } },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Privacy and analytics', path: '/privacy/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="Privacy and Analytics | AINPM.in"
+  description="How AINPM.in measures visits without cookies: what GoatCounter and PostHog collect, how session replays are masked, how bookings work and how to opt out."
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Privacy &amp; analytics</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Privacy · Updated 2 Nov 2026</span>
+    <h1>Privacy and analytics</h1>
+    <p class="answer"><strong>AINPM.in measures how pages are used without cookies and without identifying you.</strong> It uses two tools: GoatCounter for simple visit counts, and PostHog for aggregate behaviour such as which buttons are clicked, how far pages are scrolled, page speed and masked session replays. Neither tool is used for advertising.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:64px">
+    <div class="md" style="max-width:72ch">
+      <h2>What is collected</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Tool</th><th>What it records</th><th>What it does not do</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a></td><td>Page path, referrer site, browser, operating system, screen size category, country</td><td>No cookies, no query strings, no personal data</td></tr>
+          <tr><td><a href="https://posthog.com" rel="noopener">PostHog</a></td><td>Page views, clicks on buttons and links, scroll depth, time on page, page speed (Core Web Vitals), masked replays of some page views</td><td>No cookies or browser storage; no link between visits; URL query strings removed; all text and inputs masked in replays</td></tr>
+        </tbody>
+      </table></div>
+      <h2>Session replays</h2>
+      <p>Replays show the layout of a page and where the pointer moved, so I can fix confusing design. Every piece of text is replaced with placeholders, every input is masked, and embedded content such as the Google booking calendar and demo apps is blocked. Replays are kept for one month by PostHog.</p>
+      <h2>Bookings and email</h2>
+      <p>The booking calendar on the <a href="/consult/">consultation page</a> is provided by Google Calendar, which handles the details you enter under Google's privacy policy. If you email <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>, your message is used only to reply.</p>
+      <h2>How to opt out</h2>
+      <p>Add <code>?notrack=1</code> to any address, for example <a href="/?notrack=1">ainpm.in/?notrack=1</a>. That stops both tools in this browser. Use <a href="/?track=1"><code>?track=1</code></a> to opt back in. Browsers sending Global Privacy Control are not tracked, and PostHog also respects Do Not Track.</p>
+      <h2>Contact</h2>
+      <p>Questions about data on this site: <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>.</p>
+    </div>
+    <div class="faq" style="margin-top:32px">
+      {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+    </div>
+  </div>
+</Base>

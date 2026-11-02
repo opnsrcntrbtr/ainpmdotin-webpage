@@ -222,6 +222,7 @@ const sources = [
         s.querySelectorAll('.evidence li').forEach(function(li){ li.classList.toggle('dim', k!=='all' && li.dataset.kind!==k); });
       });
       status.textContent = shown+' of '+document.querySelectorAll('.skill').length+' skills shown';
+      window.ainpmTrack && window.ainpmTrack('skills_filter', { kind: k, shown: shown });
     });
   });
   document.querySelectorAll('.hm-c a[data-kind]').forEach(function(a){

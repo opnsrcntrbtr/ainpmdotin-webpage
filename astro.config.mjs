@@ -14,6 +14,7 @@ const lastmod = {
   '/work/webauthn-prf-zktv/': '2026-11-02',
   '/work/lecture-lens/': '2026-11-02',
   '/consult/': '2026-10-28',
+  '/privacy/': '2026-11-02',
   '/glossary/': '2026-10-29',
   '/articles/': '2026-10-02',
 };

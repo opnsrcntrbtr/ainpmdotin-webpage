@@ -1,0 +1,105 @@
+---
+// Cookieless analytics: GoatCounter (counts) + PostHog (funnels, heatmaps, masked replay, web vitals).
+// Neither tool sets cookies. Visitors can opt out with ?notrack=1 (and back in with ?track=1).
+import { SITE } from '../data/site';
+const ph = SITE.posthog;
+---
+<script is:inline define:vars={{ gc: SITE.goatcounter, phKey: ph.key, phHost: ph.host, phSample: ph.replaySampleRate }}>
+(function () {
+  // ---- opt-out (owner and any visitor) ----
+  var q = new URLSearchParams(location.search), off = false;
+  try {
+    if (q.get('notrack') === '1') { localStorage.setItem('ainpm-notrack', '1'); localStorage.setItem('skipgc', 't'); }
+    if (q.get('track') === '1') { localStorage.removeItem('ainpm-notrack'); localStorage.removeItem('skipgc'); }
+    off = localStorage.getItem('ainpm-notrack') === '1';
+  } catch (e) {}
+  if (navigator.globalPrivacyControl === true) off = true;
+  window.ainpmTrackingOff = off;
+
+  // ---- unified event helper: ainpmTrack('event_name', { props }) ----
+  var queue = [];
+  window.ainpmTrack = function (name, props) {
+    if (off) return;
+    if (window.posthog && window.posthog.__loaded) window.posthog.capture(name, props || {});
+    else queue.push([name, props || {}]);
+  };
+
+  // ---- GoatCounter: path only, never the query string ----
+  window.goatcounter = { path: function () { return location.pathname; }, no_onload: off };
+
+  // ---- PostHog: loaded on idle, memory-only persistence (no cookies, no storage) ----
+  function loadPostHog() {
+    if (off || !phKey) return;
+    var s = document.createElement('script');
+    s.async = true; s.crossOrigin = 'anonymous';
+    s.src = phHost.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.full.js';
+    s.onload = function () {
+      if (!window.posthog || !window.posthog.init) return;
+      window.posthog.init(phKey, {
+        api_host: phHost,
+        persistence: 'memory',
+        person_profiles: 'identified_only',
+        respect_dnt: true,
+        autocapture: true,
+        capture_pageview: true,
+        capture_pageleave: true,
+        enable_heatmaps: true,
+        capture_performance: { web_vitals: true, network_timing: false },
+        disable_session_recording: Math.random() >= phSample,
+        session_recording: {
+          maskAllInputs: true,
+          maskTextSelector: '*',
+          blockSelector: 'iframe, img[src*="googleusercontent"]',
+          recordCrossOriginIframes: false,
+        },
+        mask_all_text: true,
+        mask_all_element_attributes: true,
+        before_send: function (ev) {
+          // Strip query strings and fragments from every URL property (UTM tags are kept as their own properties).
+          var p = ev && ev.properties;
+          if (p) ['$current_url', '$referrer', '$initial_referrer', '$prev_pageview_pathname', '$pathname'].forEach(function (k) {
+            if (typeof p[k] === 'string') p[k] = p[k].split(/[?#]/)[0];
+          });
+          return ev;
+        },
+        loaded: function (ph) {
+          ph.register({ site: 'ainpm.in', section: location.pathname.split('/')[1] || 'home' });
+          queue.splice(0).forEach(function (e) { ph.capture(e[0], e[1]); });
+        },
+      });
+    };
+    document.head.appendChild(s);
+  }
+  var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1500); };
+  if (document.readyState === 'complete') idle(loadPostHog);
+  else window.addEventListener('load', function () { idle(loadPostHog); });
+
+  // ---- business events ----
+  document.addEventListener('click', function (ev) {
+    var el = ev.target.closest && ev.target.closest('a,button');
+    if (!el) return;
+    var cta = el.getAttribute('data-goatcounter-click');
+    if (cta) window.ainpmTrack('cta_click', { cta: cta, label: (el.textContent || '').trim().slice(0, 60) });
+    if (el.tagName === 'A' && el.host && el.host !== location.host) {
+      window.ainpmTrack('outbound_click', { host: el.host, url: el.href.split(/[?#]/)[0] });
+    }
+    if (el.tagName === 'A' && /^mailto:/.test(el.href)) window.ainpmTrack('email_click', { page: location.pathname });
+  }, true);
+  document.addEventListener('toggle', function (ev) {
+    var d = ev.target;
+    if (d.tagName === 'DETAILS' && d.open) {
+      var s = d.querySelector('summary');
+      window.ainpmTrack('faq_open', { question: s ? s.textContent.trim().slice(0, 120) : '' });
+    }
+  }, true);
+  // Read-through: fire once when 75% of an article has been scrolled.
+  if (/^\/articles\/[^/]+\/$/.test(location.pathname)) {
+    var fired = false;
+    window.addEventListener('scroll', function () {
+      if (fired) return;
+      var h = document.documentElement;
+      if ((h.scrollTop + innerHeight) / h.scrollHeight >= 0.75) { fired = true; window.ainpmTrack('article_read', { article: location.pathname }); }
+    }, { passive: true });
+  }
+})();
+</script>

@@ -1,5 +1,6 @@
 ---
 import { SITE, AUTHOR, NAV, personSchema, websiteSchema, fmtDate } from '../data/site';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title: string;
@@ -113,6 +114,7 @@ const path = Astro.url.pathname;
       <li><a href="/about/">About Ian Pinto</a></li>
       <li><a href="/consult/">Book a consultation</a></li>
       <li><a href="/rss.xml">RSS</a></li>
+      <li><a href="/privacy/">Privacy &amp; analytics</a></li>
       <li><a href="/llms.txt">llms.txt</a></li>
     </ul>
     {sources.length > 0 && (
@@ -151,9 +153,8 @@ const path = Astro.url.pathname;
 </script>
 {!noindex && (
   <Fragment>
+    <Analytics />
     <script is:inline define:vars={{ gc: SITE.goatcounter }}>
-      // Privacy: count the path only, never the query string.
-      window.goatcounter = { path: function () { return location.pathname; } };
       (function () {
         var box = document.getElementById('gcViews');
         if (!box || !window.fetch) return;

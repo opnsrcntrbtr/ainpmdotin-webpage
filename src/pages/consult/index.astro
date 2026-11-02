@@ -215,6 +215,7 @@ const schema = [
 
   <script is:inline define:vars={{ src: bookingEmbed }}>
     document.getElementById('loadCal').addEventListener('click', function () {
+      window.ainpmTrack && window.ainpmTrack('calendar_loaded', { page: '/consult/' });
       var slot = document.getElementById('calSlot'), f = document.createElement('iframe');
       f.src = src;
       f.title = 'Book a 30-minute consultation with Ian Pinto (Google Calendar)';

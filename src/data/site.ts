@@ -8,6 +8,13 @@ export const SITE = {
     'AINPM.in is a practical, India-first guide to AI-native product management by Ian Pinto, with a live open-source case study: SEBI Circular RAG.',
   locale: 'en-IN',
   goatcounter: 'https://ainpmdotin.goatcounter.com',
+  // PostHog Cloud (cookieless): paste the public Project API key (starts with phc_) and pick the
+  // ingestion host for your region. Leave key empty to disable PostHog completely.
+  posthog: {
+    key: '',
+    host: 'https://us.i.posthog.com', // EU projects: 'https://eu.i.posthog.com'
+    replaySampleRate: 1, // 0–1 share of page views to record (masked)
+  },
   // Google Calendar appointment schedule (Google Workspace, ianpinto@ainpm.in)
   booking:
     'https://calendar.google.com/calendar/appointments/schedules/AcZssZ00dNiqYT_nZaKJHxPnDtd02QKFXNNuIr8r564Kww0XOIw_yKW0Y0OQ62TTQJpILI2FZri55l8c',

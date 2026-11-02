@@ -63,3 +63,7 @@ sources:
 [GoatCounter](https://www.goatcounter.com) (no cookies) records page views. The footer line reads counts from GoatCounter's public counter API; it stays hidden unless "Allow adding visitor counts on your website" is enabled in the GoatCounter settings.
 
 Content last reviewed: 2 November 2026. General information only; not legal advice.
+
+## Analytics
+
+Cookieless GoatCounter + PostHog, Search Console and a Looker Studio report. Setup and event list: [docs/analytics.md](docs/analytics.md). Visitors can opt out with `?notrack=1`; details on [/privacy/](https://ainpm.in/privacy/).
