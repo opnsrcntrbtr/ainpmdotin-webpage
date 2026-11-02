@@ -1,10 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Scorecard from '../../components/Scorecard.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 import ProjectCards from '../../components/ProjectCards.astro';
 
 const published = new Date('2026-09-24');
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 
 const faq = [
   { q: 'What is SEBI Circular RAG?', a: 'SEBI Circular RAG is an open-source retrieval-augmented generation system built by Ian Pinto that answers questions over 1,490 SEBI circulars. It combines FAISS and BM25 hybrid retrieval, cross-encoder reranking, supersession-aware citations, an abstention gate and a faithfulness check.' },
@@ -100,14 +101,8 @@ const schema = [
     </figure>
   </div>
 
-  <div class="wrap">
-    <div class="stats">
-      <div><b>1,490</b><span>circulars · 83,752 chunks</span></div>
-      <div><b>0.943</b><span>Recall@10 (full pipeline)</span></div>
-      <div><b>0.881</b><span>Citation recall</span></div>
-      <div><b>0.981</b><span>Abstention accuracy</span></div>
-    </div>
-    <p class="note">Full evaluation on 15 Aug 2026 over golden_v7 (260 adjudicated queries), measured when the corpus had 728 circulars. On 15 Sep 2026 the pipeline was re-run on the 1,490-circular index and still cleared all six quality gates.</p>
+  <div class="wrap case-score">
+    <Scorecard slug="sebi-rag" />
   </div>
 
   <section id="problem">

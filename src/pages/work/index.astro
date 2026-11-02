@@ -1,11 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectCards from '../../components/ProjectCards.astro';
+import SkillProjectMap from '../../components/SkillProjectMap.astro';
+import Scorecard from '../../components/Scorecard.astro';
 import BookCTA from '../../components/BookCTA.astro';
 import { PROJECTS } from '../../data/projects';
+import { SKILLS } from '../../data/skills';
+import { LINKS } from '../../data/graph';
 import { breadcrumb } from '../../data/site';
 
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
+const evidence = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
 const schema = [
   {
     '@type': 'CollectionPage',
@@ -17,12 +22,7 @@ const schema = [
     dateModified: updated.toISOString(),
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: PROJECTS.map((p, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: p.name,
-        url: 'https://ainpm.in' + p.href,
-      })),
+      itemListElement: PROJECTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, url: 'https://ainpm.in' + p.href })),
     },
   },
   breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }]),
@@ -36,18 +36,59 @@ const schema = [
 >
   <div class="wrap crumb"><a href="/">AINPM.in</a> / Work</div>
   <div class="wrap page-head">
-    <span class="eyebrow">Portfolio</span>
+    <span class="eyebrow">Portfolio · Updated 2 Nov 2026</span>
     <h1>Products I've built and shipped</h1>
-    <p class="answer"><strong>Ian Pinto's portfolio covers four open-source products: an AI assistant for SEBI regulation, a zero-knowledge password manager, a passkey cryptography library with a research preprint, and a local-AI study app for macOS.</strong> Each case study shows the problem, the trust design, the evidence and the trade-offs.</p>
-    <p class="muted">Want it by skill instead of by product? <a href="/skills/">See the skills matrix, with each skill linked to its evidence →</a></p>
+    <p class="answer"><strong>Ian Pinto's portfolio covers four open-source products: an AI assistant for SEBI regulation, a zero-knowledge password manager, a passkey cryptography library with a research preprint, and a local-AI study app for macOS.</strong> Each card shows real, dated numbers; each case study shows the trust design and the trade-offs.</p>
   </div>
-  <div class="wrap" style="padding-top:12px;padding-bottom:24px">
-    <ProjectCards heading="h2" />
+  <div class="wrap">
+    <div class="glance">
+      <div><b>{PROJECTS.length}</b><span>open-source products</span></div>
+      <div><b>1</b><span>DOI-registered preprint</span></div>
+      <div><b>{LINKS.length}</b><span>skill-to-project connections</span></div>
+      <div><b>{evidence}</b><span>public evidence links</span></div>
+    </div>
   </div>
+
+  <section id="projects" style="border-top:0;padding-top:40px">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · Products</span>
+        <h2>What does each product prove?</h2>
+        <p class="muted">Bars show measured rates; orange marks a known weak spot. Numbers are as of the dates on each case study.</p>
+      </div>
+      <ProjectCards heading="h3" />
+    </div>
+  </section>
+
+  <section id="flagship">
+    <div class="wrap viz-grid two">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">02 · Flagship results</span>
+          <h2>How good is the flagship product?</h2>
+          <p class="muted">SEBI Circular RAG has to clear six quality floors before any change ships. The tick on each bar is the floor; the bar is the measured result.</p>
+          <p><a href="/sebi-rag/">Read the SEBI RAG case study →</a></p>
+        </div>
+      </div>
+      <Scorecard slug="sebi-rag" />
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Skills</span>
+        <h2>Which skills does the portfolio prove?</h2>
+        <p class="muted">Every line is a public evidence link from the <a href="/skills/">skills matrix</a>. Select a skill to see its proof.</p>
+      </div>
+      <SkillProjectMap id="work-map" />
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Common threads</span>
+        <span class="eyebrow">04 · Common threads</span>
         <h2>What do these projects have in common?</h2>
       </div>
       <div class="grid g3">

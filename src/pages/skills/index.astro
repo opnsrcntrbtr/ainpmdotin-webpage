@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import BookCTA from '../../components/BookCTA.astro';
+import EvidenceHeatmap from '../../components/EvidenceHeatmap.astro';
+import SkillProjectMap from '../../components/SkillProjectMap.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 import { SKILLS, CREDENTIALS } from '../../data/skills';
 
@@ -79,6 +81,20 @@ const sources = [
     <p class="note">Accredible’s 2026 figures come from spring 2026 surveys of 1,000 learners and 194 credential issuers. Accredible sells credentialing software, so treat its numbers as directional. <a href="/articles/proof-over-certificates-ai-pm-skills/">Read my analysis of the research →</a></p>
   </div>
 
+  <section id="glance">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">At a glance</span>
+        <h2>Where is the proof strongest?</h2>
+        <p class="muted">The heatmap counts the public evidence behind each skill by type. The map shows which products and writing provide it. Both are generated from the matrix below, so they always match.</p>
+      </div>
+      <div class="viz-grid">
+        <EvidenceHeatmap />
+        <SkillProjectMap id="skills-map" />
+      </div>
+    </div>
+  </section>
+
   <section id="matrix">
     <div class="wrap">
       <div class="section-head">
@@ -92,8 +108,10 @@ const sources = [
         <button type="button" aria-pressed="false" data-k="Live demo">Live demos</button>
         <button type="button" aria-pressed="false" data-k="Open code">Open code</button>
         <button type="button" aria-pressed="false" data-k="Eval results">Eval results</button>
+        <button type="button" aria-pressed="false" data-k="Package">Packages</button>
         <button type="button" aria-pressed="false" data-k="Publication">Publications</button>
         <button type="button" aria-pressed="false" data-k="Credential">Credentials</button>
+        <button type="button" aria-pressed="false" data-k="Case study">Case studies</button>
       </div>
       <p class="sr-only" id="filterStatus" aria-live="polite"></p>
 
@@ -108,10 +126,13 @@ const sources = [
               </div>
             </div>
             <p class="skill-proof"><span>Proof</span>{s.proof}</p>
-            <dl class="skill-map">
-              <div><dt>O*NET work activity</dt><dd>{s.onet.join(' · ')}</dd></div>
-              <div><dt>NACE competency</dt><dd>{s.nace}</dd></div>
-            </dl>
+            <details class="skill-map">
+              <summary>Framework mapping · NACE: {s.nace}</summary>
+              <dl>
+                <div><dt>O*NET work activity</dt><dd>{s.onet.join(' · ')}</dd></div>
+                <div><dt>NACE competency</dt><dd>{s.nace}</dd></div>
+              </dl>
+            </details>
             <ul class="evidence">
               {s.evidence.map((e) => (
                 <li data-kind={e.kind}>
@@ -201,6 +222,13 @@ const sources = [
         s.querySelectorAll('.evidence li').forEach(function(li){ li.classList.toggle('dim', k!=='all' && li.dataset.kind!==k); });
       });
       status.textContent = shown+' of '+document.querySelectorAll('.skill').length+' skills shown';
+    });
+  });
+  document.querySelectorAll('.hm-c a[data-kind]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var k=a.dataset.kind, b=document.querySelector('.filter button[data-k="'+k+'"]');
+      if(!b){ var o=document.querySelector('.filter button[data-k="all"]'); o&&o.click(); return; }
+      b.click();
     });
   });
 })();

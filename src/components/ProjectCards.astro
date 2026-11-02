@@ -1,20 +1,25 @@
 ---
 import { PROJECTS } from '../data/projects';
-interface Props { exclude?: string; heading?: 'h2' | 'h3'; }
-const { exclude, heading = 'h3' } = Astro.props;
+import Scorecard from './Scorecard.astro';
+interface Props { exclude?: string; heading?: 'h2' | 'h3'; metrics?: boolean; }
+const { exclude, heading = 'h3', metrics = true } = Astro.props;
 const H = heading;
 const list = PROJECTS.filter((p) => p.slug !== exclude);
 ---
 <div class="grid g2 work-grid">
   {list.map((p) => (
-    <article class="card work-card">
-      <span class="meta">{p.kind} · {p.status}</span>
-      <H><a href={p.href}>{p.name}</a></H>
+    <article class="pcard">
+      <div class="pcard-top">
+        <div>
+          <span class="meta">{p.kind}</span>
+          <H><a href={p.href}>{p.name}</a></H>
+        </div>
+        <span class="status">{p.status}</span>
+      </div>
       <p class="tagline">{p.tagline}</p>
-      <p>{p.summary}</p>
+      {metrics && <Scorecard slug={p.slug} compact heading={false} />}
       <ul class="strata">{p.tags.map((t) => <li>{t}</li>)}</ul>
-      <p class="links-row" style="margin-top:14px">
-        <a href={p.href}>Read the case study →</a>
+      <p class="links-row">
         {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
       </p>
     </article>

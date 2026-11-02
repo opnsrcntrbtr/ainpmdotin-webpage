@@ -1,0 +1,37 @@
+---
+import { KINDS, MATRIX, KIND_TOTALS } from '../data/graph';
+interface Props { interactive?: boolean; }
+const { interactive = true } = Astro.props;
+const total = KIND_TOTALS.reduce((a, b) => a + b, 0);
+const step = (n: number) => Math.min(n, 4);
+---
+<figure class="heatmap">
+  <figcaption class="sc-head"><strong>Evidence by skill and type</strong><span>{total} public evidence links · darker = more evidence{interactive ? ' · select a cell to filter the matrix' : ''}</span></figcaption>
+  <div class="hm-scroll">
+    <table class="hm">
+      <caption class="sr-only">Number of public evidence links for each skill, by evidence type</caption>
+      <thead>
+        <tr><th scope="col">Skill</th>{KINDS.map((k) => <th scope="col"><span>{k}</span></th>)}<th scope="col" class="hm-total">Total</th></tr>
+      </thead>
+      <tbody>
+        {MATRIX.map((r) => (
+          <tr>
+            <th scope="row"><a href={`#${r.id}`}>{r.name}</a></th>
+            {r.counts.map((c, i) => (
+              <td class={`hm-c s${step(c)}`}>
+                {c > 0 && interactive
+                  ? <a href={`#${r.id}`} data-kind={KINDS[i]} aria-label={`${r.name}: ${c} ${KINDS[i]} ${c === 1 ? 'link' : 'links'}`} title={`${r.name} · ${KINDS[i]}: ${c}`}>{c}</a>
+                  : <span aria-label={c === 0 ? `${r.name}: no ${KINDS[i]}` : `${r.name}: ${c} ${KINDS[i]}`}>{c > 0 ? c : '·'}</span>}
+              </td>
+            ))}
+            <td class="hm-total">{r.total}</td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr><th scope="row">Total</th>{KIND_TOTALS.map((t) => <td class="hm-total">{t}</td>)}<td class="hm-total"><strong>{total}</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="hm-legend" aria-hidden="true"><span>Fewer</span><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><span>More</span></div>
+</figure>

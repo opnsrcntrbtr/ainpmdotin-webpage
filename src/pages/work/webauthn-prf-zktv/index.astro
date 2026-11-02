@@ -1,10 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Scorecard from '../../../components/Scorecard.astro';
 import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 const repo = 'https://github.com/opnsrcntrbtr/webauthn-prf-zktv';
 const npm = 'https://www.npmjs.com/package/webauthn-prf-zktv';
 const doi = 'https://doi.org/10.6084/m9.figshare.32915411.v1';
@@ -80,13 +81,8 @@ const sources = [
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="stats">
-      <div><b>v0.2.0</b><span>on npm, MIT licence</span></div>
-      <div><b>1</b><span>runtime dependency (@noble/hashes)</span></div>
-      <div><b>2</b><span>wrap schemes: prf-v1 and pw-v1</span></div>
-      <div><b>~128-bit</b><span>post-quantum symmetric margin</span></div>
-    </div>
+  <div class="wrap case-score">
+    <Scorecard slug="webauthn-prf-zktv" />
   </div>
 
   <section id="problem">

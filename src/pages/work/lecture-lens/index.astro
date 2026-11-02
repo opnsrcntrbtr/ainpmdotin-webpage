@@ -1,11 +1,12 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Scorecard from '../../../components/Scorecard.astro';
 import LayerDiagram from '../../../components/LayerDiagram.astro';
 import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
 const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
 
@@ -85,14 +86,8 @@ const sources = [
     </figure>
   </div>
 
-  <div class="wrap">
-    <div class="stats">
-      <div><b>0</b><span>bytes uploaded to the cloud</span></div>
-      <div><b>~10 min</b><span>to build a 90-minute class</span></div>
-      <div><b>6</b><span>cases in the 12-minute smoke eval</span></div>
-      <div><b>3</b><span>layers keeping course material private</span></div>
-    </div>
-    <p class="note">Figures from the project documentation, October 2026. Status: early, single maintainer, Apple silicon only.</p>
+  <div class="wrap case-score">
+    <Scorecard slug="lecture-lens" />
   </div>
 
   <section id="problem">

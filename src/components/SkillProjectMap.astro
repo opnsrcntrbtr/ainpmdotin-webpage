@@ -1,0 +1,85 @@
+---
+import { SKILLS } from '../data/skills';
+import { TARGETS, LINKS } from '../data/graph';
+interface Props { id?: string; }
+const { id = 'spm' } = Astro.props;
+const W = 820, rowL = 46, top = 22;
+const H = top * 2 + rowL * (SKILLS.length - 1) + 20;
+const lx = 300, rx = 570;
+const ly = (i: number) => top + 10 + i * rowL;
+const rowR = (H - top * 2 - 20) / (TARGETS.length - 1);
+const ry = (i: number) => top + 10 + i * rowR;
+const sIdx = Object.fromEntries(SKILLS.map((s, i) => [s.id, i]));
+const tIdx = Object.fromEntries(TARGETS.map((t, i) => [t.id, i]));
+const paths = LINKS.map((l) => {
+  const y1 = ly(sIdx[l.skill]), y2 = ry(tIdx[l.target]);
+  const mx = (lx + rx) / 2;
+  return { ...l, d: `M${lx + 10},${y1} C${mx},${y1} ${mx},${y2} ${rx - 10},${y2}` };
+});
+const counts = Object.fromEntries(TARGETS.map((t) => [t.id, LINKS.filter((l) => l.target === t.id).length]));
+---
+<figure class="spm" id={id}>
+  <figcaption class="sc-head"><strong>Which projects prove which skills?</strong><span>{LINKS.length} connections · hover or focus a skill or project to trace it</span></figcaption>
+  <div class="spm-scroll">
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby={`${id}-t`} xmlns="http://www.w3.org/2000/svg">
+      <title id={`${id}-t`}>Map of eight skills on the left connected to the projects, writing and credentials that provide evidence for them, on the right. The same information is listed below the chart.</title>
+      <g class="spm-links">
+        {paths.map((p) => <path d={p.d} data-s={p.skill} data-t={p.target} />)}
+      </g>
+      <g class="spm-left">
+        {SKILLS.map((s, i) => (
+          <g class="spm-node" tabindex="0" data-s={s.id} role="link" aria-label={`${s.name}: ${LINKS.filter((l) => l.skill === s.id).length} connections`}>
+            <circle cx={lx + 6} cy={ly(i)} r="6" />
+            <text x={lx - 8} y={ly(i) + 5} text-anchor="end">{s.name}</text>
+          </g>
+        ))}
+      </g>
+      <g class="spm-right">
+        {TARGETS.map((t, i) => (
+          <g class={`spm-node ${t.group}`} tabindex="0" data-t={t.id} role="link" aria-label={`${t.label}: evidence for ${counts[t.id]} ${counts[t.id] === 1 ? "skill" : "skills"}`}>
+            <circle cx={rx - 6} cy={ry(i)} r="7" />
+            <text x={rx + 8} y={ry(i) + 5}>{t.label}</text>
+            <text x={rx + 8} y={ry(i) + 22} class="spm-sub">{counts[t.id]} {counts[t.id] === 1 ? "skill" : "skills"}</text>
+          </g>
+        ))}
+      </g>
+    </svg>
+  </div>
+  <details class="spm-list">
+    <summary>Show as a list</summary>
+    <ul>
+      {TARGETS.map((t) => (
+        <li><a href={t.href}>{t.label}</a>: {LINKS.filter((l) => l.target === t.id).map((l) => SKILLS.find((s) => s.id === l.skill)!.name).join(', ')}</li>
+      ))}
+    </ul>
+  </details>
+</figure>
+<script is:inline define:vars={{ id }}>
+(function () {
+  var fig = document.getElementById(id); if (!fig) return;
+  function set(s, t) {
+    var on = !!(s || t);
+    fig.classList.toggle('focusing', on);
+    var live = {};
+    fig.querySelectorAll('.spm-links path').forEach(function (p) {
+      var hit = (s && p.dataset.s === s) || (t && p.dataset.t === t);
+      p.classList.toggle('on', !!hit);
+      if (hit) { live['s:' + p.dataset.s] = 1; live['t:' + p.dataset.t] = 1; }
+    });
+    fig.querySelectorAll('.spm-node').forEach(function (n) {
+      var key = n.dataset.s ? 's:' + n.dataset.s : 't:' + n.dataset.t;
+      n.classList.toggle('on', !!live[key]);
+    });
+  }
+  fig.querySelectorAll('.spm-node').forEach(function (n) {
+    var enter = function () { set(n.dataset.s, n.dataset.t); };
+    n.addEventListener('mouseenter', enter); n.addEventListener('focus', enter);
+    n.addEventListener('mouseleave', function () { set(); }); n.addEventListener('blur', function () { set(); });
+    n.addEventListener('click', function () {
+      if (n.dataset.s) { var el = document.getElementById(n.dataset.s); if (el) { location.hash = n.dataset.s; return; } location.href = '/skills/#' + n.dataset.s; }
+      else { var a = Array.from(fig.querySelectorAll('.spm-list a')).find(function (x) { return x.textContent === n.querySelector('text').textContent; }); if (a) location.href = a.getAttribute('href'); }
+    });
+    n.addEventListener('keydown', function (e) { if (e.key === 'Enter') n.dispatchEvent(new Event('click')); });
+  });
+})();
+</script>

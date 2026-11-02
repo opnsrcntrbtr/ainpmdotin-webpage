@@ -1,11 +1,12 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Scorecard from '../../../components/Scorecard.astro';
 import LayerDiagram from '../../../components/LayerDiagram.astro';
 import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 const repo = 'https://github.com/opnsrcntrbtr/TrustVault-PWA';
 const app = 'https://trust-vault-pwa.vercel.app';
 
@@ -87,14 +88,8 @@ const sources = [
     </figure>
   </div>
 
-  <div class="wrap">
-    <div class="stats">
-      <div><b>4,139</b><span>automated tests passing</span></div>
-      <div><b>AES-256</b><span>GCM encryption on device</span></div>
-      <div><b>N=2<sup>17</sup></b><span>scrypt cost for key wrapping</span></div>
-      <div><b>0</b><span>bytes of credential data sent to AI</span></div>
-    </div>
-    <p class="note">Test count from the project status report of 6 July 2026 (4,139 passed, 3 failing). Security properties are as designed and documented by the project; there has been no independent audit.</p>
+  <div class="wrap case-score">
+    <Scorecard slug="trustvault" />
   </div>
 
   <section id="problem">

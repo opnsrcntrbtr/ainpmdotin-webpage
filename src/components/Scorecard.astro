@@ -1,0 +1,46 @@
+---
+import { SCORECARDS, type Metric } from '../data/metrics';
+interface Props { slug: string; compact?: boolean; heading?: boolean; }
+const { slug, compact = false, heading = true } = Astro.props;
+const sc = SCORECARDS[slug];
+if (!sc) throw new Error(`No scorecard for ${slug}`);
+const bars = sc.metrics.filter((m) => m.kind !== 'stat') as Exclude<Metric, { kind: 'stat' }>[];
+const stats = sc.metrics.filter((m) => m.kind === 'stat') as Extract<Metric, { kind: 'stat' }>[];
+const shownBars = compact ? bars.slice(0, 3) : bars;
+const shownStats = compact ? stats.slice(0, 2) : stats;
+const pct = (m: (typeof bars)[number]) => (m.kind === 'rate' ? m.value : m.num / m.den);
+const fmt = (m: (typeof bars)[number]) =>
+  m.kind === 'rate' ? (m.display ?? m.value.toFixed(3)) : `${m.num.toLocaleString('en-IN')} / ${m.den.toLocaleString('en-IN')}`;
+---
+<figure class={`scorecard${compact ? ' compact' : ''}`}>
+  {heading && <figcaption class="sc-head"><strong>{sc.title}</strong><span>{sc.asOf}</span></figcaption>}
+  {shownBars.length > 0 && (
+    <ul class="sc-bars">
+      {shownBars.map((m) => {
+        const w = Math.max(0.02, Math.min(1, pct(m))) * 100;
+        const floor = m.kind === 'rate' && m.floor !== undefined ? m.floor * 100 : null;
+        const tip = `${m.label}: ${fmt(m)}${floor !== null ? ` · floor ${(m as any).floor}` : ''}`;
+        return (
+          <li class={m.weak ? 'weak' : undefined} title={tip}>
+            <span class="sc-label">{m.label}</span>
+            <span class="sc-track" role="img" aria-label={tip}>
+              <span class="sc-fill" style={`width:${w}%`}></span>
+              {floor !== null && <span class="sc-floor" style={`left:${floor}%`}></span>}
+            </span>
+            <span class="sc-val">{fmt(m)}</span>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+  {shownStats.length > 0 && (
+    <dl class="sc-stats">
+      {shownStats.map((m) => (<div><dt>{m.label}</dt><dd>{m.value}</dd></div>))}
+    </dl>
+  )}
+  {!compact && (
+    <p class="sc-foot">
+      {sc.note && <Fragment>{sc.note}{' '}</Fragment>}Source: <a href={sc.source.href} target="_blank" rel="noopener">{sc.source.label} ↗</a>
+    </p>
+  )}
+</figure>
