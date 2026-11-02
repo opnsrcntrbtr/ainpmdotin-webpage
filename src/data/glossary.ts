@@ -27,6 +27,11 @@ const TERMS: Term[] = [
   { id: 'quality-gate', term: 'Quality gate', def: 'A minimum score for each evaluation metric that a change must clear before release. Gates should be re-derived when the model, data or test set changes.' },
   { id: 'rag', term: 'Retrieval-augmented generation (RAG)', def: 'A pattern where the system first retrieves relevant passages from a trusted corpus and then asks a language model to answer using only those passages, usually with citations.' },
   { id: 'recall-at-k', term: 'Recall@k', def: 'The share of questions for which a relevant document appears in the top k retrieved results. Recall@10 of 0.943 means the right document is in the top ten 94.3% of the time.' },
+  { id: 'open-badges-3', term: 'Open Badges 3.0', def: 'A 1EdTech standard for digital badges that follows the W3C Verifiable Credentials model, so a badge carries signed, machine-readable proof of who issued it and which skills it covers.' },
+  { id: 'proof-of-skill', term: 'Proof of skill', def: 'Public evidence that someone can do what they claim, such as a live demo, an evaluation log, open code or a verifiable credential, linked to a specific, plainly worded skill.' },
+  { id: 'skills-based-hiring', term: 'Skills-based hiring', def: 'Hiring that judges candidates on demonstrated skills rather than degrees or job titles alone, usually by asking for evidence, work samples or skill-tagged credentials.' },
+  { id: 'skills-framework', term: 'Skills framework', def: 'A shared, structured list of skills and work activities, such as O*NET, ESCO or NACE Career Readiness Competencies, used to describe skills in language employers and hiring systems recognise.' },
+  { id: 'verifiable-credential', term: 'Verifiable credential', def: 'A digital certificate signed by its issuer, following the W3C Verifiable Credentials standard, so anyone can confirm it is genuine without contacting the issuer.' },
   { id: 'supersession', term: 'Supersession', def: 'When a newer regulation or circular replaces an older one. Supersession-aware systems flag the older document and point to its replacement.' },
   { id: 'synthetically-generated-information', term: 'Synthetically generated information (SGI)', def: 'The term used in India’s IT Rules for AI-generated or AI-altered content. From 20 February 2026 it must carry prominent labels.' },
 ];

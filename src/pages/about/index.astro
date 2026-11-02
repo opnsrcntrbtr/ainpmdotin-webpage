@@ -1,8 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { AUTHOR, breadcrumb } from '../../data/site';
+import { CREDENTIALS } from '../../data/skills';
 
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 const schema = [
   {
     '@type': 'ProfilePage',
@@ -43,10 +44,11 @@ const schema = [
         <h2>Credentials</h2>
       </div>
       <ul class="chips">
-        <li>MBA</li><li>BE (IT)</li><li>PMP</li><li>CSM</li>
-        <li>AI Product Management — IIT Kharagpur (upGrad)</li><li>AI Product Management — ISB</li>
-        <li>Certified AI &amp; cloud-native engineering</li>
+        {CREDENTIALS.map((c) => (
+          <li>{c.verifyUrl ? <a href={c.verifyUrl} target="_blank" rel="noopener">{c.name}{c.issuer ? ` — ${c.issuer}` : ''} ↗</a> : <Fragment>{c.name}{c.issuer ? ` — ${c.issuer}` : ''}</Fragment>}</li>
+        ))}
       </ul>
+      <p class="muted" style="margin-top:-8px">Credentials are one signal. <a href="/skills/">See each skill mapped to O*NET and NACE, with the public evidence behind it →</a></p>
       <div class="md">
         <h2>Open work</h2>
         <ul>
@@ -65,7 +67,7 @@ const schema = [
         {AUTHOR.sameAs.slice(0, 2).map((u, i) => (
           <a class="btn ghost" href={u} rel="me noopener" target="_blank">{i === 0 ? 'Connect on LinkedIn ↗' : 'GitHub ↗'}</a>
         ))}
-        <a class="btn ghost" href="/articles/">Read the articles</a>
+        <a class="btn ghost" href="/skills/">Skills &amp; evidence</a>
       </div>
       <p class="note" style="margin-top:20px">Views on this site are my own and not those of any employer.</p>
     </div>

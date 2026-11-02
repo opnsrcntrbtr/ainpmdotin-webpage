@@ -180,7 +180,7 @@ const schema = [
       <ul class="strata">
         <li><b>40</b> title lookups</li><li><b>60</b> paraphrased body text</li><li><b>30</b> numbers &amp; tables</li><li><b>40</b> lineage / supersession</li><li><b>20</b> multi-hop</li><li><b>20</b> repealed legal basis</li><li><b>40</b> hard negatives</li><li><b>10</b> far negatives</li>
       </ul>
-      <div class="tbl-wrap" style="margin-top:22px">
+      <div class="tbl-wrap" style="margin-top:22px" tabindex="0" role="region" aria-label="Evaluation results table">
         <table>
           <thead><tr><th>Metric</th><th>Result</th><th>What it tells a PM</th></tr></thead>
           <tbody>
@@ -205,7 +205,7 @@ const schema = [
         <h2>What was shipped, and what was rejected?</h2>
         <p class="muted">Every change was an experiment measured against the golden set. Saying no to plausible ideas was as important as saying yes.</p>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap" tabindex="0" role="region" aria-label="Product decisions table">
         <table>
           <thead><tr><th>Decision</th><th>Evidence</th><th>Call</th></tr></thead>
           <tbody>

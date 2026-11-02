@@ -1,0 +1,208 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookCTA from '../../components/BookCTA.astro';
+import { breadcrumb, faqSchema } from '../../data/site';
+import { SKILLS, CREDENTIALS } from '../../data/skills';
+
+const updated = new Date('2026-11-02');
+const isExternal = (h: string) => h.startsWith('http');
+const evidenceCount = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
+
+const faq = [
+  { q: 'What is a proof-of-skill matrix?', a: 'A proof-of-skill matrix lists each skill in language employers already use, then links to public evidence for it, such as a live demo, source code, evaluation results or a publication. It lets a hiring manager or client check a claim in minutes instead of trusting a list of certificates.' },
+  { q: 'Why map skills to O*NET and NACE?', a: 'Accredible’s 2026 State of Credentialing research found that 44% of learners want a clearer description of the skills they gained, and recommends describing skills in frameworks employers already use. O*NET work activities and NACE career readiness competencies are widely used by employers and are two of the frameworks Accredible added in August 2026.' },
+  { q: 'Are certificates still useful for AI product managers?', a: 'Yes, as one signal among several. Accredible’s 2025 research found 75% of HR and talent leaders say a digital credential makes skills easier to verify, but its 2026 report concludes that credentials alone do not guarantee career outcomes. Pair each credential with shipped work and measured results.' },
+  { q: 'How can I build my own proof-of-skill matrix?', a: 'List five to eight skills for the role you want, write each as one sentence an employer would recognise, map it to a framework such as O*NET or NACE, and link at least one public artefact per skill: a demo, repository, evaluation log, write-up or verifiable credential. Publish weak results too.' },
+];
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': 'https://ainpm.in/skills/#webpage',
+    url: 'https://ainpm.in/skills/',
+    name: 'AI-native product management skills matrix with evidence',
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    about: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    dateModified: updated.toISOString(),
+    inLanguage: 'en-IN',
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Skills with public evidence',
+    itemListElement: SKILLS.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'DefinedTerm',
+        '@id': `https://ainpm.in/skills/#${s.id}`,
+        name: s.name,
+        description: `${s.claim} Evidence: ${s.proof}`,
+        inDefinedTermSet: 'https://ainpm.in/skills/',
+      },
+    })),
+  },
+  faqSchema(faq),
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Skills and evidence', path: '/skills/' }]),
+];
+
+const sources = [
+  { href: 'https://www.accredible.com/reports/2026-state-of-credentialing-report', label: 'Accredible — 2026 State of Credentialing Report' },
+  { href: 'https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof', label: 'Accredible — 2025 State of Credentialing: hiring needs verifiable proof' },
+  { href: 'https://www.accredible.com/newsroom/accredible-launches-skills-frameworks-for-digital-credentials', label: 'Accredible — Skills Frameworks launch (11 Aug 2026)' },
+  { href: 'https://www.onetonline.org/find/descriptor/browse/4.A', label: 'O*NET OnLine — Generalized Work Activities' },
+  { href: 'https://www.naceweb.org/career-readiness/competencies/career-readiness-defined/', label: 'NACE — Career Readiness Competencies' },
+];
+---
+<Base
+  title="AI PM Skills Matrix With Public Evidence | AINPM.in"
+  description="Ian Pinto's AI-native product management skills in employer language, mapped to O*NET and NACE, each linked to live demos, code, eval results and credentials."
+  schema={schema}
+  updated={updated}
+  sources={sources}
+  ogImage="/og/skills.png"
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Skills</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Proof of skill · Updated 2 Nov 2026</span>
+    <h1>What I can do, and the evidence you can check</h1>
+    <p class="answer"><strong>This page lists eight AI-native product management skills in the language employers use, and links each one to public evidence: live demos, source code, evaluation results, publications and credentials.</strong> It follows a simple idea from recent credentialing research: a skill claim is only as strong as the proof behind it.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="stats research">
+      <div><b>44%</b><span>of learners want a clearer description of the skills they gained</span><small>Accredible, 2026</small></div>
+      <div><b>22→44%</b><span>of issuers now rank proving program value as a top priority</span><small>Accredible, 2026</small></div>
+      <div><b>75%</b><span>of HR leaders say digital credentials make skills easier to verify</span><small>Accredible, 2025</small></div>
+      <div><b>{evidenceCount}</b><span>evidence links on this page, each one click away</span><small>AINPM.in</small></div>
+    </div>
+    <p class="note">Accredible’s 2026 figures come from spring 2026 surveys of 1,000 learners and 194 credential issuers. Accredible sells credentialing software, so treat its numbers as directional. <a href="/articles/proof-over-certificates-ai-pm-skills/">Read my analysis of the research →</a></p>
+  </div>
+
+  <section id="matrix">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · Skills matrix</span>
+        <h2>Which skills, and where is the proof?</h2>
+        <p class="muted">Each skill is written as one sentence an employer would recognise, aligned to an <abbr title="Occupational Information Network, US Department of Labor">O*NET</abbr> work activity and a <abbr title="National Association of Colleges and Employers">NACE</abbr> career readiness competency, then backed by evidence anyone can open.</p>
+      </div>
+
+      <div class="filter" role="group" aria-label="Filter evidence by type">
+        <button type="button" aria-pressed="true" data-k="all">All evidence</button>
+        <button type="button" aria-pressed="false" data-k="Live demo">Live demos</button>
+        <button type="button" aria-pressed="false" data-k="Open code">Open code</button>
+        <button type="button" aria-pressed="false" data-k="Eval results">Eval results</button>
+        <button type="button" aria-pressed="false" data-k="Publication">Publications</button>
+        <button type="button" aria-pressed="false" data-k="Credential">Credentials</button>
+      </div>
+      <p class="sr-only" id="filterStatus" aria-live="polite"></p>
+
+      <ol class="skills">
+        {SKILLS.map((s, i) => (
+          <li class="skill card" id={s.id} data-kinds={s.evidence.map((e) => e.kind).join('|')}>
+            <div class="skill-head">
+              <span class="skill-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.name}</h3>
+                <p class="skill-claim">{s.claim}</p>
+              </div>
+            </div>
+            <p class="skill-proof"><span>Proof</span>{s.proof}</p>
+            <dl class="skill-map">
+              <div><dt>O*NET work activity</dt><dd>{s.onet.join(' · ')}</dd></div>
+              <div><dt>NACE competency</dt><dd>{s.nace}</dd></div>
+            </dl>
+            <ul class="evidence">
+              {s.evidence.map((e) => (
+                <li data-kind={e.kind}>
+                  <span class="ev-kind">{e.kind}</span>
+                  <a href={e.href} {...(isExternal(e.href) ? { target: '_blank', rel: 'noopener' } : {})}>{e.label}{isExternal(e.href) ? ' ↗' : ''}</a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+      <p class="note">Framework labels are my own alignment for orientation. They are not an endorsement or certification by O*NET, NACE or any framework owner.</p>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · Credentials</span>
+        <h2>Which credentials back these skills?</h2>
+        <p class="muted">Credentials are one signal, not the whole case. Each one below is linked to the skills it supports. Verification links, such as Open Badges 3.0 or issuer pages, are added as they become available.</p>
+      </div>
+      <div class="grid g3">
+        {CREDENTIALS.map((c) => (
+          <article class="card cred">
+            <span class="meta">{c.category}</span>
+            <h3>{c.name}</h3>
+            {c.issuer && <p class="cred-issuer">{c.issuer}</p>}
+            <p class="cred-skills">Supports: {c.skills.map((id, j) => {
+              const s = SKILLS.find((x) => x.id === id);
+              return <Fragment>{j > 0 && ', '}<a href={`#${id}`}>{s?.name ?? id}</a></Fragment>;
+            })}</p>
+            {c.verifyUrl
+              ? <a class="verify ok" href={c.verifyUrl} target="_blank" rel="noopener">Verify credential ↗</a>
+              : <span class="verify">Verification link on request</span>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="method">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Method</span>
+        <h2>How can you build your own proof-of-skill matrix?</h2>
+        <p class="muted">The same five steps work for any AI product manager in India, whether you are moving into AI from a traditional PM role or applying to a capability centre.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Name five to eight skills for the role you want</h3><p>Start from real job descriptions, not a course syllabus.</p></div></div>
+        <div class="step"><div><h3>Write each as one employer-readable sentence</h3><p>“Turn a requirement into a graded test set” beats “strong AI skills”.</p></div></div>
+        <div class="step"><div><h3>Map it to a recognised framework</h3><p>O*NET, ESCO or NACE help recruiters and AI search tools match your skills to roles.</p></div></div>
+        <div class="step"><div><h3>Link at least one public artefact per skill</h3><p>A demo, repository, eval log, write-up or verifiable credential. Publish weak results too.</p></div></div>
+        <div class="step"><div><h3>Review it every quarter</h3><p>Add new evidence, retire stale claims, and date the page so readers know it is current.</p></div></div>
+      </div>
+      <BookCTA id="skills" level="h3" heading="Want a second opinion on your AI PM portfolio?" text="Book a 30-minute AI PM career session: I will review your skills, evidence and projects against what Indian and global AI teams hire for." />
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · FAQ</span>
+        <h2>Questions about skills and evidence</h2>
+      </div>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+<script is:inline>
+(function(){
+  var btns=document.querySelectorAll('.filter button'), status=document.getElementById('filterStatus');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var k=b.dataset.k, shown=0;
+      btns.forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false')});
+      document.querySelectorAll('.skill').forEach(function(s){
+        var hit = k==='all' || s.dataset.kinds.split('|').indexOf(k)>-1;
+        s.hidden=!hit; if(hit) shown++;
+        s.querySelectorAll('.evidence li').forEach(function(li){ li.classList.toggle('dim', k!=='all' && li.dataset.kind!==k); });
+      });
+      status.textContent = shown+' of '+document.querySelectorAll('.skill').length+' skills shown';
+    });
+  });
+})();
+</script>
+</Base>

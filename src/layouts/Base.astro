@@ -62,7 +62,8 @@ const path = Astro.url.pathname;
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={image}>
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -82,11 +83,17 @@ const path = Astro.url.pathname;
   <div class="wrap">
     <a class="brand" href="/" aria-label="AINPM.in home"><i></i>AINPM.in</a>
     <nav aria-label="Primary"><ul>
-      {NAV.map((n) => (
-        <li><a href={n.href} class={n.cta ? 'nav-cta' : undefined} data-goatcounter-click={n.cta ? 'cta-nav-book' : undefined} aria-current={path === n.href || (n.href !== '/' && !n.href.includes('#') && path.startsWith(n.href)) ? 'page' : undefined}>{n.label}</a></li>
+      {NAV.filter((n) => !n.cta).map((n) => (
+        <li><a href={n.href} aria-current={path === n.href || (n.href !== '/' && !n.href.includes('#') && path.startsWith(n.href)) ? 'page' : undefined}>{n.label}</a></li>
       ))}
     </ul></nav>
-    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">◐</button>
+    {NAV.filter((n) => n.cta).map((n) => (
+      <a href={n.href} class="nav-cta" data-goatcounter-click="cta-nav-book" aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>
+    ))}
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark theme">
+      <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>
+    </button>
   </div>
 </header>
 
@@ -99,6 +106,7 @@ const path = Astro.url.pathname;
     <ul class="foot-nav">
       <li><a href="/">Home</a></li>
       <li><a href="/work/">Work</a></li>
+      <li><a href="/skills/">Skills &amp; evidence</a></li>
       <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
       <li><a href="/articles/">Articles</a></li>
       <li><a href="/glossary/">Glossary</a></li>
@@ -132,9 +140,11 @@ const path = Astro.url.pathname;
 <script is:inline>
 (function(){
   var root=document.documentElement, btn=document.getElementById('themeBtn');
+  function cur(){return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function label(){if(btn) btn.setAttribute('aria-label', cur()==='dark'?'Switch to light theme':'Switch to dark theme');}
+  label();
   if(btn) btn.addEventListener('click',function(){
-    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    var next=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',next); label();
     try{localStorage.setItem('ainpm-theme',next);}catch(e){}
   });
 })();

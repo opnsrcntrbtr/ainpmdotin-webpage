@@ -7,7 +7,7 @@ import ProjectCards from '../components/ProjectCards.astro';
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const updated = new Date('2026-10-29');
+const updated = new Date('2026-11-02');
 
 const faq = [
   { q: 'What is AI-native product management?', a: 'AI-native product management is the practice of building products where an AI model is the core of the experience rather than an add-on. The product manager specifies behaviour with evaluation sets, measures quality as a rate, manages inference cost per task and designs trust controls such as citations, abstention and consent from the start.' },
@@ -15,6 +15,7 @@ const faq = [
   { q: 'What is SEBI Circular RAG?', a: 'SEBI Circular RAG is an open-source assistant that answers questions over 1,490 SEBI circulars. It cites every claim, flags superseded circulars, can answer as of a past date and refuses when evidence is missing. A live demo runs on Hugging Face and the code and dataset are public.' },
   { q: 'Which AI regulations apply to product teams in India?', a: 'India has no single AI Act. Product teams track MeitY\'s India AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules on labelling AI-generated content, RBI\'s FREE-AI framework and SEBI\'s forthcoming AI/ML guidelines.' },
   { q: 'How do I become an AI-native product manager?', a: 'Start by building a small evaluation set of about 50 real examples for a feature you own, prototype against it with AI coding tools, track cost and latency per task, and learn the regulation that applies to your sector. Publishing a working project with its evaluation results is stronger evidence than a certificate.' },
+  { q: 'What evidence proves AI product management skills?', a: 'Public artefacts someone else can check: a live demo, an evaluation log with metric floors, open code, a case study that includes weak results and verifiable credentials that name specific skills. Accredible\'s 2026 State of Credentialing research found credentials alone do not guarantee career outcomes and 44% of learners want clearer skill descriptions, so map each skill to a framework like O*NET or NACE and link the proof.' },
   { q: 'Is the content on AINPM.in legal or financial advice?', a: 'No. The content is general information for product managers. Regulatory summaries are for orientation only, and SEBI Circular RAG is an independent research demo that is not endorsed by SEBI. Always verify against primary sources.' },
 ];
 
@@ -26,6 +27,7 @@ const sources = [
   { href: 'https://www.lexology.com/library/detail.aspx?g=ffc0c58c-3727-4472-9914-5fa6a33ffffd', label: 'MeitY AI Governance Guidelines — analysis' },
   { href: 'https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines', label: 'DPDP Act & Rules 2025 phased timeline' },
   { href: 'https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026', label: 'MeitY IT Amendment Rules 2026 (synthetic content)' },
+  { href: 'https://www.accredible.com/reports/2026-state-of-credentialing-report', label: 'Accredible — 2026 State of Credentialing Report' },
   { href: 'https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md', label: 'SEBI Circular RAG — project status and eval log' },
   { href: 'https://www.indiasnews.net/news/279251495/sebi-to-soon-issue-aiml-guidelines-for-capital-markets-mandate-human-oversight-kill-switch-controls-chairman-pandey', label: 'SEBI chairman on forthcoming AI/ML guidelines (Aug 2026)' },
 ];
@@ -55,7 +57,7 @@ const schema = [
   <div class="wrap phero">
     <div>
       <span class="pill-live">Featured MVP · Live on Hugging Face</span>
-      <h1><span class="kicker">AI-native product management, built from India</span>Ask SEBI circulars. Get <em>cited answers</em> — or an honest "not in the corpus".</h1>
+      <h1><span class="kicker">AI-native product management, built from India</span>Ask SEBI circulars. Get <em>cited answers</em> — or an honest “not in the corpus”.</h1>
       <p class="lede"><strong>SEBI Circular RAG</strong> is an open-source, AI-native product I built to answer questions over 1,490 SEBI circulars. It cites every claim, flags circulars that have been superseded, answers "as of" a past date, and refuses to guess when the evidence isn't there.</p>
       <div class="cta">
         <a class="btn primary" href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo" target="_blank" rel="noopener">Try the live demo ↗</a>
@@ -85,13 +87,27 @@ const schema = [
   </div>
 
   <section id="what">
-    <div class="wrap">
+    <div class="wrap what-grid">
       <div class="section-head">
         <span class="eyebrow">Start here</span>
         <h2>What is AI-native product management?</h2>
         <p class="answer"><strong>AI-native product management is the practice of building products where an AI model is the core of the experience, not an add-on.</strong> The spec becomes an evaluation set, quality is measured as a rate, every task has an inference cost, and trust controls such as citations, abstention and consent are designed in from the first sprint.</p>
         <p class="muted">AINPM.in is my practical guide to doing this from India: what changes for PMs, the Indian AI and regulation landscape, a playbook, and a live product that applies it. <a href="/articles/what-is-ai-native-product-management/">Read the full explainer →</a></p>
       </div>
+      <aside class="proof-card" aria-labelledby="proof-h">
+        <span class="eyebrow">New · Proof of skill</span>
+        <h3 id="proof-h">Proof over certificates</h3>
+        <p>Accredible’s 2026 State of Credentialing research says credentials alone don’t guarantee career outcomes. So every skill I claim links to evidence you can open.</p>
+        <ul>
+          <li><b>8</b><span>AI PM skills, mapped to O*NET and NACE</span></li>
+          <li><b>4</b><span>open-source products with demos, code or packages</span></li>
+          <li><b>44%</b><span>of learners want clearer skill descriptions (Accredible, 2026)</span></li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="/skills/" data-goatcounter-click="cta-home-skills">See the skills matrix</a>
+          <a class="btn ghost" href="/articles/proof-over-certificates-ai-pm-skills/">Read the analysis</a>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -175,35 +191,35 @@ const schema = [
         <span class="eyebrow">05 · Start here</span>
         <h2>Where should you begin?</h2>
       </div>
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-t="pm">Working PMs</button>
-        <button role="tab" aria-selected="false" data-t="new">Aspiring PMs</button>
-        <button role="tab" aria-selected="false" data-t="lead">Founders &amp; leaders</button>
-        <button role="tab" aria-selected="false" data-t="hire">Recruiters</button>
+      <div class="tabs" role="tablist" aria-label="Choose your role">
+        <button role="tab" id="t-pm" aria-selected="true" aria-controls="p-pm" tabindex="0" data-t="pm">Working PMs</button>
+        <button role="tab" id="t-new" aria-selected="false" aria-controls="p-new" tabindex="-1" data-t="new">Aspiring PMs</button>
+        <button role="tab" id="t-lead" aria-selected="false" aria-controls="p-lead" tabindex="-1" data-t="lead">Founders &amp; leaders</button>
+        <button role="tab" id="t-hire" aria-selected="false" aria-controls="p-hire" tabindex="-1" data-t="hire">Recruiters</button>
       </div>
       <div class="card">
-        <div class="panel active" id="p-pm"><ul>
+        <div class="panel active" id="p-pm" role="tabpanel" aria-labelledby="t-pm" tabindex="0"><ul>
           <li><strong>Build one eval set</strong> for a feature you own this month — even 50 labelled examples change the conversation.</li>
           <li><strong>Learn the cost model:</strong> tokens, context windows, caching and model routing.</li>
           <li><strong>Prototype yourself</strong> with AI coding tools — PMs who can ship a working demo move faster than specs.</li>
           <li><strong>Map your data flows</strong> against DPDP before May 2027.</li>
         </ul></div>
-        <div class="panel" id="p-new"><ul>
-          <li><strong>Show, don't tell:</strong> publish two small AI products on GitHub with a written eval and a cost breakdown.</li>
+        <div class="panel" id="p-new" role="tabpanel" aria-labelledby="t-new" tabindex="0" hidden><ul>
+          <li><strong>Show, don't tell:</strong> publish two small AI products on GitHub with a written eval and a cost breakdown, then link them per skill in a <a href="/skills/#method">proof-of-skill matrix</a>.</li>
           <li><strong>Pick a Bharat problem</strong> — vernacular, voice or low-connectivity — and use an Indic model.</li>
           <li><strong>Learn the basics</strong> of RAG, agents, prompt design and evaluation; skip hype, keep notes.</li>
           <li><strong>Target GCCs and AI-first startups</strong> — both are hiring for AI product skills.</li>
         </ul></div>
-        <div class="panel" id="p-lead"><ul>
+        <div class="panel" id="p-lead" role="tabpanel" aria-labelledby="t-lead" tabindex="0" hidden><ul>
           <li><strong>Fund evaluation infrastructure</strong> as seriously as feature work — it is your quality moat.</li>
           <li><strong>Price for inference:</strong> make unit economics visible per workflow, per customer.</li>
           <li><strong>Use IndiaAI compute</strong> and Indic models where sovereignty, cost or language fit matter.</li>
           <li><strong>Assign an owner</strong> for AI governance — RBI, SEBI, MeitY and DPDP obligations overlap.</li>
         </ul></div>
-        <div class="panel" id="p-hire"><ul>
+        <div class="panel" id="p-hire" role="tabpanel" aria-labelledby="t-hire" tabindex="0" hidden><ul>
           <li><strong>Ask for evals, not buzzwords:</strong> how did the candidate define and measure "good"?</li>
           <li><strong>Probe trade-offs:</strong> quality vs latency vs cost vs risk, with numbers.</li>
-          <li><strong>Look for shipped artefacts</strong> — prototypes, agents, write-ups — over certificates alone.</li>
+          <li><strong>Look for shipped artefacts</strong> — prototypes, agents, write-ups — over certificates alone. <a href="/articles/proof-over-certificates-ai-pm-skills/">Why proof beats certificates →</a></li>
           <li><strong>Check regulatory fluency</strong> for BFSI, health and public-sector roles.</li>
         </ul></div>
       </div>
@@ -280,13 +296,25 @@ const schema = [
     </div>
   </section>
 <script is:inline>
-document.querySelectorAll('.tabs button').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-    b.setAttribute('aria-selected','true');
-    document.getElementById('p-'+b.dataset.t).classList.add('active');
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  function select(b,focus){
+    tabs.forEach(function(x){
+      var on=x===b; x.setAttribute('aria-selected',on?'true':'false'); x.tabIndex=on?0:-1;
+      var p=document.getElementById(x.getAttribute('aria-controls')); p.hidden=!on; p.classList.toggle('active',on);
+    });
+    if(focus) b.focus();
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){select(b,false)});
+    b.addEventListener('keydown',function(e){
+      var j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length;
+      else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
+      if(j!==null){e.preventDefault(); select(tabs[j],true);}
+    });
   });
-});
+})();
 </script>
 </Base>

@@ -32,6 +32,11 @@ const cards = {
     lines: ['Book an AI product', 'consultation with', 'Ian Pinto.'],
     foot: 'Strategy · RAG & agent evals · BFSI · Local AI · ainpm.in/consult',
   }),
+  'skills.png': card({
+    kicker: 'Proof of skill · Skills matrix',
+    lines: ['AI PM skills,', 'each with evidence', 'you can check.'],
+    foot: 'Mapped to O*NET and NACE · Demos · Evals · Code · ainpm.in/skills',
+  }),
   'sebi-rag.png': card({
     kicker: 'AI-native PM case study',
     lines: ['SEBI Circular RAG:', 'cited answers over', '1,490 SEBI circulars.'],
