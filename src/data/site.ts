@@ -11,8 +11,8 @@ export const SITE = {
   // PostHog Cloud (cookieless): paste the public Project API key (starts with phc_) and pick the
   // ingestion host for your region. Leave key empty to disable PostHog completely.
   posthog: {
-    key: '',
-    host: 'https://us.i.posthog.com', // EU projects: 'https://eu.i.posthog.com'
+    key: 'phc_wtTDGr82aun3Krej2qKsQWcn2adqhzDTNL9qsyksLRCy',
+    host: 'https://eu.i.posthog.com', // EU Cloud
     replaySampleRate: 1, // 0–1 share of page views to record (masked)
   },
   // Google Calendar appointment schedule (Google Workspace, ianpinto@ainpm.in)
