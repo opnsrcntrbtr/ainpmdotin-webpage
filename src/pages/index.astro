@@ -3,19 +3,23 @@ import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { faqSchema } from '../data/site';
 import ProjectCards from '../components/ProjectCards.astro';
+import BookCTA from '../components/BookCTA.astro';
+import { SKILLS } from '../data/skills';
+import { PROJECTS } from '../data/projects';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-03');
+const evidence = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
+const latest = articles.slice(0, 3);
 
 const faq = [
   { q: 'What is AI-native product management?', a: 'AI-native product management is the practice of building products where an AI model is the core of the experience rather than an add-on. The product manager specifies behaviour with evaluation sets, measures quality as a rate, manages inference cost per task and designs trust controls such as citations, abstention and consent from the start.' },
-  { q: 'What is AINPM.in?', a: 'AINPM.in is an independent guide to AI-native product management written from India by Ian Pinto, a Technical Product / Program Manager. It combines a field guide, a regulation tracker, articles and a live open-source case study, SEBI Circular RAG.' },
+  { q: 'What is AINPM.in?', a: 'AINPM.in is the site of Ian Pinto, a Technical Product / Program Manager in India. It brings together his open-source AI products, a field guide and articles on AI-native product management, a skills matrix with public evidence, and paid consultations.' },
   { q: 'What is SEBI Circular RAG?', a: 'SEBI Circular RAG is an open-source assistant that answers questions over 1,490 SEBI circulars. It cites every claim, flags superseded circulars, can answer as of a past date and refuses when evidence is missing. A live demo runs on Hugging Face and the code and dataset are public.' },
   { q: 'Which AI regulations apply to product teams in India?', a: 'India has no single AI Act. Product teams track MeitY\'s India AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules on labelling AI-generated content, RBI\'s FREE-AI framework and SEBI\'s forthcoming AI/ML guidelines.' },
   { q: 'How do I become an AI-native product manager?', a: 'Start by building a small evaluation set of about 50 real examples for a feature you own, prototype against it with AI coding tools, track cost and latency per task, and learn the regulation that applies to your sector. Publishing a working project with its evaluation results is stronger evidence than a certificate.' },
-  { q: 'What evidence proves AI product management skills?', a: 'Public artefacts someone else can check: a live demo, an evaluation log with metric floors, open code, a case study that includes weak results and verifiable credentials that name specific skills. Accredible\'s 2026 State of Credentialing research found credentials alone do not guarantee career outcomes and 44% of learners want clearer skill descriptions, so map each skill to a framework like O*NET or NACE and link the proof.' },
   { q: 'Is the content on AINPM.in legal or financial advice?', a: 'No. The content is general information for product managers. Regulatory summaries are for orientation only, and SEBI Circular RAG is an independent research demo that is not endorsed by SEBI. Always verify against primary sources.' },
 ];
 
@@ -49,179 +53,63 @@ const schema = [
 ---
 <Base
   title="AI-Native Product Management in India | AINPM.in"
-  description="A practical India-first guide to AI-native product management by Ian Pinto: six shifts, a regulation radar, a playbook and a live SEBI Circular RAG case study."
+  description="Ian Pinto builds and evaluates AI-native products from India and helps teams do the same: open-source work, a practical field guide, articles and consultations."
   schema={schema}
   updated={updated}
   sources={sources}
 >
-  <div class="wrap phero">
+  <div class="wrap hero7">
     <div>
-      <span class="pill-live">Featured MVP · Live on Hugging Face</span>
-      <h1><span class="kicker">AI-native product management, built from India</span>Ask SEBI circulars. Get <em>cited answers</em> — or an honest “not in the corpus”.</h1>
-      <p class="lede"><strong>SEBI Circular RAG</strong> is an open-source, AI-native product I built to answer questions over 1,490 SEBI circulars. It cites every claim, flags circulars that have been superseded, answers "as of" a past date, and refuses to guess when the evidence isn't there.</p>
+      <h1><span class="kicker">Ian Pinto · AI-native product management</span>Building AI products people can <em>trust</em>, from India</h1>
+      <p class="lede">I'm a Technical Product / Program Manager who designs, ships and evaluates AI-native products: retrieval assistants, privacy-first apps and local AI. I help product teams in India do the same.</p>
       <div class="cta">
-        <a class="btn primary" href="https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo" target="_blank" rel="noopener">Try the live demo ↗</a>
-        <a class="btn ghost" href="/sebi-rag/">Read the PM case study</a>
-      </div>
-      <div class="links-row">
-        <a href="https://github.com/opnsrcntrbtr/sebi-circular-rag" target="_blank" rel="noopener">GitHub repo ↗</a>
-        <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars" target="_blank" rel="noopener">Open dataset ↗</a>
-        <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index" target="_blank" rel="noopener">Prebuilt index ↗</a>
-        <a href="/consult/" data-goatcounter-click="cta-home-hero-book">Book a consultation →</a>
+        <a class="btn primary" href="/work/" data-goatcounter-click="cta-home-hero-work">See my work</a>
+        <a class="btn ghost" href="/consult/" data-goatcounter-click="cta-home-hero-book">Book a consultation</a>
       </div>
     </div>
-    <figure class="shot">
-      <div class="bar"><i></i><i></i><i></i><span>sebi-circular-rag · cited answer with supersession status</span></div>
-      <img src="https://raw.githubusercontent.com/opnsrcntrbtr/sebi-circular-rag/main/docs/assets/demo.webp" alt="SEBI Circular RAG interface showing numbered citations, in-force and superseded status for each circular, and the regulations each circular relies on" width="1512" height="806" decoding="async" fetchpriority="high">
-      <figcaption>Every citation shows whether the circular is in force or superseded, and by what.</figcaption>
-    </figure>
+    <div class="feature-card">
+      <figure class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>Featured · SEBI Circular RAG</span></div>
+        <img src="https://raw.githubusercontent.com/opnsrcntrbtr/sebi-circular-rag/main/docs/assets/demo.webp" alt="SEBI Circular RAG interface showing numbered citations, in-force and superseded status for each circular, and the regulations each circular relies on" width="1512" height="806" decoding="async" fetchpriority="high">
+        <figcaption>Cited answers over 1,490 SEBI circulars, with superseded circulars flagged.</figcaption>
+      </figure>
+      <a class="more-link" href="/sebi-rag/" style="margin-top:0">Learn more about SEBI Circular RAG</a>
+    </div>
   </div>
   <div class="wrap">
-    <div class="stats">
-      <div><b>1,490</b><span>SEBI circulars indexed</span></div>
-      <div><b>0.943</b><span>Recall@10 on 260 test queries</span></div>
-      <div><b>0.881</b><span>Citation recall</span></div>
-      <div><b>0.981</b><span>Abstention accuracy</span></div>
+    <div class="proofbar" aria-label="Proof points">
+      <div><b>{PROJECTS.length}</b><span>open-source AI products</span></div>
+      <div><b>0.981</b><span>abstention accuracy, SEBI RAG</span></div>
+      <div><b>1</b><span>DOI-registered research preprint</span></div>
+      <div><b>{evidence}</b><span>public evidence links for my skills</span></div>
     </div>
-    <p class="note">Metrics are from a full run on 15 Aug 2026 against the 260-query golden_v7 set (728-circular corpus at the time). A 15 Sep 2026 check on the 1,490-circular index still cleared every quality gate. Not legal advice.</p>
   </div>
 
-  <section id="what">
-    <div class="wrap what-grid">
-      <div class="section-head">
-        <span class="eyebrow">Start here</span>
-        <h2>What is AI-native product management?</h2>
-        <p class="answer"><strong>AI-native product management is the practice of building products where an AI model is the core of the experience, not an add-on.</strong> The spec becomes an evaluation set, quality is measured as a rate, every task has an inference cost, and trust controls such as citations, abstention and consent are designed in from the first sprint.</p>
-        <p class="muted">AINPM.in is my practical guide to doing this from India: what changes for PMs, the Indian AI and regulation landscape, a playbook, and a live product that applies it. <a href="/articles/what-is-ai-native-product-management/">Read the full explainer →</a></p>
-      </div>
-      <aside class="proof-card" aria-labelledby="proof-h">
-        <span class="eyebrow">New · Proof of skill</span>
-        <h3 id="proof-h">Proof over certificates</h3>
-        <p>Accredible’s 2026 State of Credentialing research says credentials alone don’t guarantee career outcomes. So every skill I claim links to evidence you can open.</p>
-        <ul>
-          <li><b>8</b><span>AI PM skills, mapped to O*NET and NACE</span></li>
-          <li><b>4</b><span>open-source products with demos, code or packages</span></li>
-          <li><b>44%</b><span>of learners want clearer skill descriptions (Accredible, 2026)</span></li>
-        </ul>
-        <div class="cta">
-          <a class="btn primary" href="/skills/" data-goatcounter-click="cta-home-skills">See the skills matrix</a>
-          <a class="btn ghost" href="/articles/proof-over-certificates-ai-pm-skills/">Read the analysis</a>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section id="shifts">
+  <section id="offer" style="border-top:0;padding-top:64px">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">01 · What changes</span>
-        <h2>What changes for a PM? Six shifts</h2>
-        <p class="muted">AI-native product management isn't adding a chatbot to a roadmap. It changes what a spec is, how quality is proven, and what a unit of work costs.</p>
+        <span class="eyebrow">What I do</span>
+        <h2>Build, advise and share</h2>
       </div>
       <div class="grid g3">
-        <article class="card shift"><span class="from">Static PRDs</span><span class="to">Evals are the spec</span><p>Acceptance criteria become test sets and graded rubrics. If you can't measure "good", you can't ship a probabilistic product.</p></article>
-        <article class="card shift"><span class="from">Features &amp; screens</span><span class="to">Agents &amp; workflows</span><p>Design the job to be done end-to-end — tools, memory, hand-offs and where a human approves — not just the UI.</p></article>
-        <article class="card shift"><span class="from">Fixed-cost software</span><span class="to">₹ per outcome</span><p>Every task has an inference bill. Model choice, context size and caching are product decisions with margin impact.</p></article>
-        <article class="card shift"><span class="from">Annual roadmaps</span><span class="to">Learning loops</span><p>Models improve monthly. Plan in short bets, instrument everything, and re-run evals whenever the model underneath changes.</p></article>
-        <article class="card shift"><span class="from">Compliance at the end</span><span class="to">Trust by design</span><p>Consent, labelling, audit trails and kill-switches belong in the first sprint — regulators in India now expect them.</p></article>
-        <article class="card shift"><span class="from">English-first UX</span><span class="to">Bharat-first UX</span><p>Voice, vernacular and low-bandwidth are defaults, not localisation tasks — Indic models make this practical today.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="india">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">02 · India lens</span>
-        <h2>Why is India a distinct place to build AI products?</h2>
-        <p class="muted">Sovereign compute, Indic foundation models, population-scale digital rails and the world's largest pool of capability centres — a combination no other market has.</p>
-      </div>
-      <div class="grid g4">
-        <article class="card"><span class="num">38,000<small>+ GPUs</small></span><h3>IndiaAI compute</h3><p>Subsidised national compute under the ₹10,372 crore IndiaAI Mission, with 20,000+ more GPUs announced in February 2026.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
-        <article class="card"><span class="num">22<small> languages</small></span><h3>Indic models</h3><p>BharatGen Param2 (17B) spans 22 Indian languages; Sarvam launched 30B and 105B models plus speech and vision at the AI Impact Summit.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
-        <article class="card"><span class="num">2,117<small> GCCs</small></span><h3>Capability centres</h3><p>2.36 million professionals in India's GCCs (FY2026) — increasingly owning global AI products, not just delivery.</p><a class="src" href="https://zinnov.com/centers-of-excellence/zinnov-nasscom-india-gcc-landscape-2026-report/">Source ↗</a></article>
-        <article class="card"><span class="num">DPI<small> rails</small></span><h3>Public infrastructure</h3><p>UPI, Aadhaar, DigiLocker, Account Aggregator and ONDC give AI agents identity, consent and payment rails to act on.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="radar">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">03 · Regulation radar</span>
-        <h2>Which AI rules must an Indian product manager track?</h2>
-        <p class="muted">India has chosen principles-based guidelines plus sector regulators over a single AI Act. That means your obligations depend on your domain — and several dates are close.</p>
-      </div>
-      <ol class="timeline">
-        <li><time>AUG 2025</time><h3>RBI FREE-AI framework</h3><p>Seven "sutras" for responsible AI in regulated finance — trust, people first, fairness, accountability, understandable by design, safety and resilience.</p></li>
-        <li><time>NOV 2025</time><h3>MeitY India AI Governance Guidelines</h3><p>Principles-based, techno-legal approach relying on existing law and sector regulators rather than a standalone AI statute.</p></li>
-        <li><time>14 NOV 2025</time><h3>DPDP Rules notified</h3><p>Data Protection Board provisions active; the rest of the Digital Personal Data Protection regime phases in.</p></li>
-        <li><time>20 FEB 2026</time><h3>IT Rules amendment on synthetic content</h3><p>AI-generated media must be prominently labelled; takedown windows cut to 3 hours (2 hours for deepfake intimate imagery).</p></li>
-        <li class="next"><time>SOON · ANNOUNCED AUG 2026</time><h3>SEBI AI/ML guidelines <span class="tag">Pending</span></h3><p>Still pending on 2 October 2026. SEBI's chairman has said guidelines will mandate human-in-the-loop, kill-switches and data governance for AI in securities markets.</p></li>
-        <li class="next"><time>13 NOV 2026</time><h3>DPDP consent managers go live <span class="tag">6 weeks</span></h3><p>Registered consent managers become operational — design your consent UX to interoperate.</p></li>
-        <li class="next"><time>13 MAY 2027</time><h3>DPDP full compliance <span class="tag">Deadline</span></h3><p>Consent, itemised notices, security safeguards, breach reporting and Significant Data Fiduciary duties apply; penalties up to ₹250 crore per instance.</p></li>
-      </ol>
-      <p class="muted" style="font-size:.85rem;margin-top:8px">This summary is for orientation only and is not legal advice. <a href="/articles/india-ai-regulation-for-product-managers/">Read the full regulation guide for product managers →</a></p>
-    </div>
-  </section>
-
-  <section id="playbook">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">04 · Playbook</span>
-        <h2>How do you take an AI product from problem to production?</h2>
-        <p class="muted">Eight steps I use to take an AI product from problem to production. <a href="/sebi-rag/">See them applied in the SEBI RAG case study →</a></p>
-      </div>
-      <div class="steps">
-        <div class="step"><div><h3>Frame the job, not the model</h3><p>Start from a user outcome and a baseline. Is AI 10× better here, or just novel?</p></div></div>
-        <div class="step"><div><h3><a href="/articles/evals-are-the-new-prd/">Write evals before prompts</a></h3><p>Golden datasets in the languages and dialects your users actually speak; rubric-graded, versioned, owned by the PM.</p></div></div>
-        <div class="step"><div><h3>Choose models by ₹ per task</h3><p>Compare frontier APIs, open-weight and Indic models on quality, latency, cost and data residency.</p></div></div>
-        <div class="step"><div><h3>Ground it in your data (RAG)</h3><p>Retrieval over trusted sources with citations — essential for BFSI, health and government use cases.</p></div></div>
-        <div class="step"><div><h3>Design agents with guardrails</h3><p>Scoped tools, approval gates, audit logs and a kill-switch. Human-in-the-loop where money or rights move.</p></div></div>
-        <div class="step"><div><h3>Consent &amp; privacy by design</h3><p>Purpose-limited data, itemised notices and consent-manager readiness for DPDP.</p></div></div>
-        <div class="step"><div><h3>Ship small, observe everything</h3><p>Trace every call, sample outputs for review, track cost and quality drift per cohort.</p></div></div>
-        <div class="step"><div><h3>Measure outcomes, then scale</h3><p>Task success, time saved and trust signals — not just DAUs. Re-run evals on every model change.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="who">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">05 · Start here</span>
-        <h2>Where should you begin?</h2>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Choose your role">
-        <button role="tab" id="t-pm" aria-selected="true" aria-controls="p-pm" tabindex="0" data-t="pm">Working PMs</button>
-        <button role="tab" id="t-new" aria-selected="false" aria-controls="p-new" tabindex="-1" data-t="new">Aspiring PMs</button>
-        <button role="tab" id="t-lead" aria-selected="false" aria-controls="p-lead" tabindex="-1" data-t="lead">Founders &amp; leaders</button>
-        <button role="tab" id="t-hire" aria-selected="false" aria-controls="p-hire" tabindex="-1" data-t="hire">Recruiters</button>
-      </div>
-      <div class="card">
-        <div class="panel active" id="p-pm" role="tabpanel" aria-labelledby="t-pm" tabindex="0"><ul>
-          <li><strong>Build one eval set</strong> for a feature you own this month — even 50 labelled examples change the conversation.</li>
-          <li><strong>Learn the cost model:</strong> tokens, context windows, caching and model routing.</li>
-          <li><strong>Prototype yourself</strong> with AI coding tools — PMs who can ship a working demo move faster than specs.</li>
-          <li><strong>Map your data flows</strong> against DPDP before May 2027.</li>
-        </ul></div>
-        <div class="panel" id="p-new" role="tabpanel" aria-labelledby="t-new" tabindex="0" hidden><ul>
-          <li><strong>Show, don't tell:</strong> publish two small AI products on GitHub with a written eval and a cost breakdown, then link them per skill in a <a href="/skills/#method">proof-of-skill matrix</a>.</li>
-          <li><strong>Pick a Bharat problem</strong> — vernacular, voice or low-connectivity — and use an Indic model.</li>
-          <li><strong>Learn the basics</strong> of RAG, agents, prompt design and evaluation; skip hype, keep notes.</li>
-          <li><strong>Target GCCs and AI-first startups</strong> — both are hiring for AI product skills.</li>
-        </ul></div>
-        <div class="panel" id="p-lead" role="tabpanel" aria-labelledby="t-lead" tabindex="0" hidden><ul>
-          <li><strong>Fund evaluation infrastructure</strong> as seriously as feature work — it is your quality moat.</li>
-          <li><strong>Price for inference:</strong> make unit economics visible per workflow, per customer.</li>
-          <li><strong>Use IndiaAI compute</strong> and Indic models where sovereignty, cost or language fit matter.</li>
-          <li><strong>Assign an owner</strong> for AI governance — RBI, SEBI, MeitY and DPDP obligations overlap.</li>
-        </ul></div>
-        <div class="panel" id="p-hire" role="tabpanel" aria-labelledby="t-hire" tabindex="0" hidden><ul>
-          <li><strong>Ask for evals, not buzzwords:</strong> how did the candidate define and measure "good"?</li>
-          <li><strong>Probe trade-offs:</strong> quality vs latency vs cost vs risk, with numbers.</li>
-          <li><strong>Look for shipped artefacts</strong> — prototypes, agents, write-ups — over certificates alone. <a href="/articles/proof-over-certificates-ai-pm-skills/">Why proof beats certificates →</a></li>
-          <li><strong>Check regulatory fluency</strong> for BFSI, health and public-sector roles.</li>
-        </ul></div>
+        <article class="card offer">
+          <span class="num">01 · Build</span>
+          <h3>Open-source AI products</h3>
+          <p>A SEBI regulation assistant, a zero-knowledge password manager, a passkey library with a preprint, and a local-AI study app for Mac. Each publishes its evaluation results.</p>
+          <a class="more-link" href="/work/">Learn more about my work</a>
+        </article>
+        <article class="card offer">
+          <span class="num">02 · Advise</span>
+          <h3>Consultations</h3>
+          <p>Paid 30-minute sessions on AI product strategy, RAG and agent evaluation, BFSI compliance-by-design, private local AI and AI PM careers.</p>
+          <a class="more-link" href="/consult/" data-goatcounter-click="cta-home-offer-book">Learn more about consulting</a>
+        </article>
+        <article class="card offer">
+          <span class="num">03 · Share</span>
+          <h3>Guide and articles</h3>
+          <p>A practical field guide, answer-first articles and a glossary for product managers building AI products in India.</p>
+          <a class="more-link" href="/guide/">Learn more in the field guide</a>
+        </article>
       </div>
     </div>
   </section>
@@ -229,43 +117,61 @@ const schema = [
   <section id="work">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Portfolio</span>
-        <h2>What else have I built?</h2>
-        <p class="muted">Privacy-first and AI-native products with their evidence and trade-offs. <a href="/work/">See the full portfolio →</a></p>
+        <span class="eyebrow">Featured work</span>
+        <h2>Products with numbers you can check</h2>
+        <p class="muted">Each card shows dated, measured results. Weak spots are shown in orange, not hidden.</p>
       </div>
-      <ProjectCards exclude="sebi-rag" />
+      <ProjectCards />
+      <a class="more-link" href="/work/">See the full portfolio</a>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="wrap what-grid">
+      <div class="section-head">
+        <span class="eyebrow">Start here</span>
+        <h2>What is AI-native product management?</h2>
+        <p class="answer"><strong>It is building products where an AI model is the core of the experience, not an add-on.</strong> The spec becomes an evaluation set, quality is measured as a rate, every task has a cost, and trust controls are designed in from the first sprint.</p>
+        <ul class="guide-points">
+          <li><span><a href="/guide/#shifts">Six shifts</a> in how a PM specifies, measures and ships</span></li>
+          <li><span><a href="/guide/#radar">India's AI rules</a> with dates: DPDP consent managers start 13 Nov 2026</span></li>
+          <li><span><a href="/guide/#playbook">An eight-step playbook</a> from problem to production</span></li>
+        </ul>
+        <a class="more-link" href="/guide/">Read the field guide</a>
+      </div>
+      <aside class="proof-card" aria-labelledby="proof-h">
+        <span class="eyebrow">Proof of skill</span>
+        <h3 id="proof-h">Every skill links to evidence</h3>
+        <p>Eight AI product skills, each tied to a live demo, code, evaluation results or a publication you can open.</p>
+        <a class="more-link" href="/skills/" data-goatcounter-click="cta-home-skills">Learn more in the skills matrix</a>
+      </aside>
     </div>
   </section>
 
   <section id="articles">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">06 · Articles</span>
+        <span class="eyebrow">Latest articles</span>
         <h2>Guides for AI-native product managers</h2>
-        <p class="muted">Answer-first guides with sources, written from hands-on work. <a href="/articles/">All articles</a> · <a href="/glossary/">Glossary</a></p>
       </div>
       <div class="grid g3">
-        {articles.map((a) => (
+        {latest.map((a) => (
           <a class="card" href={`/articles/${a.id}/`}>
             <span class="meta">{a.data.tags[0]} · {a.data.readingMinutes} min read</span>
             <h3>{a.data.title}</h3>
             <p>{a.data.description}</p>
-            <span class="more">Read the guide →</span>
+            <span class="more">Read the article →</span>
           </a>
         ))}
       </div>
-      <div class="grid g3 soon" style="margin-top:16px">
-        <article class="card"><h3>Eval templates</h3><p>Reusable rubrics and golden-set formats for multilingual AI features.</p></article>
-        <article class="card"><h3>Agentic PRD</h3><p>A spec template for agents: tools, autonomy levels, approvals and failure modes.</p></article>
-        <article class="card"><h3>₹-per-task calculator</h3><p>Estimate inference cost across models before you commit to an architecture.</p></article>
-      </div>
+      <a class="more-link" href="/articles/">All articles</a>
     </div>
   </section>
 
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">07 · FAQ</span>
+        <span class="eyebrow">FAQ</span>
         <h2>Frequently asked questions</h2>
       </div>
       <div class="faq">
@@ -276,45 +182,7 @@ const schema = [
           </details>
         ))}
       </div>
+      <BookCTA id="home" heading="Building an AI-native product?" text="Book a 30-minute consultation on strategy, evaluation, compliance-by-design, private local AI or your AI PM career." />
     </div>
   </section>
-
-  <section id="about">
-    <div class="wrap about">
-      <div class="avatar" aria-hidden="true">IP</div>
-      <div>
-        <span class="eyebrow">About the author</span>
-        <h2>Ian Pinto</h2>
-        <p class="muted" style="margin-top:12px;max-width:65ch">Technical Product / Program Manager working on mutual fund AMC products and platforms, cloud-native systems, RAG and agentic AI. I started AINPM.in to share what I'm learning about building AI-native products in India, openly and iteratively.</p>
-        <div class="cta" style="margin-top:20px">
-          <a class="btn primary" href="/consult/" data-goatcounter-click="cta-home-about-book">Book a consultation</a>
-          <a class="btn ghost" href="/about/">More about me</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/ian1980/" rel="me noopener" target="_blank">LinkedIn ↗</a>
-          <a class="btn ghost" href="https://github.com/opnsrcntrbtr" rel="me noopener" target="_blank">GitHub ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-<script is:inline>
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]'));
-  function select(b,focus){
-    tabs.forEach(function(x){
-      var on=x===b; x.setAttribute('aria-selected',on?'true':'false'); x.tabIndex=on?0:-1;
-      var p=document.getElementById(x.getAttribute('aria-controls')); p.hidden=!on; p.classList.toggle('active',on);
-    });
-    if(focus) b.focus();
-  }
-  tabs.forEach(function(b,i){
-    b.addEventListener('click',function(){select(b,false)});
-    b.addEventListener('keydown',function(e){
-      var j=null;
-      if(e.key==='ArrowRight') j=(i+1)%tabs.length;
-      else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
-      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
-      if(j!==null){e.preventDefault(); select(tabs[j],true);}
-    });
-  });
-})();
-</script>
 </Base>

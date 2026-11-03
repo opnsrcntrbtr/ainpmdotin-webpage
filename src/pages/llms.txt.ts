@@ -24,7 +24,8 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 
 ## Key pages
 
-- [Home: AI-native product management in India](https://ainpm.in/): Field guide, regulation radar, playbook and FAQ
+- [Home: AI-native product management in India](https://ainpm.in/): Overview of Ian Pinto's work, consulting, guide and articles
+- [Field guide](https://ainpm.in/guide/): Six shifts for PMs, India AI landscape, regulation radar with dates, eight-step playbook, where to start by role
 - [SEBI Circular RAG case study](https://ainpm.in/sebi-rag/): Problem, trust principles, pipeline, evaluation results, decisions, live demo, open data
 - [Articles](https://ainpm.in/articles/): Answer-first guides
 - [Glossary](https://ainpm.in/glossary/): ${GLOSSARY.length} defined terms

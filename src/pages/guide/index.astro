@@ -1,0 +1,192 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookCTA from '../../components/BookCTA.astro';
+import { breadcrumb, faqSchema } from '../../data/site';
+
+const updated = new Date('2026-11-03');
+const faq = [
+  { q: 'What changes for a product manager in AI-native products?', a: 'Six things: evaluation sets replace static PRDs, workflows and agents replace screens, every task has an inference cost, roadmaps become short learning loops, trust controls move to the first sprint, and design becomes voice-, vernacular- and low-bandwidth-first in India.' },
+  { q: 'Which AI rules must product teams in India track?', a: 'India has no single AI Act. Teams track MeitY\'s India AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules on labelling AI-generated content, RBI\'s FREE-AI framework and SEBI\'s forthcoming AI/ML guidelines.' },
+  { q: 'How do you take an AI product from problem to production?', a: 'Frame the user job, write evaluations before prompts, choose models by cost per task, ground answers in your own data, design agents with guardrails, build consent and privacy in, ship small while observing everything, and scale only when outcomes improve.' },
+];
+const sources = [
+  { href: 'https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026', label: 'India AI Impact Summit 2026 — overview' },
+  { href: 'https://www.kapyn.app/blog/indiaai-mission-explained-2026', label: 'IndiaAI Mission explained (outlay, GPUs)' },
+  { href: 'https://zinnov.com/centers-of-excellence/zinnov-nasscom-india-gcc-landscape-2026-report/', label: 'Zinnov–nasscom India GCC Landscape Report 2026' },
+  { href: 'https://rbidocs.rbi.org.in/rdocs/PublicationReport/Pdfs/FREEAIR130820250A24FF2D4578453F824C72ED9F5D5851.PDF', label: 'RBI FREE-AI Committee Report (Aug 2025)' },
+  { href: 'https://www.lexology.com/library/detail.aspx?g=ffc0c58c-3727-4472-9914-5fa6a33ffffd', label: 'MeitY AI Governance Guidelines — analysis' },
+  { href: 'https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines', label: 'DPDP Act & Rules 2025 phased timeline' },
+  { href: 'https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026', label: 'MeitY IT Amendment Rules 2026 (synthetic content)' },
+  { href: 'https://www.indiasnews.net/news/279251495/sebi-to-soon-issue-aiml-guidelines-for-capital-markets-mandate-human-oversight-kill-switch-controls-chairman-pandey', label: 'SEBI chairman on forthcoming AI/ML guidelines (Aug 2026)' },
+];
+const schema = [
+  { '@type': 'TechArticle', '@id': 'https://ainpm.in/guide/#article', headline: 'A field guide to AI-native product management in India', url: 'https://ainpm.in/guide/', datePublished: '2026-09-23', dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, isPartOf: { '@id': 'https://ainpm.in/#website' }, inLanguage: 'en-IN' },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Field guide', path: '/guide/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="AI-Native PM Field Guide for India | AINPM.in"
+  description="Field guide to AI-native product management in India: six shifts for PMs, the India AI landscape, a regulation radar with dates, an eight-step playbook and role tips."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={new Date('2026-09-23')}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Field guide</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Field guide · Updated 3 Nov 2026</span>
+    <h1>A field guide to AI-native product management in India</h1>
+    <p class="answer"><strong>AI-native product management is building products where an AI model is the core of the experience, not an add-on.</strong> This guide covers what changes for product managers, why India is different, the AI rules to track, a playbook from problem to production, and where to start for your role.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#shifts">Six shifts</a></li>
+      <li><a href="#india">India lens</a></li>
+      <li><a href="#radar">Regulation radar</a></li>
+      <li><a href="#playbook">Playbook</a></li>
+      <li><a href="#who">Where to start</a></li>
+    </ul>
+  </div>
+
+  <section id="shifts">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · What changes</span>
+        <h2>What changes for a PM? Six shifts</h2>
+        <p class="muted">AI-native product management isn't adding a chatbot to a roadmap. It changes what a spec is, how quality is proven, and what a unit of work costs.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card shift"><span class="from">Static PRDs</span><span class="to">Evals are the spec</span><p>Acceptance criteria become test sets and graded rubrics. If you can't measure "good", you can't ship a probabilistic product.</p></article>
+        <article class="card shift"><span class="from">Features &amp; screens</span><span class="to">Agents &amp; workflows</span><p>Design the job to be done end-to-end — tools, memory, hand-offs and where a human approves — not just the UI.</p></article>
+        <article class="card shift"><span class="from">Fixed-cost software</span><span class="to">₹ per outcome</span><p>Every task has an inference bill. Model choice, context size and caching are product decisions with margin impact.</p></article>
+        <article class="card shift"><span class="from">Annual roadmaps</span><span class="to">Learning loops</span><p>Models improve monthly. Plan in short bets, instrument everything, and re-run evals whenever the model underneath changes.</p></article>
+        <article class="card shift"><span class="from">Compliance at the end</span><span class="to">Trust by design</span><p>Consent, labelling, audit trails and kill-switches belong in the first sprint — regulators in India now expect them.</p></article>
+        <article class="card shift"><span class="from">English-first UX</span><span class="to">Bharat-first UX</span><p>Voice, vernacular and low-bandwidth are defaults, not localisation tasks — Indic models make this practical today.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="india">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · India lens</span>
+        <h2>Why is India a distinct place to build AI products?</h2>
+        <p class="muted">Sovereign compute, Indic foundation models, population-scale digital rails and the world's largest pool of capability centres — a combination no other market has.</p>
+      </div>
+      <div class="grid g4">
+        <article class="card"><span class="num">38,000<small>+ GPUs</small></span><h3>IndiaAI compute</h3><p>Subsidised national compute under the ₹10,372 crore IndiaAI Mission, with 20,000+ more GPUs announced in February 2026.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
+        <article class="card"><span class="num">22<small> languages</small></span><h3>Indic models</h3><p>BharatGen Param2 (17B) spans 22 Indian languages; Sarvam launched 30B and 105B models plus speech and vision at the AI Impact Summit.</p><a class="src" href="https://en.wikipedia.org/wiki/India_AI_Impact_Summit_2026">Source ↗</a></article>
+        <article class="card"><span class="num">2,117<small> GCCs</small></span><h3>Capability centres</h3><p>2.36 million professionals in India's GCCs (FY2026) — increasingly owning global AI products, not just delivery.</p><a class="src" href="https://zinnov.com/centers-of-excellence/zinnov-nasscom-india-gcc-landscape-2026-report/">Source ↗</a></article>
+        <article class="card"><span class="num">DPI<small> rails</small></span><h3>Public infrastructure</h3><p>UPI, Aadhaar, DigiLocker, Account Aggregator and ONDC give AI agents identity, consent and payment rails to act on.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="radar">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Regulation radar</span>
+        <h2>Which AI rules must an Indian product manager track?</h2>
+        <p class="muted">India has chosen principles-based guidelines plus sector regulators over a single AI Act. That means your obligations depend on your domain — and several dates are close.</p>
+      </div>
+      <ol class="timeline">
+        <li><time>AUG 2025</time><h3>RBI FREE-AI framework</h3><p>Seven "sutras" for responsible AI in regulated finance — trust, people first, fairness, accountability, understandable by design, safety and resilience.</p></li>
+        <li><time>NOV 2025</time><h3>MeitY India AI Governance Guidelines</h3><p>Principles-based, techno-legal approach relying on existing law and sector regulators rather than a standalone AI statute.</p></li>
+        <li><time>14 NOV 2025</time><h3>DPDP Rules notified</h3><p>Data Protection Board provisions active; the rest of the Digital Personal Data Protection regime phases in.</p></li>
+        <li><time>20 FEB 2026</time><h3>IT Rules amendment on synthetic content</h3><p>AI-generated media must be prominently labelled; takedown windows cut to 3 hours (2 hours for deepfake intimate imagery).</p></li>
+        <li class="next"><time>SOON · ANNOUNCED AUG 2026</time><h3>SEBI AI/ML guidelines <span class="tag">Pending</span></h3><p>Still pending on 2 October 2026. SEBI's chairman has said guidelines will mandate human-in-the-loop, kill-switches and data governance for AI in securities markets.</p></li>
+        <li class="next"><time>13 NOV 2026</time><h3>DPDP consent managers go live <span class="tag">6 weeks</span></h3><p>Registered consent managers become operational — design your consent UX to interoperate.</p></li>
+        <li class="next"><time>13 MAY 2027</time><h3>DPDP full compliance <span class="tag">Deadline</span></h3><p>Consent, itemised notices, security safeguards, breach reporting and Significant Data Fiduciary duties apply; penalties up to ₹250 crore per instance.</p></li>
+      </ol>
+      <p class="muted" style="font-size:.85rem;margin-top:8px">This summary is for orientation only and is not legal advice. <a href="/articles/india-ai-regulation-for-product-managers/" class="more-link">Read the full regulation guide</a></p>
+    </div>
+  </section>
+
+  <section id="playbook">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Playbook</span>
+        <h2>How do you take an AI product from problem to production?</h2>
+        <p class="muted">Eight steps I use to take an AI product from problem to production. <a href="/sebi-rag/">See them applied in the SEBI RAG case study →</a></p>
+      </div>
+      <div class="steps">
+        <div class="step"><div><h3>Frame the job, not the model</h3><p>Start from a user outcome and a baseline. Is AI 10× better here, or just novel?</p></div></div>
+        <div class="step"><div><h3><a href="/articles/evals-are-the-new-prd/">Write evals before prompts</a></h3><p>Golden datasets in the languages and dialects your users actually speak; rubric-graded, versioned, owned by the PM.</p></div></div>
+        <div class="step"><div><h3>Choose models by ₹ per task</h3><p>Compare frontier APIs, open-weight and Indic models on quality, latency, cost and data residency.</p></div></div>
+        <div class="step"><div><h3>Ground it in your data (RAG)</h3><p>Retrieval over trusted sources with citations — essential for BFSI, health and government use cases.</p></div></div>
+        <div class="step"><div><h3>Design agents with guardrails</h3><p>Scoped tools, approval gates, audit logs and a kill-switch. Human-in-the-loop where money or rights move.</p></div></div>
+        <div class="step"><div><h3>Consent &amp; privacy by design</h3><p>Purpose-limited data, itemised notices and consent-manager readiness for DPDP.</p></div></div>
+        <div class="step"><div><h3>Ship small, observe everything</h3><p>Trace every call, sample outputs for review, track cost and quality drift per cohort.</p></div></div>
+        <div class="step"><div><h3>Measure outcomes, then scale</h3><p>Task success, time saved and trust signals — not just DAUs. Re-run evals on every model change.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · Start here</span>
+        <h2>Where should you begin?</h2>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Choose your role">
+        <button role="tab" id="t-pm" aria-selected="true" aria-controls="p-pm" tabindex="0" data-t="pm">Working PMs</button>
+        <button role="tab" id="t-new" aria-selected="false" aria-controls="p-new" tabindex="-1" data-t="new">Aspiring PMs</button>
+        <button role="tab" id="t-lead" aria-selected="false" aria-controls="p-lead" tabindex="-1" data-t="lead">Founders &amp; leaders</button>
+        <button role="tab" id="t-hire" aria-selected="false" aria-controls="p-hire" tabindex="-1" data-t="hire">Recruiters</button>
+      </div>
+      <div class="card">
+        <div class="panel active" id="p-pm" role="tabpanel" aria-labelledby="t-pm" tabindex="0"><ul>
+          <li><strong>Build one eval set</strong> for a feature you own this month — even 50 labelled examples change the conversation.</li>
+          <li><strong>Learn the cost model:</strong> tokens, context windows, caching and model routing.</li>
+          <li><strong>Prototype yourself</strong> with AI coding tools — PMs who can ship a working demo move faster than specs.</li>
+          <li><strong>Map your data flows</strong> against DPDP before May 2027.</li>
+        </ul></div>
+        <div class="panel" id="p-new" role="tabpanel" aria-labelledby="t-new" tabindex="0" hidden><ul>
+          <li><strong>Show, don't tell:</strong> publish two small AI products on GitHub with a written eval and a cost breakdown, then link them per skill in a <a href="/skills/#method">proof-of-skill matrix</a>.</li>
+          <li><strong>Pick a Bharat problem</strong> — vernacular, voice or low-connectivity — and use an Indic model.</li>
+          <li><strong>Learn the basics</strong> of RAG, agents, prompt design and evaluation; skip hype, keep notes.</li>
+          <li><strong>Target GCCs and AI-first startups</strong> — both are hiring for AI product skills.</li>
+        </ul></div>
+        <div class="panel" id="p-lead" role="tabpanel" aria-labelledby="t-lead" tabindex="0" hidden><ul>
+          <li><strong>Fund evaluation infrastructure</strong> as seriously as feature work — it is your quality moat.</li>
+          <li><strong>Price for inference:</strong> make unit economics visible per workflow, per customer.</li>
+          <li><strong>Use IndiaAI compute</strong> and Indic models where sovereignty, cost or language fit matter.</li>
+          <li><strong>Assign an owner</strong> for AI governance — RBI, SEBI, MeitY and DPDP obligations overlap.</li>
+        </ul></div>
+        <div class="panel" id="p-hire" role="tabpanel" aria-labelledby="t-hire" tabindex="0" hidden><ul>
+          <li><strong>Ask for evals, not buzzwords:</strong> how did the candidate define and measure "good"?</li>
+          <li><strong>Probe trade-offs:</strong> quality vs latency vs cost vs risk, with numbers.</li>
+          <li><strong>Look for shipped artefacts</strong> — prototypes, agents, write-ups — over certificates alone. <a href="/articles/proof-over-certificates-ai-pm-skills/">Why proof beats certificates →</a></li>
+          <li><strong>Check regulatory fluency</strong> for BFSI, health and public-sector roles.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <BookCTA id="guide" heading="Want help applying this to your product?" text="Book a 30-minute consultation on AI product strategy, evaluation, compliance-by-design or your AI PM career." />
+    </div>
+  </section>
+<script is:inline>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  function select(b,focus){
+    tabs.forEach(function(x){
+      var on=x===b; x.setAttribute('aria-selected',on?'true':'false'); x.tabIndex=on?0:-1;
+      var p=document.getElementById(x.getAttribute('aria-controls')); p.hidden=!on; p.classList.toggle('active',on);
+    });
+    if(focus) b.focus();
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){select(b,false)});
+    b.addEventListener('keydown',function(e){
+      var j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length;
+      else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
+      if(j!==null){e.preventDefault(); select(tabs[j],true);}
+    });
+  });
+})();
+</script>
+</Base>

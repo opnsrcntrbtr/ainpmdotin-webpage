@@ -5,7 +5,7 @@ export const SITE = {
   url: 'https://ainpm.in',
   tagline: 'AI-native product management, built from India',
   description:
-    'AINPM.in is a practical, India-first guide to AI-native product management by Ian Pinto, with a live open-source case study: SEBI Circular RAG.',
+    'AINPM.in is Ian Pinto\'s home for AI-native product management in India: open-source products, a practical field guide, articles and consultations.',
   locale: 'en-IN',
   goatcounter: 'https://ainpmdotin.goatcounter.com',
   // PostHog Cloud (cookieless): paste the public Project API key (starts with phc_) and pick the
@@ -50,10 +50,9 @@ export const AUTHOR = {
 export const NAV = [
   { href: '/work/', label: 'Work' },
   { href: '/skills/', label: 'Skills' },
+  { href: '/guide/', label: 'Guide' },
   { href: '/articles/', label: 'Articles' },
   { href: '/glossary/', label: 'Glossary' },
-  { href: '/#playbook', label: 'Playbook' },
-  { href: '/#radar', label: 'Regulation' },
   { href: '/about/', label: 'About' },
   { href: '/consult/', label: 'Book a call', cta: true },
 ];

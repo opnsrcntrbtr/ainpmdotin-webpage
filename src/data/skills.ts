@@ -74,7 +74,7 @@ export const SKILLS: Skill[] = [
     nace: 'Professionalism',
     evidence: [
       { label: 'India AI regulation for PMs', href: '/articles/india-ai-regulation-for-product-managers/', kind: 'Publication' },
-      { label: 'Regulation radar', href: '/#radar', kind: 'Publication' },
+      { label: 'Regulation radar', href: '/guide/#radar', kind: 'Publication' },
       { label: 'SEBI RAG trust principles', href: '/sebi-rag/', kind: 'Case study' },
     ],
   },
@@ -113,7 +113,7 @@ export const SKILLS: Skill[] = [
     nace: 'Leadership',
     evidence: [
       { label: 'Portfolio', href: '/work/', kind: 'Case study' },
-      { label: 'Eight-step playbook', href: '/#playbook', kind: 'Publication' },
+      { label: 'Eight-step playbook', href: '/guide/#playbook', kind: 'Publication' },
       { label: 'What is AI-native PM?', href: '/articles/what-is-ai-native-product-management/', kind: 'Publication' },
     ],
   },

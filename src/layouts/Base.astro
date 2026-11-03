@@ -1,6 +1,8 @@
 ---
 import { SITE, AUTHOR, NAV, personSchema, websiteSchema, fmtDate } from '../data/site';
 import Analytics from '../components/Analytics.astro';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/source-serif-4';
 
 interface Props {
   title: string;
@@ -63,16 +65,12 @@ const path = Astro.url.pathname;
 <meta name="twitter:title" content={title}>
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={image}>
-<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbfaf8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="AINPM.in articles" href="/rss.xml">
 <link rel="sitemap" href="/sitemap-index.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script is:inline>try{var t=localStorage.getItem('ainpm-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <script type="application/ld+json" set:html={jsonLd}></script>
@@ -110,6 +108,7 @@ const path = Astro.url.pathname;
       <li><a href="/skills/">Skills &amp; evidence</a></li>
       <li><a href="/sebi-rag/">SEBI RAG case study</a></li>
       <li><a href="/articles/">Articles</a></li>
+      <li><a href="/guide/">Field guide</a></li>
       <li><a href="/glossary/">Glossary</a></li>
       <li><a href="/about/">About Ian Pinto</a></li>
       <li><a href="/consult/">Book a consultation</a></li>
@@ -142,7 +141,7 @@ const path = Astro.url.pathname;
 <script is:inline>
 (function(){
   var root=document.documentElement, btn=document.getElementById('themeBtn');
-  function cur(){return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  function cur(){return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';}
   function label(){if(btn) btn.setAttribute('aria-label', cur()==='dark'?'Switch to light theme':'Switch to dark theme');}
   label();
   if(btn) btn.addEventListener('click',function(){

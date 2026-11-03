@@ -4,12 +4,6 @@
   --shadow:0 1px 2px rgba(28,25,23,.05),0 8px 24px rgba(28,25,23,.06);
   --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
-    --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
-  }
-}
 :root[data-theme="dark"]{
   --bg:#12110f; --surface:#1b1a17; --surface-2:#23211d; --ink:#f5f1ea; --ink-2:#b5ada2; --line:#35312b;
   --saffron:#f0a04b; --teal:#4fd1c0; --accent-soft:#2a2016; --teal-soft:#15282a; --shadow:none;
@@ -233,7 +227,6 @@ a.card h3{color:var(--ink)}
 
 /* ---- a11y fixes from design review (2 Oct 2026) ---- */
 :root{--on-teal:#ffffff}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--on-teal:#12110f}}
 :root[data-theme="dark"]{--on-teal:#12110f}
 .tabs button[aria-selected="true"],.btn.primary:hover{color:var(--on-teal)}
 .md table{display:table;width:100%;min-width:0;border-collapse:separate;border-spacing:0;overflow:hidden}
@@ -285,7 +278,6 @@ p,li,dd{text-wrap:pretty}
 .theme-btn{display:grid;place-items:center;padding:0}
 .theme-btn svg{display:block}
 .theme-btn .i-sun{display:none}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-btn .i-sun{display:block}:root:not([data-theme="light"]) .theme-btn .i-moon{display:none}}
 :root[data-theme="dark"] .theme-btn .i-sun{display:block}
 :root[data-theme="dark"] .theme-btn .i-moon{display:none}
 .theme-btn:hover{border-color:var(--teal);color:var(--teal)}
@@ -353,11 +345,6 @@ abbr[title]{text-decoration:underline dotted;text-underline-offset:3px;cursor:he
   --seq-ink-1:#0c2e2b;--seq-ink-2:#0c2e2b;--seq-ink-3:#ffffff;--seq-ink-4:#ffffff;
   --track:#ece6dc;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --seq-1:#1f5f58;--seq-2:#277a70;--seq-3:#3fae9f;--seq-4:#6fd9c9;
-  --seq-ink-1:#f5f1ea;--seq-ink-2:#ffffff;--seq-ink-3:#0c1f1d;--seq-ink-4:#0c1f1d;
-  --track:#2c2a25;
-}}
 :root[data-theme="dark"]{
   --seq-1:#1f5f58;--seq-2:#277a70;--seq-3:#3fae9f;--seq-4:#6fd9c9;
   --seq-ink-1:#f5f1ea;--seq-ink-2:#ffffff;--seq-ink-3:#0c1f1d;--seq-ink-4:#0c1f1d;
@@ -466,3 +453,90 @@ details.skill-map dl{margin:10px 0 0;display:grid;gap:8px}
 .hm-c{width:10.5%}
 .hm tbody th,.hm thead th:first-child,.hm tfoot th{position:sticky;left:0;z-index:1;background:var(--surface)}
 @media(max-width:700px){.hm tbody th{white-space:normal;min-width:120px;max-width:140px;font-size:.82rem;line-height:1.25}.heatmap,.spm{padding:16px 14px}.spm svg{min-width:680px}}
+
+/* ======================================================================
+   v7 — professional typography and light-first theme (3 Nov 2026)
+   Source Serif 4 (headings) + Inter (UI/body), self-hosted via Fontsource.
+   Light is the default for everyone; dark only when the visitor picks it.
+   ====================================================================== */
+:root{
+  --bg:#fbfaf8; --surface:#ffffff; --surface-2:#f4f2ee; --ink:#1c1917; --ink-2:#55514c; --line:#e6e2db;
+  --teal:#0f766e; --teal-ink:#0b5a54; --saffron:#9a4d06; --teal-soft:#e8f3f1; --accent-soft:#fbf0e4;
+  --shadow:0 1px 2px rgba(28,25,23,.04),0 4px 14px rgba(28,25,23,.05);
+  --serif:"Source Serif 4 Variable","Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Inter Variable","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --label:600 .72rem/1.3 var(--sans);
+}
+:root[data-theme="dark"]{--teal-ink:#7fe0d2}
+body{font:400 17px/1.7 var(--sans);font-feature-settings:"cv11","ss01";text-rendering:optimizeLegibility}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;font-optical-sizing:auto}
+h1{font-size:clamp(2.15rem,4.4vw,3.3rem);line-height:1.1}
+h2{font-size:clamp(1.55rem,2.6vw,2.05rem);line-height:1.2}
+h3{font-size:1.14rem;line-height:1.3}
+.phero h1,.hero h1,.page-head h1,.article h1{font-size:clamp(2.15rem,4.4vw,3.3rem);max-width:20ch}
+.phero h1 em,.hero h1 em{background:none;-webkit-text-fill-color:currentColor;color:var(--teal)}
+.lede,.phero .lede{font-size:1.12rem;line-height:1.65;color:var(--ink-2)}
+.answer{font-size:1.08rem;line-height:1.7}
+.md p,.md li,.page-head p,.section-head p{max-width:72ch}
+/* labels: one consistent sans style instead of mixed mono */
+.eyebrow,.kicker,.meta,.card .meta,.pcard .meta,.svc .card .for,.status,.tag,.badge,.pill-live,.stamp,
+.timeline time,.stats.research small,.sc-head span,.hm thead th,th,.crumb,.tldr strong,.hm-legend,
+.spm-node .spm-sub,.skill-map dt,details.skill-map summary,.ev-kind{
+  font:var(--label);letter-spacing:.06em;text-transform:uppercase}
+.eyebrow{color:var(--teal);margin-bottom:12px}
+.kicker{color:var(--saffron);margin-bottom:12px}
+.crumb{text-transform:none;letter-spacing:0;font-weight:500;font-size:.85rem}
+.pill-live{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);padding:6px 12px}
+.status{background:var(--surface-2);color:var(--ink-2)}
+/* buttons */
+.btn{border-radius:8px;padding:11px 18px;font-weight:600;font-size:.95rem;line-height:1.2}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.primary:hover{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0c1f1d}
+:root[data-theme="dark"] .btn.primary:hover{color:#0c1f1d}
+.btn.ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+/* surfaces */
+.card,.pcard,.scorecard,.heatmap,.spm,.tbl-wrap,.faq details,.glance div,.stats,.proof-card{border-radius:12px;box-shadow:var(--shadow)}
+.card{padding:22px 24px}
+.card p{font-size:.96rem;line-height:1.6}
+section{padding:72px 0}
+.section-head{margin-bottom:32px;max-width:64ch}
+.section-head .muted{font-size:1.02rem}
+.stats b,.glance b{font-family:var(--serif);font-weight:600}
+.nav .wrap{height:64px}
+.brand{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+.nav ul a{font-size:.93rem;font-weight:500;color:var(--ink-2)}
+.nav ul a:hover{color:var(--ink)}
+.nav ul a[aria-current="page"]{color:var(--ink)}
+a:hover{color:var(--teal-ink)}
+/* "Learn more" links */
+.more-link{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.95rem;color:var(--teal);text-decoration:none;margin-top:14px}
+.more-link::after{content:"→";transition:transform .15s}
+.more-link:hover{color:var(--teal-ink);text-decoration:underline}
+.more-link:hover::after{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.more-link::after{transition:none}.more-link:hover::after{transform:none}}
+/* home v7 */
+.hero7{display:grid;gap:40px;align-items:center;padding-top:64px;padding-bottom:40px}
+@media(min-width:980px){.hero7{grid-template-columns:1.1fr .9fr;padding-top:88px}}
+.hero7 .lede{margin:18px 0 26px;max-width:56ch}
+.proofbar{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px}
+@media(min-width:760px){.proofbar{grid-template-columns:repeat(4,1fr)}}
+.proofbar div{padding:18px 16px 18px 0}
+.proofbar b{display:block;font:600 1.7rem/1.1 var(--serif);color:var(--ink)}
+.proofbar span{display:block;font-size:.86rem;color:var(--ink-2);margin-top:4px}
+.offer{display:flex;flex-direction:column}
+.offer .num{font:var(--label);letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:block}
+.offer .more-link{margin-top:auto;padding-top:14px}
+.feature-card{display:flex;flex-direction:column;gap:14px}
+.feature-card .shot{box-shadow:var(--shadow)}
+.guide-points{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.guide-points li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.guide-points li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--teal);margin-top:9px;justify-self:center}
+.guide-points a{font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.toc a{display:inline-block;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:.88rem;font-weight:500;color:var(--ink);text-decoration:none}
+.toc a:hover{border-color:var(--teal);color:var(--teal)}
+.hero7 h1 em,.phero h1 em{font-style:normal;color:var(--teal);background:none;-webkit-text-fill-color:currentColor}
+.hero7 h1{font-size:clamp(2.3rem,4.8vw,3.6rem);letter-spacing:-.02em;max-width:18ch}
+p .more-link{margin-top:0;font-size:inherit}
