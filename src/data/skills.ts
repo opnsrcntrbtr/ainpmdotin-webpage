@@ -159,7 +159,7 @@ export const CREDENTIALS: Credential[] = [
   { name: 'Project Management Professional (PMP)', issuer: 'Project Management Institute', category: 'certification', skills: ['program-delivery'] },
   { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', category: 'certification', skills: ['program-delivery'] },
   { name: 'AI Product Management', issuer: 'IIT Kharagpur with upGrad', category: 'certificate', skills: ['product-strategy', 'ai-evaluation'] },
-  { name: 'AI Product Management', issuer: 'Indian School of Business (ISB)', category: 'certificate', skills: ['product-strategy'] },
+  { name: 'Product Management', issuer: 'Indian School of Business (ISB)', category: 'certificate', skills: ['product-strategy'] },
   { name: 'Certified AI and cloud-native engineering', category: 'certificate', skills: ['rag-product', 'local-ai'] },
 ];
 

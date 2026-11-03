@@ -61,7 +61,7 @@ Learners also said what they want next to a credential: career paths, job titles
 
 The research points the same way from the issuer side. When the share of issuers prioritising proof of value doubles in a year, the market is saying that a credential's name is no longer enough; people want to see what it leads to. For AI roles, where tools change every few months, that gap is wider still.
 
-This is not an argument against learning programmes. I hold AI product management certificates from IIT Kharagpur (with upGrad) and ISB, and they gave me structure. The argument is about **what you show next to them**.
+This is not an argument against learning programmes. I hold an AI product management certificate from IIT Kharagpur (with upGrad) and a product management certificate from ISB, and they gave me structure. The argument is about **what you show next to them**.
 
 ## What counts as proof of skill for an AI PM?
 
