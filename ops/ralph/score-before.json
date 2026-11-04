@@ -9,8 +9,11 @@
    ]
   },
   "AI Product Strategy": {
-   "score": 0.5,
-   "headPages": []
+   "score": 1,
+   "headPages": [
+    "/articles/ai-product-strategy-framework-india/",
+    "/articles/"
+   ]
   },
   "AI Regulation Compliance": {
    "score": 1,
@@ -47,10 +50,10 @@
   }
  },
  "categories": {
-  "topicCoverage": 27.9,
+  "topicCoverage": 30,
   "answerStructure": 18.9,
   "evidence": 10,
-  "depth": 8.6,
+  "depth": 8.7,
   "schema": 10,
   "freshCrawl": 9.8
  },
@@ -60,28 +63,33 @@
    "questionH2": "0/5",
    "faq": false
   },
+  "/articles/ai-product-strategy-framework-india/": {
+   "words": 1294,
+   "questionH2": "11/13",
+   "faq": true
+  },
   "/articles/evals-are-the-new-prd/": {
-   "words": 1348,
+   "words": 1356,
    "questionH2": "8/10",
    "faq": true
   },
   "/articles/how-to-move-into-ai-product-management-in-india/": {
-   "words": 1192,
+   "words": 1200,
    "questionH2": "8/10",
    "faq": true
   },
   "/articles/india-ai-regulation-for-product-managers/": {
-   "words": 1202,
+   "words": 1210,
    "questionH2": "7/9",
    "faq": true
   },
   "/articles/proof-over-certificates-ai-pm-skills/": {
-   "words": 1444,
+   "words": 1452,
    "questionH2": "8/10",
    "faq": true
   },
   "/articles/what-is-ai-native-product-management/": {
-   "words": 1247,
+   "words": 1255,
    "questionH2": "7/9",
    "faq": true
   },
@@ -96,7 +104,7 @@
    "faq": true
   },
   "/": {
-   "words": 1006,
+   "words": 1003,
    "questionH2": "2/6",
    "faq": true
   },
@@ -150,6 +158,6 @@
   "BreadcrumbList",
   "TechArticle|Article|BlogPosting"
  ],
- "total": 85.2,
- "contentPages": 17
+ "total": 87.4,
+ "contentPages": 18
 }
