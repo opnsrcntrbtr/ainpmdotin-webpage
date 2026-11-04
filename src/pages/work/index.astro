@@ -4,7 +4,7 @@ import ProjectCards from '../../components/ProjectCards.astro';
 import SkillProjectMap from '../../components/SkillProjectMap.astro';
 import Scorecard from '../../components/Scorecard.astro';
 import BookCTA from '../../components/BookCTA.astro';
-import { PROJECTS } from '../../data/projects';
+import { PROJECTS, LABS } from '../../data/projects';
 import { SKILLS } from '../../data/skills';
 import { LINKS } from '../../data/graph';
 import { breadcrumb } from '../../data/site';
@@ -116,10 +116,28 @@ const schema = [
     </div>
   </section>
 
+  <section id="labs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · Experiments</span>
+        <h2>What am I experimenting with?</h2>
+        <p class="muted">Early public experiments, listed with their real status. None of them claims results it has not published.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="os-tbl">
+          <thead><tr><th scope="col">Experiment</th><th scope="col">Started</th><th scope="col">Last activity</th><th scope="col">What it explores</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            {LABS.map((l) => (<tr><td><a href={l.href} target="_blank" rel="noopener">{l.name} ↗</a></td><td class="v">{fmtD(l.started)}</td><td class="v">{fmtD(l.lastActivity)}</td><td>{l.what}</td><td>{l.status}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">05 · Common threads</span>
+        <span class="eyebrow">06 · Common threads</span>
         <h2>What do these projects have in common?</h2>
       </div>
       <div class="grid g3">

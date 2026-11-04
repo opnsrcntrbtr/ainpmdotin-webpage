@@ -100,3 +100,12 @@ export const PROJECTS: Project[] = [
     ],
   },
 ];
+
+/** Experiments: public, early, and labelled honestly. No results are claimed unless published. */
+export interface Lab { name: string; href: string; started: string; lastActivity: string; what: string; status: string; skills: string[]; }
+export const LABS: Lab[] = [
+  { name: 'MLX AutoResearch agent', href: 'https://github.com/opnsrcntrbtr/mlx-autoresearch-agent', started: '2026-08-04', lastActivity: '2026-08-05', what: 'A local agent (Qwen on MLX) edits one training script, trains for 5 minutes on an Apple silicon Mac, and keeps the change only if validation loss improves.', status: 'Harness and loop spec published; no results yet', skills: ['local-ai', 'ai-evaluation'] },
+  { name: 'SEBI regulatory knowledge-base agent', href: 'https://github.com/opnsrcntrbtr/sebi-regulatory-knowledge-base-ai-agent', started: '2025-11-27', lastActivity: '2025-11-28', what: 'An agentic RAG toolkit over SEBI regulations in LangChain.js and LangGraph; an early step before SEBI Circular RAG.', status: 'Prototype, superseded', skills: ['rag-product', 'trust-compliance'] },
+  { name: 'UPI offline payment PWA (NFC)', href: 'https://github.com/opnsrcntrbtr/UPI-Offline-Payment-PWA-NFC-Based', started: '2025-11-15', lastActivity: '2025-11-28', what: 'Design for offline UPI payments by NFC tap with QR fallback, enforcing UPI Lite limits (Rs 1,000 per payment, Rs 5,000 balance).', status: 'Scaffolding only; payment flows not built', skills: ['trust-compliance', 'privacy-security'] },
+  { name: 'GenAI Tasker Lite (Android)', href: 'https://github.com/opnsrcntrbtr/genAI-edge-tasker-lite', started: '2025-09-13', lastActivity: '2026-05-31', what: 'An offline-first Android 14 task manager with on-device semantic search, plus a phased roadmap to real embeddings.', status: 'Educational scaffold', skills: ['local-ai'] },
+];

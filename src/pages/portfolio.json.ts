@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { SKILLS, CREDENTIALS } from '../data/skills';
-import { PROJECTS, activityCheckedOn } from '../data/projects';
+import { PROJECTS, LABS, activityCheckedOn } from '../data/projects';
 import { SCORECARDS } from '../data/metrics';
 import { CONTRIBUTIONS, contributionsCheckedOn } from '../data/contributions';
 
@@ -16,6 +16,7 @@ export const GET: APIRoute = () => {
     credentials: CREDENTIALS.map((c) => ({ ...c })),
     projects: PROJECTS.map((p) => ({ name: p.name, url: abs(p.href), summary: p.summary, status: p.status, skills: p.skills ?? [], lastActivity: p.lastActivity, activityCheckedOn, links: p.links, results: SCORECARDS[p.slug] ?? null })),
     contributions: { checkedOn: contributionsCheckedOn, items: CONTRIBUTIONS },
+    experiments: LABS,
   };
   return new Response(JSON.stringify(body, null, 2), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };
