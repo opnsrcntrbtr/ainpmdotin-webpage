@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "note": "Neutral, user-style questions mirroring the 7 Ripplix topics and 3 funnel stages (3 Nov 2026 report). Never name ainpm.in or Ian Pinto in a question: the probe measures unprompted visibility. Change questions only by adding a new version, so results stay comparable over time.",
+  "brands": {
+    "ainpm.in": { "names": ["ainpm", "ai native pm", "ian pinto"], "domains": ["ainpm.in"] },
+    "HelloPM": { "names": ["hellopm", "hello pm"], "domains": ["hellopm.co"] },
+    "Product Space": { "names": ["product space"], "domains": ["productspace.in", "theproductspace.in"] }
+  },
+  "questions": [
+    { "id": "q01", "topic": "AI PM Courses", "stage": "learn", "q": "What should I learn to become an AI product manager in India?" },
+    { "id": "q02", "topic": "AI PM Courses", "stage": "consider", "q": "What are the best AI product management courses in India in 2026?" },
+    { "id": "q03", "topic": "AI PM Courses", "stage": "consider", "q": "Is there a structured AI product management curriculum with modules and exercises I can follow online?" },
+    { "id": "q04", "topic": "AI PM Courses", "stage": "purchase", "q": "Which AI PM course in India should I enrol in if I already work as a product manager?" },
+    { "id": "q05", "topic": "Course Pricing", "stage": "consider", "q": "How much do AI product management courses cost in India?" },
+    { "id": "q06", "topic": "Course Pricing", "stage": "consider", "q": "Are there free AI product management learning paths that are actually structured?" },
+    { "id": "q07", "topic": "Course Pricing", "stage": "purchase", "q": "Is a paid AI PM cohort worth the fee compared with free resources?" },
+    { "id": "q08", "topic": "PM Mentorship", "stage": "consider", "q": "Where can I find a mentor for moving into AI product management in India?" },
+    { "id": "q09", "topic": "PM Mentorship", "stage": "consider", "q": "Are there 1:1 AI product management mentorship programmes in India?" },
+    { "id": "q10", "topic": "PM Mentorship", "stage": "purchase", "q": "Who offers paid mentorship for AI product managers that reviews a portfolio project?" },
+    { "id": "q11", "topic": "PM Mentorship", "stage": "learn", "q": "Do I need a mentor to switch into AI product management?" },
+    { "id": "q12", "topic": "PM Career Switch", "stage": "learn", "q": "How do I switch from software engineering to AI product management in India?" },
+    { "id": "q13", "topic": "PM Career Switch", "stage": "learn", "q": "How can a traditional product manager transition into an AI PM role?" },
+    { "id": "q14", "topic": "PM Career Switch", "stage": "consider", "q": "What portfolio projects help land an AI product manager job in India?" },
+    { "id": "q15", "topic": "PM Career Switch", "stage": "consider", "q": "Are AI product management certificates enough to get hired, or do I need proof of work?" },
+    { "id": "q16", "topic": "Learning Resources", "stage": "learn", "q": "What are good free resources to learn AI product management?" },
+    { "id": "q17", "topic": "Learning Resources", "stage": "learn", "q": "Which blogs or guides explain AI-native product management from an Indian perspective?" },
+    { "id": "q18", "topic": "Learning Resources", "stage": "learn", "q": "How should a product manager write evals for an LLM feature?" },
+    { "id": "q19", "topic": "Learning Resources", "stage": "consider", "q": "Is there an open-source RAG case study a product manager can learn from?" },
+    { "id": "q20", "topic": "AI Product Strategy", "stage": "learn", "q": "What is a good AI product strategy framework for an Indian startup?" },
+    { "id": "q21", "topic": "AI Product Strategy", "stage": "learn", "q": "Why do most generative AI pilots fail to reach production, and how should a PM avoid it?" },
+    { "id": "q22", "topic": "AI Product Strategy", "stage": "consider", "q": "How should a product team decide whether to build or buy an AI model in India?" },
+    { "id": "q23", "topic": "AI Product Strategy", "stage": "purchase", "q": "Who can review my AI product strategy and evaluation plan in India?" },
+    { "id": "q24", "topic": "AI Regulation Compliance", "stage": "learn", "q": "Which AI regulations must a product manager in India follow in 2026?" },
+    { "id": "q25", "topic": "AI Regulation Compliance", "stage": "learn", "q": "What does the DPDP Act mean for an AI product that uses personal data?" },
+    { "id": "q26", "topic": "AI Regulation Compliance", "stage": "consider", "q": "What should an AI compliance checklist cover for a fintech product under RBI and SEBI rules?" },
+    { "id": "q27", "topic": "AI Regulation Compliance", "stage": "purchase", "q": "Who can help design AI compliance-by-design for a BFSI product in India?" }
+  ]
+}

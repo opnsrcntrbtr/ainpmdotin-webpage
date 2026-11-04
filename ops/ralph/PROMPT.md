@@ -42,6 +42,16 @@ testimonials, placement rates or competitor facts. Every number needs a source o
   `"rebaseline": true` in `iter.json`, records both scores, and becomes the new baseline.
 - The local score is a proxy. Ground truth is Ripplix (R8) and the visibility probe (R10) in `external.jsonl`.
 
+## Ground-truth measurement (R10 visibility probe)
+
+`npm run probe -- --dry-run` lists the 27 neutral questions (`ops/ralph/probe-questions.json`, versioned) and the
+cost estimate (about US$3-5 a full run). `npm run probe` asks each one to Claude with live web search and records,
+per answer, whether ainpm.in and each competitor is mentioned, cited or only retrieved, and in what order. A full
+run appends a summary (mention rate, citation rate, share of voice, funnel, per-topic) to `external.jsonl` and saves
+detail to `ops/ralph/probe/<date>.json`. It needs an Anthropic credential on the Mac (`ANTHROPIC_API_KEY` or
+`ant auth login`), so the scheduled Mac task runs it on the first Monday of each month; a cloud session cannot.
+Claude is one assistant; keep Ripplix (R8) for ChatGPT, Gemini and Google AI Mode.
+
 ## Where an iteration runs
 
 - **Mac (scheduled, Mondays 10:33 IST):** commits to `main` and pushes. Flushes any queued PostHog events.
