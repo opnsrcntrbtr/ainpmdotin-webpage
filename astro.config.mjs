@@ -5,7 +5,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 // Real "last modified" dates for the sitemap, so crawlers can trust them.
 // Articles: read from frontmatter. Other pages: set here when their content changes.
 const lastmod = {
-  '/': '2026-11-03',
+  '/': '2026-11-05',
   '/guide/': '2026-11-03',
   '/learn/': '2026-11-04',
   '/mentorship/': '2026-11-04',

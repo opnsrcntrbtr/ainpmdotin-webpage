@@ -4,13 +4,16 @@ import { getCollection } from 'astro:content';
 import { faqSchema } from '../data/site';
 import ProjectCards from '../components/ProjectCards.astro';
 import BookCTA from '../components/BookCTA.astro';
-import { SKILLS } from '../data/skills';
+import { SKILLS, CREDENTIALS } from '../data/skills';
+import { CONTRIBUTIONS } from '../data/contributions';
+const verified = CREDENTIALS.filter((c) => c.verification === 'issuer').length;
+const mergedPRs = CONTRIBUTIONS.filter((c) => c.kind === 'merged-pr').length;
 import { PROJECTS } from '../data/projects';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const updated = new Date('2026-11-03');
+const updated = new Date('2026-11-05');
 const evidence = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
 const latest = articles.slice(0, 3);
 
@@ -81,7 +84,9 @@ const schema = [
       <div><b>{PROJECTS.length}</b><span>open-source AI products</span></div>
       <div><b>0.981</b><span>abstention accuracy, SEBI RAG</span></div>
       <div><b>1</b><span>DOI-registered research preprint</span></div>
-      <div><b>{evidence}</b><span>public evidence links for my skills</span></div>
+      <div><b>{verified}</b><span><a href="/skills/#credentials">credentials verifiable on Credly and Accredible</a></span></div>
+      <div><b>{mergedPRs}</b><span><a href="/work/#open-source">merged pull requests to other open-source projects</a></span></div>
+      <div><b>{evidence}</b><span><a href="/skills/">public evidence links for my skills</a></span></div>
     </div>
   </div>
 

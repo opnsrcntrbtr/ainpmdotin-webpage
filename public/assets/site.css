@@ -546,3 +546,6 @@ a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
 .pcard-active{font-size:.78rem;color:var(--ink-2);margin:6px 0 0}
 @media (max-width:640px){.os-tbl th:nth-child(2),.os-tbl td:nth-child(2),.os-tbl th:nth-child(3),.os-tbl td:nth-child(3){display:none}}
 .proofbox .md{padding-left:1.1em;margin:10px 0 0}.proofbox .md li{margin:6px 0}
+@media(min-width:760px){.proofbar{grid-template-columns:repeat(3,1fr)}}
+.proofbar span a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.proofbar span a:hover{color:var(--teal)}
