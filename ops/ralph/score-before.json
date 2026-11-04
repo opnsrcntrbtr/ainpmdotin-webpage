@@ -31,21 +31,25 @@
    ]
   },
   "PM Career Switch": {
-   "score": 0,
-   "headPages": []
+   "score": 1,
+   "headPages": [
+    "/mentorship/"
+   ]
   },
   "PM Mentorship": {
-   "score": 0.5,
-   "headPages": []
+   "score": 1,
+   "headPages": [
+    "/mentorship/"
+   ]
   }
  },
  "categories": {
-  "topicCoverage": 21.4,
-  "answerStructure": 18.7,
-  "evidence": 10.3,
-  "depth": 8.8,
+  "topicCoverage": 27.9,
+  "answerStructure": 18.8,
+  "evidence": 10.1,
+  "depth": 8.5,
   "schema": 10,
-  "freshCrawl": 9.8
+  "freshCrawl": 9.6
  },
  "pages": {
   "/about/": {
@@ -74,7 +78,7 @@
    "faq": true
   },
   "/consult/": {
-   "words": 873,
+   "words": 880,
    "questionH2": "2/4",
    "faq": true
   },
@@ -84,12 +88,17 @@
    "faq": true
   },
   "/": {
-   "words": 994,
+   "words": 1002,
    "questionH2": "2/6",
    "faq": true
   },
   "/learn/": {
-   "words": 1041,
+   "words": 1042,
+   "questionH2": "4/5",
+   "faq": true
+  },
+  "/mentorship/": {
+   "words": 576,
    "questionH2": "4/5",
    "faq": true
   },
@@ -133,6 +142,6 @@
   "BreadcrumbList",
   "TechArticle|Article|BlogPosting"
  ],
- "total": 79,
- "contentPages": 15
+ "total": 84.9,
+ "contentPages": 16
 }

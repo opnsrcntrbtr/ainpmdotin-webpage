@@ -19,14 +19,16 @@
     "id": "R2",
     "priority": 9,
     "estPts": 8,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Mentorship programme page /mentorship/ with honest scope (not placement), Service schema",
     "ripplixGap": "Only 30-minute consultations; PM Mentorship blind spot (0 of 25 answers)",
     "topics": [
       "PM Mentorship",
       "PM Career Switch"
-    ]
+    ],
+    "commit": "2f2aaa2",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R3",
