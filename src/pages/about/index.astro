@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { AUTHOR, breadcrumb } from '../../data/site';
 import { CREDENTIALS } from '../../data/skills';
 
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-05');
 const schema = [
   {
     '@type': 'ProfilePage',
@@ -49,7 +49,7 @@ const schema = [
           <li>{c.verifyUrl && c.verification === 'issuer' ? <a href={c.verifyUrl} target="_blank" rel="noopener">{c.name}{c.issuer ? ` — ${c.issuer}` : ''} ↗</a> : <Fragment>{c.name}{c.issuer ? ` — ${c.issuer}` : ''}</Fragment>}</li>
         ))}
       </ul>
-      <p class="muted" style="margin-top:-8px">Credentials are one signal. <a class="more-link" href="/skills/">Learn more: each skill with its public evidence</a></p>
+      <p class="muted" style="margin-top:-8px">{CREDENTIALS.filter((c) => c.verification === 'issuer').length} of {CREDENTIALS.length} credentials can be verified on the issuer's platform (<a href="https://www.credly.com/users/ian-pinto/badges" target="_blank" rel="noopener">Credly ↗</a>, Accredible). Credentials are one signal. <a class="more-link" href="/skills/#credentials">See every credential with its dates and verification link</a></p>
       <div class="md">
         <h2>Open work</h2>
         <ul>

@@ -84,5 +84,21 @@
     "owner": "ian",
     "title": "Optional: one anonymised day-job outcome (AMC platform) you approve for publication",
     "accredible": "Relevant experience 76%"
+  },
+  {
+    "id": "P10",
+    "priority": 8,
+    "status": "open",
+    "owner": "claude",
+    "title": "Identity links: add Credly, Hugging Face and npm profiles to Person sameAs; ProfilePage schema on /about/ with verified-credential count",
+    "accredible": "Verification (53% verify frequently)"
+  },
+  {
+    "id": "P11",
+    "priority": 7,
+    "status": "open",
+    "owner": "claude",
+    "title": "Home and About surface proof: verified-credential and merged-PR counts in the proof bar, linked to /skills/#credentials and /work/#open-source",
+    "accredible": "79%: value should be communicated better"
   }
 ]

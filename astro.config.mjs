@@ -13,7 +13,7 @@ const lastmod = {
   '/work/': '2026-11-05',
   '/skills/': '2026-11-05',
   '/sebi-rag/': '2026-11-05',
-  '/about/': '2026-10-29',
+  '/about/': '2026-11-05',
   '/work/trustvault/': '2026-11-05',
   '/work/webauthn-prf-zktv/': '2026-11-05',
   '/work/lecture-lens/': '2026-11-05',

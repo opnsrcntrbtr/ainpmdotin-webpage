@@ -34,6 +34,7 @@ export const AUTHOR = {
     'https://www.linkedin.com/in/ian1980/',
     'https://github.com/opnsrcntrbtr',
     'https://huggingface.co/opnsrcntrbtrian',
+    'https://www.credly.com/users/ian-pinto',
   ],
   knowsAbout: [
     'AI-native product management',
