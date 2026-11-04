@@ -3,6 +3,7 @@
   "AI PM Courses": {
    "score": 1,
    "headPages": [
+    "/articles/how-to-move-into-ai-product-management-in-india/",
     "/learn/",
     "/work/lecture-lens/"
    ]
@@ -33,6 +34,8 @@
   "PM Career Switch": {
    "score": 1,
    "headPages": [
+    "/articles/how-to-move-into-ai-product-management-in-india/",
+    "/articles/",
     "/mentorship/"
    ]
   },
@@ -45,11 +48,11 @@
  },
  "categories": {
   "topicCoverage": 27.9,
-  "answerStructure": 18.8,
-  "evidence": 10.1,
-  "depth": 8.5,
+  "answerStructure": 18.9,
+  "evidence": 10,
+  "depth": 8.6,
   "schema": 10,
-  "freshCrawl": 9.6
+  "freshCrawl": 9.8
  },
  "pages": {
   "/about/": {
@@ -58,22 +61,27 @@
    "faq": false
   },
   "/articles/evals-are-the-new-prd/": {
-   "words": 1337,
+   "words": 1348,
+   "questionH2": "8/10",
+   "faq": true
+  },
+  "/articles/how-to-move-into-ai-product-management-in-india/": {
+   "words": 1192,
    "questionH2": "8/10",
    "faq": true
   },
   "/articles/india-ai-regulation-for-product-managers/": {
-   "words": 1191,
+   "words": 1202,
    "questionH2": "7/9",
    "faq": true
   },
   "/articles/proof-over-certificates-ai-pm-skills/": {
-   "words": 1433,
+   "words": 1444,
    "questionH2": "8/10",
    "faq": true
   },
   "/articles/what-is-ai-native-product-management/": {
-   "words": 1236,
+   "words": 1247,
    "questionH2": "7/9",
    "faq": true
   },
@@ -88,7 +96,7 @@
    "faq": true
   },
   "/": {
-   "words": 1002,
+   "words": 1006,
    "questionH2": "2/6",
    "faq": true
   },
@@ -142,6 +150,6 @@
   "BreadcrumbList",
   "TechArticle|Article|BlogPosting"
  ],
- "total": 84.9,
- "contentPages": 16
+ "total": 85.2,
+ "contentPages": 17
 }

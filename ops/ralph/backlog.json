@@ -34,7 +34,7 @@
     "id": "R3",
     "priority": 8,
     "estPts": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Article: how to move into AI product management from India (career switch roadmap, choosing a course)",
     "ripplixGap": "Learn stage 0%; PM Career Switch; Course Pricing",
@@ -42,7 +42,9 @@
       "PM Career Switch",
       "AI PM Courses",
       "Course Pricing"
-    ]
+    ],
+    "commit": "6a82545",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R4",
