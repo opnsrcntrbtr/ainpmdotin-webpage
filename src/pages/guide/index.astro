@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import BookCTA from '../../components/BookCTA.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 
-const updated = new Date('2026-11-03');
+const updated = new Date('2026-11-04');
 const faq = [
   { q: 'What changes for a product manager in AI-native products?', a: 'Six things: evaluation sets replace static PRDs, workflows and agents replace screens, every task has an inference cost, roadmaps become short learning loops, trust controls move to the first sprint, and design becomes voice-, vernacular- and low-bandwidth-first in India.' },
   { q: 'Which AI rules must product teams in India track?', a: 'India has no single AI Act. Teams track MeitY\'s India AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules on labelling AI-generated content, RBI\'s FREE-AI framework and SEBI\'s forthcoming AI/ML guidelines.' },
@@ -36,7 +36,7 @@ const schema = [
 >
   <div class="wrap crumb"><a href="/">AINPM.in</a> / Field guide</div>
   <div class="wrap page-head">
-    <span class="eyebrow">Field guide · Updated 3 Nov 2026</span>
+    <span class="eyebrow">Field guide · Updated 4 Nov 2026</span>
     <h1>A field guide to AI-native product management in India</h1>
     <p class="answer"><strong>AI-native product management is building products where an AI model is the core of the experience, not an add-on.</strong> This guide covers what changes for product managers, why India is different, the AI rules to track, a playbook from problem to production, and where to start for your role.</p>
     <ul class="toc" aria-label="On this page">
@@ -90,15 +90,26 @@ const schema = [
         <p class="muted">India has chosen principles-based guidelines plus sector regulators over a single AI Act. That means your obligations depend on your domain — and several dates are close.</p>
       </div>
       <ol class="timeline">
-        <li><time>AUG 2025</time><h3>RBI FREE-AI framework</h3><p>Seven "sutras" for responsible AI in regulated finance — trust, people first, fairness, accountability, understandable by design, safety and resilience.</p></li>
-        <li><time>NOV 2025</time><h3>MeitY India AI Governance Guidelines</h3><p>Principles-based, techno-legal approach relying on existing law and sector regulators rather than a standalone AI statute.</p></li>
-        <li><time>14 NOV 2025</time><h3>DPDP Rules notified</h3><p>Data Protection Board provisions active; the rest of the Digital Personal Data Protection regime phases in.</p></li>
-        <li><time>20 FEB 2026</time><h3>IT Rules amendment on synthetic content</h3><p>AI-generated media must be prominently labelled; takedown windows cut to 3 hours (2 hours for deepfake intimate imagery).</p></li>
-        <li class="next"><time>SOON · ANNOUNCED AUG 2026</time><h3>SEBI AI/ML guidelines <span class="tag">Pending</span></h3><p>Still pending on 2 October 2026. SEBI's chairman has said guidelines will mandate human-in-the-loop, kill-switches and data governance for AI in securities markets.</p></li>
-        <li class="next"><time>13 NOV 2026</time><h3>DPDP consent managers go live <span class="tag">6 weeks</span></h3><p>Registered consent managers become operational — design your consent UX to interoperate.</p></li>
-        <li class="next"><time>13 MAY 2027</time><h3>DPDP full compliance <span class="tag">Deadline</span></h3><p>Consent, itemised notices, security safeguards, breach reporting and Significant Data Fiduciary duties apply; penalties up to ₹250 crore per instance.</p></li>
+        <li><time>AUG 2025</time><h3>RBI FREE-AI framework</h3><p>Seven "sutras" for responsible AI in regulated finance — trust, people first, fairness, accountability, understandable by design, safety and resilience — with 26 recommendations (13 Aug 2025). <a class="src" href="https://rbidocs.rbi.org.in/rdocs/PublicationReport/Pdfs/FREEAIR130820250A24FF2D4578453F824C72ED9F5D5851.PDF" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li><time>NOV 2025</time><h3>MeitY India AI Governance Guidelines</h3><p>Principles-based, techno-legal approach relying on existing law and sector regulators rather than a standalone AI statute. <a class="src" href="https://www.lexology.com/library/detail.aspx?g=ffc0c58c-3727-4472-9914-5fa6a33ffffd" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li><time>14 NOV 2025</time><h3>DPDP Rules notified</h3><p>Data Protection Board provisions active; the rest of the Digital Personal Data Protection regime phases in. <a class="src" href="https://en.wikipedia.org/wiki/Digital_Personal_Data_Protection_Rules,_2025" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li><time>20 FEB 2026</time><h3>IT Rules amendment on synthetic content</h3><p>AI-generated media must be prominently labelled; takedown windows cut to 3 hours (2 hours for deepfake intimate imagery). <a class="src" href="https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li class="next"><time>SOON · ANNOUNCED AUG 2026</time><h3>SEBI AI/ML guidelines <span class="tag">Pending</span></h3><p>No final circular found as of 4 Nov 2026. In August 2026 SEBI's chairman said the guidelines will mandate human-in-the-loop, kill switches and data controls, and that regulated entities stay accountable for vendor AI tools. <a class="src" href="https://www.moneylife.in/article/ai-in-markets-sebi-to-mandate-human-oversight-kill-switches-and-data-controls-says-pandey/81406.html" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li class="next"><time>13 NOV 2026</time><h3>DPDP consent managers go live <span class="tag">This month</span></h3><p>Consent manager registration under Rule 4 starts on 13 Nov 2026 — design your consent UX to interoperate. <a class="src" href="https://www.medianama.com/2025/11/223-explained-obligations-role-requirements-consent-managers-dpdp-rules-2025/" rel="noopener" target="_blank">Source ↗</a></p></li>
+        <li class="next"><time>13 MAY 2027</time><h3>DPDP full compliance <span class="tag">Deadline</span></h3><p>Consent, itemised notices, security safeguards, breach reporting and Significant Data Fiduciary duties apply; penalties up to ₹250 crore per instance. <a class="src" href="https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines" rel="noopener" target="_blank">Source ↗</a></p></li>
       </ol>
-      <p class="muted" style="font-size:.85rem;margin-top:8px">This summary is for orientation only and is not legal advice. <a href="/articles/india-ai-regulation-for-product-managers/" class="more-link">Read the full regulation guide</a></p>
+      <div class="section-head" style="margin-top:36px">
+        <h3 style="font-size:1.35rem">What should an AI compliance checklist cover?</h3>
+        <p class="muted">Five controls do most of the work. Build them before launch, and keep evidence for each.</p>
+      </div>
+      <ol class="guide-points">
+        <li><span><strong>Purpose and data map.</strong> Every piece of personal data in prompts, logs, embeddings and fine-tuning sets, with its purpose (DPDP).</span></li>
+        <li><span><strong>Consent and notice flow</strong> that can interoperate with registered consent managers (DPDP, from 13 Nov 2026).</span></li>
+        <li><span><strong>Human approval points and a tested kill switch</strong> where money or rights move (RBI FREE-AI; SEBI, announced).</span></li>
+        <li><span><strong>An evaluation gate with refusals</strong> that blocks releases below a quality floor, plus a model inventory with named owners.</span></li>
+        <li><span><strong>Labels on synthetic media</strong> and a takedown path inside 3 hours (IT Rules amendment).</span></li>
+      </ol>
+      <p class="muted" style="font-size:.85rem;margin-top:8px">This summary is for orientation only and is not legal advice. <a href="/articles/ai-compliance-checklist-india/" class="more-link">Get the full 12-point compliance checklist</a> · <a href="/articles/india-ai-regulation-for-product-managers/" class="more-link">Read the full regulation guide</a></p>
     </div>
   </section>
 
