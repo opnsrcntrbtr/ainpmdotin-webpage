@@ -51,9 +51,9 @@
  },
  "categories": {
   "topicCoverage": 30,
-  "answerStructure": 19.3,
-  "evidence": 11.3,
-  "depth": 8.8,
+  "answerStructure": 19.4,
+  "evidence": 12,
+  "depth": 8.9,
   "schema": 10,
   "freshCrawl": 9.8
  },
@@ -66,8 +66,16 @@
    "bareStats": 0,
    "sourceDomains": 4
   },
+  "/articles/ai-compliance-checklist-india/": {
+   "words": 1504,
+   "questionH2": "7/9",
+   "faq": true,
+   "sourcedStats": 3,
+   "bareStats": 1,
+   "sourceDomains": 7
+  },
   "/articles/ai-product-strategy-framework-india/": {
-   "words": 1366,
+   "words": 1375,
    "questionH2": "12/14",
    "faq": true,
    "sourcedStats": 5,
@@ -75,7 +83,7 @@
    "sourceDomains": 5
   },
   "/articles/evals-are-the-new-prd/": {
-   "words": 1394,
+   "words": 1403,
    "questionH2": "9/11",
    "faq": true,
    "sourcedStats": 0,
@@ -83,7 +91,7 @@
    "sourceDomains": 2
   },
   "/articles/how-to-move-into-ai-product-management-in-india/": {
-   "words": 1294,
+   "words": 1303,
    "questionH2": "9/11",
    "faq": true,
    "sourcedStats": 7,
@@ -91,7 +99,7 @@
    "sourceDomains": 5
   },
   "/articles/india-ai-regulation-for-product-managers/": {
-   "words": 1300,
+   "words": 1312,
    "questionH2": "8/10",
    "faq": true,
    "sourcedStats": 2,
@@ -99,7 +107,7 @@
    "sourceDomains": 7
   },
   "/articles/proof-over-certificates-ai-pm-skills/": {
-   "words": 1548,
+   "words": 1557,
    "questionH2": "9/11",
    "faq": true,
    "sourcedStats": 7,
@@ -107,7 +115,7 @@
    "sourceDomains": 3
   },
   "/articles/what-is-ai-native-product-management/": {
-   "words": 1298,
+   "words": 1307,
    "questionH2": "8/10",
    "faq": true,
    "sourcedStats": 0,
@@ -123,15 +131,15 @@
    "sourceDomains": 1
   },
   "/guide/": {
-   "words": 1084,
+   "words": 1239,
    "questionH2": "5/6",
    "faq": true,
-   "sourcedStats": 0,
-   "bareStats": 6,
-   "sourceDomains": 2
+   "sourcedStats": 3,
+   "bareStats": 3,
+   "sourceDomains": 8
   },
   "/": {
-   "words": 1003,
+   "words": 1006,
    "questionH2": "2/6",
    "faq": true,
    "sourcedStats": 0,
@@ -213,6 +221,6 @@
   "BreadcrumbList",
   "TechArticle|Article|BlogPosting"
  ],
- "total": 89.2,
- "contentPages": 18
+ "total": 90.1,
+ "contentPages": 19
 }

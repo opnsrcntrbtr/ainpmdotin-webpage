@@ -88,13 +88,15 @@
     "id": "R6",
     "priority": 5,
     "estPts": 3,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Regulation compliance hub: question-style H2s and checklist on /guide/#radar + article",
     "ripplixGap": "AI Regulation Compliance 0% in answers",
     "topics": [
       "AI Regulation Compliance"
-    ]
+    ],
+    "commit": "a0396cb",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R7",
