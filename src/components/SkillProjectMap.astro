@@ -21,14 +21,14 @@ const counts = Object.fromEntries(TARGETS.map((t) => [t.id, LINKS.filter((l) => 
 <figure class="spm" id={id}>
   <figcaption class="sc-head"><strong>Which projects prove which skills?</strong><span>{LINKS.length} connections · hover or focus a skill or project to trace it</span></figcaption>
   <div class="spm-scroll">
-    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby={`${id}-t`} xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox={`0 0 ${W} ${H}`} role="group" aria-labelledby={`${id}-t`} xmlns="http://www.w3.org/2000/svg">
       <title id={`${id}-t`}>Map of eight skills on the left connected to the projects, writing and credentials that provide evidence for them, on the right. The same information is listed below the chart.</title>
       <g class="spm-links">
         {paths.map((p) => <path d={p.d} data-s={p.skill} data-t={p.target} />)}
       </g>
       <g class="spm-left">
         {SKILLS.map((s, i) => (
-          <g class="spm-node" tabindex="0" data-s={s.id} role="link" aria-label={`${s.name}: ${LINKS.filter((l) => l.skill === s.id).length} connections`}>
+          <g class="spm-node" tabindex="0" data-s={s.id} role="button" aria-label={`${s.name}: ${LINKS.filter((l) => l.skill === s.id).length} connections`}>
             <circle cx={lx + 6} cy={ly(i)} r="6" />
             <text x={lx - 8} y={ly(i) + 5} text-anchor="end">{s.name}</text>
           </g>
@@ -36,7 +36,7 @@ const counts = Object.fromEntries(TARGETS.map((t) => [t.id, LINKS.filter((l) => 
       </g>
       <g class="spm-right">
         {TARGETS.map((t, i) => (
-          <g class={`spm-node ${t.group}`} tabindex="0" data-t={t.id} role="link" aria-label={`${t.label}: evidence for ${counts[t.id]} ${counts[t.id] === 1 ? "skill" : "skills"}`}>
+          <g class={`spm-node ${t.group}`} tabindex="0" data-t={t.id} role="button" aria-label={`${t.label}: evidence for ${counts[t.id]} ${counts[t.id] === 1 ? "skill" : "skills"}`}>
             <circle cx={rx - 6} cy={ry(i)} r="7" />
             <text x={rx + 8} y={ry(i) + 5}>{t.label}</text>
             <text x={rx + 8} y={ry(i) + 22} class="spm-sub">{counts[t.id]} {counts[t.id] === 1 ? "skill" : "skills"}</text>

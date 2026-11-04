@@ -6,7 +6,7 @@ import SkillProjectMap from '../../components/SkillProjectMap.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 import { SKILLS, CREDENTIALS } from '../../data/skills';
 
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-04');
 const isExternal = (h: string) => h.startsWith('http');
 const evidenceCount = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
 
@@ -73,9 +73,9 @@ const sources = [
 
   <div class="wrap">
     <div class="stats research">
-      <div><b>44%</b><span>of learners want a clearer description of the skills they gained</span><small>Accredible, 2026</small></div>
-      <div><b>22→44%</b><span>of issuers now rank proving program value as a top priority</span><small>Accredible, 2026</small></div>
-      <div><b>75%</b><span>of HR leaders say digital credentials make skills easier to verify</span><small>Accredible, 2025</small></div>
+      <div><b>44%</b><span>of learners want a clearer description of the skills they gained</span><small><a href="https://www.accredible.com/reports/2026-state-of-credentialing-report" rel="noopener" target="_blank">Accredible, 2026 ↗</a></small></div>
+      <div><b>22→44%</b><span>of issuers now rank proving program value as a top priority</span><small><a href="https://www.accredible.com/reports/2026-state-of-credentialing-report" rel="noopener" target="_blank">Accredible, 2026 ↗</a></small></div>
+      <div><b>75%</b><span>of HR leaders say digital credentials make skills easier to verify</span><small><a href="https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof" rel="noopener" target="_blank">Accredible, 2025 ↗</a></small></div>
       <div><b>{evidenceCount}</b><span>evidence links on this page, each one click away</span><small>AINPM.in</small></div>
     </div>
     <p class="note">Accredible’s 2026 figures come from spring 2026 surveys of 1,000 learners and 194 credential issuers. Accredible sells credentialing software, so treat its numbers as directional. <a class="more-link" href="/articles/proof-over-certificates-ai-pm-skills/">Learn more in my analysis of the research</a></p>

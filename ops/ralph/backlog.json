@@ -61,26 +61,42 @@
     "doneOn": "2026-11-04"
   },
   {
+    "id": "R9",
+    "priority": 6.5,
+    "estPts": 0,
+    "status": "done",
+    "owner": "claude",
+    "title": "Harden geo-score: count only sourced statistics (outbound link or dated measurement in the same block) and distinct source domains; rebaseline",
+    "ripplixGap": "Guard against scoring the scorer instead of the reader (proxy near ceiling)",
+    "topics": [],
+    "commit": "277b807",
+    "doneOn": "2026-11-04"
+  },
+  {
     "id": "R5",
     "priority": 6,
     "estPts": 4,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Evidence density pass: add dated statistics and outbound sources to /work/, /about/, home",
     "ripplixGap": "GEO statistics/citations lever; brand recognition",
-    "topics": []
+    "topics": [],
+    "commit": "f32e2f6",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R6",
     "priority": 5,
     "estPts": 3,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Regulation compliance hub: question-style H2s and checklist on /guide/#radar + article",
     "ripplixGap": "AI Regulation Compliance 0% in answers",
     "topics": [
       "AI Regulation Compliance"
-    ]
+    ],
+    "commit": "a0396cb",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R7",
@@ -101,5 +117,17 @@
     "title": "Re-run Ripplix (or equivalent) monthly and paste headline numbers into ops/ralph/external.jsonl",
     "ripplixGap": "Ground-truth measurement",
     "topics": []
+  },
+  {
+    "id": "R10",
+    "priority": 2.5,
+    "estPts": 0,
+    "status": "done",
+    "owner": "claude",
+    "title": "AI visibility probe: ask the Ripplix-style questions to Claude with web search and log mentions/citations of ainpm.in to external.jsonl (run by Ian with ANTHROPIC_API_KEY)",
+    "ripplixGap": "Ground-truth measurement between Ripplix audits",
+    "topics": [],
+    "commit": "3d15abc",
+    "doneOn": "2026-11-04"
   }
 ]

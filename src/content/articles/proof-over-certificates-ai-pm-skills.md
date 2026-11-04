@@ -3,7 +3,7 @@ title: "Proof Over Certificates: Skills Evidence for AI PMs"
 description: "What Accredible's 2026 State of Credentialing research means for AI product managers in India, and how to turn skills into evidence employers can verify."
 tldr: "Accredible's 2026 research says credentials help but do not guarantee career outcomes, and 44% of learners want clearer descriptions of the skills they gained. For AI product managers, the answer is a proof-of-skill matrix: each skill in employer language, mapped to a framework like O*NET or NACE, and linked to public evidence such as demos, eval logs and verifiable credentials."
 pubDate: 2026-11-02
-updatedDate: 2026-11-02
+updatedDate: 2026-11-04
 tags: ["Careers", "Skills", "Credentials"]
 readingMinutes: 7
 faq:
@@ -44,12 +44,12 @@ The figures most relevant to product managers:
 
 | Finding | Figure | Year |
 |---|---|---|
-| Learners who want a clearer description of the skills they gained | 44% | 2026 |
-| Issuers ranking "demonstrate program value" as a top priority | 22% → 44% | 2025 → 2026 |
-| Learners who say issuers could make a credential's value easier to communicate | 79% | 2026 |
-| Learners planning another credentialed course within two years | 85% | 2026 |
-| HR and talent leaders who say a digital credential makes skills easier to verify | 75% | 2025 |
-| Employers who say they actively look for digital credentials | 91% | 2025 |
+| Learners who want a clearer description of the skills they gained | 44% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Issuers ranking "demonstrate program value" as a top priority | 22% → 44% | [2025 → 2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Learners who say issuers could make a credential's value easier to communicate | 79% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Learners planning another credentialed course within two years | 85% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| HR and talent leaders who say a digital credential makes skills easier to verify | 75% | [2025](https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof) |
+| Employers who say they actively look for digital credentials | 91% | [2025](https://www.accredible.com/reports/2025-state-of-credentialing/employers-are-looking-but-not-finding) |
 
 Learners also said what they want next to a credential: career paths, job titles linked to their skills, companies that hire for those skills, and salary ranges.
 

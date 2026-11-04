@@ -4,7 +4,9 @@
 set -euo pipefail
 ITER="$1"; MSG="$2"
 AUTH=(-c user.name="Ian Pinto" -c user.email="7788571+opnsrcntrbtr@users.noreply.github.com")
-TRAILER=$'\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01EL9ZTjLUb8TziysyUb65st'
+# RALPH_SESSION_URL lets a cloud session credit its own session; the Mac task keeps the default.
+SESSION_URL="${RALPH_SESSION_URL:-https://claude.ai/code/session_01EL9ZTjLUb8TziysyUb65st}"
+TRAILER=$'\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: '"$SESSION_URL"
 git add -A -- . ':!ops/ralph/traces.jsonl' ':!ops/ralph/score-before.json' ':!ops/ralph/iter.json'
 git "${AUTH[@]}" commit -qm "$MSG$TRAILER"
 SHA=$(git rev-parse --short HEAD)
@@ -16,7 +18,7 @@ for x in b:
     if x['id']==it['backlogId']: x['status']='done'; x['commit']=sys.argv[2]; x['doneOn']=__import__('datetime').date.today().isoformat()
 open('ops/ralph/backlog.json','w').write(json.dumps(b,indent=2,ensure_ascii=False)+'\n')
 PY
-node scripts/ralph-trace.mjs "$ITER"
+node scripts/ralph-trace.mjs "$ITER" ${RALPH_TRACE_FLAGS:-}
 git add ops/ralph
 git "${AUTH[@]}" commit -qm "ralph: trace iteration $(python3 -c "import json;print(json.load(open('$ITER'))['iteration'])") ($SHA)$TRAILER"
 git log --oneline -2

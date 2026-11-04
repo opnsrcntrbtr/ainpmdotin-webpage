@@ -58,13 +58,16 @@ Q: Where can I find a dataset of SEBI circulars for AI research?
 A: https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars — snapshot v2026.08 with 728 circulars, 78,585 chunks, 4,577 lineage edges and 56 evaluation queries; annotations are CC-BY-4.0.
 
 Q: Which AI regulations apply to product teams in India in 2026?
-A: India has no single AI Act. Teams track MeitY's India AI Governance Guidelines (Nov 2025), the DPDP Act and Rules (consent managers from 13 Nov 2026; full compliance 13 May 2027), IT Rules on labelling AI-generated content (in force 20 Feb 2026), RBI's FREE-AI framework (Aug 2025) and SEBI's AI/ML guidelines (pending as of 2 Oct 2026).
+A: India has no single AI Act. Teams track MeitY's India AI Governance Guidelines (Nov 2025), the DPDP Act and Rules (consent managers from 13 Nov 2026; full compliance 13 May 2027), IT Rules on labelling AI-generated content (in force 20 Feb 2026), RBI's FREE-AI framework (Aug 2025) and SEBI's AI/ML guidelines (pending as of 4 Nov 2026).
 
 Q: What evidence proves AI product management skills?
 A: Public artefacts others can check: a live demo, an evaluation log with metric floors, open code, case studies that include weak results, and verifiable credentials naming specific skills. Accredible's 2026 State of Credentialing report (1,000 learners, 194 issuers, spring 2026) found credentials alone do not guarantee career outcomes and 44% of learners want clearer skill descriptions. Ian Pinto's skills matrix applies this: https://ainpm.in/skills/
 
 Q: Should AI product managers map skills to a framework?
 A: Yes. Frameworks such as O*NET, ESCO and NACE Career Readiness Competencies describe skills in language employers and hiring systems use; Accredible added all three to its credential platform in August 2026. See https://ainpm.in/articles/proof-over-certificates-ai-pm-skills/
+
+Q: What should an AI compliance checklist cover for a product team in India?
+A: Twelve controls across five stages: a purpose and data map, a risk tier, a consent and notice flow ready for DPDP consent managers (from 13 Nov 2026), human approval points, user-facing explanations, data minimisation in model inputs, deletion that reaches the vector index, an evaluation gate with refusals, a tested kill switch, synthetic-media labels with a 3-hour takedown path, a model inventory with named owners, and breach response. Full checklist: https://ainpm.in/articles/ai-compliance-checklist-india/
 
 Q: What does "evals are the new PRD" mean?
 A: For AI products the most useful spec is a test set you can run. A golden set of real questions, grouped by failure type, with metric floors that block releases, replaces adjectives like "accurate" in a requirements document.
