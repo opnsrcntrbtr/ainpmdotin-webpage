@@ -122,10 +122,12 @@
     "id": "R10",
     "priority": 2.5,
     "estPts": 0,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "AI visibility probe: ask the Ripplix-style questions to Claude with web search and log mentions/citations of ainpm.in to external.jsonl (run by Ian with ANTHROPIC_API_KEY)",
     "ripplixGap": "Ground-truth measurement between Ripplix audits",
-    "topics": []
+    "topics": [],
+    "commit": "3d15abc",
+    "doneOn": "2026-11-04"
   }
 ]
