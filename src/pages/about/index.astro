@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { AUTHOR, breadcrumb } from '../../data/site';
 import { CREDENTIALS } from '../../data/skills';
 
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-04');
 const schema = [
   {
     '@type': 'ProfilePage',
@@ -30,19 +30,29 @@ const schema = [
       <h1 style="font-size:clamp(2rem,4.4vw,3rem)">Ian Pinto</h1>
       <p class="answer" style="margin-top:14px"><strong>Ian Pinto is a Technical Product / Program Manager based in India who works on mutual fund AMC products and platforms, cloud-native systems, RAG and agentic AI.</strong> He writes AINPM.in and built SEBI Circular RAG, an open-source assistant over SEBI circulars.</p>
       <div class="md">
-        <h2>Why I started AINPM.in</h2>
+        <h2>Why did I start AINPM.in?</h2>
         <p>I started AINPM.in to share what I'm learning about building AI-native products in India, openly and iteratively. Most writing on AI product management assumes a US context. Indian product teams deal with different languages, different digital rails and a different regulatory map, so I wanted a guide that starts from here.</p>
         <p><a class="more-link" href="/guide/">Read the field guide</a></p>
-        <h2>What I work on</h2>
+        <h2>What do I work on?</h2>
         <ul>
           <li><strong>Mutual fund AMC products and platforms</strong> — the domain behind the SEBI Circular RAG case study.</li>
           <li><strong>RAG and agentic AI</strong> — retrieval, evaluation, citations and abstention.</li>
           <li><strong>Cloud-native systems</strong> — designing and running services at scale.</li>
           <li><strong>Technical product and program management</strong> — taking products from problem to production.</li>
         </ul>
-        <h2>Consulting</h2>
+        <h2>What is my track record, in numbers?</h2>
+        <p>Measured results from my open-source work, each dated and linked to the log or repository you can check.</p>
+      </div>
+      <ul class="track">
+        <li><b>94.3%</b>recall@10 on 260 adjudicated test queries for SEBI Circular RAG (full run, 15 Aug 2026). <a href="https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md" rel="noopener" target="_blank">Evaluation log ↗</a></li>
+        <li><b>98.1%</b>abstention accuracy: it refuses when the evidence is missing and answers when it is there (15 Aug 2026). <a href="https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md" rel="noopener" target="_blank">Evaluation log ↗</a></li>
+        <li><b>1,490</b>SEBI circulars indexed; every quality gate still cleared on the larger index (check of 15 Sep 2026). <a href="https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars-index" rel="noopener" target="_blank">Prebuilt index ↗</a></li>
+        <li><b>4,139</b>automated tests passing in TrustVault, a zero-knowledge password manager (6 Jul 2026). <a href="https://github.com/opnsrcntrbtr/TrustVault-PWA" rel="noopener" target="_blank">Repository ↗</a></li>
+      </ul>
+      <div class="md">
+        <h2>How can I help your team?</h2>
         <p>I take a small number of paid consultations on AI product strategy, RAG and agent evaluation, AI compliance-by-design for financial services, privacy-first local AI on Apple Mac, and AI PM careers. <a class="more-link" href="/consult/">See services and book a time</a> or email <a href="mailto:ianpinto@ainpm.in">ianpinto@ainpm.in</a>.</p>
-        <h2>Credentials</h2>
+        <h2>Which credentials do I hold?</h2>
       </div>
       <ul class="chips">
         {CREDENTIALS.map((c) => (
@@ -51,7 +61,7 @@ const schema = [
       </ul>
       <p class="muted" style="margin-top:-8px">Credentials are one signal. <a class="more-link" href="/skills/">Learn more: each skill with its public evidence</a></p>
       <div class="md">
-        <h2>Open work</h2>
+        <h2>What have I built in the open?</h2>
         <ul>
           <li><a href="/sebi-rag/">SEBI Circular RAG case study</a> — how it was built and evaluated.</li>
           <li><a href="https://github.com/opnsrcntrbtr/sebi-circular-rag" rel="noopener">sebi-circular-rag on GitHub</a> — code, evaluation log and tests.</li>

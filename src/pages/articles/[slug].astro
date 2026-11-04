@@ -49,7 +49,6 @@ const schema = [
   schema={schema}
   published={d.pubDate}
   updated={d.updatedDate}
-  sources={d.sources}
 >
   <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/articles/">Articles</a></div>
   <div class="wrap">
@@ -64,6 +63,16 @@ const schema = [
       </p>
       <div class="tldr"><strong>Short answer</strong><p>{d.tldr}</p></div>
       <div class="md"><Content /></div>
+
+      {d.sources.length > 0 && (
+        <section class="sources" aria-labelledby="sources-h">
+          <h2 id="sources-h">Where do these figures come from?</h2>
+          <p>Sources used in this guide (page last updated <time datetime={d.updatedDate.toISOString().slice(0, 10)}>{fmtDate(d.updatedDate)}</time>):</p>
+          <ol>
+            {d.sources.map((s) => <li><a href={s.href} rel="noopener" target="_blank">{s.label} ↗</a></li>)}
+          </ol>
+        </section>
+      )}
 
       <BookCTA id={`article-${entry.id}`} heading="Want help applying this?" />
 

@@ -540,3 +540,15 @@ a:hover{color:var(--teal-ink)}
 .hero7 h1 em,.phero h1 em{font-style:normal;color:var(--teal);background:none;-webkit-text-fill-color:currentColor}
 .hero7 h1{font-size:clamp(2.3rem,4.8vw,3.6rem);letter-spacing:-.02em;max-width:18ch}
 p .more-link{margin-top:0;font-size:inherit}
+
+/* ---- v7: in-article sources (Ralph iteration 6) ---- */
+.sources{border:0;padding:32px 0 0;margin-top:8px}
+.sources h2{font-size:1.3rem;margin-bottom:10px}
+.sources p{color:var(--ink-2);font-size:.95rem}
+.sources ol{padding-left:1.2em;display:grid;gap:6px;font-size:.92rem}
+.sources a{overflow-wrap:anywhere}
+.track{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+@media(min-width:720px){.track{grid-template-columns:repeat(2,1fr)}}
+.track li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.92rem;color:var(--ink-2)}
+.track li b{display:block;font:700 1.25rem/1.2 var(--serif);color:var(--teal);margin-bottom:2px}
+.track li a{font-size:.85rem}

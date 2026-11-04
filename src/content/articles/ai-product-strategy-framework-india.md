@@ -32,7 +32,7 @@ sources:
 
 ## Why do so many AI products stall after the pilot?
 
-**Because most teams start with a model, not a measurable job.** MIT NANDA's 2025 *GenAI Divide* study, drawing on more than 300 public AI initiatives, 52 interviews and 153 senior-leader surveys, found that **95% of organisations saw no measurable return** on generative AI, and only **5% of integrated pilots** were extracting significant value. McKinsey's latest State of AI survey (1,719 respondents, fieldwork May–June 2026) found that only **44%** of companies are scaling AI across the enterprise and just **6%** attribute 5% or more of EBIT to it.
+**Because most teams start with a model, not a measurable job.** MIT NANDA's 2025 *GenAI Divide* study ([summary](https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide)), drawing on more than 300 public AI initiatives, 52 interviews and 153 senior-leader surveys, found that **95% of organisations saw no measurable return** on generative AI, and only **5% of integrated pilots** were extracting significant value. McKinsey's latest [State of AI survey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai) (1,719 respondents, fieldwork May–June 2026) found that only **44%** of companies are scaling AI across the enterprise and just **6%** attribute 5% or more of EBIT to it.
 
 The pattern behind both studies is the same: unclear success metrics, systems that do not learn from feedback, and costs nobody modelled. A strategy fixes this by forcing six answers before anyone writes a prompt.
 

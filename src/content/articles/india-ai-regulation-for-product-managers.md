@@ -3,7 +3,7 @@ title: "India AI Regulation for Product Managers (2026 Guide)"
 description: "A product manager's guide to India's AI rules in 2026: DPDP deadlines, RBI FREE-AI, SEBI AI/ML guidelines, MeitY guidance and AI-content labelling, with a checklist."
 tldr: "India has no single AI Act. Product teams answer to MeitY's principles-based AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules that require labelling of AI-generated content, RBI's FREE-AI framework for regulated finance, and SEBI's AI/ML guidelines, which were still pending on 2 October 2026."
 pubDate: 2026-10-02
-updatedDate: 2026-10-02
+updatedDate: 2026-11-04
 tags: ["Regulation", "India", "BFSI"]
 readingMinutes: 8
 faq:
@@ -58,7 +58,7 @@ The Ministry of Electronics and IT (MeitY) published the India AI Governance Gui
 
 ## What does the DPDP Act require from an AI product?
 
-**It requires valid consent for a stated purpose, clear notices, security safeguards, breach reporting and respect for user rights, with penalties of up to ₹250 crore per instance.**
+**It requires valid consent for a stated purpose, clear notices, security safeguards, breach reporting and respect for user rights, with penalties of up to ₹250 crore per instance.** ([DPDP timeline and penalties](https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines))
 
 For AI products the practical questions are specific. What personal data goes into prompts, logs, embeddings and fine-tuning sets? Can you delete it on request, including from a vector index? Is the purpose you collected it for the purpose you are using it for? From 13 November 2026, registered consent managers let people manage consent across services, so consent flows should be built to interoperate. Significant Data Fiduciaries face extra duties. The safest design is to keep personal data out of model inputs unless the feature needs it, and to log what was sent.
 
@@ -74,7 +74,7 @@ SEBI consulted on responsible AI/ML use in June 2025. In August 2026 its chairma
 
 **AI-generated images, video and audio must be clearly labelled, and unlawful content must come down within hours.** The IT Rules amendment in force from 20 February 2026 requires visible labels on synthetic visuals and a spoken disclosure at the start of synthetic audio.
 
-General takedown time fell from 36 hours to three. For non-consensual intimate imagery, including deepfakes, it is two hours. Large social platforms must ask users to declare synthetic content and use technical measures to verify it. If your product generates or hosts media, labelling and a fast takedown path are launch requirements, not later hardening.
+General takedown time fell from 36 hours to three ([IT Amendment Rules 2026](https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026)). For non-consensual intimate imagery, including deepfakes, it is two hours. Large social platforms must ask users to declare synthetic content and use technical measures to verify it. If your product generates or hosts media, labelling and a fast takedown path are launch requirements, not later hardening.
 
 ## What should a product manager do now?
 
