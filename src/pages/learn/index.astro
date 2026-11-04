@@ -1,0 +1,225 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookCTA from '../../components/BookCTA.astro';
+import { breadcrumb, faqSchema } from '../../data/site';
+
+const updated = new Date('2026-11-04');
+const HOURS = 24;
+
+const modules = [
+  {
+    n: 1, id: 'm1', hours: 4, title: 'Foundations: what changes when AI is the product',
+    goal: 'Explain how an AI-native product differs from a feature with AI bolted on.',
+    read: [
+      { href: '/articles/what-is-ai-native-product-management/', label: 'What is AI-native product management?' },
+      { href: '/guide/#shifts', label: 'Field guide: six shifts for PMs' },
+      { href: 'https://pair.withgoogle.com/guidebook/', label: 'Google PAIR People + AI Guidebook (free)' },
+    ],
+    exercise: 'Pick one feature you know. Rewrite it as a user job, list five ways an AI version could fail, and say who notices each failure.',
+    done: 'You can explain the difference in two minutes to a non-technical stakeholder.',
+  },
+  {
+    n: 2, id: 'm2', hours: 4, title: 'Evals are the spec',
+    goal: 'Turn a requirement into a graded test set before anyone writes a prompt.',
+    read: [
+      { href: '/articles/evals-are-the-new-prd/', label: 'Evals are the new PRD' },
+      { href: 'https://hamel.dev/blog/posts/evals/', label: 'Hamel Husain: Your AI product needs evals' },
+      { href: 'https://docs.claude.com/en/docs/test-and-evaluate/develop-tests', label: 'Anthropic docs: define success criteria and build evaluations' },
+    ],
+    exercise: 'Write a 30-item golden set for your feature, grouped by failure type, with a pass/fail rubric for each item.',
+    done: 'Someone else can grade an answer with your rubric and reach the same verdict.',
+  },
+  {
+    n: 3, id: 'm3', hours: 4, title: 'Models, cost per task and build vs buy',
+    goal: 'Make model choice a product decision, with the cost of each task in rupees.',
+    read: [
+      { href: 'https://huyenchip.com/2023/04/11/llm-engineering.html', label: 'Chip Huyen: Building LLM applications for production' },
+      { href: 'https://platform.openai.com/docs/guides/evals', label: 'OpenAI docs: working with evals' },
+      { href: '/glossary/', label: 'AINPM glossary: tokens, context, RAG, guardrails' },
+    ],
+    exercise: 'Compare three model options on your golden set. Record quality, latency and cost per 1,000 tasks in rupees, then recommend one.',
+    done: 'Your recommendation names the trade-off you accepted and the number that would change your mind.',
+  },
+  {
+    n: 4, id: 'm4', hours: 4, title: 'RAG, agents and trust design',
+    goal: 'Design citations, abstention and human approval into the product, not around it.',
+    read: [
+      { href: '/sebi-rag/', label: 'Case study: SEBI Circular RAG (cited answers, abstention gate)' },
+      { href: '/work/trustvault/', label: 'Case study: TrustVault (privacy by architecture)' },
+      { href: '/guide/#playbook', label: 'Field guide: eight-step playbook' },
+    ],
+    exercise: 'For your feature, write the rule for when the assistant must refuse, what it cites, and where a human approves or can switch it off.',
+    done: 'You can point to the metric that proves each trust rule works.',
+  },
+  {
+    n: 5, id: 'm5', hours: 4, title: 'India regulation and compliance by design',
+    goal: 'Know which Indian rules apply and build them into the first sprint.',
+    read: [
+      { href: '/articles/india-ai-regulation-for-product-managers/', label: 'India AI regulation for product managers' },
+      { href: '/guide/#radar', label: 'Field guide: regulation radar with dates' },
+      { href: 'https://www.meity.gov.in/data-protection-framework', label: 'MeitY: data protection framework (DPDP Act and Rules)' },
+      { href: 'https://www.nist.gov/itl/ai-risk-management-framework', label: 'NIST AI Risk Management Framework' },
+    ],
+    exercise: 'Draw the data flow for your feature. Mark where consent is taken, what is logged for audit, and what you would show a regulator.',
+    done: 'Your diagram answers the DPDP questions: what data, which purpose, whose consent, how long it is kept.',
+  },
+  {
+    n: 6, id: 'm6', hours: 4, title: 'Portfolio and career evidence',
+    goal: 'Show hiring managers proof of skill, not just certificates.',
+    read: [
+      { href: '/articles/proof-over-certificates-ai-pm-skills/', label: 'Proof over certificates: AI PM skills' },
+      { href: '/skills/', label: 'Example: a skills matrix with public evidence' },
+    ],
+    exercise: 'Publish one small project with its golden set, results (including weak numbers), cost per task and a one-page decision log.',
+    done: 'A recruiter can open one link and check every claim you make.',
+  },
+];
+
+const faq = [
+  { q: 'Is this AI product management learning path free?', a: 'Yes. All six modules are free and self-paced. They link to free articles on AINPM.in and to free public resources. There is no fee, sign-up or certificate.' },
+  { q: 'How long does the learning path take?', a: `About ${HOURS} hours: six modules of roughly four hours each. At four hours a week it takes six weeks.` },
+  { q: 'Is this a course with placement support?', a: 'No. It is a structured, free learning path, not a bootcamp. There are no cohorts, placement guarantees or job referrals. If you want feedback on your work, the paid mentorship programme adds 1:1 reviews.' },
+  { q: 'Who is it for?', a: 'Product managers moving into AI-native roles, engineers and analysts moving into product, and founders who need to scope an AI product. Module 5 is specific to India.' },
+  { q: 'What do I have at the end?', a: 'A golden set and rubric, a model and cost comparison in rupees, trust rules for your feature, a DPDP data-flow map, and one published portfolio project you can link to.' },
+];
+
+const sources = [
+  { href: 'https://pair.withgoogle.com/guidebook/', label: 'Google PAIR — People + AI Guidebook' },
+  { href: 'https://hamel.dev/blog/posts/evals/', label: 'Hamel Husain — Your AI product needs evals' },
+  { href: 'https://docs.claude.com/en/docs/test-and-evaluate/develop-tests', label: 'Anthropic — Create strong empirical evaluations' },
+  { href: 'https://platform.openai.com/docs/guides/evals', label: 'OpenAI — Evals guide' },
+  { href: 'https://huyenchip.com/2023/04/11/llm-engineering.html', label: 'Chip Huyen — Building LLM applications for production' },
+  { href: 'https://www.meity.gov.in/data-protection-framework', label: 'MeitY — Data protection framework' },
+  { href: 'https://www.nist.gov/itl/ai-risk-management-framework', label: 'NIST — AI Risk Management Framework' },
+];
+
+const abs = (h: string) => (h.startsWith('/') ? 'https://ainpm.in' + h : h);
+const schema = [
+  {
+    '@type': 'Course', '@id': 'https://ainpm.in/learn/#course',
+    name: 'AI-native product management: a free learning path',
+    description: 'A free, self-paced, six-module learning path for product managers moving into AI-native products in India: evals, cost per task, RAG and agents, trust design, Indian regulation and portfolio evidence.',
+    url: 'https://ainpm.in/learn/', inLanguage: 'en-IN', isAccessibleForFree: true,
+    provider: { '@id': 'https://ainpm.in/about/#ian-pinto' }, author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    educationalLevel: 'Intermediate', timeRequired: `PT${HOURS}H`, dateModified: updated.toISOString(),
+    teaches: ['AI product evaluation', 'Model selection and cost per task', 'RAG and agent trust design', 'India AI regulation and DPDP compliance', 'AI PM portfolio evidence'],
+    syllabusSections: modules.map((m) => ({ '@type': 'Syllabus', name: `Module ${m.n}: ${m.title}`, description: m.goal, timeRequired: `PT${m.hours}H` })),
+    offers: { '@type': 'Offer', price: 0, priceCurrency: 'INR', category: 'Free', availability: 'https://schema.org/InStock' },
+    hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: `PT${HOURS}H`, courseSchedule: { '@type': 'Schedule', repeatFrequency: 'P1W', duration: 'PT4H', repeatCount: 6 } },
+  },
+  {
+    '@type': 'HowTo', '@id': 'https://ainpm.in/learn/#howto',
+    name: 'How to learn AI-native product management in six steps',
+    totalTime: `PT${HOURS}H`, estimatedCost: { '@type': 'MonetaryAmount', currency: 'INR', value: 0 },
+    step: modules.map((m) => ({ '@type': 'HowToStep', position: m.n, name: m.title, text: `${m.goal} Exercise: ${m.exercise}`, url: `https://ainpm.in/learn/#${m.id}` })),
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Learn', path: '/learn/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="Free AI Product Management Learning Path | AINPM.in"
+  description="A free, structured path to learn AI-native product management in India: six modules, about 24 hours, with exercises, a roadmap and links to free resources."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Learn</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Free learning path · Updated 4 Nov 2026</span>
+    <h1>Learn AI-native product management: a free six-module path</h1>
+    <p class="answer"><strong>This is a free, self-paced learning path for product managers moving into AI products in India: six modules, about {HOURS} hours, each with reading, one hands-on exercise and a clear finish line.</strong> It is not a bootcamp: there are no cohorts, fees, certificates or placement promises.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#fit">Is it for you?</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Roadmap</span>
+        <h2>What does the six-week roadmap look like?</h2>
+        <p class="muted">At about 4 hours a week, the path takes 6 weeks. Each week ends with something you can show.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Week</th><th scope="col">Module</th><th scope="col">Hours</th><th scope="col">You finish with</th></tr></thead>
+          <tbody>
+            {modules.map((m) => (
+              <tr><td>{m.n}</td><td><a href={`#${m.id}`}>{m.title}</a></td><td>{m.hours}</td><td>{m.done}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="modules">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Modules</span>
+        <h2>What will you learn in each module?</h2>
+      </div>
+      <div class="grid g2">
+        {modules.map((m) => (
+          <article class="card" id={m.id}>
+            <span class="meta">Module {m.n} · about {m.hours} hours</span>
+            <h3>{m.title}</h3>
+            <p><strong>Goal:</strong> {m.goal}</p>
+            <p class="meta" style="margin-top:12px">Read</p>
+            <ul>{m.read.map((r) => <li><a href={r.href} rel={r.href.startsWith('http') ? 'noopener' : undefined}>{r.label}</a></li>)}</ul>
+            <p><strong>Exercise:</strong> {m.exercise}</p>
+            <p class="muted"><strong>Done when:</strong> {m.done}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Fit</span>
+        <h2>Is this learning path right for you?</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>A good fit if you</h3>
+          <ul>
+            <li>already work in product, engineering, design or analytics</li>
+            <li>learn well from reading and doing, at your own pace</li>
+            <li>want public evidence of skill, not only a certificate</li>
+            <li>build for Indian users, regulators or capability centres</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Look elsewhere if you need</h3>
+          <ul>
+            <li>live classes, a cohort and peer groups</li>
+            <li>placement support, referrals or a job guarantee</li>
+            <li>a formal certificate from a university or institute</li>
+          </ul>
+          <p class="muted">For 1:1 feedback on your exercises and portfolio, see the paid <a href="/consult/#ai-pm-mentoring">AI PM mentoring</a>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions about the learning path</h2></div>
+      <div class="faq">
+        {faq.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BookCTA id="learn" />
+</Base>

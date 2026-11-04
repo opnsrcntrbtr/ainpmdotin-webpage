@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: scripts/ralph-commit.sh <iter.json> "<commit message>"
+# Commits the change, records the trace with the commit hash, marks the backlog item done, commits the trace.
+set -euo pipefail
+ITER="$1"; MSG="$2"
+AUTH=(-c user.name="Ian Pinto" -c user.email="7788571+opnsrcntrbtr@users.noreply.github.com")
+TRAILER=$'\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01EL9ZTjLUb8TziysyUb65st'
+git add -A -- . ':!ops/ralph/traces.jsonl' ':!ops/ralph/score-before.json' ':!ops/ralph/iter.json'
+git "${AUTH[@]}" commit -qm "$MSG$TRAILER"
+SHA=$(git rev-parse --short HEAD)
+python3 - "$ITER" "$SHA" <<'PY'
+import json,sys
+it=json.load(open(sys.argv[1])); it['commit']=sys.argv[2]; json.dump(it,open(sys.argv[1],'w'))
+b=json.load(open('ops/ralph/backlog.json'))
+for x in b:
+    if x['id']==it['backlogId']: x['status']='done'; x['commit']=sys.argv[2]; x['doneOn']=__import__('datetime').date.today().isoformat()
+open('ops/ralph/backlog.json','w').write(json.dumps(b,indent=2,ensure_ascii=False)+'\n')
+PY
+node scripts/ralph-trace.mjs "$ITER"
+git add ops/ralph
+git "${AUTH[@]}" commit -qm "ralph: trace iteration $(python3 -c "import json;print(json.load(open('$ITER'))['iteration'])") ($SHA)$TRAILER"
+git log --oneline -2

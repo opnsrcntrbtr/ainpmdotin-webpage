@@ -51,8 +51,8 @@ export const NAV = [
   { href: '/work/', label: 'Work' },
   { href: '/skills/', label: 'Skills' },
   { href: '/guide/', label: 'Guide' },
+  { href: '/learn/', label: 'Learn' },
   { href: '/articles/', label: 'Articles' },
-  { href: '/glossary/', label: 'Glossary' },
   { href: '/about/', label: 'About' },
   { href: '/consult/', label: 'Book a call', cta: true },
 ];

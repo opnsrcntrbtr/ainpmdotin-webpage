@@ -7,6 +7,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 const lastmod = {
   '/': '2026-11-03',
   '/guide/': '2026-11-03',
+  '/learn/': '2026-11-04',
   '/sebi-rag/': '2026-11-02',
   '/about/': '2026-10-29',
   '/work/': '2026-11-02',
