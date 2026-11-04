@@ -4,7 +4,7 @@
 // Framework labels are my own alignment for orientation; they are not an
 // endorsement or certification by O*NET, NACE or any framework owner.
 
-export type EvidenceKind = 'Live demo' | 'Open code' | 'Eval results' | 'Publication' | 'Package' | 'Credential' | 'Case study';
+export type EvidenceKind = 'Live demo' | 'Open code' | 'Eval results' | 'Publication' | 'Package' | 'Credential' | 'Case study' | 'Contribution';
 
 export interface Evidence {
   label: string;
@@ -49,6 +49,9 @@ export const SKILLS: Skill[] = [
       { label: 'SEBI RAG evaluation log', href: `${GH}/sebi-circular-rag/blob/main/docs/status.md`, kind: 'Eval results' },
       { label: 'Evals are the new PRD', href: '/articles/evals-are-the-new-prd/', kind: 'Publication' },
       { label: 'Lecture Lens local eval harness', href: '/work/lecture-lens/', kind: 'Case study' },
+      { label: 'CodeSearchNet retrieval report: baselines, ablation, significance tests', href: 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain/blob/main/REPORT.md', kind: 'Eval results' },
+      { label: 'Merged fix with 5 regression tests (graphify #576)', href: 'https://github.com/Graphify-Labs/graphify/pull/576', kind: 'Contribution' },
+      { label: 'Databricks Generative AI Fundamentals', href: 'https://www.credential.net/46362a83-a223-47bb-a783-1c522b65a1fd', kind: 'Credential' },
     ],
   },
   {
@@ -63,6 +66,9 @@ export const SKILLS: Skill[] = [
       { label: 'sebi-circular-rag repository', href: `${GH}/sebi-circular-rag`, kind: 'Open code' },
       { label: 'SEBI circulars dataset (CC-BY-4.0)', href: 'https://huggingface.co/datasets/opnsrcntrbtrian/sebi-circulars', kind: 'Open code' },
       { label: 'PM case study', href: '/sebi-rag/', kind: 'Case study' },
+      { label: 'CodeSearchNet Find & Explain live demo', href: 'https://huggingface.co/spaces/opnsrcntrbtrian/csne-find-and-explain', kind: 'Live demo' },
+      { label: 'Fine-tuned retrieval model (MiniLM)', href: 'https://huggingface.co/opnsrcntrbtrian/csne-minilm-retrieval-full-1ep', kind: 'Open code' },
+      { label: 'Google Cloud BigQuery skill badges', href: 'https://www.credly.com/users/ian-pinto/badges', kind: 'Credential' },
     ],
   },
   {
@@ -76,6 +82,8 @@ export const SKILLS: Skill[] = [
       { label: 'India AI regulation for PMs', href: '/articles/india-ai-regulation-for-product-managers/', kind: 'Publication' },
       { label: 'Regulation radar', href: '/guide/#radar', kind: 'Publication' },
       { label: 'SEBI RAG trust principles', href: '/sebi-rag/', kind: 'Case study' },
+      { label: 'SEBI RAG live demo with supersession-aware citations', href: 'https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo', kind: 'Live demo' },
+      { label: 'SEBI RAG evaluation gate (abstention accuracy 0.981)', href: 'https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md', kind: 'Eval results' },
     ],
   },
   {
@@ -90,6 +98,7 @@ export const SKILLS: Skill[] = [
       { label: 'Preprint (DOI)', href: 'https://doi.org/10.6084/m9.figshare.32915411.v1', kind: 'Publication' },
       { label: 'TrustVault repository', href: `${GH}/TrustVault-PWA`, kind: 'Open code' },
       { label: 'TrustVault case study', href: '/work/trustvault/', kind: 'Case study' },
+      { label: 'password-suite on npm', href: 'https://www.npmjs.com/package/password-suite', kind: 'Package' },
     ],
   },
   {
@@ -102,6 +111,9 @@ export const SKILLS: Skill[] = [
     evidence: [
       { label: 'Lecture Lens docs', href: 'https://opnsrcntrbtr.github.io/lecture-lens/', kind: 'Open code' },
       { label: 'Lecture Lens case study', href: '/work/lecture-lens/', kind: 'Case study' },
+      { label: 'Lecture Lens repository', href: 'https://github.com/opnsrcntrbtr/lecture-lens', kind: 'Open code' },
+      { label: 'MLX AutoResearch agent (local MLX experiment loop)', href: 'https://github.com/opnsrcntrbtr/mlx-autoresearch-agent', kind: 'Open code' },
+      { label: 'Free learning path, module 3: models and cost per task', href: '/learn/#m3', kind: 'Publication' },
     ],
   },
   {
@@ -115,6 +127,8 @@ export const SKILLS: Skill[] = [
       { label: 'Portfolio', href: '/work/', kind: 'Case study' },
       { label: 'Eight-step playbook', href: '/guide/#playbook', kind: 'Publication' },
       { label: 'What is AI-native PM?', href: '/articles/what-is-ai-native-product-management/', kind: 'Publication' },
+      { label: 'ISB Product Management certificate', href: 'https://www.credential.net/cc9d4612-76c4-47b7-8c95-d6b81ebe53fe', kind: 'Credential' },
+      { label: 'AI product strategy framework for Indian teams', href: '/articles/ai-product-strategy-framework-india/', kind: 'Publication' },
     ],
   },
   {
@@ -125,8 +139,11 @@ export const SKILLS: Skill[] = [
     onet: ['Coordinating the Work and Activities of Others', 'Scheduling Work and Activities'],
     nace: 'Teamwork',
     evidence: [
-      { label: 'Credentials', href: '#credentials', kind: 'Credential' },
+      { label: 'All credentials, with verification links', href: '#credentials', kind: 'Credential' },
       { label: 'About Ian Pinto', href: '/about/', kind: 'Case study' },
+      { label: 'PMP on Credly (valid to Aug 2027)', href: 'https://www.credly.com/badges/af25e5e0-fabb-42a7-8083-4e4f1b9d9d51/public_url', kind: 'Credential' },
+      { label: 'Merged feature in openselfservice (#365)', href: 'https://github.com/o2sdev/openselfservice/pull/365', kind: 'Contribution' },
+      { label: 'express-swagger-auto on npm', href: 'https://www.npmjs.com/package/express-swagger-auto', kind: 'Package' },
     ],
   },
   {
@@ -140,6 +157,8 @@ export const SKILLS: Skill[] = [
       { label: 'Articles', href: '/articles/', kind: 'Publication' },
       { label: 'Glossary', href: '/glossary/', kind: 'Publication' },
       { label: 'SEBI RAG results, including weak ones', href: '/sebi-rag/', kind: 'Eval results' },
+      { label: 'CodeSearchNet case study: limits stated up front', href: '/work/codesearchnet/', kind: 'Case study' },
+      { label: 'graphify #576: a fix explained for beginners and experts', href: 'https://github.com/Graphify-Labs/graphify/pull/576', kind: 'Contribution' },
     ],
   },
 ];
