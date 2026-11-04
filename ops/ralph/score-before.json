@@ -52,7 +52,7 @@
  "categories": {
   "topicCoverage": 30,
   "answerStructure": 18.9,
-  "evidence": 10,
+  "evidence": 5.4,
   "depth": 8.7,
   "schema": 10,
   "freshCrawl": 9.8
@@ -61,94 +61,149 @@
   "/about/": {
    "words": 348,
    "questionH2": "0/5",
-   "faq": false
+   "faq": false,
+   "sourcedStats": 0,
+   "bareStats": 0,
+   "sourceDomains": 4
   },
   "/articles/ai-product-strategy-framework-india/": {
    "words": 1294,
    "questionH2": "11/13",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 11,
+   "sourceDomains": 0
   },
   "/articles/evals-are-the-new-prd/": {
    "words": 1356,
    "questionH2": "8/10",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 0,
+   "sourceDomains": 0
   },
   "/articles/how-to-move-into-ai-product-management-in-india/": {
    "words": 1200,
    "questionH2": "8/10",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 9,
+   "sourceDomains": 0
   },
   "/articles/india-ai-regulation-for-product-managers/": {
    "words": 1210,
    "questionH2": "7/9",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 2,
+   "sourceDomains": 0
   },
   "/articles/proof-over-certificates-ai-pm-skills/": {
    "words": 1452,
    "questionH2": "8/10",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 12,
+   "sourceDomains": 0
   },
   "/articles/what-is-ai-native-product-management/": {
    "words": 1255,
    "questionH2": "7/9",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 0,
+   "sourceDomains": 0
   },
   "/consult/": {
    "words": 880,
    "questionH2": "2/4",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 0,
+   "sourceDomains": 1
   },
   "/guide/": {
    "words": 1084,
    "questionH2": "5/6",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 6,
+   "sourceDomains": 2
   },
   "/": {
    "words": 1003,
    "questionH2": "2/6",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 2,
+   "sourceDomains": 6
   },
   "/learn/": {
    "words": 1042,
    "questionH2": "4/5",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 10,
+   "sourceDomains": 7
   },
   "/mentorship/": {
    "words": 576,
    "questionH2": "4/5",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 4,
+   "sourceDomains": 0
   },
   "/sebi-rag/": {
    "words": 1869,
    "questionH2": "5/10",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 3,
+   "sourceDomains": 6
   },
   "/skills/": {
    "words": 1762,
    "questionH2": "4/5",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 5,
+   "sourceDomains": 5
   },
   "/work/": {
    "words": 688,
    "questionH2": "5/5",
-   "faq": false
+   "faq": false,
+   "sourcedStats": 0,
+   "bareStats": 1,
+   "sourceDomains": 6
   },
   "/work/lecture-lens/": {
    "words": 1238,
    "questionH2": "6/8",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 1,
+   "sourceDomains": 6
   },
   "/work/trustvault/": {
    "words": 1175,
    "questionH2": "5/8",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 1,
+   "sourceDomains": 6
   },
   "/work/webauthn-prf-zktv/": {
    "words": 1196,
    "questionH2": "7/9",
-   "faq": true
+   "faq": true,
+   "sourcedStats": 0,
+   "bareStats": 1,
+   "sourceDomains": 7
   }
  },
+ "scorerVersion": 2,
  "schemaTypes": [
   "FAQPage",
   "HowTo",
@@ -158,6 +213,6 @@
   "BreadcrumbList",
   "TechArticle|Article|BlogPosting"
  ],
- "total": 87.4,
+ "total": 82.8,
  "contentPages": 18
 }

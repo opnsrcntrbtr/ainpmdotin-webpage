@@ -64,11 +64,13 @@
     "id": "R9",
     "priority": 6.5,
     "estPts": 0,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Harden geo-score: count only sourced statistics (outbound link or dated measurement in the same block) and distinct source domains; rebaseline",
     "ripplixGap": "Guard against scoring the scorer instead of the reader (proxy near ceiling)",
-    "topics": []
+    "topics": [],
+    "commit": "277b807",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "R5",
