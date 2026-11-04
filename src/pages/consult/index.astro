@@ -60,6 +60,7 @@ const services = [
       'Interview preparation for AI product roles',
       'A 90-day skills plan: evals, RAG, agents, regulation',
     ],
+    more: { href: '/mentorship/', label: 'Learn more about the four-session mentorship programme' },
   },
 ];
 
@@ -156,6 +157,7 @@ const schema = [
             <h3>{s.name}</h3>
             <p>{s.summary}</p>
             <ul>{s.points.map((p) => <li>{p}</li>)}</ul>
+            {s.more && <a class="more-link" href={s.more.href}>{s.more.label}</a>}
           </article>
         ))}
       </div>

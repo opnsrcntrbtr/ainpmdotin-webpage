@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+import BookCTA from '../../components/BookCTA.astro';
+import { SITE, AUTHOR, breadcrumb, faqSchema } from '../../data/site';
+
+const updated = new Date('2026-11-04');
+
+const sessions = [
+  { n: 1, title: 'Goal and gap plan', text: 'Agree the role you are aiming for, review your CV and LinkedIn against real job descriptions, and pick one portfolio project.' },
+  { n: 2, title: 'Evals and product judgement', text: 'Review your golden set, rubric and model comparison from the free learning path. Practise explaining trade-offs in rupees.' },
+  { n: 3, title: 'Portfolio project review', text: 'Line-by-line review of your published project: problem framing, evaluation results, trust design and decision log.' },
+  { n: 4, title: 'Interview practice', text: 'A mock AI product interview: product sense, an evaluation case and a regulation question, with written feedback.' },
+];
+
+const faq = [
+  { q: 'What is the AI PM mentorship programme?', a: 'Four 1:1 video sessions with Ian Pinto over six to eight weeks, plus written feedback by email between sessions. It follows the free AINPM learning path and ends with a reviewed portfolio project and a mock interview.' },
+  { q: 'How is mentorship different from a 30-minute consultation?', a: 'A consultation answers one question in one call. Mentorship is a structured plan across four sessions, with homework, reviews of your work and progress checks.' },
+  { q: 'Does the mentorship include placement or job referrals?', a: 'No. There is no placement guarantee and no referral promise. The programme helps you build evidence of skill that hiring managers can check, and prepare for interviews.' },
+  { q: 'How much does mentorship cost?', a: `It is a paid programme. Pricing is shared on request at ${AUTHOR.email}. Every engagement starts with a 30-minute consultation to check fit.` },
+  { q: 'Who is the mentorship for?', a: 'Product managers moving into AI-native roles, engineers, analysts and consultants switching into product, and professionals in Indian BFSI or capability centres who want to lead AI products.' },
+];
+
+const schema = [
+  {
+    '@type': 'Service', '@id': 'https://ainpm.in/mentorship/#service',
+    name: 'AI product management mentorship programme',
+    serviceType: 'Career mentorship',
+    description: 'Four 1:1 sessions over six to eight weeks for professionals moving into AI product management: goal plan, evals and product judgement, portfolio review and interview practice.',
+    provider: { '@id': 'https://ainpm.in/about/#ian-pinto' }, areaServed: { '@type': 'Country', name: 'India' },
+    audience: { '@type': 'Audience', audienceType: 'Product managers and professionals switching into AI product management' },
+    url: 'https://ainpm.in/mentorship/',
+    offers: { '@type': 'Offer', availability: 'https://schema.org/InStock', url: SITE.booking, priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', description: 'Price on request' } },
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Mentorship sessions', itemListElement: sessions.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: `Session ${s.n}: ${s.title}`, description: s.text } })) },
+  },
+  {
+    '@type': 'HowTo', '@id': 'https://ainpm.in/mentorship/#switch',
+    name: 'How to switch into AI product management',
+    step: [
+      { '@type': 'HowToStep', position: 1, name: 'Choose a target role', text: 'Collect five real AI PM job descriptions and list the skills they repeat.' },
+      { '@type': 'HowToStep', position: 2, name: 'Learn the core skills', text: 'Work through evals, cost per task, trust design and Indian regulation on the free AINPM learning path.' },
+      { '@type': 'HowToStep', position: 3, name: 'Build one public project', text: 'Ship a small AI product with a golden set, results, cost per task and a decision log.' },
+      { '@type': 'HowToStep', position: 4, name: 'Map skills to evidence', text: 'Write each skill as one sentence and link it to the public proof.' },
+      { '@type': 'HowToStep', position: 5, name: 'Practise interviews', text: 'Rehearse product sense, evaluation and regulation questions out loud, with feedback.' },
+    ],
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Mentorship', path: '/mentorship/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="AI Product Management Mentorship in India | AINPM.in"
+  description="A four-session AI PM mentorship with Ian Pinto for professionals switching into AI product management in India: goal plan, evals, portfolio review and mock interview."
+  schema={schema}
+  updated={updated}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / Mentorship</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Mentorship programme · Updated 4 Nov 2026</span>
+    <h1>AI product management mentorship for career switchers</h1>
+    <p class="answer"><strong>A paid, four-session 1:1 mentorship with Ian Pinto over six to eight weeks, for people moving into AI product management in India.</strong> It builds on the <a href="/learn/">free learning path</a> and ends with a reviewed portfolio project and a mock interview. It does not include placement or referrals.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="#switch">Career switch</a></li>
+      <li><a href="#compare">Compare options</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+
+  <section id="sessions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Programme</span>
+        <h2>What happens in the four sessions?</h2>
+        <p class="muted">Each session is 45 minutes on video. Between sessions you get written feedback on your work by email.</p>
+      </div>
+      <div class="steps">
+        {sessions.map((s) => (
+          <div class="step"><div><h3>Session {s.n}: {s.title}</h3><p>{s.text}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="switch">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Career switch</span>
+        <h2>How do you switch into AI product management?</h2>
+        <p class="muted">The same five steps work with or without a mentor. Mentorship adds feedback and accountability.</p>
+      </div>
+      <ol class="guide-points">
+        <li><span><strong>Choose a target role.</strong> Collect five real AI PM job descriptions and list the skills they repeat.</span></li>
+        <li><span><strong>Learn the core skills.</strong> Evals, cost per task, trust design and Indian regulation, in the <a href="/learn/">free learning path</a>.</span></li>
+        <li><span><strong>Build one public project.</strong> A small AI product with a golden set, results, cost per task and a decision log. See <a href="/work/">my work</a> for examples.</span></li>
+        <li><span><strong>Map skills to evidence.</strong> One sentence per skill, linked to proof, like the <a href="/skills/">skills matrix</a>.</span></li>
+        <li><span><strong>Practise interviews.</strong> Rehearse product sense, evaluation and regulation questions out loud, with feedback.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Options</span>
+        <h2>Which option fits you: free path, mentorship or a consultation?</h2>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th scope="col"></th><th scope="col">Free learning path</th><th scope="col">Mentorship</th><th scope="col">Consultation</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Format</th><td>Self-paced, 6 modules</td><td>4 × 45-minute 1:1 sessions</td><td>1 × 30-minute call</td></tr>
+          <tr><th scope="row">Time</th><td>About 24 hours over 6 weeks</td><td>6–8 weeks</td><td>One call</td></tr>
+          <tr><th scope="row">Feedback on your work</th><td>No</td><td>Yes, written and live</td><td>On one question</td></tr>
+          <tr><th scope="row">Price</th><td>Free</td><td>On request</td><td>On request</td></tr>
+          <tr><th scope="row">Placement or referrals</th><td>No</td><td>No</td><td>No</td></tr>
+        </tbody>
+      </table></div>
+      <p><a class="more-link" href="/consult/">Start with a 30-minute consultation</a></p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions about mentorship</h2></div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+    </div>
+  </section>
+
+  <BookCTA id="mentorship" />
+</Base>
