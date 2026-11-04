@@ -8,8 +8,12 @@ import { PROJECTS } from '../../data/projects';
 import { SKILLS } from '../../data/skills';
 import { LINKS } from '../../data/graph';
 import { breadcrumb } from '../../data/site';
+import { CONTRIBUTIONS, contributionsCheckedOn } from '../../data/contributions';
+const prs = CONTRIBUTIONS.filter((c) => c.kind === 'merged-pr');
+const pkgs = CONTRIBUTIONS.filter((c) => c.kind === 'package');
+const fmtD = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-05');
 const evidence = SKILLS.reduce((n, s) => n + s.evidence.length, 0);
 const schema = [
   {
@@ -36,7 +40,7 @@ const schema = [
 >
   <div class="wrap crumb"><a href="/">AINPM.in</a> / Work</div>
   <div class="wrap page-head">
-    <span class="eyebrow">Portfolio · Updated 2 Nov 2026</span>
+    <span class="eyebrow">Portfolio · Updated 5 Nov 2026</span>
     <h1>Products I've built and shipped</h1>
     <p class="answer"><strong>Five open-source products by Ian Pinto: an AI assistant for SEBI regulation, a zero-knowledge password manager, a passkey cryptography library with a research preprint, a local-AI study app for macOS, and fine-tuned code search.</strong> Each card shows dated numbers. Open a case study to see the trust design and trade-offs.</p>
   </div>
@@ -85,10 +89,37 @@ const schema = [
     </div>
   </section>
 
+  <section id="open-source">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Open source</span>
+        <h2>What have I contributed to other open-source projects?</h2>
+        <p class="muted">Merged pull requests to projects I don't own, and small packages I publish and maintain. Only merged pull requests are listed. Download counts are small and stated as they are; checked {fmtD(contributionsCheckedOn)}.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="os-tbl">
+          <thead><tr><th scope="col">Merged pull request</th><th scope="col">Project</th><th scope="col">Merged</th><th scope="col">What changed</th></tr></thead>
+          <tbody>
+            {prs.map((c) => (<tr><td><a href={c.href} target="_blank" rel="noopener">{c.title} ↗</a></td><td>{c.project}</td><td class="v">{fmtD(c.date)}</td><td>{c.summary}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap" style="margin-top:20px">
+        <table class="os-tbl">
+          <thead><tr><th scope="col">Package</th><th scope="col">Registry</th><th scope="col">First published</th><th scope="col">What it does</th><th scope="col">Recent downloads</th></tr></thead>
+          <tbody>
+            {pkgs.map((c) => (<tr><td><a href={c.href} target="_blank" rel="noopener">{c.title} ↗</a></td><td>{c.project}</td><td class="v">{fmtD(c.date)}</td><td>{c.summary}</td><td>{c.stat}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <p class="note">All {PROJECTS.length} case studies above and every package are on <a href="https://github.com/opnsrcntrbtr" target="_blank" rel="noopener">GitHub ↗</a> and <a href="https://huggingface.co/opnsrcntrbtrian" target="_blank" rel="noopener">Hugging Face ↗</a>. A machine-readable version is at <a href="/portfolio.json">/portfolio.json</a>.</p>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">04 · Common threads</span>
+        <span class="eyebrow">05 · Common threads</span>
         <h2>What do these projects have in common?</h2>
       </div>
       <div class="grid g3">
