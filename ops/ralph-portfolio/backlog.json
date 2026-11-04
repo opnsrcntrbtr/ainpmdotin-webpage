@@ -42,10 +42,12 @@
   {
     "id": "P5",
     "priority": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Skills matrix refresh: add new evidence (credentials, CSNE, contributions) so every skill has 4+ links of 3+ kinds",
-    "accredible": "44% want clearer skill descriptions"
+    "accredible": "44% want clearer skill descriptions",
+    "commit": "b2ace61",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "P6",
