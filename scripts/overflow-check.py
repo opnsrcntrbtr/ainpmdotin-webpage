@@ -5,7 +5,8 @@ bad = 0
 with sync_playwright() as p:
     b = p.chromium.launch(); m = b.new_page(viewport={'width': 390, 'height': 844})
     for path in sys.argv[1:]:
-        m.goto('http://localhost:4329' + path); m.wait_for_timeout(300)
+        r = m.goto('http://localhost:4329' + path); m.wait_for_timeout(300)
+        if not r or r.status != 200: print(path, 'HTTP', r and r.status); bad += 1; continue
         w = m.evaluate('document.documentElement.scrollWidth')
         print(path, 'OK' if w <= 390 else f'OVERFLOW {w}px'); bad += w > 390
         m.screenshot(path='/tmp/claude-0/ov' + path.strip('/').replace('/', '_') + '.png', full_page=False)
