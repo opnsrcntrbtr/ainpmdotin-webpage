@@ -1,26 +1,99 @@
 [
-  { "id": "R1", "priority": 10, "estPts": 12, "status": "open", "owner": "claude",
+  {
+    "id": "R1",
+    "priority": 10,
+    "estPts": 12,
+    "status": "done",
+    "owner": "claude",
     "title": "Free structured learning path /learn/ (modules, roadmap, Course + HowTo schema, pricing = free)",
-    "ripplixGap": "Not a structured course; Course Pricing 0%; AI PM Courses", "topics": ["AI PM Courses", "Course Pricing", "Learning Resources"] },
-  { "id": "R2", "priority": 9, "estPts": 8, "status": "open", "owner": "claude",
+    "ripplixGap": "Not a structured course; Course Pricing 0%; AI PM Courses",
+    "topics": [
+      "AI PM Courses",
+      "Course Pricing",
+      "Learning Resources"
+    ],
+    "commit": "20be871",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "R2",
+    "priority": 9,
+    "estPts": 8,
+    "status": "open",
+    "owner": "claude",
     "title": "Mentorship programme page /mentorship/ with honest scope (not placement), Service schema",
-    "ripplixGap": "Only 30-minute consultations; PM Mentorship blind spot (0 of 25 answers)", "topics": ["PM Mentorship", "PM Career Switch"] },
-  { "id": "R3", "priority": 8, "estPts": 6, "status": "open", "owner": "claude",
+    "ripplixGap": "Only 30-minute consultations; PM Mentorship blind spot (0 of 25 answers)",
+    "topics": [
+      "PM Mentorship",
+      "PM Career Switch"
+    ]
+  },
+  {
+    "id": "R3",
+    "priority": 8,
+    "estPts": 6,
+    "status": "open",
+    "owner": "claude",
     "title": "Article: how to move into AI product management from India (career switch roadmap, choosing a course)",
-    "ripplixGap": "Learn stage 0%; PM Career Switch; Course Pricing", "topics": ["PM Career Switch", "AI PM Courses", "Course Pricing"] },
-  { "id": "R4", "priority": 7, "estPts": 6, "status": "open", "owner": "claude",
+    "ripplixGap": "Learn stage 0%; PM Career Switch; Course Pricing",
+    "topics": [
+      "PM Career Switch",
+      "AI PM Courses",
+      "Course Pricing"
+    ]
+  },
+  {
+    "id": "R4",
+    "priority": 7,
+    "estPts": 6,
+    "status": "open",
+    "owner": "claude",
     "title": "Article: AI product strategy framework for Indian teams (statistics, sources, HowTo)",
-    "ripplixGap": "AI Product Strategy 0%", "topics": ["AI Product Strategy"] },
-  { "id": "R5", "priority": 6, "estPts": 4, "status": "open", "owner": "claude",
+    "ripplixGap": "AI Product Strategy 0%",
+    "topics": [
+      "AI Product Strategy"
+    ]
+  },
+  {
+    "id": "R5",
+    "priority": 6,
+    "estPts": 4,
+    "status": "open",
+    "owner": "claude",
     "title": "Evidence density pass: add dated statistics and outbound sources to /work/, /about/, home",
-    "ripplixGap": "GEO statistics/citations lever; brand recognition", "topics": [] },
-  { "id": "R6", "priority": 5, "estPts": 3, "status": "open", "owner": "claude",
+    "ripplixGap": "GEO statistics/citations lever; brand recognition",
+    "topics": []
+  },
+  {
+    "id": "R6",
+    "priority": 5,
+    "estPts": 3,
+    "status": "open",
+    "owner": "claude",
     "title": "Regulation compliance hub: question-style H2s and checklist on /guide/#radar + article",
-    "ripplixGap": "AI Regulation Compliance 0% in answers", "topics": ["AI Regulation Compliance"] },
-  { "id": "R7", "priority": 4, "estPts": 3, "status": "open", "owner": "ian",
+    "ripplixGap": "AI Regulation Compliance 0% in answers",
+    "topics": [
+      "AI Regulation Compliance"
+    ]
+  },
+  {
+    "id": "R7",
+    "priority": 4,
+    "estPts": 3,
+    "status": "open",
+    "owner": "ian",
     "title": "Off-site signals: LinkedIn post per new page, dev.to cross-post with canonical, GitHub READMEs link to ainpm.in",
-    "ripplixGap": "Limited brand recognition; domain hard to verify", "topics": [] },
-  { "id": "R8", "priority": 3, "estPts": 2, "status": "open", "owner": "ian",
+    "ripplixGap": "Limited brand recognition; domain hard to verify",
+    "topics": []
+  },
+  {
+    "id": "R8",
+    "priority": 3,
+    "estPts": 2,
+    "status": "open",
+    "owner": "ian",
     "title": "Re-run Ripplix (or equivalent) monthly and paste headline numbers into ops/ralph/external.jsonl",
-    "ripplixGap": "Ground-truth measurement", "topics": [] }
+    "ripplixGap": "Ground-truth measurement",
+    "topics": []
+  }
 ]

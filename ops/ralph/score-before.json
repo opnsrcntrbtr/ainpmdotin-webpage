@@ -1,0 +1,138 @@
+{
+ "topics": {
+  "AI PM Courses": {
+   "score": 1,
+   "headPages": [
+    "/learn/",
+    "/work/lecture-lens/"
+   ]
+  },
+  "AI Product Strategy": {
+   "score": 0.5,
+   "headPages": []
+  },
+  "AI Regulation Compliance": {
+   "score": 1,
+   "headPages": [
+    "/articles/india-ai-regulation-for-product-managers/",
+    "/sebi-rag/"
+   ]
+  },
+  "Course Pricing": {
+   "score": 1,
+   "headPages": [
+    "/learn/"
+   ]
+  },
+  "Learning Resources": {
+   "score": 1,
+   "headPages": [
+    "/guide/"
+   ]
+  },
+  "PM Career Switch": {
+   "score": 0,
+   "headPages": []
+  },
+  "PM Mentorship": {
+   "score": 0.5,
+   "headPages": []
+  }
+ },
+ "categories": {
+  "topicCoverage": 21.4,
+  "answerStructure": 18.7,
+  "evidence": 10.3,
+  "depth": 8.8,
+  "schema": 10,
+  "freshCrawl": 9.8
+ },
+ "pages": {
+  "/about/": {
+   "words": 348,
+   "questionH2": "0/5",
+   "faq": false
+  },
+  "/articles/evals-are-the-new-prd/": {
+   "words": 1337,
+   "questionH2": "8/10",
+   "faq": true
+  },
+  "/articles/india-ai-regulation-for-product-managers/": {
+   "words": 1191,
+   "questionH2": "7/9",
+   "faq": true
+  },
+  "/articles/proof-over-certificates-ai-pm-skills/": {
+   "words": 1433,
+   "questionH2": "8/10",
+   "faq": true
+  },
+  "/articles/what-is-ai-native-product-management/": {
+   "words": 1236,
+   "questionH2": "7/9",
+   "faq": true
+  },
+  "/consult/": {
+   "words": 873,
+   "questionH2": "2/4",
+   "faq": true
+  },
+  "/guide/": {
+   "words": 1084,
+   "questionH2": "5/6",
+   "faq": true
+  },
+  "/": {
+   "words": 994,
+   "questionH2": "2/6",
+   "faq": true
+  },
+  "/learn/": {
+   "words": 1041,
+   "questionH2": "4/5",
+   "faq": true
+  },
+  "/sebi-rag/": {
+   "words": 1869,
+   "questionH2": "5/10",
+   "faq": true
+  },
+  "/skills/": {
+   "words": 1762,
+   "questionH2": "4/5",
+   "faq": true
+  },
+  "/work/": {
+   "words": 688,
+   "questionH2": "5/5",
+   "faq": false
+  },
+  "/work/lecture-lens/": {
+   "words": 1238,
+   "questionH2": "6/8",
+   "faq": true
+  },
+  "/work/trustvault/": {
+   "words": 1175,
+   "questionH2": "5/8",
+   "faq": true
+  },
+  "/work/webauthn-prf-zktv/": {
+   "words": 1196,
+   "questionH2": "7/9",
+   "faq": true
+  }
+ },
+ "schemaTypes": [
+  "FAQPage",
+  "HowTo",
+  "Course",
+  "Service",
+  "Person",
+  "BreadcrumbList",
+  "TechArticle|Article|BlogPosting"
+ ],
+ "total": 79,
+ "contentPages": 15
+}
