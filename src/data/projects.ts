@@ -82,4 +82,21 @@ export const PROJECTS: Project[] = [
       { label: 'GitHub', href: 'https://github.com/opnsrcntrbtr/lecture-lens' },
     ],
   },
+  {
+    slug: 'codesearchnet',
+    href: '/work/codesearchnet/',
+    name: 'CodeSearchNet Find & Explain',
+    tagline: 'Search Python code in plain English, then get a one-line explanation of each function.',
+    summary: 'Fine-tuned MiniLM retrieval (MRR 0.815 vs BM25 0.527) and a fine-tuned flan-t5 summariser, evaluated on the official CodeSearchNet test split with significance tests.',
+    kind: 'AI · Retrieval',
+    status: 'Live demo',
+    tags: ['Fine-tuning', 'Retrieval', 'Evals'],
+    skills: ['ai-evaluation', 'rag-product', 'communicating-quality'],
+    lastActivity: '2026-08-13',
+    links: [
+      { label: 'Live demo', href: 'https://huggingface.co/spaces/opnsrcntrbtrian/csne-find-and-explain' },
+      { label: 'GitHub', href: 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain' },
+      { label: 'Model', href: 'https://huggingface.co/opnsrcntrbtrian/csne-minilm-retrieval-full-1ep' },
+    ],
+  },
 ];

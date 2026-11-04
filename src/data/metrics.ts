@@ -64,4 +64,16 @@ export const SCORECARDS: Record<string, Scorecard> = {
       { kind: 'stat', label: 'Smoke-eval cases', value: '6' },
     ],
   },
+  codesearchnet: {
+    title: 'Retrieval on 1,000 test queries (1 gold + 999 distractors)',
+    asOf: 'Project report, Aug 2026 · official CodeSearchNet Python test split',
+    note: 'Tick = baseline (BM25 or zero-shot). Queries are author-written docstrings, which likely overstates real-world search quality.',
+    source: { label: 'REPORT.md', href: 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain/blob/main/REPORT.md' },
+    metrics: [
+      { kind: 'rate', label: 'MRR, fine-tuned (BM25 0.527)', value: 0.8151, floor: 0.5272 },
+      { kind: 'rate', label: 'Recall@1', value: 0.725, floor: 0.407 },
+      { kind: 'rate', label: 'Recall@10', value: 0.961, floor: 0.747 },
+      { kind: 'rate', label: 'Summary BERTScore F1 (zero-shot 0.747)', value: 0.8463, floor: 0.7473 },
+    ],
+  },
 };
