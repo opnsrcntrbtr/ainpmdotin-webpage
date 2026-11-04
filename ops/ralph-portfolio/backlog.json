@@ -104,5 +104,13 @@
     "accredible": "79%: value should be communicated better",
     "commit": "864bd66",
     "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P12",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Update the Accredible research article with how the portfolio applies each finding (verification, applied skills, recency, contributions, portfolio.json)",
+    "accredible": "All findings, applied"
   }
 ]

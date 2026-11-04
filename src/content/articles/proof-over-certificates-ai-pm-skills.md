@@ -3,7 +3,7 @@ title: "Proof Over Certificates: Skills Evidence for AI PMs"
 description: "What Accredible's 2026 State of Credentialing research means for AI product managers in India, and how to turn skills into evidence employers can verify."
 tldr: "Accredible's 2026 research says credentials help but do not guarantee career outcomes, and 44% of learners want clearer descriptions of the skills they gained. For AI product managers, the answer is a proof-of-skill matrix: each skill in employer language, mapped to a framework like O*NET or NACE, and linked to public evidence such as demos, eval logs and verifiable credentials."
 pubDate: 2026-11-02
-updatedDate: 2026-11-02
+updatedDate: 2026-11-05
 tags: ["Careers", "Skills", "Credentials"]
 readingMinutes: 7
 faq:
@@ -101,6 +101,16 @@ For an Indian PM, the practical steps are simple: claim the digital version of e
 5. **Date the page and review it every quarter.** Stale evidence is weak evidence.
 
 I applied these steps to my own work. The result is the [AINPM.in skills matrix](/skills/): eight skills, each mapped to O*NET and NACE and linked to demos, code, eval logs, publications and credentials.
+
+## How did I apply this to my own portfolio?
+
+I rebuilt my portfolio on this site against the same research, and every number below can be checked:
+
+- **Verification first.** Accredible's 2025 research found 84% of HR leaders have suspected or found exaggerated qualifications, and 53% verify claims frequently. 7 of my 12 credentials now link to the issuer's own page on Credly or Accredible, with issue and expiry dates. Two records I uploaded myself are labelled as such. See [my credentials](/skills/#credentials).
+- **Applied skills and test results.** Employers in the same study valued applied skills in a real context (58%) and test results (51%). Each of my [five case studies](/work/) shows dated results, including weak ones, and a box that names the skills it proves.
+- **Recent use.** 47% valued recent skill use, so every project shows its last public activity date.
+- **Work on other people's code.** Two merged pull requests and seven small published packages are listed with real download counts on the [work page](/work/#open-source).
+- **Machine-readable.** The whole portfolio is also published as [portfolio.json](/portfolio.json) for recruiters' tools and AI assistants.
 
 ## What should recruiters and hiring managers take from this?
 
