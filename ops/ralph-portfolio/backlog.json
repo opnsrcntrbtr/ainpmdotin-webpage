@@ -98,9 +98,11 @@
   {
     "id": "P11",
     "priority": 7,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Home and About surface proof: verified-credential and merged-PR counts in the proof bar, linked to /skills/#credentials and /work/#open-source",
-    "accredible": "79%: value should be communicated better"
+    "accredible": "79%: value should be communicated better",
+    "commit": "864bd66",
+    "doneOn": "2026-11-04"
   }
 ]
