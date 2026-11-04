@@ -1,9 +1,9 @@
 {
- "total": 74.8,
+ "total": 76.8,
  "categories": {
   "verifiedCredentials": 13,
   "skillsEvidence": 15.8,
-  "appliedProjects": 16,
+  "appliedProjects": 18,
   "testResults": 15,
   "recency": 10,
   "contributions": 0,
@@ -12,7 +12,7 @@
  "counts": {
   "credentials": 12,
   "verified": 9,
-  "projects": 4,
+  "projects": 5,
   "skills": 8,
   "mergedPRs": 0,
   "packages": 0
