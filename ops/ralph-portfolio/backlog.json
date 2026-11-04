@@ -1,0 +1,11 @@
+[
+  {"id":"P1","priority":10,"status":"open","owner":"claude","title":"Verified credentials: issuer links (Credly, Accredible), issue/expiry dates, verification type, new PMI/Databricks/Google Cloud badges; schema url/dateCreated/validUntil","accredible":"84% suspect exaggeration; 53% verify frequently"},
+  {"id":"P2","priority":9,"status":"open","owner":"claude","title":"Project proof fields: skills mapping and last-activity date for every project; dated results surfaced on cards; /portfolio.json machine-readable export","accredible":"Applied skills 58%; recent skill use 47%"},
+  {"id":"P3","priority":8,"status":"open","owner":"claude","title":"New case study: CodeSearchNet Find & Explain (fine-tuned retrieval, MRR 0.815, HF Space + 2 models)","accredible":"Test results 51%; applied skills 58%"},
+  {"id":"P4","priority":7,"status":"open","owner":"claude","title":"Open-source contributions: merged PRs (graphify #576, openselfservice #365) and published npm/PyPI packages with dated download counts","accredible":"Relevant experience 76%; applied skills 58%"},
+  {"id":"P5","priority":6,"status":"open","owner":"claude","title":"Skills matrix refresh: add new evidence (credentials, CSNE, contributions) so every skill has 4+ links of 3+ kinds","accredible":"44% want clearer skill descriptions"},
+  {"id":"P6","priority":5,"status":"open","owner":"claude","title":"Case-study proof boxes: skills demonstrated + evidence you can check + last activity on all case studies","accredible":"79%: value should be communicated better"},
+  {"id":"P7","priority":4,"status":"open","owner":"claude","title":"Labs: MLX AutoResearch agent and other experiments listed with honest status (no results yet)","accredible":"Recent skill use 47%"},
+  {"id":"P8","priority":3,"status":"open","owner":"ian","title":"Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording","accredible":"Verification"},
+  {"id":"P9","priority":2,"status":"open","owner":"ian","title":"Optional: one anonymised day-job outcome (AMC platform) you approve for publication","accredible":"Relevant experience 76%"}
+]

@@ -46,7 +46,7 @@ const schema = [
       </div>
       <ul class="chips">
         {CREDENTIALS.map((c) => (
-          <li>{c.verifyUrl ? <a href={c.verifyUrl} target="_blank" rel="noopener">{c.name}{c.issuer ? ` — ${c.issuer}` : ''} ↗</a> : <Fragment>{c.name}{c.issuer ? ` — ${c.issuer}` : ''}</Fragment>}</li>
+          <li>{c.verifyUrl && c.verification === 'issuer' ? <a href={c.verifyUrl} target="_blank" rel="noopener">{c.name}{c.issuer ? ` — ${c.issuer}` : ''} ↗</a> : <Fragment>{c.name}{c.issuer ? ` — ${c.issuer}` : ''}</Fragment>}</li>
         ))}
       </ul>
       <p class="muted" style="margin-top:-8px">Credentials are one signal. <a class="more-link" href="/skills/">Learn more: each skill with its public evidence</a></p>

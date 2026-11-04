@@ -147,20 +147,33 @@ export const SKILLS: Skill[] = [
 export interface Credential {
   name: string;
   issuer?: string;
-  category: 'degree' | 'certification' | 'certificate';
-  /** Public verification link (Accredible, Credly, Open Badges 3.0, issuer page). Leave empty until available. */
+  category: 'degree' | 'certification' | 'certificate' | 'badge';
+  /** Public verification page (Credly, Accredible, issuer). Leave empty until available. */
   verifyUrl?: string;
+  /** 'issuer': issued and hosted by the issuer's platform. 'self-uploaded': a record Ian uploaded himself. */
+  verification?: 'issuer' | 'self-uploaded';
+  platform?: 'Credly' | 'Accredible';
+  issued?: string; // ISO date, from the verification page
+  expires?: string; // ISO date, from the verification page
+  note?: string;
   skills: string[]; // Skill ids this credential supports
 }
 
+// Checked against each verification page on 5 Nov 2026. Credly profile: https://www.credly.com/users/ian-pinto/badges
+const CREDLY = 'https://www.credly.com/users/ian-pinto/badges';
 export const CREDENTIALS: Credential[] = [
-  { name: 'MBA', category: 'degree', skills: ['product-strategy'] },
-  { name: 'BE (Information Technology)', category: 'degree', skills: ['privacy-security'] },
-  { name: 'Project Management Professional (PMP)', issuer: 'Project Management Institute', category: 'certification', skills: ['program-delivery'] },
-  { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', category: 'certification', skills: ['program-delivery'] },
+  { name: 'Project Management Professional (PMP)', issuer: 'Project Management Institute', category: 'certification', verifyUrl: 'https://www.credly.com/badges/af25e5e0-fabb-42a7-8083-4e4f1b9d9d51/public_url', verification: 'issuer', platform: 'Credly', issued: '2015-08-21', expires: '2027-08-21', skills: ['program-delivery', 'communicating-quality'] },
+  { name: 'Generative AI Overview for Project Managers', issuer: 'Project Management Institute', category: 'badge', verifyUrl: CREDLY, verification: 'issuer', platform: 'Credly', issued: '2023-09-28', skills: ['program-delivery', 'product-strategy'] },
+  { name: 'Product Management (Online Executive Certificate Programme)', issuer: 'Indian School of Business (ISB) Executive Education', category: 'certificate', verifyUrl: 'https://www.credential.net/cc9d4612-76c4-47b7-8c95-d6b81ebe53fe', verification: 'issuer', platform: 'Accredible', issued: '2022-04-01', note: 'Programme 29 Nov 2021 to 14 Mar 2022, delivered with Emeritus', skills: ['product-strategy'] },
+  { name: 'Academy Accreditation: Generative AI Fundamentals', issuer: 'Databricks Academy', category: 'badge', verifyUrl: 'https://www.credential.net/46362a83-a223-47bb-a783-1c522b65a1fd', verification: 'issuer', platform: 'Accredible', issued: '2023-09-30', skills: ['rag-product', 'ai-evaluation'] },
+  { name: 'Build a Data Warehouse with BigQuery (skill badge)', issuer: 'Google Cloud', category: 'badge', verifyUrl: CREDLY, verification: 'issuer', platform: 'Credly', issued: '2024-11-19', skills: ['rag-product'] },
+  { name: 'Streaming Analytics into BigQuery (skill badge)', issuer: 'Google Cloud', category: 'badge', verifyUrl: CREDLY, verification: 'issuer', platform: 'Credly', issued: '2024-12-01', skills: ['rag-product'] },
+  { name: 'Data Science programme, Course 1', issuer: 'upGrad', category: 'certificate', verifyUrl: 'https://www.credential.net/e9075bc5-d4fb-4546-8933-d0247e45e1b6', verification: 'issuer', platform: 'Accredible', issued: '2020-08-18', note: 'Issued as "DS C18 Course 1 LOA"', skills: ['ai-evaluation'] },
   { name: 'AI Product Management', issuer: 'IIT Kharagpur with upGrad', category: 'certificate', skills: ['product-strategy', 'ai-evaluation'] },
-  { name: 'Product Management', issuer: 'Indian School of Business (ISB)', category: 'certificate', skills: ['product-strategy'] },
-  { name: 'Certified AI and cloud-native engineering', category: 'certificate', skills: ['rag-product', 'local-ai'] },
+  { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', category: 'certification', skills: ['program-delivery'] },
+  { name: 'AWS Cloud Practitioner Essentials', issuer: 'Amazon Web Services', category: 'certificate', verifyUrl: 'https://www.credential.net/93e91ee4-acb1-4b14-b7ac-a452b086712c?username=ianpinto', verification: 'self-uploaded', platform: 'Accredible', note: 'Course completion, ID E-N0539V', skills: ['privacy-security'] },
+  { name: 'MBA, Information Technology and Systems Management', issuer: 'NMIMS Global Access School for Continuing Education', category: 'degree', verifyUrl: 'https://www.credential.net/1d9b1ed0-221a-402e-80d2-42848a14d003?username=ianpinto', verification: 'self-uploaded', platform: 'Accredible', note: 'Semester transcripts uploaded by Ian', skills: ['product-strategy'] },
+  { name: 'BE (Information Technology)', category: 'degree', skills: ['privacy-security'] },
 ];
 
 export const credentialSchema = CREDENTIALS.map((c) => ({
@@ -169,4 +182,6 @@ export const credentialSchema = CREDENTIALS.map((c) => ({
   credentialCategory: c.category,
   ...(c.issuer ? { recognizedBy: { '@type': 'Organization', name: c.issuer } } : {}),
   ...(c.verifyUrl ? { url: c.verifyUrl } : {}),
+  ...(c.issued ? { dateCreated: c.issued } : {}),
+  ...(c.expires ? { expires: c.expires } : {}),
 }));

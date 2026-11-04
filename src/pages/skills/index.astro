@@ -5,6 +5,7 @@ import EvidenceHeatmap from '../../components/EvidenceHeatmap.astro';
 import SkillProjectMap from '../../components/SkillProjectMap.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 import { SKILLS, CREDENTIALS } from '../../data/skills';
+import { fmtDate } from '../../data/site';
 
 const updated = new Date('2026-11-02');
 const isExternal = (h: string) => h.startsWith('http');
@@ -153,7 +154,8 @@ const sources = [
       <div class="section-head">
         <span class="eyebrow">02 · Credentials</span>
         <h2>Which credentials back these skills?</h2>
-        <p class="muted">Credentials are one signal, not the whole case. Each one below is linked to the skills it supports. Verification links, such as Open Badges 3.0 or issuer pages, are added as they become available.</p>
+        <p class="muted">Credentials are one signal, not the whole case. Accredible's 2025 research found 84% of HR leaders have suspected or found exaggerated qualifications, and 53% verify claims frequently. So each credential below links to the issuer's own verification page where one exists, shows its dates, and names the skills it supports. Records I uploaded myself are labelled as such.</p>
+        <p class="note">{CREDENTIALS.filter((c) => c.verification === 'issuer').length} of {CREDENTIALS.length} credentials are verifiable on the issuer's platform · checked 5 Nov 2026</p>
       </div>
       <div class="grid g3">
         {CREDENTIALS.map((c) => (
@@ -161,12 +163,15 @@ const sources = [
             <span class="meta">{c.category}</span>
             <h3>{c.name}</h3>
             {c.issuer && <p class="cred-issuer">{c.issuer}</p>}
+            {(c.issued || c.expires || c.note) && <p class="cred-dates">{c.issued && <Fragment>Issued {fmtDate(new Date(c.issued))}</Fragment>}{c.expires && <Fragment> · valid until {fmtDate(new Date(c.expires))}</Fragment>}{c.note && <Fragment>{(c.issued || c.expires) ? ' · ' : ''}{c.note}</Fragment>}</p>}
             <p class="cred-skills">Supports: {c.skills.map((id, j) => {
               const s = SKILLS.find((x) => x.id === id);
               return <Fragment>{j > 0 && ', '}<a href={`#${id}`}>{s?.name ?? id}</a></Fragment>;
             })}</p>
             {c.verifyUrl
-              ? <a class="verify ok" href={c.verifyUrl} target="_blank" rel="noopener">Verify credential ↗</a>
+              ? (c.verification === 'self-uploaded'
+                  ? <a class="verify self" href={c.verifyUrl} target="_blank" rel="noopener">Self-uploaded record on {c.platform} ↗</a>
+                  : <a class="verify ok" href={c.verifyUrl} target="_blank" rel="noopener">Verify on {c.platform} ↗</a>)
               : <span class="verify">Verification link on request</span>}
           </article>
         ))}

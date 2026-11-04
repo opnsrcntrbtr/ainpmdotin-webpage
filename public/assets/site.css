@@ -540,3 +540,5 @@ a:hover{color:var(--teal-ink)}
 .hero7 h1 em,.phero h1 em{font-style:normal;color:var(--teal);background:none;-webkit-text-fill-color:currentColor}
 .hero7 h1{font-size:clamp(2.3rem,4.8vw,3.6rem);letter-spacing:-.02em;max-width:18ch}
 p .more-link{margin-top:0;font-size:inherit}
+.card .cred-dates{font-size:.82rem;color:var(--ink-2);margin:-4px 0 10px}
+a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
