@@ -8,7 +8,13 @@ export interface Project {
   status: string;
   tags: string[];
   links: { label: string; href: string }[];
+  /** Skill ids from src/data/skills.ts that this project proves. */
+  skills?: string[];
+  /** Last public activity (repo update or release), ISO date, checked on activityCheckedOn. */
+  lastActivity?: string;
 }
+
+export const activityCheckedOn = '2026-11-05';
 
 export const PROJECTS: Project[] = [
   {
@@ -20,6 +26,8 @@ export const PROJECTS: Project[] = [
     kind: 'AI · RegTech',
     status: 'Live demo',
     tags: ['RAG', 'Evals', 'SEBI'],
+    skills: ['ai-evaluation', 'rag-product', 'trust-compliance', 'communicating-quality'],
+    lastActivity: '2026-09-16',
     links: [
       { label: 'Live demo', href: 'https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo' },
       { label: 'GitHub', href: 'https://github.com/opnsrcntrbtr/sebi-circular-rag' },
@@ -34,6 +42,8 @@ export const PROJECTS: Project[] = [
     kind: 'Security · PWA',
     status: 'Staging',
     tags: ['Zero-knowledge', 'WebAuthn PRF', 'On-device AI'],
+    skills: ['privacy-security', 'local-ai', 'program-delivery'],
+    lastActivity: '2026-08-02',
     links: [
       { label: 'Staging app', href: 'https://trust-vault-pwa.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/opnsrcntrbtr/TrustVault-PWA' },
@@ -48,6 +58,8 @@ export const PROJECTS: Project[] = [
     kind: 'Security · Research',
     status: 'npm v0.2.0',
     tags: ['Library', 'Cryptography', 'Preprint'],
+    skills: ['privacy-security', 'communicating-quality'],
+    lastActivity: '2026-07-07',
     links: [
       { label: 'npm', href: 'https://www.npmjs.com/package/webauthn-prf-zktv' },
       { label: 'Preprint (DOI)', href: 'https://doi.org/10.6084/m9.figshare.32915411.v1' },
@@ -63,6 +75,8 @@ export const PROJECTS: Project[] = [
     kind: 'Local AI · macOS',
     status: 'Early, open source',
     tags: ['Local AI', 'SwiftUI', 'Evals'],
+    skills: ['local-ai', 'ai-evaluation', 'product-strategy'],
+    lastActivity: '2026-10-10',
     links: [
       { label: 'Docs', href: 'https://opnsrcntrbtr.github.io/lecture-lens/' },
       { label: 'GitHub', href: 'https://github.com/opnsrcntrbtr/lecture-lens' },

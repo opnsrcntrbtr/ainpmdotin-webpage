@@ -25,6 +25,7 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 ## Key pages
 
 - [Home: AI-native product management in India](https://ainpm.in/): Overview of Ian Pinto's work, consulting, guide and articles
+- [Portfolio data (JSON)](https://ainpm.in/portfolio.json): Machine-readable skills, verified credentials, projects with dated results, and open-source contributions
 - [Free learning path](https://ainpm.in/learn/): Free, self-paced six-module AI PM learning path (about 24 hours): evals, cost per task, RAG and agent trust design, India regulation, portfolio evidence. Not a bootcamp; no placement
 - [Mentorship programme](https://ainpm.in/mentorship/): Paid four-session 1:1 AI PM mentorship for career switchers (goal plan, evals, portfolio review, mock interview); no placement
 - [Field guide](https://ainpm.in/guide/): Six shifts for PMs, India AI landscape, regulation radar with dates, eight-step playbook, where to start by role

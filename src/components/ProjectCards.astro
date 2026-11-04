@@ -1,5 +1,7 @@
 ---
 import { PROJECTS } from '../data/projects';
+import { SKILLS } from '../data/skills';
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 import Scorecard from './Scorecard.astro';
 interface Props { exclude?: string; heading?: 'h2' | 'h3'; metrics?: boolean; }
 const { exclude, heading = 'h3', metrics = true } = Astro.props;
@@ -19,6 +21,8 @@ const list = PROJECTS.filter((p) => p.slug !== exclude);
       <p class="tagline">{p.tagline}</p>
       {metrics && <Scorecard slug={p.slug} compact heading={false} />}
       <ul class="strata">{p.tags.map((t) => <li>{t}</li>)}</ul>
+      {p.skills && <p class="pcard-skills"><span>Proves</span> {p.skills.map((id, j) => <Fragment>{j > 0 && ' · '}<a href={`/skills/#${id}`}>{SKILLS.find((x) => x.id === id)?.name ?? id}</a></Fragment>)}</p>}
+      {p.lastActivity && <p class="pcard-active">Last public activity <time datetime={p.lastActivity}>{fmt(p.lastActivity)}</time></p>}
       <p class="links-row">
         {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
       </p>

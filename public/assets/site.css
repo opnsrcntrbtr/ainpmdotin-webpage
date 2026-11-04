@@ -542,3 +542,5 @@ a:hover{color:var(--teal-ink)}
 p .more-link{margin-top:0;font-size:inherit}
 .card .cred-dates{font-size:.82rem;color:var(--ink-2);margin:-4px 0 10px}
 a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
+.pcard-skills{font-size:.85rem;color:var(--ink-2);margin:8px 0 0}.pcard-skills span{font:var(--label);text-transform:uppercase;letter-spacing:.06em;color:var(--saffron);margin-right:4px}
+.pcard-active{font-size:.78rem;color:var(--ink-2);margin:6px 0 0}
