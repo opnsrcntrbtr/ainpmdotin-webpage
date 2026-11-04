@@ -12,10 +12,12 @@
   {
     "id": "P2",
     "priority": 9,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Project proof fields: skills mapping and last-activity date for every project; dated results surfaced on cards; /portfolio.json machine-readable export",
-    "accredible": "Applied skills 58%; recent skill use 47%"
+    "accredible": "Applied skills 58%; recent skill use 47%",
+    "commit": "b2c1a99",
+    "doneOn": "2026-11-04"
   },
   {
     "id": "P3",

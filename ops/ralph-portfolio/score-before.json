@@ -1,11 +1,11 @@
 {
- "total": 56.8,
+ "total": 74.8,
  "categories": {
   "verifiedCredentials": 13,
   "skillsEvidence": 15.8,
-  "appliedProjects": 8,
+  "appliedProjects": 16,
   "testResults": 15,
-  "recency": 0,
+  "recency": 10,
   "contributions": 0,
   "skillClarity": 5
  },
