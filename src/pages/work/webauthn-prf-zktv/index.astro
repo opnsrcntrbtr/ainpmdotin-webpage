@@ -1,11 +1,12 @@
 ---
+import ProofBox from '../../../components/ProofBox.astro';
 import Base from '../../../layouts/Base.astro';
 import Scorecard from '../../../components/Scorecard.astro';
 import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-05');
 const repo = 'https://github.com/opnsrcntrbtr/webauthn-prf-zktv';
 const npm = 'https://www.npmjs.com/package/webauthn-prf-zktv';
 const doi = 'https://doi.org/10.6084/m9.figshare.32915411.v1';
@@ -240,6 +241,8 @@ const sources = [
       </div>
     </div>
   </section>
+
+  <ProofBox slug="webauthn-prf-zktv" />
 
   <section id="faq">
     <div class="wrap">

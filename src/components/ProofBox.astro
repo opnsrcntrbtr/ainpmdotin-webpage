@@ -1,0 +1,39 @@
+---
+// "What this proves" box for a case study: the skills it demonstrates (in employer language),
+// the evidence anyone can open, and when it was last active. Data comes from src/data/.
+import { PROJECTS, activityCheckedOn } from '../data/projects';
+import { SKILLS } from '../data/skills';
+import { SCORECARDS } from '../data/metrics';
+interface Props { slug: string; }
+const p = PROJECTS.find((x) => x.slug === Astro.props.slug);
+const sc = SCORECARDS[Astro.props.slug];
+const skills = (p?.skills ?? []).map((id) => SKILLS.find((s) => s.id === id)).filter(Boolean);
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+{p && (
+  <section id="proof" class="proofbox-sec">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Proof of skill</span>
+        <h2>What does this project prove, and how can you check it?</h2>
+        <p class="muted">Employers trust skills they can verify. Each claim below links to its place in the <a href="/skills/">skills matrix</a>, and every piece of evidence is public.</p>
+      </div>
+      <div class="grid g2 proofbox">
+        <div class="card">
+          <h3>Skills demonstrated</h3>
+          <ul class="md">
+            {skills.map((s) => <li><a href={`/skills/#${s!.id}`}><strong>{s!.name}</strong></a>: {s!.claim}</li>)}
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Evidence you can open</h3>
+          <ul class="md">
+            {p.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a></li>)}
+            {sc && <li><a href={sc.source.href} target="_blank" rel="noopener">{sc.source.label} ↗</a> <span class="muted">({sc.asOf})</span></li>}
+          </ul>
+          {p.lastActivity && <p class="note">Last public activity {fmt(p.lastActivity)} · checked {fmt(activityCheckedOn)}</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

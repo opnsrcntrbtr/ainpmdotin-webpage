@@ -545,3 +545,4 @@ a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
 .pcard-skills{font-size:.85rem;color:var(--ink-2);margin:8px 0 0}.pcard-skills span{font:var(--label);text-transform:uppercase;letter-spacing:.06em;color:var(--saffron);margin-right:4px}
 .pcard-active{font-size:.78rem;color:var(--ink-2);margin:6px 0 0}
 @media (max-width:640px){.os-tbl th:nth-child(2),.os-tbl td:nth-child(2),.os-tbl th:nth-child(3),.os-tbl td:nth-child(3){display:none}}
+.proofbox .md{padding-left:1.1em;margin:10px 0 0}.proofbox .md li{margin:6px 0}

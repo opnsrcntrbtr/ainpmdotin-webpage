@@ -1,11 +1,12 @@
 ---
+import ProofBox from '../../components/ProofBox.astro';
 import Base from '../../layouts/Base.astro';
 import Scorecard from '../../components/Scorecard.astro';
 import { breadcrumb, faqSchema } from '../../data/site';
 import ProjectCards from '../../components/ProjectCards.astro';
 
 const published = new Date('2026-09-24');
-const updated = new Date('2026-11-02');
+const updated = new Date('2026-11-05');
 
 const faq = [
   { q: 'What is SEBI Circular RAG?', a: 'SEBI Circular RAG is an open-source retrieval-augmented generation system built by Ian Pinto that answers questions over 1,490 SEBI circulars. It combines FAISS and BM25 hybrid retrieval, cross-encoder reranking, supersession-aware citations, an abstention gate and a faithfulness check.' },
@@ -260,6 +261,8 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <ProofBox slug="sebi-rag" />
 
   <section id="faq">
     <div class="wrap">

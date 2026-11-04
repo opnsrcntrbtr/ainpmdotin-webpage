@@ -1,4 +1,5 @@
 ---
+import ProofBox from '../../../components/ProofBox.astro';
 import Base from '../../../layouts/Base.astro';
 import Scorecard from '../../../components/Scorecard.astro';
 import BookCTA from '../../../components/BookCTA.astro';
@@ -163,23 +164,11 @@ const sources = [
     </div>
   </section>
 
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">05 · Skills shown</span>
-        <h2>Which skills does this project prove?</h2>
-      </div>
-      <ul class="guide-points">
-        <li><span><a href="/skills/#ai-evaluation">AI evaluation design</a>: baselines, ablation, distractor-pool sensitivity and significance tests on an official split</span></li>
-        <li><span><a href="/skills/#rag-product">Retrieval product design</a>: the retrieval half of any RAG system, measured with MRR and Recall@k</span></li>
-        <li><span><a href="/skills/#communicating-quality">Communicating AI quality honestly</a>: the report leads with limits and says the data gain was small</span></li>
-      </ul>
-    </div>
-  </section>
+  <ProofBox slug="codesearchnet" />
 
   <section id="faq">
     <div class="wrap">
-      <div class="section-head"><span class="eyebrow">06 · FAQ</span><h2>Frequently asked questions</h2></div>
+      <div class="section-head"><span class="eyebrow">05 · FAQ</span><h2>Frequently asked questions</h2></div>
       <div class="faq">
         {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
       </div>
