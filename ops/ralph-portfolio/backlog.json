@@ -74,7 +74,7 @@
     "priority": 3,
     "status": "open",
     "owner": "ian",
-    "title": "Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording",
+    "title": "Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording (8 Nov: public search found no match on Scrum Alliance or upGrad/IIT-KGP; links still needed from Ian)",
     "accredible": "Verification"
   },
   {
@@ -82,7 +82,7 @@
     "priority": 2,
     "status": "open",
     "owner": "ian",
-    "title": "Optional: one anonymised day-job outcome (AMC platform) you approve for publication",
+    "title": "Review the anonymised AMC outcome draft in ops/ralph-portfolio/drafts/amc-outcome.md; publish only after Ian approves",
     "accredible": "Relevant experience 76%"
   },
   {
@@ -114,5 +114,69 @@
     "accredible": "All findings, applied",
     "commit": "2f390d9",
     "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P13",
+    "priority": 10,
+    "status": "open",
+    "owner": "claude",
+    "title": "PM artifacts framework (/work/artifacts/ hub + per-project pages from src/data/artifacts.ts) and SEBI Circular RAG artifacts: brief, eval spec, metrics tree, decision log, launch notes",
+    "accredible": "Applied skills in real-world context 58%; test results 51%"
+  },
+  {
+    "id": "P14",
+    "priority": 9,
+    "status": "open",
+    "owner": "claude",
+    "title": "PM artifacts: CodeSearchNet and Lecture Lens",
+    "accredible": "Applied skills 58%"
+  },
+  {
+    "id": "P15",
+    "priority": 8,
+    "status": "open",
+    "owner": "claude",
+    "title": "PM artifacts: TrustVault and webauthn-prf-zktv",
+    "accredible": "Applied skills 58%"
+  },
+  {
+    "id": "P16",
+    "priority": 7,
+    "status": "open",
+    "owner": "claude",
+    "title": "Skills passport: ESCO + SFIA 9 (code, level, why) per skill on /skills/passport/, plus self-asserted Open Badges 3.0-style JSON export",
+    "accredible": "44% want clearer skill descriptions; frameworks help matching"
+  },
+  {
+    "id": "P17",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Builder's notes 1: what fine-tuning taught me about data vs epochs (CodeSearchNet)",
+    "accredible": "Test results 51%"
+  },
+  {
+    "id": "P18",
+    "priority": 5,
+    "status": "open",
+    "owner": "claude",
+    "title": "Builder's notes 2: release gates that move with the model (SEBI RAG floors)",
+    "accredible": "Test results 51%"
+  },
+  {
+    "id": "P19",
+    "priority": 4,
+    "status": "open",
+    "owner": "claude",
+    "title": "Builder's notes 3: keeping private course material out of a public repo (Lecture Lens content guard)",
+    "accredible": "Applied skills 58%"
+  },
+  {
+    "id": "P20",
+    "priority": 3,
+    "status": "open",
+    "owner": "claude",
+    "title": "Draft (not published) anonymised AMC platform outcome page for Ian's review, with placeholders for numbers",
+    "accredible": "Relevant experience 76%"
   }
 ]

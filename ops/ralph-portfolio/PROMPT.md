@@ -16,13 +16,19 @@ The rubric follows Accredible's State of Credentialing research:
 | 79% of learners say issuers could communicate credential value better; 44% want clearer skill descriptions (2026) | Each credential and project names the skills it proves, in employer language mapped to O*NET/NACE |
 | Only 13% of issuers know learner outcomes (2026) | Ian states outcomes himself: what each credential or project led to, with evidence |
 
+## Rubric v2 (8 Nov 2026)
+
+Adds product artifacts per project (15), ESCO/SFIA mapping with levels (10) and builder's notes articles (5); raw 130 scaled to 100. Baseline under v2: 70.
+
 ## Rules
 
 - Never invent a credential, date, metric, star count, download count or outcome. Every value comes
   from a page you opened this iteration (issuer page, GitHub, npm, Hugging Face) and carries an "as of" date.
 - Self-uploaded Accredible records (`USER-UPLOADED`) are labelled "self-uploaded record", never "verified".
 - Unmerged pull requests are not listed as contributions.
-- Day-job work stays out unless Ian supplies an approved, anonymised write-up.
+- Day-job work stays out unless Ian supplies an approved, anonymised write-up. Drafts live in `ops/ralph-portfolio/drafts/` and are never built.
+- PM artifacts summarise the project's own documents (ADRs, status logs, reports) and link to them; a metrics tree is labelled as Ian's framing of documented metrics.
+- SFIA levels are self-assessed and say so; each level cites the evidence that justifies it.
 
 ## One iteration
 

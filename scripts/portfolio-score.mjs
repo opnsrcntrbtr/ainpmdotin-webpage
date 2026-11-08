@@ -9,6 +9,9 @@ import { PROJECTS } from '../src/data/projects.ts';
 import { SCORECARDS } from '../src/data/metrics.ts';
 
 let CONTRIBUTIONS = [];
+let ARTIFACTS = {};
+try { ({ ARTIFACTS } = await import('../src/data/artifacts.ts')); } catch { /* not yet created */ }
+import { readdirSync, readFileSync } from 'node:fs';
 try { ({ CONTRIBUTIONS } = await import('../src/data/contributions.ts')); } catch { /* not yet created */ }
 
 const today = new Date();
@@ -44,8 +47,19 @@ r.contributions = 10 * (0.6 * cap(merged.length / 2) + 0.4 * cap(pkgs.length / 4
 // 7. Clear skill descriptions (5): employer-language claim + framework mapping + headline proof.
 r.skillClarity = 5 * SKILLS.filter((s) => s.claim && s.proof && s.onet?.length && s.nace).length / SKILLS.length;
 
+// --- Rubric v2 (8 Nov 2026): product artifacts, framework mapping, builder's notes ---
+// 8. PM artifacts (15): each project has a brief, eval spec, metrics tree, decision log and launch notes, each with a source.
+const parts = ['brief', 'evalSpec', 'metricsTree', 'decisions', 'launch'];
+r.pmArtifacts = 15 * PROJECTS.reduce((a, p) => { const x = ARTIFACTS[p.slug]; return a + (x ? parts.filter((k) => x[k] && (k !== 'decisions' || x[k].length >= 3)).length / parts.length : 0); }, 0) / Math.max(PROJECTS.length, 1);
+// 9. Framework mapping (10): each skill mapped to ESCO and SFIA (code + level) with a level justification.
+r.frameworkMapping = 10 * SKILLS.filter((s) => s.esco?.length && s.sfia?.length && s.sfia.every((x) => x.level && x.why)).length / SKILLS.length;
+// 10. Builder's notes (5): articles tagged "Builder's notes" that link to public evidence; target 3.
+const notes = readdirSync('src/content/articles').filter((f) => f.endsWith('.md')).map((f) => readFileSync('src/content/articles/' + f, 'utf8')).filter((t) => /tags:.*Builder's notes/.test(t) && /https:\/\/(github\.com|huggingface\.co)/.test(t));
+r.builderNotes = 5 * cap(notes.length / 3);
+
 for (const k in r) r[k] = +r[k].toFixed(1);
-const total = +Object.values(r).reduce((a, b) => a + b, 0).toFixed(1);
-const out = { total, categories: r, counts: { credentials: CREDENTIALS.length, verified: CREDENTIALS.filter((c) => c.verifyUrl).length, projects: PROJECTS.length, skills: SKILLS.length, mergedPRs: merged.length, packages: pkgs.length } };
+// v2 raw maximum is 130; report on a 0-100 scale.
+const total = +(Object.values(r).reduce((a, b) => a + b, 0) * 100 / 130).toFixed(1);
+const out = { total, rubric: 'v2', categories: r, counts: { credentials: CREDENTIALS.length, verified: CREDENTIALS.filter((c) => c.verifyUrl).length, projects: PROJECTS.length, skills: SKILLS.length, mergedPRs: merged.length, packages: pkgs.length } };
 if (process.argv.includes('--json')) console.log(JSON.stringify(out));
 else { console.log(`Portfolio proof score: ${total}/100`); for (const [k, v] of Object.entries(r)) console.log(`  ${k}: ${v}`); console.log('  counts:', JSON.stringify(out.counts)); }
