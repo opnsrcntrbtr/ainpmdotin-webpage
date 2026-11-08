@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { ARTIFACTS } from '../../../data/artifacts';
+import { PROJECTS } from '../../../data/projects';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-11-08');
+const rows = PROJECTS.map((p) => ({ p, a: ARTIFACTS[p.slug] }));
+const done = rows.filter((r) => r.a).length;
+const decisions = Object.values(ARTIFACTS).reduce((n, a) => n + a.decisions.length, 0);
+const sources = [
+  { href: 'https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof', label: 'Accredible — 2025 State of Credentialing: hiring needs verifiable proof' },
+  { href: 'https://www.accredible.com/reports/2026-state-of-credentialing-report', label: 'Accredible — 2026 State of Credentialing Report' },
+  ...Object.values(ARTIFACTS).map((a) => a.brief.source),
+];
+const faq = [
+  { q: 'What are product artifacts in an AI PM portfolio?', a: 'The documents a product manager produces while framing and shipping a product: a problem brief, an evaluation spec that defines quality, a metrics tree, a decision log and launch notes. For AI products the evaluation spec matters most, because it is how "good" is defined for a probabilistic system.' },
+  { q: 'Why show artifacts instead of only results?', a: 'Employers look for applied skills in a real-world context and for test results. Artifacts show the judgement behind the results: what was measured, what was rejected and why, and what is still weak.' },
+];
+const schema = [
+  { '@type': 'CollectionPage', name: 'Product artifacts by Ian Pinto', url: 'https://ainpm.in/work/artifacts/', dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, isPartOf: { '@id': 'https://ainpm.in/#website' } },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Product artifacts', path: '/work/artifacts/' }]),
+  faqSchema(faq),
+];
+---
+<Base
+  title="Product Artifacts: Briefs, Eval Specs, Decision Logs | AINPM.in"
+  description="The product management work behind Ian Pinto's AI products: problem briefs, evaluation specs, metrics trees, decision logs and launch notes, each linked to its source."
+  schema={schema}
+  updated={updated}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / Product artifacts</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Product artifacts · Updated 8 Nov 2026</span>
+    <h1>The product work behind each project</h1>
+    <p class="answer"><strong>For each product I publish five artifacts: a problem brief, an evaluation spec, a metrics tree, a decision log and launch notes.</strong> They show how each product was framed, measured and decided. Every line links back to the project's own documents.</p>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>Which artifacts are published for each project?</h2><p class="muted">{done} of {rows.length} projects have published artifacts, with {decisions} dated decisions logged so far.</p></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th scope="col">Project</th><th scope="col">Brief</th><th scope="col">Eval spec</th><th scope="col">Metrics tree</th><th scope="col">Decisions</th><th scope="col">Launch notes</th></tr></thead>
+        <tbody>
+          {rows.map(({ p, a }) => (
+            <tr>
+              <td>{a ? <a href={`/work/artifacts/${p.slug}/`}><strong>{p.name}</strong></a> : <a href={p.href}>{p.name}</a>}</td>
+              {a ? <Fragment><td><a href={`/work/artifacts/${p.slug}/#brief`}>Read</a></td><td><a href={`/work/artifacts/${p.slug}/#eval`}>{a.evalSpec.metrics.length} metrics</a></td><td><a href={`/work/artifacts/${p.slug}/#metrics`}>Read</a></td><td><a href={`/work/artifacts/${p.slug}/#decisions`}>{a.decisions.length} logged</a></td><td><a href={`/work/artifacts/${p.slug}/#launch`}>Read</a></td></Fragment>
+                 : <td colspan="5" class="muted">Coming soon</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>What does each artifact show?</h2><p class="muted">Accredible's 2025 research found employers value applied skills in a real-world context (58%) and test or assessment results (51%). Each artifact answers a question a hiring manager or client would ask.</p></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th scope="col">Artifact</th><th scope="col">Question it answers</th><th scope="col">What to look for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Problem brief</strong></td><td>Did they understand the user and the constraints?</td><td>A specific user, a job to be done, and non-goals that rule things out</td></tr>
+          <tr><td><strong>Evaluation spec</strong></td><td>How is "good" defined for a probabilistic product?</td><td>A test set grouped by failure type, metric floors, and when floors must be re-derived</td></tr>
+          <tr><td><strong>Metrics tree</strong></td><td>What is the product trying to move, and what must not break?</td><td>One north star, the drivers under it, and guardrails</td></tr>
+          <tr><td><strong>Decision log</strong></td><td>How do they decide under uncertainty?</td><td>Dated decisions with evidence, including rejected options and overrides</td></tr>
+          <tr><td><strong>Launch notes</strong></td><td>Are they honest about what shipped?</td><td>Shipped scope, known limits and the next step</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>What do people ask about product artifacts?</h2></div>
+      <div class="faq">{faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}</div>
+    </div>
+  </section>
+</Base>

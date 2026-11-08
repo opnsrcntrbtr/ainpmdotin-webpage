@@ -549,3 +549,7 @@ a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
 @media(min-width:760px){.proofbar{grid-template-columns:repeat(3,1fr)}}
 .proofbar span a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .proofbar span a:hover{color:var(--teal)}
+.art-list{padding-left:1.1em;margin:8px 0 0}.art-list li{margin:5px 0}
+.mtree{display:grid;gap:16px}.mtree-root{border-left:4px solid var(--teal)}
+.grid>.card{min-width:0}
+.art-metrics table{min-width:0;width:100%}

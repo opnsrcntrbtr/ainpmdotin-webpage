@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { GLOSSARY } from '../data/glossary';
+import { ARTIFACTS } from '../data/artifacts';
 
 export const GET: APIRoute = async () => {
   const articles = (await getCollection('articles')).sort(
@@ -25,6 +26,8 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 ## Key pages
 
 - [Home: AI-native product management in India](https://ainpm.in/): Overview of Ian Pinto's work, consulting, guide and articles
+- [Product artifacts](https://ainpm.in/work/artifacts/): Problem briefs, evaluation specs, metrics trees, decision logs and launch notes for each project, linked to source documents
+${Object.values(ARTIFACTS).map((a) => `- [${a.name} product artifacts](https://ainpm.in/work/artifacts/${a.slug}/): Brief, eval spec, metrics tree, ${a.decisions.length}-entry decision log and launch notes`).join('\n')}
 - [Portfolio data (JSON)](https://ainpm.in/portfolio.json): Machine-readable skills, verified credentials, projects with dated results, and open-source contributions
 - [Free learning path](https://ainpm.in/learn/): Free, self-paced six-module AI PM learning path (about 24 hours): evals, cost per task, RAG and agent trust design, India regulation, portfolio evidence. Not a bootcamp; no placement
 - [Mentorship programme](https://ainpm.in/mentorship/): Paid four-session 1:1 AI PM mentorship for career switchers (goal plan, evals, portfolio review, mock interview); no placement

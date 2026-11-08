@@ -4,6 +4,7 @@
 import { PROJECTS, activityCheckedOn } from '../data/projects';
 import { SKILLS } from '../data/skills';
 import { SCORECARDS } from '../data/metrics';
+import { ARTIFACTS } from '../data/artifacts';
 interface Props { slug: string; }
 const p = PROJECTS.find((x) => x.slug === Astro.props.slug);
 const sc = SCORECARDS[Astro.props.slug];
@@ -31,6 +32,7 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
             {p.links.map((l) => <li><a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a></li>)}
             {sc && <li><a href={sc.source.href} target="_blank" rel="noopener">{sc.source.label} ↗</a> <span class="muted">({sc.asOf})</span></li>}
           </ul>
+          {ARTIFACTS[p.slug] && <p><a class="more-link" href={`/work/artifacts/${p.slug}/`}>See the product artifacts: brief, eval spec, metrics tree, decisions</a></p>}
           {p.lastActivity && <p class="note">Last public activity {fmt(p.lastActivity)} · checked {fmt(activityCheckedOn)}</p>}
         </div>
       </div>
