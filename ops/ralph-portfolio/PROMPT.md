@@ -35,7 +35,7 @@ Adds product artifacts per project (15), ESCO/SFIA mapping with levels (10) and 
 1. Pick the open item with the highest `priority`.
 2. `npm run build && node --experimental-strip-types --no-warnings scripts/portfolio-score.mjs --json > ops/ralph-portfolio/score-before.json` (skip if the last trace's after is current).
 3. Make the smallest complete change. Data lives in `src/data/` (skills.ts, projects.ts, metrics.ts, contributions.ts); pages read from it.
-4. Back-pressure, all must pass: `npm run build`, `npm run check`, portfolio score and `node scripts/geo-score.mjs` must not drop,
+4. Back-pressure, all must pass: `npm run build`, `npm run check`, the portfolio score must not drop, `node scripts/geo-score.mjs` may not drop by more than 0.3 (new pages shift its averages),
    `python3 scripts/overflow-check.py <changed paths>` at 390px.
 5. Write `ops/ralph-portfolio/iter.json`, then `scripts/ralph-portfolio.sh ops/ralph-portfolio/iter.json "<message>"`.
 6. Publish through the Mac bundle route (see the Claude project notes). On failure: revert, mark `blocked`, trace.
