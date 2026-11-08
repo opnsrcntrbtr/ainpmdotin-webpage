@@ -12,6 +12,8 @@ const lastmod = {
   '/work/codesearchnet/': '2026-11-05',
   '/work/artifacts/': '2026-11-08',
   '/work/artifacts/sebi-rag/': '2026-11-08',
+  '/work/artifacts/codesearchnet/': '2026-11-08',
+  '/work/artifacts/lecture-lens/': '2026-11-08',
   '/work/': '2026-11-08',
   '/skills/': '2026-11-05',
   '/sebi-rag/': '2026-11-05',
