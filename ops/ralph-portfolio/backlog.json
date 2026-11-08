@@ -118,10 +118,12 @@
   {
     "id": "P13",
     "priority": 10,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "PM artifacts framework (/work/artifacts/ hub + per-project pages from src/data/artifacts.ts) and SEBI Circular RAG artifacts: brief, eval spec, metrics tree, decision log, launch notes",
-    "accredible": "Applied skills in real-world context 58%; test results 51%"
+    "accredible": "Applied skills in real-world context 58%; test results 51%",
+    "commit": "7054969",
+    "doneOn": "2026-11-08"
   },
   {
     "id": "P14",
