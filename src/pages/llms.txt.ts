@@ -26,6 +26,7 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 ## Key pages
 
 - [Home: AI-native product management in India](https://ainpm.in/): Overview of Ian Pinto's work, consulting, guide and articles
+- [Skills passport](https://ainpm.in/skills/passport/): Skills mapped to O*NET, NACE, ESCO and SFIA 9 with self-assessed levels and evidence; JSON at https://ainpm.in/skills/passport.json (self-asserted, unsigned)
 - [Product artifacts](https://ainpm.in/work/artifacts/): Problem briefs, evaluation specs, metrics trees, decision logs and launch notes for each project, linked to source documents
 ${Object.values(ARTIFACTS).map((a) => `- [${a.name} product artifacts](https://ainpm.in/work/artifacts/${a.slug}/): Brief, eval spec, metrics tree, ${a.decisions.length}-entry decision log and launch notes`).join('\n')}
 - [Portfolio data (JSON)](https://ainpm.in/portfolio.json): Machine-readable skills, verified credentials, projects with dated results, and open-source contributions

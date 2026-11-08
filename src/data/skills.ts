@@ -22,7 +22,67 @@ export interface Skill {
   onet: string[];
   nace: string;
   evidence: Evidence[];
+  /** ESCO v1 skills (European Commission), by concept URI. */
+  esco?: { label: string; uri: string }[];
+  /** SFIA 9 skills with a self-assessed level of responsibility and the evidence behind it. */
+  sfia?: { code: string; name: string; level: number; why: string }[];
 }
+
+export const SFIA_LEVELS = ['', 'Follow', 'Assist', 'Apply', 'Enable', 'Ensure, advise', 'Initiate, influence', 'Set strategy, inspire, mobilise'];
+const E = (label: string, id: string) => ({ label, uri: `http://data.europa.eu/esco/skill/${id}` });
+const MAP: Record<string, Pick<Skill, 'esco' | 'sfia'>> = {
+  'ai-evaluation': {
+    esco: [E('apply statistical analysis techniques', '382c11ed-20d5-4ae7-b60e-15fec527fa6c'), E('report test findings', '561c2525-5bd8-4d86-8f45-820f4be7db93')],
+    sfia: [
+      { code: 'TEST', name: 'Functional testing', level: 4, why: 'Designed a 260-question adjudicated golden set with six release floors that block changes (SEBI Circular RAG).' },
+      { code: 'MLNG', name: 'Machine learning', level: 4, why: 'Selects models on measured benefit with baselines and significance tests (CodeSearchNet; SEBI ADR-004).' },
+    ],
+  },
+  'rag-product': {
+    esco: [E('natural language processing', 'fff0e2cd-d0bd-4b02-9daf-158b79d9688a'), E('information extraction', '696e3b5b-8b61-45af-ae4c-3ab700f197ec')],
+    sfia: [
+      { code: 'PROD', name: 'Product management', level: 4, why: 'Owns scope, users and success metrics for retrieval products (SEBI RAG brief and metrics tree).' },
+      { code: 'DATS', name: 'Data science', level: 3, why: 'Fine-tuned a retrieval encoder to MRR 0.815 against a BM25 baseline of 0.527 (CodeSearchNet).' },
+    ],
+  },
+  'trust-compliance': {
+    esco: [E('comply with legal regulations', '3d3ee5c3-4286-457f-9f76-1704011f7e11'), E('data protection', 'a4346013-a967-4a58-a533-6b32ad1364c5')],
+    sfia: [
+      { code: 'INAS', name: 'Information assurance', level: 4, why: 'Built abstention, citation and certainty controls into a regulatory assistant (SEBI RAG ADR-002, abstention accuracy 0.981).' },
+    ],
+  },
+  'privacy-security': {
+    esco: [E('ICT encryption', 'd32db06e-bd06-4415-a7ab-1b0ee68caa9a'), E('respect data protection principles', '097c6a36-f031-4d3e-b5c1-62d6ffcb430b')],
+    sfia: [
+      { code: 'SCTY', name: 'Information security', level: 4, why: 'Wrote a threat model with guarantees and residuals and shipped it as a library (webauthn-prf-zktv; TrustVault OWASP M1 to M10).' },
+    ],
+  },
+  'local-ai': {
+    esco: [E('utilise machine learning', '8369c2d6-c100-4cf6-bd83-9668d8678433'), E('principles of artificial intelligence', 'e465a154-93f7-4973-9ce1-31659fe16dd2')],
+    sfia: [
+      { code: 'EMRG', name: 'Emerging technology monitoring', level: 4, why: 'Evaluates on-device AI (MLX, Gemini Nano, WebGPU) and records adopt or decline decisions (SEBI ADR-003; Lecture Lens ADR-006).' },
+    ],
+  },
+  'product-strategy': {
+    esco: [E('plan product management', '29fb886c-6be0-4e93-9ea1-232881f2092a'), E('define technical requirements', 'd9e5349e-8791-49c2-8ba4-839fdd1606c2')],
+    sfia: [
+      { code: 'PROD', name: 'Product management', level: 4, why: 'Publishes problem briefs, metrics trees and decision logs for five products; ISB Product Management certificate.' },
+      { code: 'REQM', name: 'Requirements definition and management', level: 4, why: 'Writes constraints, non-goals and evaluation specs that define done (product artifacts).' },
+    ],
+  },
+  'program-delivery': {
+    esco: [E('perform project management', 'cd5efa8c-e44d-4cbc-91c6-796018dbed68'), E('Agile project management', '0a9acb6b-1139-4be9-b431-3a80a959f2f4')],
+    sfia: [
+      { code: 'PRMG', name: 'Project management', level: 5, why: 'PMP since 2015 (valid to 2027) and a Technical Product / Program Manager role; public evidence includes phased delivery of TrustVault (phases 0 to 7).' },
+    ],
+  },
+  'communicating-quality': {
+    esco: [E('present reports', 'd0f2f8a7-d935-4a6d-8e54-dcc3e5e2cbeb'), E('communicate with stakeholders', '477173ca-5fc2-406b-9122-95d92811f284')],
+    sfia: [
+      { code: 'TECH', name: 'Specialist advice', level: 4, why: 'Explains AI quality in plain numbers, weak ones included, in case studies, articles and consultations.' },
+    ],
+  },
+};
 
 export const NACE_COMPETENCIES = [
   'Career & Self-Development',
@@ -37,7 +97,7 @@ export const NACE_COMPETENCIES = [
 
 const GH = 'https://github.com/opnsrcntrbtr';
 
-export const SKILLS: Skill[] = [
+const BASE_SKILLS: Skill[] = [
   {
     id: 'ai-evaluation',
     name: 'AI evaluation design',
@@ -162,6 +222,8 @@ export const SKILLS: Skill[] = [
     ],
   },
 ];
+
+export const SKILLS: Skill[] = BASE_SKILLS.map((s) => ({ ...s, ...(MAP[s.id] ?? {}) }));
 
 export interface Credential {
   name: string;
