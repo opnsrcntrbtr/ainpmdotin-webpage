@@ -18,6 +18,8 @@ export interface ArtifactSet {
 const SEBI = 'https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs';
 const CSN = 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain/blob/main';
 const LL = 'https://opnsrcntrbtr.github.io/lecture-lens';
+const TV = 'https://github.com/opnsrcntrbtr/TrustVault-PWA/blob/main/docs';
+const WA = 'https://github.com/opnsrcntrbtr/webauthn-prf-zktv/blob/main';
 
 export const ARTIFACTS: Record<string, ArtifactSet> = {
   'sebi-rag': {
@@ -224,6 +226,131 @@ export const ARTIFACTS: Record<string, ArtifactSet> = {
       limits: ['macOS on Apple silicon only', 'About a quarter of spoken words missing in one measured class', 'A full evaluation takes over an hour', 'Depends on screenpipe, which it does not control'],
       next: ['Capture guard that alerts within 60 seconds when nothing is saved', 'Cancellable evaluations that show the change against the last run', 'Eval checks drawn from real failures'],
       source: { label: 'Roadmap', href: `${LL}/project/roadmap` },
+    },
+  },
+  trustvault: {
+    slug: 'trustvault',
+    name: 'TrustVault PWA',
+    caseStudy: '/work/trustvault/',
+    updated: '2026-11-08',
+    brief: {
+      problem: 'Password managers ask users to trust a server with their vault. A progressive web app can keep every secret on the device, but only if storage alone can never unlock it.',
+      users: 'Privacy-conscious individuals and families who want a password manager that works offline on any device.',
+      job: 'Keep my passwords safe on my own device, unlock with my fingerprint, and never depend on a company’s server.',
+      constraints: [
+        'Zero-knowledge: a full storage dump must not reveal the vault key',
+        'Offline-first; works as an installable PWA',
+        'OWASP Mobile Top 10 (2025) as the security baseline',
+        'Any AI help runs locally, and no secret is ever sent to a model',
+      ],
+      nonGoals: ['Cloud sync of vault contents', 'Telemetry or hidden features', 'Remote AI services'],
+      source: { label: 'PROJECT_STATUS.md (6 Jul 2026)', href: `${TV}/status/PROJECT_STATUS.md` },
+    },
+    evalSpec: {
+      summary: 'Security and quality are gated by an automated suite plus OWASP and Lighthouse checks. Figures are self-reported by the project; there is no independent audit yet.',
+      dataset: [
+        'About 600 unit, 400 integration and 100 security tests (crypto, auth flow, CRUD, OWASP checks)',
+        'Lighthouse audits for performance and PWA installability',
+        'OWASP Mobile Top 10 (2025) checklist, M1 to M10',
+      ],
+      metrics: [
+        { name: 'Automated tests passing', value: '4,139 of 4,142', floor: '>85% coverage target' },
+        { name: 'TypeScript errors', value: '0', floor: '0' },
+        { name: 'Lighthouse PWA', value: '100', floor: '>90' },
+        { name: 'ESLint errors in src/', value: '801', floor: '0', note: 'Open debt' },
+        { name: 'WCAG 2.1 AA', value: 'Partial', floor: 'Formal audit', note: 'Pending' },
+      ],
+      rule: 'Status is reported against targets, including the misses: lint errors and the accessibility audit are listed as open, not hidden.',
+      source: { label: 'PROJECT_STATUS.md: codebase health and tests', href: `${TV}/status/PROJECT_STATUS.md` },
+    },
+    metricsTree: {
+      northStar: 'Vaults that stay usable and unreadable to anyone but their owner',
+      why: 'A password manager fails if it leaks, and also if its owner gets locked out.',
+      drivers: [
+        { name: 'Fast, safe unlock', metric: 'Passkey (WebAuthn PRF) unlock with a password fallback' },
+        { name: 'Works anywhere', metric: 'Lighthouse PWA 100; offline-first caching' },
+        { name: 'Quality holds', metric: '4,139 of 4,142 tests passing' },
+      ],
+      guardrails: [
+        { name: 'Storage alone never unlocks', metric: 'Wrap key never stored; non-extractable session keys' },
+        { name: 'No data egress', metric: 'Zero telemetry; local-only AI with secret-free prompts' },
+        { name: 'Breach checks leak nothing', metric: 'HIBP k-anonymity (5-character hash prefix)' },
+      ],
+    },
+    decisions: [
+      { id: 'Phase 4', date: '2026-06-10', title: 'Passkey unlock without a stored key', decision: 'Unlock with a key derived from the authenticator’s PRF output, released only after biometric or PIN verification and never stored.', why: 'Zero-knowledge requires that nothing persisted can reconstruct the vault key.', status: 'Adopted', source: { label: 'PROJECT_STATUS.md Phase 4', href: `${TV}/status/PROJECT_STATUS.md` } },
+      { id: 'Phase 6', date: '2026-06-15', title: 'Strict CSP and no third-party CDNs', decision: 'Hash-based Content Security Policy with no unsafe-inline, and self-hosted OCR instead of a CDN.', why: 'Every external script is a way in; zero CDN egress keeps the trust boundary on the device.', status: 'Adopted', source: { label: 'PROJECT_STATUS.md Phase 6 and security posture', href: `${TV}/status/PROJECT_STATUS.md` } },
+      { id: 'Phase 6', date: '2026-06-15', title: 'Breach checks by k-anonymity', decision: 'Query Have I Been Pwned with only a 5-character SHA-1 prefix.', why: 'Users get breach alerts without the password or its full hash leaving the device.', status: 'Adopted', source: { label: 'PROJECT_STATUS.md Phase 6', href: `${TV}/status/PROJECT_STATUS.md` } },
+      { id: 'AI', date: '2026-06-21', title: 'On-device AI behind a zero-egress boundary', decision: 'Gemini Nano on desktop and WebLLM on Android explain password strength and breach impact locally; prompts never include secrets.', why: 'AI help is useful only if it cannot become a leak.', status: 'Adopted', source: { label: 'PROJECT_STATUS.md AI assistance', href: `${TV}/status/PROJECT_STATUS.md` } },
+      { id: 'Library', date: '2026-07-04', title: 'Extract the crypto into a reusable library', decision: 'Move PRF key wrapping into webauthn-prf-zktv, published on npm with a research preprint.', why: 'A standalone, tested library can be reviewed and reused independently of the app.', status: 'Adopted', source: { label: 'webauthn-prf-zktv README', href: `${WA}/README.md` } },
+    ],
+    launch: {
+      status: 'Staging deployment; feature-complete through Phase 7 plus experimental AI',
+      shipped: ['Credential management, generator, TOTP, auto-lock and encrypted import/export', 'Passkey unlock and multi-vault profiles', 'Breach detection and local AI explanations'],
+      limits: ['801 ESLint errors in src/ to clear', 'One flaky import-export test', 'WCAG 2.1 AA formal audit pending', 'No independent security audit yet'],
+      next: ['Full lint sweep before the next feature', 'Formal accessibility audit', 'CSV import/export and an error-boundary UI'],
+      source: { label: 'PROJECT_STATUS.md: known limitations', href: `${TV}/status/PROJECT_STATUS.md` },
+    },
+  },
+  'webauthn-prf-zktv': {
+    slug: 'webauthn-prf-zktv',
+    name: 'webauthn-prf-zktv',
+    caseStudy: '/work/webauthn-prf-zktv/',
+    updated: '2026-11-08',
+    brief: {
+      problem: 'Web apps that encrypt user data need a key that a stolen database cannot reproduce. Passkeys can supply one through the WebAuthn PRF extension, but the pattern is easy to get wrong.',
+      users: 'Developers building zero-knowledge web and PWA apps; researchers reviewing passkey-based encryption.',
+      job: 'Give me a small, reviewed library that wraps a vault key under a passkey or a password, so storage alone can never unlock it.',
+      constraints: [
+        'One runtime dependency; native WebAuthn APIs, no wrapper library',
+        'Only non-extractable keys; nothing secret is ever persisted',
+        'Symmetric primitives only in the wrap path (AES-256-GCM, HKDF-SHA256, scrypt)',
+      ],
+      nonGoals: ['Combined-factor (hybrid) wrapping in v1', 'Android WebView PRF, which the platform does not support'],
+      source: { label: 'README and SECURITY.md', href: `${WA}/SECURITY.md` },
+    },
+    evalSpec: {
+      summary: 'Correctness is pinned by a threat model with explicit guarantees, known-answer interop vectors for independent implementations, and an automated test suite.',
+      dataset: [
+        'Primary threat: an attacker with a full storage dump; secondary: script running in the page (XSS)',
+        'Known-answer vectors so other implementations can check compatibility',
+        'Vitest suite run by a verify script with type-check, lint and build',
+      ],
+      metrics: [
+        { name: 'Platforms with WebAuthn PRF', value: '5 of 6', note: 'Android WebView unsupported' },
+        { name: 'Runtime dependencies', value: '1' },
+        { name: 'Wrap schemes', value: '2', note: 'Passkey and password' },
+        { name: 'scrypt cost', value: 'N=131072, r=8, p=1' },
+      ],
+      rule: 'Storage compromise alone must never be sufficient: no stored input can recompute a key, and decrypt failures give no oracle.',
+      source: { label: 'SECURITY.md guarantees', href: `${WA}/SECURITY.md` },
+    },
+    metricsTree: {
+      northStar: 'Apps can adopt passkey-based encryption without inventing their own crypto',
+      why: 'The library only matters if others can use it safely.',
+      drivers: [
+        { name: 'Works on the platforms people use', metric: 'PRF on 5 of 6 platforms' },
+        { name: 'Easy to adopt', metric: 'npm v0.2.0, one dependency' },
+        { name: 'Independently checkable', metric: 'Interop vectors and a DOI preprint' },
+      ],
+      guardrails: [
+        { name: 'No lockout', metric: 'Password wrap kept alongside every passkey wrap' },
+        { name: 'No key export', metric: 'No exportKey path in the public API' },
+        { name: 'No decrypt oracle', metric: 'One generic DecryptError' },
+      ],
+    },
+    decisions: [
+      { id: 'Schemes', date: '2026-07-05', title: 'Always keep a password wrap', decision: 'Treat the password scheme as the safety net that makes passkey unlock safe to deploy.', why: 'Deleting a passkey destroys its PRF path permanently, and the data with it.', status: 'Adopted', source: { label: 'README: why two schemes', href: `${WA}/README.md` } },
+      { id: 'Deps', date: '2026-07-05', title: 'Native WebAuthn, one dependency', decision: 'Call navigator.credentials directly with strict PRF validation; depend only on a scrypt implementation.', why: 'Fewer dependencies mean a smaller audit surface for a crypto library.', status: 'Adopted', source: { label: 'README', href: `${WA}/README.md` } },
+      { id: 'Keys', date: '2026-07-05', title: 'Non-extractable keys and a generic decrypt error', decision: 'No exportKey path; one DecryptError for every failure; zeroise transient buffers.', why: 'Script in the page can misuse an unlocked key but cannot steal it, and errors reveal nothing.', status: 'Adopted', source: { label: 'SECURITY.md', href: `${WA}/SECURITY.md` } },
+      { id: 'Hybrid', date: '2026-07-05', title: 'Combined-factor scheme deferred', decision: 'The hybrid-v1 name is reserved but not implemented in v1.', why: 'Ship the two well-understood schemes first.', status: 'Declined', source: { label: 'SECURITY.md residuals', href: `${WA}/SECURITY.md` } },
+    ],
+    launch: {
+      status: 'npm v0.2.0 (5 Jul 2026); preprint with DOI',
+      shipped: ['Core, WebAuthn and IndexedDB modules', 'Threat model with guarantees and residuals', 'Interop vectors and a CC BY 4.0 preprint'],
+      limits: ['Zeroisation is best-effort in JavaScript', 'PRF output passes through JS memory briefly, by spec', 'No PRF in Android WebView; password scheme only there'],
+      next: ['A combined-factor scheme', 'Independent review of the implementation'],
+      source: { label: 'SECURITY.md residuals', href: `${WA}/SECURITY.md` },
     },
   },
 };

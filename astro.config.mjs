@@ -14,6 +14,8 @@ const lastmod = {
   '/work/artifacts/sebi-rag/': '2026-11-08',
   '/work/artifacts/codesearchnet/': '2026-11-08',
   '/work/artifacts/lecture-lens/': '2026-11-08',
+  '/work/artifacts/trustvault/': '2026-11-08',
+  '/work/artifacts/webauthn-prf-zktv/': '2026-11-08',
   '/work/': '2026-11-08',
   '/skills/': '2026-11-05',
   '/sebi-rag/': '2026-11-05',

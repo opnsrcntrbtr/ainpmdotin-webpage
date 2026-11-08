@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import BookCTA from '../../../components/BookCTA.astro';
 import { ARTIFACTS, type ArtifactSet } from '../../../data/artifacts';
+import { PROJECTS } from '../../../data/projects';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
 export function getStaticPaths() {
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 }
 const { a } = Astro.props as { a: ArtifactSet };
 const updated = new Date(a.updated);
+const proj = PROJECTS.find((x) => x.slug === a.slug);
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 const url = `https://ainpm.in/work/artifacts/${a.slug}/`;
 const faq = [
@@ -105,6 +107,7 @@ const sources = [a.brief.source, a.evalSpec.source, a.launch.source, ...a.decisi
         <div class="card"><h3>Next</h3><ul class="md art-list">{a.launch.next.map((x) => <li>{x}</li>)}</ul></div>
       </div>
       <p class="note">Source: <a href={a.launch.source.href} target="_blank" rel="noopener">{a.launch.source.label} ↗</a> · <a href="/work/artifacts/">All product artifacts</a></p>
+      {proj && <p class="note">Open it yourself: {proj.links.map((l, i) => <Fragment>{i > 0 && ' · '}<a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a></Fragment>)}</p>}
     </div>
   </section>
 
