@@ -1,5 +1,5 @@
 {
- "total": 81.5,
+ "total": 89.2,
  "rubric": "v2",
  "categories": {
   "verifiedCredentials": 13,
@@ -10,7 +10,7 @@
   "contributions": 10,
   "skillClarity": 5,
   "pmArtifacts": 15,
-  "frameworkMapping": 0,
+  "frameworkMapping": 10,
   "builderNotes": 0
  },
  "counts": {
