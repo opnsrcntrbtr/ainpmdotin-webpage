@@ -1,5 +1,6 @@
 {
- "total": 91,
+ "total": 70,
+ "rubric": "v2",
  "categories": {
   "verifiedCredentials": 13,
   "skillsEvidence": 20,
@@ -7,7 +8,10 @@
   "testResults": 15,
   "recency": 10,
   "contributions": 10,
-  "skillClarity": 5
+  "skillClarity": 5,
+  "pmArtifacts": 0,
+  "frameworkMapping": 0,
+  "builderNotes": 0
  },
  "counts": {
   "credentials": 12,
