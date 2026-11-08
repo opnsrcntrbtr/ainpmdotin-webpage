@@ -128,10 +128,12 @@
   {
     "id": "P14",
     "priority": 9,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "PM artifacts: CodeSearchNet and Lecture Lens",
-    "accredible": "Applied skills 58%"
+    "accredible": "Applied skills 58%",
+    "commit": "7160146",
+    "doneOn": "2026-11-08"
   },
   {
     "id": "P15",
