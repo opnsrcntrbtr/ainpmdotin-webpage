@@ -158,10 +158,12 @@
   {
     "id": "P17",
     "priority": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Builder's notes 1: what fine-tuning taught me about data vs epochs (CodeSearchNet)",
-    "accredible": "Test results 51%"
+    "accredible": "Test results 51%",
+    "commit": "3debcf9",
+    "doneOn": "2026-11-08"
   },
   {
     "id": "P18",
