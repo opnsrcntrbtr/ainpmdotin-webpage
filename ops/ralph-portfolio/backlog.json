@@ -138,10 +138,12 @@
   {
     "id": "P15",
     "priority": 8,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "PM artifacts: TrustVault and webauthn-prf-zktv",
-    "accredible": "Applied skills 58%"
+    "accredible": "Applied skills 58%",
+    "commit": "bf64870",
+    "doneOn": "2026-11-08"
   },
   {
     "id": "P16",
