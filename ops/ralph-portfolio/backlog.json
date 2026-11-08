@@ -178,10 +178,12 @@
   {
     "id": "P19",
     "priority": 4,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Builder's notes 3: keeping private course material out of a public repo (Lecture Lens content guard)",
-    "accredible": "Applied skills 58%"
+    "accredible": "Applied skills 58%",
+    "commit": "ea1a07a",
+    "doneOn": "2026-11-08"
   },
   {
     "id": "P20",
