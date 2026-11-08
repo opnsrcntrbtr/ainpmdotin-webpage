@@ -188,9 +188,11 @@
   {
     "id": "P20",
     "priority": 3,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Draft (not published) anonymised AMC platform outcome page for Ian's review, with placeholders for numbers",
-    "accredible": "Relevant experience 76%"
+    "accredible": "Relevant experience 76%",
+    "commit": "c221750",
+    "doneOn": "2026-11-08"
   }
 ]
