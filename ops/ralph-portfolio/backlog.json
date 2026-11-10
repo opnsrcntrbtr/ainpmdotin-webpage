@@ -238,10 +238,12 @@
   {
     "id": "P25",
     "priority": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Draft upstream screenpipe PR description for the 3 engine commits (App Tap, configurable DRM pages, immediate release); not opened",
-    "accredible": "Contributions as evidence"
+    "accredible": "Contributions as evidence",
+    "commit": "e8192e2",
+    "doneOn": "2026-11-10"
   },
   {
     "id": "P26",
