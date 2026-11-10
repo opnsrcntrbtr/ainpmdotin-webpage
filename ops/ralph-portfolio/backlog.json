@@ -228,10 +228,12 @@
   {
     "id": "P24",
     "priority": 7,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Builder's note: respecting copy-protected video while keeping what learners need (DRM pause, keep audio, engine changes)",
-    "accredible": "Applied skills 58%"
+    "accredible": "Applied skills 58%",
+    "commit": "63a539f",
+    "doneOn": "2026-11-10"
   },
   {
     "id": "P25",
