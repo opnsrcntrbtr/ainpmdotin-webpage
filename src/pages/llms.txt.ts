@@ -42,6 +42,7 @@ ${Object.values(ARTIFACTS).map((a) => `- [${a.name} product artifacts](https://a
 - [TrustVault case study](https://ainpm.in/work/trustvault/): Zero-knowledge password manager PWA with WebAuthn PRF passkey unlock and on-device AI
 - [webauthn-prf-zktv case study](https://ainpm.in/work/webauthn-prf-zktv/): Passkey vault key-wrapping library (npm) and preprint (DOI 10.6084/m9.figshare.32915411.v1)
 - [Lecture Lens case study](https://ainpm.in/work/lecture-lens/): Local-AI macOS app turning lectures into transcripts, notes and flashcards
+- [Lecture Lens origin story](https://ainpm.in/work/lecture-lens/origin/): How the private Screenpipe Study prototype became Lecture Lens: evidence before release, three screenpipe engine changes, and the move to open source
 - [CodeSearchNet Find & Explain case study](https://ainpm.in/work/codesearchnet/): Fine-tuned code retrieval (MRR 0.815 vs BM25 0.527 on 1,000 CodeSearchNet test queries) and a fine-tuned summariser, with significance tests and a live demo
 - [Book a consultation](https://ainpm.in/consult/): Paid 30-minute consultations with Ian Pinto (price on request, ianpinto@ainpm.in)
 

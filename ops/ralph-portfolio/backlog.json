@@ -194,5 +194,53 @@
     "accredible": "Relevant experience 76%",
     "commit": "c221750",
     "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P21",
+    "priority": 10,
+    "status": "open",
+    "owner": "claude",
+    "title": "Origin-story case study: from the private Screenpipe Study prototype to the public Lecture Lens (timeline, what was learned, how it was made safe to open-source; no course, institution or platform names)",
+    "accredible": "Applied skills in real-world context 58%; relevant experience 76%"
+  },
+  {
+    "id": "P22",
+    "priority": 9,
+    "status": "open",
+    "owner": "claude",
+    "title": "Lecture Lens refresh: Studio (in-browser model), ADR-005/006, prototype eval results (slide vision, DeepEval run, judge calibration), lastActivity 6 Nov 2026, Studio screenshot",
+    "accredible": "Test results 51%; recent skill use 47%"
+  },
+  {
+    "id": "P23",
+    "priority": 8,
+    "status": "open",
+    "owner": "claude",
+    "title": "Evolution timeline /work/timeline/: dated credentials, projects, releases and merged PRs from 2015 to 2026",
+    "accredible": "79%: value should be communicated better; only 13% of issuers know outcomes"
+  },
+  {
+    "id": "P24",
+    "priority": 7,
+    "status": "open",
+    "owner": "claude",
+    "title": "Builder's note: respecting copy-protected video while keeping what learners need (DRM pause, keep audio, engine changes)",
+    "accredible": "Applied skills 58%"
+  },
+  {
+    "id": "P25",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Draft upstream screenpipe PR description for the 3 engine commits (App Tap, configurable DRM pages, immediate release); not opened",
+    "accredible": "Contributions as evidence"
+  },
+  {
+    "id": "P26",
+    "priority": 5,
+    "status": "open",
+    "owner": "ian",
+    "title": "Decide whether to open the screenpipe upstream PR (draft in ops/ralph-portfolio/drafts/screenpipe-pr.md); native app screenshots need a demo lecture without course content",
+    "accredible": "Contributions as evidence"
   }
 ]

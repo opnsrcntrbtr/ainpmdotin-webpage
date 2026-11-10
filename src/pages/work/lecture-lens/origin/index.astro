@@ -1,0 +1,162 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import BookCTA from '../../../../components/BookCTA.astro';
+import { breadcrumb, faqSchema } from '../../../../data/site';
+
+const updated = new Date('2026-11-11');
+const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
+const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
+const timeline = [
+  { date: '29 Sep 2026', what: 'Private prototype "Screenpipe Study" gets its own repository: capture control, a grounded study command line and a lecture pipeline' },
+  { date: '29 Sep 2026', what: 'Engine change 1: tap one application’s own audio, so a lecture plays without room noise or other apps’ sounds' },
+  { date: '29 Sep 2026', what: 'Slide-vision decision record, chosen on a realistic stress set rather than clean slides' },
+  { date: '30 Sep 2026', what: 'Engine changes 2 and 3: pause screen capture on protected video, keep audio, and release capture immediately' },
+  { date: '30 Sep 2026', what: 'Native SwiftUI app, DeepEval suite and a judge benchmark' },
+  { date: '3 Oct 2026', what: 'First full DeepEval run of answers, notes and flashcards' },
+  { date: '4 Oct 2026', what: 'Public open-source release as Lecture Lens, with a content guard' },
+  { date: '10 Oct 2026', what: 'Live-class follower: re-transcription, slide log and Q&A threads' },
+  { date: '29 Oct 2026', what: 'Judge calibration on a blind holdout; the simpler judge prompt kept' },
+  { date: '5 Nov 2026', what: 'Lecture Lens Studio runs the model inside Chrome; fixes now flow back from the public port to the prototype' },
+];
+const faq = [
+  { q: 'What was Screenpipe Study?', a: 'A private toolkit Ian Pinto built in September 2026 to capture the online course he was taking on his own Mac, using the open-source screenpipe recorder and local models to turn lectures into cited answers, notes and flashcards. Lecture Lens is its public, open-source successor.' },
+  { q: 'Why not open-source the prototype directly?', a: 'It was full of private context: course and platform names, captured lectures, logs and personal tools. Lecture Lens was rebuilt from it with generic names, a content guard on every commit, and the private folders left behind.' },
+  { q: 'What did the prototype prove before release?', a: 'On production-style slide captures the chosen vision setup passed 21 of 21 checks at a median 5.3 seconds, with 48% fewer image tokens after cropping. The first full DeepEval run passed 15 of 15 note cases, 26 of 43 question-answering cases and 9 of 15 flashcard cases.' },
+  { q: 'Did the engine changes go upstream?', a: 'Not yet. Three small changes to the screenpipe engine (app audio tap, configurable protected-video pages, immediate capture release) live on a local branch, configured by environment variables to keep the change reviewable. A pull-request description has been drafted.' },
+];
+const schema = [
+  { '@type': 'TechArticle', headline: 'From a private study prototype to Lecture Lens', url: 'https://ainpm.in/work/lecture-lens/origin/', datePublished: updated.toISOString(), dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, isPartOf: { '@id': 'https://ainpm.in/#website' }, inLanguage: 'en-IN', about: 'Lecture Lens' },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Lecture Lens', path: '/work/lecture-lens/' }, { name: 'Origin story', path: '/work/lecture-lens/origin/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: repo, label: 'Lecture Lens repository (public port of the prototype)' },
+  { href: docs + 'project/content-guard', label: 'Lecture Lens content guard' },
+  { href: docs + 'decisions/ADR-002-native-app-integration', label: 'ADR-002: native SwiftUI app' },
+  { href: docs + 'decisions/ADR-004-drm-video-black-screen', label: 'ADR-004: protected video goes black while capturing' },
+  { href: 'https://github.com/screenpipe/screenpipe', label: 'screenpipe, the open-source recorder the prototype builds on' },
+];
+---
+<Base
+  title="From Screenpipe Study to Lecture Lens: Origin Story | AINPM.in"
+  description="How a private study prototype on one Mac became Lecture Lens, an open-source product: what it proved, three engine changes, and how it was made safe to publish."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Course, institution and platform names are left out on purpose. Prototype figures come from its private evaluation logs, summarised here; the public repository carries the code."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / <a href="/work/lecture-lens/">Lecture Lens</a> / Origin story</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Case study · Origin story · Updated 11 Nov 2026</span>
+    <h1>From Screenpipe Study to Lecture Lens: a private prototype becomes a product</h1>
+    <p class="answer"><strong>Lecture Lens began as Screenpipe Study, a private toolkit I built in September 2026 to capture the online course I was taking, on my own Mac.</strong> In five weeks it went from a personal script set to an open-source product with a native app, an evaluation suite and an in-browser model, with a content guard keeping course material out of the public repository.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#why">Why</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#proved">What it proved</a></li><li><a href="#engine">Engine changes</a></li><li><a href="#public">Going public</a></li><li><a href="#lessons">Lessons</a></li>
+    </ul>
+  </div>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">01 · Why</span><h2>Why build a private study tool first?</h2></div>
+      <div class="grid g2">
+        <div class="card"><h3>The job</h3><p>As a working professional in a part-time course, I attended recorded lectures and weekend live classes with little time to re-watch either. I wanted every class captured and turned into material I could trust, without uploading anything.</p></div>
+        <div class="card"><h3>The bet</h3><p>Build it for one user, on one machine, with real classes, and let evidence decide what generalises. Deterministic work (segmenting, de-duplicating, file layout) stays in code; the model is used only for judgement, and every output cites a timecode, slide or frame.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">02 · Timeline</span><h2>How did it evolve, week by week?</h2><p class="muted">From the prototype's 55 commits and the public repository's history.</p></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th scope="col">Date</th><th scope="col">Milestone</th></tr></thead>
+        <tbody>{timeline.map((t) => <tr><td class="v">{t.date}</td><td>{t.what}</td></tr>)}</tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="proved">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">03 · Evidence</span><h2>What did the prototype prove before release?</h2><p class="muted">Measured on the prototype, before any public claim was made.</p></div>
+      <div class="grid g3">
+        <div class="card">
+          <span class="meta">Slide vision · 29 Sep 2026</span>
+          <h3>Realistic frames changed the answer</h3>
+          <ul class="md art-list">
+            <li><strong>21 of 21</strong> checks passed on production-style captures, median <strong>5.3 s</strong> per slide</li>
+            <li>Cropping to the player cut image tokens by <strong>48%</strong></li>
+            <li>"Thinking on" looked safer on clean slides but passed only <strong>15 of 21</strong> realistic ones, so it was rejected</li>
+            <li>A guard discards any description where the image provably never reached the model, after a silent text-only load invented slide content</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="meta">DeepEval · 3 Oct 2026</span>
+          <h3>Study outputs, scored by a second model</h3>
+          <ul class="md art-list">
+            <li>Notes: <strong>15 of 15</strong> cases passed (faithfulness 0.989)</li>
+            <li>Answers: <strong>26 of 43</strong> passed (faithfulness 0.924, relevancy 0.826)</li>
+            <li>Flashcards: <strong>9 of 15</strong> passed, the weakest output</li>
+            <li>Median answer time <strong>2.3 s</strong> on a local model</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="meta">Judge calibration · 29 Oct 2026</span>
+          <h3>The judge was tested too</h3>
+          <ul class="md art-list">
+            <li>On a blind holdout, the simpler judge prompt agreed with labels <strong>80%</strong> of the time (Cohen's kappa <strong>0.44</strong>)</li>
+            <li>A revised prompt also scored 80% but kappa <strong>0.29</strong>, so the simpler one stayed</li>
+            <li>Lesson: an automated judge needs its own evaluation before its scores mean anything</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engine">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">04 · Engine</span><h2>What did I change in the screenpipe engine?</h2><p class="muted">Three small changes on a local branch of the open-source recorder, each switched on by an environment variable so the difference from upstream stays easy to review.</p></div>
+      <div class="tbl-wrap"><table class="os-tbl">
+        <thead><tr><th scope="col">Change</th><th scope="col">Date</th><th scope="col">Size</th><th scope="col">Why</th></tr></thead>
+        <tbody>
+          <tr><td><strong>App audio tap</strong></td><td class="v">29 Sep 2026</td><td>4 unit tests</td><td>Record one app's own sound (the browser playing the lecture), not the room or other apps</td></tr>
+          <tr><td><strong>Configurable protected-video pages</strong></td><td class="v">30 Sep 2026</td><td>+83 lines, 3 files</td><td>Pause screen capture on listed player pages and keep audio, because screen capture blanks protected video while audio does not</td></tr>
+          <tr><td><strong>Immediate capture release</strong></td><td class="v">30 Sep 2026</td><td>+105 lines, 2 files</td><td>Release capture as soon as the pause starts, and keep pausing while the protected page is still visible</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">These changes are not yet upstream; a pull-request description is drafted.</p>
+    </div>
+  </section>
+
+  <section id="public">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">05 · Going public</span><h2>How was a private tool made safe to open-source?</h2></div>
+      <div class="grid g2">
+        <div class="card"><h3>Left behind</h3><ul class="md art-list"><li>Captured lectures, logs and personal tools</li><li>Course, institution and platform names, replaced with generic ones</li><li>Machine-specific paths and settings</li></ul></div>
+        <div class="card"><h3>Added</h3><ul class="md art-list"><li>A <a href={docs + 'project/content-guard'}>six-layer content guard</a> on every commit and push</li><li>Neutral test fixtures and documentation</li><li>A sync path both ways: since 5 Nov 2026, fixes made in the public port flow back to the prototype</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lessons">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">06 · Lessons</span><h2>What are the product lessons?</h2></div>
+      <ol class="guide-points">
+        <li><span><strong>Start with one real user.</strong> Building for my own classes surfaced problems no spec would have: black video, room noise, judges that disagree with people.</span></li>
+        <li><span><strong>Test on realistic inputs.</strong> The clean slide set pointed to the wrong setting; only production-style frames showed it.</span></li>
+        <li><span><strong>Evaluate the evaluator.</strong> A model judge is a measuring instrument, and it needs calibration like any other.</span></li>
+        <li><span><strong>Design for publishing early.</strong> Generic names and a content guard made the move from private to public a port, not a rewrite.</span></li>
+      </ol>
+      <p><a class="more-link" href="/work/lecture-lens/">Read the Lecture Lens case study</a> · <a class="more-link" href="/work/artifacts/lecture-lens/">See its product artifacts</a></p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>What do people ask about the origin story?</h2></div>
+      <div class="faq">{faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}</div>
+      <BookCTA id="ll-origin" heading="Taking a private prototype to a product?" text="Book a consultation on evaluation, privacy-by-design and the path from internal tool to open release." />
+    </div>
+  </section>
+</Base>
