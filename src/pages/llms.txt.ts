@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { GLOSSARY } from '../data/glossary';
+import { ARTIFACTS } from '../data/artifacts';
 
 export const GET: APIRoute = async () => {
   const articles = (await getCollection('articles')).sort(
@@ -25,6 +26,11 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 ## Key pages
 
 - [Home: AI-native product management in India](https://ainpm.in/): Overview of Ian Pinto's work, consulting, guide and articles
+- [Skills passport](https://ainpm.in/skills/passport/): Skills mapped to O*NET, NACE, ESCO and SFIA 9 with self-assessed levels and evidence; JSON at https://ainpm.in/skills/passport.json (self-asserted, unsigned)
+- [Evolution timeline](https://ainpm.in/work/timeline/): Dated credentials, projects, releases, research and merged contributions, 2015 to 2026, each linked to proof
+- [Product artifacts](https://ainpm.in/work/artifacts/): Problem briefs, evaluation specs, metrics trees, decision logs and launch notes for each project, linked to source documents
+${Object.values(ARTIFACTS).map((a) => `- [${a.name} product artifacts](https://ainpm.in/work/artifacts/${a.slug}/): Brief, eval spec, metrics tree, ${a.decisions.length}-entry decision log and launch notes`).join('\n')}
+- [Portfolio data (JSON)](https://ainpm.in/portfolio.json): Machine-readable skills, verified credentials, projects with dated results, and open-source contributions
 - [Free learning path](https://ainpm.in/learn/): Free, self-paced six-module AI PM learning path (about 24 hours): evals, cost per task, RAG and agent trust design, India regulation, portfolio evidence. Not a bootcamp; no placement
 - [Mentorship programme](https://ainpm.in/mentorship/): Paid four-session 1:1 AI PM mentorship for career switchers (goal plan, evals, portfolio review, mock interview); no placement
 - [Field guide](https://ainpm.in/guide/): Six shifts for PMs, India AI landscape, regulation radar with dates, eight-step playbook, where to start by role
@@ -32,11 +38,13 @@ Author: Ian Pinto — https://ainpm.in/about/ — https://www.linkedin.com/in/ia
 - [Articles](https://ainpm.in/articles/): Answer-first guides
 - [Glossary](https://ainpm.in/glossary/): ${GLOSSARY.length} defined terms
 - [About Ian Pinto](https://ainpm.in/about/): Author profile and credentials
-- [Portfolio](https://ainpm.in/work/): Case studies of four open-source products
+- [Portfolio](https://ainpm.in/work/): Case studies of five open-source products, plus open-source contributions
 - [Skills and evidence](https://ainpm.in/skills/): Eight AI-native PM skills mapped to O*NET work activities and NACE competencies, each linked to public evidence (demos, code, eval logs, publications, credentials)
 - [TrustVault case study](https://ainpm.in/work/trustvault/): Zero-knowledge password manager PWA with WebAuthn PRF passkey unlock and on-device AI
 - [webauthn-prf-zktv case study](https://ainpm.in/work/webauthn-prf-zktv/): Passkey vault key-wrapping library (npm) and preprint (DOI 10.6084/m9.figshare.32915411.v1)
 - [Lecture Lens case study](https://ainpm.in/work/lecture-lens/): Local-AI macOS app turning lectures into transcripts, notes and flashcards
+- [Lecture Lens origin story](https://ainpm.in/work/lecture-lens/origin/): How the private Screenpipe Study prototype became Lecture Lens: evidence before release, three screenpipe engine changes, and the move to open source
+- [CodeSearchNet Find & Explain case study](https://ainpm.in/work/codesearchnet/): Fine-tuned code retrieval (MRR 0.815 vs BM25 0.527 on 1,000 CodeSearchNet test queries) and a fine-tuned summariser, with significance tests and a live demo
 - [Book a consultation](https://ainpm.in/consult/): Paid 30-minute consultations with Ian Pinto (price on request, ianpinto@ainpm.in)
 
 ## Articles

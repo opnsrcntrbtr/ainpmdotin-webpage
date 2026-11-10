@@ -1,0 +1,266 @@
+[
+  {
+    "id": "P1",
+    "priority": 10,
+    "status": "done",
+    "owner": "claude",
+    "title": "Verified credentials: issuer links (Credly, Accredible), issue/expiry dates, verification type, new PMI/Databricks/Google Cloud badges; schema url/dateCreated/validUntil",
+    "accredible": "84% suspect exaggeration; 53% verify frequently",
+    "commit": "a69714c",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P2",
+    "priority": 9,
+    "status": "done",
+    "owner": "claude",
+    "title": "Project proof fields: skills mapping and last-activity date for every project; dated results surfaced on cards; /portfolio.json machine-readable export",
+    "accredible": "Applied skills 58%; recent skill use 47%",
+    "commit": "b2c1a99",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P3",
+    "priority": 8,
+    "status": "done",
+    "owner": "claude",
+    "title": "New case study: CodeSearchNet Find & Explain (fine-tuned retrieval, MRR 0.815, HF Space + 2 models)",
+    "accredible": "Test results 51%; applied skills 58%",
+    "commit": "9f5afe9",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P4",
+    "priority": 7,
+    "status": "done",
+    "owner": "claude",
+    "title": "Open-source contributions: merged PRs (graphify #576, openselfservice #365) and published npm/PyPI packages with dated download counts",
+    "accredible": "Relevant experience 76%; applied skills 58%",
+    "commit": "8c8c52d",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P5",
+    "priority": 6,
+    "status": "done",
+    "owner": "claude",
+    "title": "Skills matrix refresh: add new evidence (credentials, CSNE, contributions) so every skill has 4+ links of 3+ kinds",
+    "accredible": "44% want clearer skill descriptions",
+    "commit": "b2ace61",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P6",
+    "priority": 5,
+    "status": "done",
+    "owner": "claude",
+    "title": "Case-study proof boxes: skills demonstrated + evidence you can check + last activity on all case studies",
+    "accredible": "79%: value should be communicated better",
+    "commit": "3013348",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P7",
+    "priority": 4,
+    "status": "done",
+    "owner": "claude",
+    "title": "Labs: MLX AutoResearch agent and other experiments listed with honest status (no results yet)",
+    "accredible": "Recent skill use 47%",
+    "commit": "b6ea07c",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P8",
+    "priority": 3,
+    "status": "open",
+    "owner": "ian",
+    "title": "Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording (8 Nov: public search found no match on Scrum Alliance or upGrad/IIT-KGP; links still needed from Ian)",
+    "accredible": "Verification"
+  },
+  {
+    "id": "P9",
+    "priority": 2,
+    "status": "open",
+    "owner": "ian",
+    "title": "Review the anonymised AMC outcome draft in ops/ralph-portfolio/drafts/amc-outcome.md; publish only after Ian approves",
+    "accredible": "Relevant experience 76%"
+  },
+  {
+    "id": "P10",
+    "priority": 8,
+    "status": "done",
+    "owner": "claude",
+    "title": "Identity links: add Credly, Hugging Face and npm profiles to Person sameAs; ProfilePage schema on /about/ with verified-credential count",
+    "accredible": "Verification (53% verify frequently)",
+    "commit": "61f83a2",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P11",
+    "priority": 7,
+    "status": "done",
+    "owner": "claude",
+    "title": "Home and About surface proof: verified-credential and merged-PR counts in the proof bar, linked to /skills/#credentials and /work/#open-source",
+    "accredible": "79%: value should be communicated better",
+    "commit": "864bd66",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P12",
+    "priority": 6,
+    "status": "done",
+    "owner": "claude",
+    "title": "Update the Accredible research article with how the portfolio applies each finding (verification, applied skills, recency, contributions, portfolio.json)",
+    "accredible": "All findings, applied",
+    "commit": "2f390d9",
+    "doneOn": "2026-11-04"
+  },
+  {
+    "id": "P13",
+    "priority": 10,
+    "status": "done",
+    "owner": "claude",
+    "title": "PM artifacts framework (/work/artifacts/ hub + per-project pages from src/data/artifacts.ts) and SEBI Circular RAG artifacts: brief, eval spec, metrics tree, decision log, launch notes",
+    "accredible": "Applied skills in real-world context 58%; test results 51%",
+    "commit": "7054969",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P14",
+    "priority": 9,
+    "status": "done",
+    "owner": "claude",
+    "title": "PM artifacts: CodeSearchNet and Lecture Lens",
+    "accredible": "Applied skills 58%",
+    "commit": "7160146",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P15",
+    "priority": 8,
+    "status": "done",
+    "owner": "claude",
+    "title": "PM artifacts: TrustVault and webauthn-prf-zktv",
+    "accredible": "Applied skills 58%",
+    "commit": "bf64870",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P16",
+    "priority": 7,
+    "status": "done",
+    "owner": "claude",
+    "title": "Skills passport: ESCO + SFIA 9 (code, level, why) per skill on /skills/passport/, plus self-asserted Open Badges 3.0-style JSON export",
+    "accredible": "44% want clearer skill descriptions; frameworks help matching",
+    "commit": "6c9c42a",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P17",
+    "priority": 6,
+    "status": "done",
+    "owner": "claude",
+    "title": "Builder's notes 1: what fine-tuning taught me about data vs epochs (CodeSearchNet)",
+    "accredible": "Test results 51%",
+    "commit": "3debcf9",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P18",
+    "priority": 5,
+    "status": "done",
+    "owner": "claude",
+    "title": "Builder's notes 2: release gates that move with the model (SEBI RAG floors)",
+    "accredible": "Test results 51%",
+    "commit": "a3d00f7",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P19",
+    "priority": 4,
+    "status": "done",
+    "owner": "claude",
+    "title": "Builder's notes 3: keeping private course material out of a public repo (Lecture Lens content guard)",
+    "accredible": "Applied skills 58%",
+    "commit": "ea1a07a",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P20",
+    "priority": 3,
+    "status": "done",
+    "owner": "claude",
+    "title": "Draft (not published) anonymised AMC platform outcome page for Ian's review, with placeholders for numbers",
+    "accredible": "Relevant experience 76%",
+    "commit": "c221750",
+    "doneOn": "2026-11-08"
+  },
+  {
+    "id": "P21",
+    "priority": 10,
+    "status": "done",
+    "owner": "claude",
+    "title": "Origin-story case study: from the private Screenpipe Study prototype to the public Lecture Lens (timeline, what was learned, how it was made safe to open-source; no course, institution or platform names)",
+    "accredible": "Applied skills in real-world context 58%; relevant experience 76%",
+    "commit": "2dea151",
+    "doneOn": "2026-11-10"
+  },
+  {
+    "id": "P22",
+    "priority": 9,
+    "status": "done",
+    "owner": "claude",
+    "title": "Lecture Lens refresh: Studio (in-browser model), ADR-005/006, prototype eval results (slide vision, DeepEval run, judge calibration), lastActivity 6 Nov 2026, Studio screenshot",
+    "accredible": "Test results 51%; recent skill use 47%",
+    "commit": "7cf8f41",
+    "doneOn": "2026-11-10"
+  },
+  {
+    "id": "P23",
+    "priority": 8,
+    "status": "done",
+    "owner": "claude",
+    "title": "Evolution timeline /work/timeline/: dated credentials, projects, releases and merged PRs from 2015 to 2026",
+    "accredible": "79%: value should be communicated better; only 13% of issuers know outcomes",
+    "commit": "0f86eb5",
+    "doneOn": "2026-11-10"
+  },
+  {
+    "id": "P24",
+    "priority": 7,
+    "status": "done",
+    "owner": "claude",
+    "title": "Builder's note: respecting copy-protected video while keeping what learners need (DRM pause, keep audio, engine changes)",
+    "accredible": "Applied skills 58%",
+    "commit": "63a539f",
+    "doneOn": "2026-11-10"
+  },
+  {
+    "id": "P25",
+    "priority": 6,
+    "status": "done",
+    "owner": "claude",
+    "title": "Draft upstream screenpipe PR description for the 3 engine commits (App Tap, configurable DRM pages, immediate release); not opened",
+    "accredible": "Contributions as evidence",
+    "commit": "e8192e2",
+    "doneOn": "2026-11-10"
+  },
+  {
+    "id": "P26",
+    "priority": 5,
+    "status": "open",
+    "owner": "ian",
+    "title": "Decide whether to open the screenpipe upstream PR (draft in ops/ralph-portfolio/drafts/screenpipe-pr.md); native app screenshots need a demo lecture without course content",
+    "accredible": "Contributions as evidence"
+  },
+  {
+    "id": "P27",
+    "priority": 4,
+    "status": "done",
+    "owner": "claude",
+    "title": "Add this run's new evidence to the skills matrix",
+    "accredible": "Clearer skill descriptions",
+    "commit": "3cd35ee",
+    "doneOn": "2026-11-10"
+  }
+]

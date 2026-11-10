@@ -1,0 +1,185 @@
+---
+import ProofBox from '../../../components/ProofBox.astro';
+import Base from '../../../layouts/Base.astro';
+import Scorecard from '../../../components/Scorecard.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import ProjectCards from '../../../components/ProjectCards.astro';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-11-05');
+const repo = 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain';
+const report = repo + '/blob/main/REPORT.md';
+const space = 'https://huggingface.co/spaces/opnsrcntrbtrian/csne-find-and-explain';
+const model = 'https://huggingface.co/opnsrcntrbtrian/csne-minilm-retrieval-full-1ep';
+const model50 = 'https://huggingface.co/opnsrcntrbtrian/csne-minilm-retrieval-50k';
+
+const faq = [
+  { q: 'What is CodeSearchNet Find & Explain?', a: 'An open-source two-stage pipeline by Ian Pinto: a fine-tuned sentence-transformer finds Python functions that match a plain-English query, and a fine-tuned flan-t5-base model writes a one-line explanation of each result. A live demo runs on Hugging Face Spaces.' },
+  { q: 'How good is the retrieval?', a: 'On 1,000 queries from the official CodeSearchNet Python test split, each scored against its gold function plus 999 distractors, the full-corpus model reaches MRR 0.815, Recall@1 0.725 and Recall@10 0.961. BM25 reaches MRR 0.527 and the untuned encoder 0.687.' },
+  { q: 'Is the gain from more training data real?', a: 'Yes, but small. Training on all 393,427 pairs instead of 50,000 adds 0.022 MRR. A paired bootstrap (10,000 resamples) gives a 95% interval of 0.012 to 0.032, and a paired t-test gives p < 0.001.' },
+  { q: 'What are the limits?', a: 'Queries are author-written docstrings, which likely overstates real-world search quality. MRR falls from 0.882 to 0.755 as the distractor pool grows from 99 to 4,999. It covers Python only, and every model was trained for one epoch.' },
+];
+
+const schema = [
+  {
+    '@type': 'SoftwareSourceCode',
+    '@id': 'https://ainpm.in/work/codesearchnet/#code',
+    name: 'CodeSearchNet Find & Explain',
+    description: 'Semantic code search and summarisation for Python: fine-tuned MiniLM retrieval (MRR 0.815) and a fine-tuned flan-t5-base summariser (BERTScore F1 0.846).',
+    codeRepository: repo,
+    programmingLanguage: 'Python',
+    license: 'https://opensource.org/licenses/MIT',
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+  },
+  {
+    '@type': 'TechArticle',
+    headline: 'CodeSearchNet Find & Explain: a retrieval fine-tuning case study',
+    url: 'https://ainpm.in/work/codesearchnet/',
+    datePublished: updated.toISOString(),
+    dateModified: updated.toISOString(),
+    author: { '@id': 'https://ainpm.in/about/#ian-pinto' },
+    about: { '@id': 'https://ainpm.in/work/codesearchnet/#code' },
+    isPartOf: { '@id': 'https://ainpm.in/#website' },
+    inLanguage: 'en-IN',
+  },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'CodeSearchNet Find & Explain', path: '/work/codesearchnet/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: report, label: 'Project report (REPORT.md): data, methods, results, ablations, significance tests' },
+  { href: space, label: 'Live demo on Hugging Face Spaces' },
+  { href: model, label: 'Model card: csne-minilm-retrieval-full-1ep' },
+  { href: model50, label: 'Model card: csne-minilm-retrieval-50k' },
+  { href: 'https://arxiv.org/abs/2107.03374', label: 'Chen et al. (2021), arXiv:2107.03374, cited in the report for the CodeSearchNet data' },
+];
+---
+<Base
+  title="CodeSearchNet Find & Explain: Retrieval Case Study | AINPM.in"
+  description="Case study: fine-tuned code search that lifts MRR from 0.527 (BM25) to 0.815 on 1,000 CodeSearchNet test queries, with significance tests and a live demo."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Independent open-source project. CodeSearchNet data is used under its licence; views are my own."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / CodeSearchNet Find &amp; Explain</div>
+
+  <div class="wrap phero" style="padding-top:28px">
+    <div>
+      <span class="pill-live">Case study · Retrieval · Fine-tuning</span>
+      <h1><span class="kicker">Semantic code search with measured results</span>Find Python code in plain English, <em>then explain it</em></h1>
+      <p class="lede"><strong>CodeSearchNet Find &amp; Explain retrieves Python functions that match a plain-English query and writes a one-line explanation of each one.</strong> Fine-tuning a small encoder raised mean reciprocal rank from 0.527 (BM25) to 0.815 on 1,000 test queries, and the report publishes the weak spots alongside the wins.</p>
+      <div class="cta">
+        <a class="btn primary" href={space} target="_blank" rel="noopener">Try the live demo ↗</a>
+        <a class="btn ghost" href={report} target="_blank" rel="noopener">Read the report ↗</a>
+      </div>
+      <ul class="chips" style="margin-top:22px">
+        <li>sentence-transformers</li><li>MiniLM-L6</li><li>flan-t5-base</li><li>Gradio</li><li>MIT</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap case-score">
+    <Scorecard slug="codesearchnet" />
+  </div>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · The problem</span>
+        <h2>What job does it do?</h2>
+        <p class="muted">Keyword search fails when a developer describes intent ("validate input") and the code says something else (<code>check_args</code>). Docstrings and code share little vocabulary, so lexical search is weak.</p>
+      </div>
+      <div class="callout"><strong>Job to be done:</strong> when I need a function that already exists, I want to describe what it does and see the best matches with a plain explanation, so I can judge relevance without reading every body.</div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · Results</span>
+        <h2>How much better is it than the baselines?</h2>
+        <p class="muted">Official CodeSearchNet Python test split: 1,000 queries, each scored against its gold function plus 999 distractors.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Run</th><th scope="col">MRR</th><th scope="col">Recall@1</th><th scope="col">Recall@10</th></tr></thead>
+          <tbody>
+            <tr><td>BM25 (lexical)</td><td class="v">0.527</td><td class="v">0.407</td><td class="v">0.747</td></tr>
+            <tr><td>MiniLM, zero-shot</td><td class="v">0.687</td><td class="v">0.567</td><td class="v">0.898</td></tr>
+            <tr><td>MiniLM, fine-tuned on 50K pairs</td><td class="v">0.794</td><td class="v">0.701</td><td class="v">0.945</td></tr>
+            <tr><td><strong>MiniLM, fine-tuned on 393K pairs</strong></td><td class="v"><strong>0.815</strong></td><td class="v"><strong>0.725</strong></td><td class="v"><strong>0.961</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:20px"><strong>Was the extra data worth it?</strong> Training on 7.9 times more data added only 0.022 MRR. It is a real gain (paired bootstrap 95% interval 0.012 to 0.032; t-test p &lt; 0.001), but a small one. The next experiment is more epochs, not more data.</div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · How it works</span>
+        <h2>How was it built and evaluated?</h2>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Data</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>CodeSearchNet Python (412,178 training rows) joined on GitHub permalink to a dataset with curated one-line summaries: 100% join rate on a 20,000-row sample</li>
+            <li>Official splits kept, which are already separated by repository</li>
+            <li>Docstrings stripped from the code side so the task is not trivially lexical; duplicates and boilerplate removed, leaving 393,427 pairs</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Models</h3>
+          <ul class="md" style="padding-left:1.1em;margin:10px 0 0">
+            <li>Retrieval: all-MiniLM-L6-v2 fine-tuned with in-batch negatives (MultipleNegativesRankingLoss), exact search over normalised embeddings</li>
+            <li>Explanation: flan-t5-base (250M parameters) fine-tuned on the same corpus: BERTScore F1 0.747 zero-shot to 0.846 fine-tuned, on 50 test examples</li>
+            <li>An API model can stand in for the local summariser behind the same interface and prompt</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Limits</span>
+        <h2>Where does it fall short?</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Limit</th><th scope="col">Evidence</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Docstring-as-query bias</strong></td><td>Queries are written by the same author as the code, which likely overstates real-world search quality.</td></tr>
+            <tr><td><strong>Bigger search space, lower top-1</strong></td><td>MRR falls from 0.882 to 0.755 as distractors grow from 99 to 4,999; Recall@10 stays above 0.92.</td></tr>
+            <tr><td><strong>Small summary sample</strong></td><td>Summaries were scored on 50 examples; one empty output was replaced with a documented sentinel rather than dropped.</td></tr>
+            <tr><td><strong>Scope</strong></td><td>Python only; one training epoch for every model.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <ProofBox slug="codesearchnet" />
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">05 · FAQ</span><h2>Frequently asked questions</h2></div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+      <BookCTA id="codesearchnet" heading="Building search or RAG over your own content?" text="Book a consultation on retrieval design, golden sets and evaluation before you scale." />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">More work</span><h2>Other case studies</h2></div>
+      <ProjectCards exclude="codesearchnet" />
+    </div>
+  </section>
+</Base>

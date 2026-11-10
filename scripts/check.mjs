@@ -52,7 +52,7 @@ for (const file of pages) {
   }
 }
 
-for (const f of ['robots.txt', 'llms.txt', 'llms-full.txt', 'sitemap-index.xml', 'rss.xml', 'CNAME', 'og/default.png', '404.html']) {
+for (const f of ['robots.txt', 'llms.txt', 'llms-full.txt', 'portfolio.json', 'skills/passport.json', 'sitemap-index.xml', 'rss.xml', 'CNAME', 'og/default.png', '404.html']) {
   if (!(await exists(join(DIST, f)))) errors.push(`missing ${f}`);
 }
 

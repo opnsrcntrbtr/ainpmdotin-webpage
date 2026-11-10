@@ -1,27 +1,32 @@
 // Append one Ralph-loop iteration trace and mirror it to PostHog.
 // Usage: node scripts/ralph-trace.mjs ops/ralph/iter.json
 // iter.json: { iteration, backlogId, goal, ripplixGap, topics[], changes[], evidence[], checks{}, commit }
-// Score before/after are taken from ops/ralph/score-before.json and a fresh geo-score run.
+// Score before/after are taken from $RALPH_DIR/score-before.json and a fresh run of $RALPH_SCORE.
+// Defaults: RALPH_DIR=ops/ralph, RALPH_SCORE='node scripts/geo-score.mjs --json', RALPH_TRACK=visibility.
 import { readFile, appendFile, writeFile, rm } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import { POSTHOG } from './ralph-config.mjs';
 
+const DIR = process.env.RALPH_DIR || 'ops/ralph';
+const SCORE = process.env.RALPH_SCORE || 'node scripts/geo-score.mjs --json';
+const TRACK = process.env.RALPH_TRACK || 'visibility';
 const iter = JSON.parse(await readFile(process.argv[2], 'utf8'));
-const before = JSON.parse(await readFile('ops/ralph/score-before.json', 'utf8'));
-const after = JSON.parse(execSync('node scripts/geo-score.mjs --json').toString());
+const before = JSON.parse(await readFile(DIR + '/score-before.json', 'utf8'));
+const after = JSON.parse(execSync(SCORE).toString());
 // source: where the iteration ran ('mac' scheduled task or 'cloud' session). Env wins over iter.json.
 const source = process.env.RALPH_SOURCE || iter.source || 'mac';
 const trace = {
   ts: new Date().toISOString(),
+  track: TRACK,
   ...iter,
   source,
   scorerVersion: { before: before.scorerVersion ?? 1, after: after.scorerVersion ?? 1 },
   score: { before: before.total, after: after.total, delta: +(after.total - before.total).toFixed(1) },
   categories: { before: before.categories, after: after.categories },
-  topics: Object.fromEntries(Object.entries(after.topics).map(([k, v]) => [k, { before: before.topics[k]?.score ?? 0, after: v.score }])),
+  ...(after.topics ? { topics: Object.fromEntries(Object.entries(after.topics).map(([k, v]) => [k, { before: before.topics?.[k]?.score ?? 0, after: v.score }])) } : {}),
 };
-await appendFile('ops/ralph/traces.jsonl', JSON.stringify(trace) + '\n');
-await writeFile('ops/ralph/score-before.json', JSON.stringify(after, null, 1));
+await appendFile(DIR + '/traces.jsonl', JSON.stringify(trace) + '\n');
+await writeFile(DIR + '/score-before.json', JSON.stringify(after, null, 1));
 
 // PostHog: send this event plus any queued ones. Events that cannot be sent (for example from a
 // cloud session whose network policy blocks eu.i.posthog.com) are queued in the repo and flushed

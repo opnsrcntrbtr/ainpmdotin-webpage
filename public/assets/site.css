@@ -540,6 +540,30 @@ a:hover{color:var(--teal-ink)}
 .hero7 h1 em,.phero h1 em{font-style:normal;color:var(--teal);background:none;-webkit-text-fill-color:currentColor}
 .hero7 h1{font-size:clamp(2.3rem,4.8vw,3.6rem);letter-spacing:-.02em;max-width:18ch}
 p .more-link{margin-top:0;font-size:inherit}
+.card .cred-dates{font-size:.82rem;color:var(--ink-2);margin:-4px 0 10px}
+a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
+.pcard-skills{font-size:.85rem;color:var(--ink-2);margin:8px 0 0}.pcard-skills span{font:var(--label);text-transform:uppercase;letter-spacing:.06em;color:var(--saffron);margin-right:4px}
+.pcard-active{font-size:.78rem;color:var(--ink-2);margin:6px 0 0}
+@media (max-width:640px){.os-tbl th:nth-child(2),.os-tbl td:nth-child(2),.os-tbl th:nth-child(3),.os-tbl td:nth-child(3){display:none}}
+.proofbox .md{padding-left:1.1em;margin:10px 0 0}.proofbox .md li{margin:6px 0}
+@media(min-width:760px){.proofbar{grid-template-columns:repeat(3,1fr)}}
+.proofbar span a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.proofbar span a:hover{color:var(--teal)}
+.art-list{padding-left:1.1em;margin:8px 0 0}.art-list li{margin:5px 0}
+.mtree{display:grid;gap:16px}.mtree-root{border-left:4px solid var(--teal)}
+.grid>.card{min-width:0}
+.art-metrics table{min-width:0;width:100%}
+.passport{display:grid;gap:16px}
+.pp-grid{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;margin:12px 0 0;font-size:.92rem}
+.pp-grid dt{font:var(--label);text-transform:uppercase;letter-spacing:.06em;color:var(--saffron);padding-top:3px}
+.pp-grid dd{margin:0;min-width:0}.pp-grid dd p{margin:0 0 6px}
+@media(max-width:560px){.pp-grid{grid-template-columns:1fr}.pp-grid dt{padding-top:8px}}
+.tl{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.tl li{display:grid;grid-template-columns:72px auto 1fr;gap:6px 12px;align-items:baseline;padding:10px 0 10px 16px;position:relative}
+.tl li::before{content:"";position:absolute;left:-6px;top:17px;width:10px;height:10px;border-radius:50%;background:var(--teal)}
+.tl-date{font:500 .82rem var(--mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tl-title{min-width:0}
+@media(max-width:560px){.tl li{grid-template-columns:auto 1fr}.tl-title{grid-column:1/-1}}
 
 /* ---- v7: in-article sources (Ralph iteration 6) ---- */
 .sources{border:0;padding:32px 0 0;margin-top:8px}

@@ -1,0 +1,121 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import { ARTIFACTS, type ArtifactSet } from '../../../data/artifacts';
+import { PROJECTS } from '../../../data/projects';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+export function getStaticPaths() {
+  return Object.values(ARTIFACTS).map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props as { a: ArtifactSet };
+const updated = new Date(a.updated);
+const proj = PROJECTS.find((x) => x.slug === a.slug);
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const url = `https://ainpm.in/work/artifacts/${a.slug}/`;
+const faq = [
+  { q: `How is ${a.name} evaluated?`, a: `${a.evalSpec.summary} ${a.evalSpec.rule}` },
+  { q: `Which decisions shaped ${a.name}?`, a: a.decisions.map((d) => `${d.title} (${d.status.toLowerCase()}, ${fmt(d.date)}): ${d.why}`).join(' ') },
+  { q: `What are the known limits of ${a.name}?`, a: a.launch.limits.join('. ') + '.' },
+];
+const schema = [
+  { '@type': 'TechArticle', headline: `${a.name}: product artifacts`, url, datePublished: updated.toISOString(), dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, isPartOf: { '@id': 'https://ainpm.in/#website' }, inLanguage: 'en-IN', about: a.name },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Product artifacts', path: '/work/artifacts/' }, { name: a.name, path: `/work/artifacts/${a.slug}/` }]),
+  faqSchema(faq),
+];
+const sources = [a.brief.source, a.evalSpec.source, a.launch.source, ...a.decisions.map((d) => d.source)].filter((s, i, arr) => arr.findIndex((x) => x.href === s.href) === i);
+---
+<Base
+  title={`${a.name}: Product Artifacts | AINPM.in`}
+  description={`The product work behind ${a.name}: problem brief, evaluation spec, metrics tree, decision log and launch notes, each linked to its source document.`}
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / <a href="/work/artifacts/">Product artifacts</a> / {a.name}</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Product artifacts · Checked {fmt(a.updated)}</span>
+    <h1>{a.name}: the product work behind it</h1>
+    <p class="answer"><strong>These five artifacts show how {a.name} was framed, measured and decided, not just how it was coded.</strong> Each one summarises the project's own documents and links to them, so you can check every line. <a href={a.caseStudy}>Read the case study</a>.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#brief">Brief</a></li><li><a href="#eval">Eval spec</a></li><li><a href="#metrics">Metrics tree</a></li><li><a href="#decisions">Decision log</a></li><li><a href="#launch">Launch notes</a></li>
+    </ul>
+  </div>
+
+  <section id="brief">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">01 · Problem brief</span><h2>What problem does it solve, and for whom?</h2></div>
+      <div class="grid g2">
+        <div class="card"><h3>Problem</h3><p>{a.brief.problem}</p><h3 style="margin-top:14px">Users</h3><p>{a.brief.users}</p></div>
+        <div class="card"><h3>Job to be done</h3><p>"{a.brief.job}"</p></div>
+        <div class="card"><h3>Constraints</h3><ul class="md art-list">{a.brief.constraints.map((c) => <li>{c}</li>)}</ul></div>
+        <div class="card"><h3>Non-goals</h3><ul class="md art-list">{a.brief.nonGoals.map((c) => <li>{c}</li>)}</ul></div>
+      </div>
+      <p class="note">Source: <a href={a.brief.source.href} target="_blank" rel="noopener">{a.brief.source.label} ↗</a></p>
+    </div>
+  </section>
+
+  <section id="eval">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">02 · Evaluation spec</span><h2>How is quality defined and gated?</h2><p class="muted">{a.evalSpec.summary}</p></div>
+      <div class="grid g2">
+        <div class="card"><h3>Test set</h3><ul class="md art-list">{a.evalSpec.dataset.map((d) => <li>{d}</li>)}</ul></div>
+        <div class="card art-metrics">
+          <h3>Metrics</h3>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th scope="col">Metric</th><th scope="col">Measured</th><th scope="col">Bar</th></tr></thead>
+            <tbody>{a.evalSpec.metrics.map((m) => <tr><td>{m.name}{m.note && <span class="muted"> · {m.note}</span>}</td><td class="v">{m.value ?? '—'}</td><td class="v">{m.floor ?? '—'}</td></tr>)}</tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>Rule:</strong> {a.evalSpec.rule}</div>
+      <p class="note">Source: <a href={a.evalSpec.source.href} target="_blank" rel="noopener">{a.evalSpec.source.label} ↗</a></p>
+    </div>
+  </section>
+
+  <section id="metrics">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">03 · Metrics tree</span><h2>What does success mean, and what must not break?</h2><p class="muted">My framing of metrics the project already measures.</p></div>
+      <div class="mtree">
+        <div class="mtree-root card"><span class="meta">North star</span><h3>{a.metricsTree.northStar}</h3><p class="muted">{a.metricsTree.why}</p></div>
+        <div class="grid g2">
+          <div class="card"><span class="meta">Drivers</span><ul class="md art-list">{a.metricsTree.drivers.map((d) => <li><strong>{d.name}</strong>: {d.metric}</li>)}</ul></div>
+          <div class="card"><span class="meta">Guardrails</span><ul class="md art-list">{a.metricsTree.guardrails.map((d) => <li><strong>{d.name}</strong>: {d.metric}</li>)}</ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">04 · Decision log</span><h2>What was decided, and why?</h2></div>
+      <div class="tbl-wrap"><table class="os-tbl">
+        <thead><tr><th scope="col">Decision</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col">What and why</th></tr></thead>
+        <tbody>{a.decisions.map((d) => <tr><td><a href={d.source.href} target="_blank" rel="noopener"><strong>{d.id}</strong> {d.title} ↗</a></td><td class="v">{fmt(d.date)}</td><td><span class={`badge ${d.status === 'Rejected' || d.status === 'Declined' ? 'no' : 'ok'}`}>{d.status}</span></td><td>{d.decision} <span class="muted">Why: {d.why}</span></td></tr>)}</tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="launch">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">05 · Launch notes</span><h2>What shipped, what's weak, and what's next?</h2><p class="muted">Status: {a.launch.status}</p></div>
+      <div class="grid g3">
+        <div class="card"><h3>Shipped</h3><ul class="md art-list">{a.launch.shipped.map((x) => <li>{x}</li>)}</ul></div>
+        <div class="card"><h3>Known limits</h3><ul class="md art-list">{a.launch.limits.map((x) => <li>{x}</li>)}</ul></div>
+        <div class="card"><h3>Next</h3><ul class="md art-list">{a.launch.next.map((x) => <li>{x}</li>)}</ul></div>
+      </div>
+      <p class="note">Source: <a href={a.launch.source.href} target="_blank" rel="noopener">{a.launch.source.label} ↗</a> · <a href="/work/artifacts/">All product artifacts</a></p>
+      {proj && <p class="note">Open it yourself: {proj.links.map((l, i) => <Fragment>{i > 0 && ' · '}<a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a></Fragment>)}</p>}
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>What else should you know about these artifacts?</h2></div>
+      <div class="faq">{faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}</div>
+      <BookCTA id={`artifacts-${a.slug}`} heading="Want this level of product rigour on your AI feature?" text="Book a consultation on evaluation design, decision logs and release gates for AI products." />
+    </div>
+  </section>
+</Base>

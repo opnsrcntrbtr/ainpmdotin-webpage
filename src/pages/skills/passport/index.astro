@@ -1,0 +1,101 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import { SKILLS, SFIA_LEVELS } from '../../../data/skills';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-11-08');
+const sfiaCount = SKILLS.reduce((n, s) => n + (s.sfia?.length ?? 0), 0);
+const escoCount = SKILLS.reduce((n, s) => n + (s.esco?.length ?? 0), 0);
+const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const faq = [
+  { q: 'What is a skills passport?', a: 'A single record that maps each skill to recognised frameworks (here O*NET, NACE, ESCO and SFIA 9), states a level, and links the evidence behind it, so recruiters and matching tools can compare skills in a common language.' },
+  { q: 'Are these SFIA levels certified?', a: 'No. They are self-assessed against SFIA 9 level descriptions, and each one cites the public evidence that justifies it. They are not an assessment or endorsement by the SFIA Foundation.' },
+  { q: 'What is the JSON export for?', a: 'It lets recruiting systems and AI assistants read the same mapping. It follows the shape of an Open Badges 3.0 achievement, but it is unsigned and self-asserted, so it is not a verifiable credential.' },
+];
+const schema = [
+  { '@type': 'WebPage', name: 'Skills passport of Ian Pinto', url: 'https://ainpm.in/skills/passport/', dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, about: { '@id': 'https://ainpm.in/about/#ian-pinto' } },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Skills', path: '/skills/' }, { name: 'Skills passport', path: '/skills/passport/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: 'https://esco.ec.europa.eu/en/classification/skill_main', label: 'ESCO — European Skills, Competences, Qualifications and Occupations (European Commission)' },
+  { href: 'https://sfia-online.org/en/sfia-9/all-skills-a-z', label: 'SFIA 9 — skills directory' },
+  { href: 'https://sfia-online.org/en/about-sfia/sfia-levels-of-responsibility', label: 'SFIA — levels of responsibility' },
+  { href: 'https://www.onetonline.org/find/descriptor/browse/4.A', label: 'O*NET OnLine — Generalized Work Activities' },
+  { href: 'https://www.naceweb.org/career-readiness/competencies/career-readiness-defined/', label: 'NACE — Career Readiness Competencies' },
+  { href: 'https://www.imsglobal.org/spec/ob/v3p0/', label: '1EdTech — Open Badges 3.0 specification' },
+  { href: 'https://www.accredible.com/reports/2026-state-of-credentialing-report', label: 'Accredible — 2026 State of Credentialing Report' },
+];
+---
+<Base
+  title="Skills Passport: ESCO and SFIA 9 Mapping | AINPM.in"
+  description="Ian Pinto's AI product management skills mapped to O*NET, NACE, ESCO and SFIA 9, with self-assessed levels, the evidence behind each one, and a JSON export."
+  schema={schema}
+  updated={updated}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/skills/">Skills</a> / Skills passport</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Skills passport · Updated 8 Nov 2026</span>
+    <h1>Skills passport: one skill set, four frameworks</h1>
+    <p class="answer"><strong>Each of my {SKILLS.length} skills is mapped to O*NET, NACE, the European ESCO classification ({escoCount} ESCO skills) and SFIA 9 ({sfiaCount} SFIA skills with a level), and every level cites its evidence.</strong> Accredible's 2026 research found 44% of learners want clearer descriptions of the skills they gained; a shared framework makes skills comparable across employers and countries.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#passport">Passport</a></li><li><a href="#levels">SFIA levels</a></li><li><a href="#export">JSON export</a></li><li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+
+  <section id="passport">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Passport</span><h2>How does each skill map to the frameworks?</h2><p class="muted">SFIA levels are self-assessed. O*NET and NACE alignment is my own orientation. None of these is an endorsement by a framework owner.</p></div>
+      <div class="passport">
+        {SKILLS.map((s) => (
+          <article class="card" id={s.id}>
+            <h3><a href={`/skills/#${s.id}`}>{s.name}</a></h3>
+            <p>{s.claim}</p>
+            <dl class="pp-grid">
+              <dt>SFIA 9</dt>
+              <dd>{s.sfia?.map((x) => <p><a href={`https://sfia-online.org/en/sfia-9/skills/${slug(x.name)}`} target="_blank" rel="noopener"><strong>{x.code}</strong> {x.name} ↗</a> · level {x.level}, {SFIA_LEVELS[x.level]}<br><span class="muted">Evidence: {x.why}</span></p>)}</dd>
+              <dt>ESCO</dt>
+              <dd>{s.esco?.map((e, i) => <Fragment>{i > 0 && ' · '}<a href={e.uri} target="_blank" rel="noopener">{e.label} ↗</a></Fragment>)}</dd>
+              <dt>O*NET</dt><dd>{s.onet.join(' · ')}</dd>
+              <dt>NACE</dt><dd>{s.nace}</dd>
+              <dt>Evidence</dt><dd><a href={`/skills/#${s.id}`}>{s.evidence.length} public links</a></dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="levels">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Levels</span><h2>What do the SFIA levels mean?</h2><p class="muted">SFIA describes seven levels of responsibility. Level 4 is where someone works with substantial autonomy and enables others; level 5 adds accountability for outcomes and advice.</p></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th scope="col">Level</th><th scope="col">Guiding words</th><th scope="col">Skills I place here</th></tr></thead>
+        <tbody>
+          {SFIA_LEVELS.slice(1).map((w, i) => {
+            const lvl = i + 1;
+            const here = SKILLS.flatMap((s) => (s.sfia ?? []).filter((x) => x.level === lvl).map((x) => x.code));
+            return <tr><td class="v">{lvl}</td><td>{w}</td><td>{here.length ? [...new Set(here)].join(', ') : '—'}</td></tr>;
+          })}
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="export">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Export</span><h2>How can a recruiting system read this?</h2></div>
+      <p>The same mapping is published as <a href="/skills/passport.json">passport.json</a>, shaped like an Open Badges 3.0 achievement credential so tools that read that format can parse it. It is unsigned and self-asserted: verified credentials are the ones on the <a href="/skills/#credentials">credentials list</a>, which link to Credly and Accredible.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>What do people ask about the skills passport?</h2></div>
+      <div class="faq">{faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}</div>
+      <BookCTA id="passport" heading="Building your own skills evidence?" text="The AI PM mentorship covers turning projects into a framework-mapped, evidence-backed skills record." />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,24 @@
+{
+ "total": 93.1,
+ "rubric": "v2",
+ "categories": {
+  "verifiedCredentials": 13,
+  "skillsEvidence": 20,
+  "appliedProjects": 18,
+  "testResults": 15,
+  "recency": 10,
+  "contributions": 10,
+  "skillClarity": 5,
+  "pmArtifacts": 15,
+  "frameworkMapping": 10,
+  "builderNotes": 5
+ },
+ "counts": {
+  "credentials": 12,
+  "verified": 9,
+  "projects": 5,
+  "skills": 8,
+  "mergedPRs": 2,
+  "packages": 7
+ }
+}
