@@ -198,10 +198,12 @@
   {
     "id": "P21",
     "priority": 10,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Origin-story case study: from the private Screenpipe Study prototype to the public Lecture Lens (timeline, what was learned, how it was made safe to open-source; no course, institution or platform names)",
-    "accredible": "Applied skills in real-world context 58%; relevant experience 76%"
+    "accredible": "Applied skills in real-world context 58%; relevant experience 76%",
+    "commit": "2dea151",
+    "doneOn": "2026-11-10"
   },
   {
     "id": "P22",
