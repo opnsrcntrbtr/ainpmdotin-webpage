@@ -252,5 +252,13 @@
     "owner": "ian",
     "title": "Decide whether to open the screenpipe upstream PR (draft in ops/ralph-portfolio/drafts/screenpipe-pr.md); native app screenshots need a demo lecture without course content",
     "accredible": "Contributions as evidence"
+  },
+  {
+    "id": "P27",
+    "priority": 4,
+    "status": "open",
+    "owner": "claude",
+    "title": "Add this run's new evidence to the skills matrix",
+    "accredible": "Clearer skill descriptions"
   }
 ]

@@ -112,6 +112,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'CodeSearchNet retrieval report: baselines, ablation, significance tests', href: 'https://github.com/opnsrcntrbtr/codesearchnet-find-and-explain/blob/main/REPORT.md', kind: 'Eval results' },
       { label: 'Merged fix with 5 regression tests (graphify #576)', href: 'https://github.com/Graphify-Labs/graphify/pull/576', kind: 'Contribution' },
       { label: 'Databricks Generative AI Fundamentals', href: 'https://www.credential.net/46362a83-a223-47bb-a783-1c522b65a1fd', kind: 'Credential' },
+      { label: 'Judge calibration on a blind holdout (Lecture Lens origin)', href: '/work/lecture-lens/origin/#proved', kind: 'Case study' },
     ],
   },
   {
@@ -144,6 +145,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'SEBI RAG trust principles', href: '/sebi-rag/', kind: 'Case study' },
       { label: 'SEBI RAG live demo with supersession-aware citations', href: 'https://huggingface.co/spaces/opnsrcntrbtrian/sebi-circular-rag-demo', kind: 'Live demo' },
       { label: 'SEBI RAG evaluation gate (abstention accuracy 0.981)', href: 'https://github.com/opnsrcntrbtr/sebi-circular-rag/blob/main/docs/status.md', kind: 'Eval results' },
+      { label: 'Respecting protected video while capturing lectures', href: '/articles/respecting-protected-video-while-capturing-lectures/', kind: 'Publication' },
     ],
   },
   {
@@ -174,6 +176,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'Lecture Lens repository', href: 'https://github.com/opnsrcntrbtr/lecture-lens', kind: 'Open code' },
       { label: 'MLX AutoResearch agent (local MLX experiment loop)', href: 'https://github.com/opnsrcntrbtr/mlx-autoresearch-agent', kind: 'Open code' },
       { label: 'Free learning path, module 3: models and cost per task', href: '/learn/#m3', kind: 'Publication' },
+      { label: 'Lecture Lens Studio: the model runs inside Chrome', href: 'https://opnsrcntrbtr.github.io/lecture-lens/studio/', kind: 'Live demo' },
     ],
   },
   {
