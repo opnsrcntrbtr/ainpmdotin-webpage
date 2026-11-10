@@ -208,10 +208,12 @@
   {
     "id": "P22",
     "priority": 9,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Lecture Lens refresh: Studio (in-browser model), ADR-005/006, prototype eval results (slide vision, DeepEval run, judge calibration), lastActivity 6 Nov 2026, Studio screenshot",
-    "accredible": "Test results 51%; recent skill use 47%"
+    "accredible": "Test results 51%; recent skill use 47%",
+    "commit": "7cf8f41",
+    "doneOn": "2026-11-10"
   },
   {
     "id": "P23",
