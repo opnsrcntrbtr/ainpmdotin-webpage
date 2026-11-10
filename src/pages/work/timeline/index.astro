@@ -1,0 +1,65 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookCTA from '../../../components/BookCTA.astro';
+import { TIMELINE, type Kind } from '../../../data/timeline';
+import { breadcrumb, faqSchema } from '../../../data/site';
+
+const updated = new Date('2026-11-11');
+const years = [...new Set(TIMELINE.map((m) => m.date.slice(0, 4)))];
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const count = (k: Kind) => TIMELINE.filter((m) => m.kind === k).length;
+const faq = [
+  { q: 'Why publish a dated timeline?', a: 'Accredible’s research found employers value recent skill use (47%) and that only 13% of credential issuers know what learners went on to do. A dated timeline shows the progression myself: credentials first, then products, research and contributions that put them to use.' },
+  { q: 'How are the dates checked?', a: 'Credential dates come from the issuer’s verification page, contribution dates from the merged pull request, and project dates from repository creation, releases and decision records. Each entry links to its proof.' },
+];
+const schema = [
+  { '@type': 'WebPage', name: 'Evolution timeline of Ian Pinto', url: 'https://ainpm.in/work/timeline/', dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' } },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Timeline', path: '/work/timeline/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: 'https://www.accredible.com/reports/2026-state-of-credentialing-report', label: 'Accredible — 2026 State of Credentialing Report (outcomes known by 13% of issuers)' },
+  { href: 'https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof', label: 'Accredible — 2025 State of Credentialing: hiring needs verifiable proof (recent skill use 47%)' },
+  { href: 'https://github.com/opnsrcntrbtr', label: 'GitHub: opnsrcntrbtr (repository dates)' },
+  { href: 'https://www.credly.com/users/ian-pinto/badges', label: 'Credly badge wallet (credential dates)' },
+];
+---
+<Base
+  title="Evolution Timeline: Credentials to AI Products | AINPM.in"
+  description="A dated timeline of Ian Pinto's credentials, products, research and open-source contributions from 2015 to 2026, each linked to its proof."
+  schema={schema}
+  updated={updated}
+  sources={sources}
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / Timeline</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Timeline · Updated 11 Nov 2026</span>
+    <h1>How my work evolved, with proof for every step</h1>
+    <p class="answer"><strong>{TIMELINE.length} dated milestones from {years[years.length - 1]} to {years[0]}: {count('Credential')} verifiable credentials, {count('Project')} projects started, {count('Release')} releases, {count('Research')} research outputs, {count('Decision')} documented decision and {count('Contribution')} merged contributions.</strong> The pattern runs from delivery credentials to building and evaluating AI products, and each step links to something you can open.</p>
+  </div>
+
+  {years.map((y) => (
+    <section id={`y${y}`}>
+      <div class="wrap">
+        <div class="section-head"><h2>What happened in {y}?</h2></div>
+        <ol class="tl">
+          {TIMELINE.filter((m) => m.date.startsWith(y)).map((m) => (
+            <li>
+              <span class="tl-date">{fmt(m.date)}</span>
+              <span class={`badge ${m.kind === 'Credential' ? 'ok' : 'no'}`}>{m.kind}</span>
+              <span class="tl-title">{m.href ? <a href={m.href} target={m.href.startsWith('http') ? '_blank' : undefined} rel={m.href.startsWith('http') ? 'noopener' : undefined}>{m.title}{m.href.startsWith('http') ? ' ↗' : ''}</a> : m.title}{m.note && <span class="muted"> · {m.note}</span>}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  ))}
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><h2>What do people ask about the timeline?</h2></div>
+      <div class="faq">{faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}</div>
+      <BookCTA id="timeline" />
+    </div>
+  </section>
+</Base>

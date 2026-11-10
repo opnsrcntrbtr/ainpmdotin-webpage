@@ -558,3 +558,9 @@ a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
 .pp-grid dt{font:var(--label);text-transform:uppercase;letter-spacing:.06em;color:var(--saffron);padding-top:3px}
 .pp-grid dd{margin:0;min-width:0}.pp-grid dd p{margin:0 0 6px}
 @media(max-width:560px){.pp-grid{grid-template-columns:1fr}.pp-grid dt{padding-top:8px}}
+.tl{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
+.tl li{display:grid;grid-template-columns:72px auto 1fr;gap:6px 12px;align-items:baseline;padding:10px 0 10px 16px;position:relative}
+.tl li::before{content:"";position:absolute;left:-6px;top:17px;width:10px;height:10px;border-radius:50%;background:var(--teal)}
+.tl-date{font:500 .82rem var(--mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tl-title{min-width:0}
+@media(max-width:560px){.tl li{grid-template-columns:auto 1fr}.tl-title{grid-column:1/-1}}
