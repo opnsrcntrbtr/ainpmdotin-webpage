@@ -170,7 +170,7 @@ export const ARTIFACTS: Record<string, ArtifactSet> = {
     slug: 'lecture-lens',
     name: 'Lecture Lens',
     caseStudy: '/work/lecture-lens/',
-    updated: '2026-11-08',
+    updated: '2026-11-11',
     brief: {
       problem: 'Working professionals in part-time online courses attend recorded lectures and live classes with little time to re-watch either, and cloud note-takers upload course material.',
       users: 'A working professional in a part-time online course, on an Apple silicon Mac.',
@@ -196,6 +196,10 @@ export const ARTIFACTS: Record<string, ArtifactSet> = {
         { name: 'Bytes uploaded', value: '0' },
         { name: 'Build time for a 90-minute class', value: '~10 min' },
         { name: 'Smoke-eval cases', value: '6' },
+        { name: 'Notes cases passed (prototype, 3 Oct 2026)', value: '15 of 15', floor: 'Faithfulness \u2265 0.85' },
+        { name: 'Answer cases passed (prototype)', value: '26 of 43', floor: 'Faithfulness \u2265 0.8', note: 'Weak spot' },
+        { name: 'Flashcard cases passed (prototype)', value: '9 of 15', floor: 'Faithfulness \u2265 0.85', note: 'Weak spot' },
+        { name: 'Judge agreement with labels, blind holdout', value: '80%, kappa 0.44' },
       ],
       rule: 'Check what a failure is before fixing the model: the first full baseline failed mostly because the judge penalised a source list it could not see, so only the answer body is scored now.',
       source: { label: 'Evaluation guide', href: `${LL}/guides/evaluation` },
@@ -215,6 +219,7 @@ export const ARTIFACTS: Record<string, ArtifactSet> = {
       ],
     },
     decisions: [
+      { id: 'Vision', date: '2026-09-29', title: 'Slide descriptions chosen on realistic frames', decision: 'Use a 35B multimodal model with thinking off, crop to the lecture player, and discard any description where the image provably never reached the model.', why: 'Thinking on looked safer on clean slides but passed only 15 of 21 realistic ones; production-style input passed 21 of 21 (prototype ADR-001).', status: 'Accepted', source: { label: 'Origin story: prototype evidence', href: 'https://ainpm.in/work/lecture-lens/origin/#proved' } },
       { id: 'ADR-002', date: '2026-09-29', title: 'Native SwiftUI app launches the toolkit', decision: 'A menu-bar app starts capture itself and calls the tools through a JSON contract.', why: 'macOS grants screen recording to the app that launches capture; terminal launches produced 0 frames.', status: 'Accepted', source: { label: 'ADR-002', href: `${LL}/decisions/ADR-002-native-app-integration` } },
       { id: 'ADR-004', date: '2026-09-30', title: 'Pause screen capture on protected video, keep audio', decision: 'Pause capture on listed DRM player pages and build sessions from page markers and the transcript.', why: 'Protected video went black while capture ran; the protection is respected and the transcript is what matters.', status: 'Accepted', source: { label: 'ADR-004', href: `${LL}/decisions/ADR-004-drm-video-black-screen` } },
       { id: 'ADR-005', date: '2026-11-04', title: 'Confirm repeated slides with structural similarity', decision: 'Keep the cheap hash test, then confirm a repeat only if at most 5 of 36 grid cells changed.', why: 'Slides from one template look alike to the hash, so the old test missed most of them (recall 0.17 to 0.58 on synthetic decks); counting changed cells reached recall 1.00. Accepted on synthetic evidence, to confirm on a real build.', status: 'Accepted', source: { label: 'ADR-005', href: `${LL}/decisions/ADR-005-keyframe-ssim` } },
@@ -222,7 +227,7 @@ export const ARTIFACTS: Record<string, ArtifactSet> = {
     ],
     launch: {
       status: 'Early, open source; Lecture Lens Studio in MVP',
-      shipped: ['SwiftUI menu-bar app over a zsh and Python toolkit', 'Local evaluation harness with a benchmarked judge', 'Three-layer content guard for a public repo', 'Studio MVP: notes, cards and answers inside Chrome'],
+      shipped: ['SwiftUI menu-bar app over a zsh and Python toolkit', 'Local evaluation harness with a calibrated judge', 'Six-layer content guard for a public repo', 'Studio: notes, cards, answers, live Q&A and in-browser transcription inside Chrome (5 Nov 2026)'],
       limits: ['macOS on Apple silicon only', 'About a quarter of spoken words missing in one measured class', 'A full evaluation takes over an hour', 'Depends on screenpipe, which it does not control'],
       next: ['Capture guard that alerts within 60 seconds when nothing is saved', 'Cancellable evaluations that show the change against the last run', 'Eval checks drawn from real failures'],
       source: { label: 'Roadmap', href: `${LL}/project/roadmap` },

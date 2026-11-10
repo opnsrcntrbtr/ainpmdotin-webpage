@@ -7,7 +7,7 @@ import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-11-05');
+const updated = new Date('2026-11-11');
 const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
 const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
 
@@ -166,6 +166,33 @@ const sources = [
         </table>
       </div>
       <div class="callout" style="margin-top:20px"><strong>Lesson learned:</strong> in the first full baseline, most failed question-answering cases were the judge penalising the answer's source list, which it couldn't see. The harness now scores the answer body only. Check what a failure is before fixing the model.</div>
+    </div>
+  </section>
+
+  <section id="studio">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">New · 5 Nov 2026</span>
+        <h2>What is Lecture Lens Studio?</h2>
+        <p class="muted">The same notes, flashcards, answers and live-class questions, made by a model running inside Chrome instead of a local model server.</p>
+      </div>
+      <div class="grid g2">
+        <figure class="shot light" style="margin:0">
+          <div class="bar"><i></i><i></i><i></i><span>opnsrcntrbtr.github.io/lecture-lens/studio</span></div>
+          <img src="/work/lecture-lens-studio.webp" alt="Lecture Lens Studio page with engine choice (Gemini Nano or WebGPU models), a lectures folder picker and tabs for after class, ask, live class, recap and review" width="1280" height="1007" loading="lazy" decoding="async">
+          <figcaption>Studio before a lectures folder is chosen; no course content shown.</figcaption>
+        </figure>
+        <div class="card">
+          <h3>Why it matters</h3>
+          <ul class="md art-list">
+            <li>No model server and no 20 to 40 GB of weights: Gemini Nano runs in Chrome, with WebGPU models (such as Qwen3 4B at about 2.6 GB) as fallback (<a href={docs + 'decisions/ADR-006-in-browser-llm'}>ADR-006</a>)</li>
+            <li>Ships as a static page and an unpacked extension; nothing leaves the browser and the lectures folder</li>
+            <li>Live Q&amp;A parity and in-browser transcription added on 5 Nov 2026; silent audio chunks skipped before transcription on 6 Nov 2026</li>
+            <li>The local judge can score Studio's outputs too, so both engines are measured the same way</li>
+          </ul>
+          <p><a class="more-link" href={docs + 'studio/'}>Open Lecture Lens Studio</a></p>
+        </div>
+      </div>
     </div>
   </section>
 
