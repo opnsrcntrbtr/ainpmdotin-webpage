@@ -564,3 +564,15 @@ a.verify.self{color:var(--ink-2);text-decoration:underline dotted}
 .tl-date{font:500 .82rem var(--mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
 .tl-title{min-width:0}
 @media(max-width:560px){.tl li{grid-template-columns:auto 1fr}.tl-title{grid-column:1/-1}}
+
+/* ---- v7: in-article sources (Ralph iteration 6) ---- */
+.sources{border:0;padding:32px 0 0;margin-top:8px}
+.sources h2{font-size:1.3rem;margin-bottom:10px}
+.sources p{color:var(--ink-2);font-size:.95rem}
+.sources ol{padding-left:1.2em;display:grid;gap:6px;font-size:.92rem}
+.sources a{overflow-wrap:anywhere}
+.track{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+@media(min-width:720px){.track{grid-template-columns:repeat(2,1fr)}}
+.track li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.92rem;color:var(--ink-2)}
+.track li b{display:block;font:700 1.25rem/1.2 var(--serif);color:var(--teal);margin-bottom:2px}
+.track li a{font-size:.85rem}

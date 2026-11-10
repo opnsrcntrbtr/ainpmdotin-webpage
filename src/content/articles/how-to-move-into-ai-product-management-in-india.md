@@ -34,7 +34,7 @@ sources:
 
 ## Is AI product management a real career path in India?
 
-**Yes, and demand is measurable.** Naukri's World AI Day Report 2026 found AI skills in **15.4% of technology job descriptions**, up from **0.9% in 2020**, a roughly 17-fold rise across more than 300,000 job descriptions. LinkedIn's AI Labor Market Report 2026 puts the growth of AI hiring in India at **59.5% year on year**. Naukri also lists product management among the functions where the largest share of professionals rely heavily on AI.
+**Yes, and demand is measurable.** Naukri's [World AI Day Report 2026](https://telanganatoday.com/ai-skills-feature-in-15-4-per-cent-of-tech-job-descriptions-naukri-report) found AI skills in **15.4% of technology job descriptions**, up from **0.9% in 2020**, a roughly 17-fold rise across more than 300,000 job descriptions. LinkedIn's [AI Labor Market Report 2026](https://yourstory.com/ai-story/hiring-ai-professionals-india-rises-59-percent-linkedin-report) puts the growth of AI hiring in India at **59.5% year on year**. Naukri also lists product management among the functions where the largest share of professionals rely heavily on AI.
 
 Demand does not mean an easy switch. Most AI PM roles go to people who can show they have already shipped or evaluated something.
 
@@ -69,7 +69,7 @@ Judge a course by what you can **show** at the end, not by the certificate. Ask 
 | Does someone review your evaluations and decisions? | Feedback is what speeds up learning |
 | Is the curriculum current on evals, agents and cost? | AI practice changes every few months |
 | Are outcome claims verifiable? | Self-reported placement numbers are marketing |
-| Does the credential name the skills it covers? | Accredible found 44% of learners want clearer skill descriptions |
+| Does the credential name the skills it covers? | [Accredible (2026)](https://www.accredible.com/reports/2026-state-of-credentialing-report) found 44% of learners want clearer skill descriptions |
 
 ## How much does it cost to learn AI product management in India?
 
@@ -84,7 +84,7 @@ All four can work. The cheapest route that ends in public, checkable evidence is
 
 ## Does a certificate get you an AI PM job?
 
-**Rarely on its own.** Accredible's 2026 State of Credentialing research found that learners value credentials but career outcomes do not follow automatically. Its 2025 research found **75% of HR and talent leaders** say digital credentials make skills easier to verify. The lesson: a credential helps most when it sits next to shipped work with measured results. I wrote more on this in [Proof over certificates](/articles/proof-over-certificates-ai-pm-skills/).
+**Rarely on its own.** Accredible's 2026 State of Credentialing research found that learners value credentials but career outcomes do not follow automatically. Its [2025 research](https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof) found **75% of HR and talent leaders** say digital credentials make skills easier to verify. The lesson: a credential helps most when it sits next to shipped work with measured results. I wrote more on this in [Proof over certificates](/articles/proof-over-certificates-ai-pm-skills/).
 
 ## Where should you start this week?
 

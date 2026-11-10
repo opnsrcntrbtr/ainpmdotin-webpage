@@ -74,11 +74,28 @@ result.categories.answerStructure = +(20 * avg((d) => {
 })).toFixed(1);
 
 // 3. Evidence density (20): statistics and outbound citations (GEO, Aggarwal et al. KDD 2024).
+// v2 (4 Nov 2026): a statistic only counts when it is *sourced* — the same paragraph, list item
+// or table row carries an outbound link, or a full dated measurement ("15 Aug 2026").
+// Citations count distinct external domains, so repeating one site does not inflate the score.
+const STAT = /\b\d[\d,.]*\s?(%|per cent|₹|rupees|crore|lakh|weeks?|hours?|minutes?|days?)|₹\s?\d/g;
+const DATED = /\b\d{1,2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s20\d\d\b/;
+const EXT = /href="https?:\/\/(?!ainpm\.in)([^/"]+)/;
+const blocksOf = (html) => html.split(/<\/(?:p|li|tr|dd|figcaption|blockquote|h[1-6])>/i);
+const evidenceOf = (d) => {
+  let sourced = 0, bare = 0;
+  for (const b of blocksOf(d.main)) {
+    const n = (strip(b).match(STAT) ?? []).length;
+    if (!n) continue;
+    if (EXT.test(b) || DATED.test(strip(b))) sourced += n; else bare += n;
+  }
+  const domains = new Set([...d.main.matchAll(/href="https?:\/\/(?!ainpm\.in)(?:www\.)?([^/"]+)/g)].map((m) => m[1]));
+  return { sourced, bare, domains: domains.size };
+};
 result.categories.evidence = +(20 * avg((d) => {
-  const stats = (d.text.match(/\b\d[\d,.]*\s?(%|per cent|₹|rupees|crore|lakh|weeks?|hours?|minutes?|days?)|₹\s?\d/g) ?? []).length;
-  const cites = new Set([...d.main.matchAll(/href="(https?:\/\/(?!ainpm\.in)[^"]+)"/g)].map((m) => m[1])).size;
-  return 0.5 * Math.min(1, stats / 6) + 0.5 * Math.min(1, cites / 4);
+  const e = evidenceOf(d);
+  return 0.5 * Math.min(1, e.sourced / 6) + 0.5 * Math.min(1, e.domains / 4);
 })).toFixed(1);
+result.scorerVersion = 2;
 
 // 4. Depth (10): long-form pages for the questions people ask.
 result.categories.depth = +(10 * avg((d) => Math.min(1, d.words / 1200))).toFixed(1);
@@ -101,7 +118,7 @@ result.categories.freshCrawl = +(10 * (0.4 * botsOk + 0.3 * inLlms + 0.3 * dated
 
 result.total = +Object.values(result.categories).reduce((a, b) => a + b, 0).toFixed(1);
 result.contentPages = content.length;
-for (const d of content) result.pages[d.url] = { words: d.words, questionH2: d.h2.filter((h) => /\?$/.test(h)).length + '/' + d.h2.length, faq: /"FAQPage"/.test(d.ld) };
+for (const d of content) { const e = evidenceOf(d); result.pages[d.url] = { words: d.words, questionH2: d.h2.filter((h) => /\?$/.test(h)).length + '/' + d.h2.length, faq: /"FAQPage"/.test(d.ld), sourcedStats: e.sourced, bareStats: e.bare, sourceDomains: e.domains }; }
 
 if (process.argv.includes('--json')) console.log(JSON.stringify(result));
 else {

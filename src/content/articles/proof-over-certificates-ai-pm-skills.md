@@ -44,12 +44,12 @@ The figures most relevant to product managers:
 
 | Finding | Figure | Year |
 |---|---|---|
-| Learners who want a clearer description of the skills they gained | 44% | 2026 |
-| Issuers ranking "demonstrate program value" as a top priority | 22% → 44% | 2025 → 2026 |
-| Learners who say issuers could make a credential's value easier to communicate | 79% | 2026 |
-| Learners planning another credentialed course within two years | 85% | 2026 |
-| HR and talent leaders who say a digital credential makes skills easier to verify | 75% | 2025 |
-| Employers who say they actively look for digital credentials | 91% | 2025 |
+| Learners who want a clearer description of the skills they gained | 44% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Issuers ranking "demonstrate program value" as a top priority | 22% → 44% | [2025 → 2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Learners who say issuers could make a credential's value easier to communicate | 79% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| Learners planning another credentialed course within two years | 85% | [2026](https://www.accredible.com/reports/2026-state-of-credentialing-report) |
+| HR and talent leaders who say a digital credential makes skills easier to verify | 75% | [2025](https://www.accredible.com/reports/2025-state-of-credentialing/hiring-needs-verifiable-proof) |
+| Employers who say they actively look for digital credentials | 91% | [2025](https://www.accredible.com/reports/2025-state-of-credentialing/employers-are-looking-but-not-finding) |
 
 Learners also said what they want next to a credential: career paths, job titles linked to their skills, companies that hire for those skills, and salary ranges.
 

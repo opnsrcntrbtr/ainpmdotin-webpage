@@ -1,9 +1,9 @@
 ---
 title: "India AI Regulation for Product Managers (2026 Guide)"
 description: "A product manager's guide to India's AI rules in 2026: DPDP deadlines, RBI FREE-AI, SEBI AI/ML guidelines, MeitY guidance and AI-content labelling, with a checklist."
-tldr: "India has no single AI Act. Product teams answer to MeitY's principles-based AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules that require labelling of AI-generated content, RBI's FREE-AI framework for regulated finance, and SEBI's AI/ML guidelines, which were still pending on 2 October 2026."
+tldr: "India has no single AI Act. Product teams answer to MeitY's principles-based AI Governance Guidelines, the DPDP Act and Rules (consent managers from 13 November 2026, full compliance by 13 May 2027), IT Rules that require labelling of AI-generated content, RBI's FREE-AI framework for regulated finance, and SEBI's AI/ML guidelines, which had not been issued as of 4 November 2026."
 pubDate: 2026-10-02
-updatedDate: 2026-10-02
+updatedDate: 2026-11-04
 tags: ["Regulation", "India", "BFSI"]
 readingMinutes: 8
 faq:
@@ -14,7 +14,7 @@ faq:
   - q: "What is RBI's FREE-AI framework?"
     a: "FREE-AI is the Reserve Bank of India's Framework for Responsible and Ethical Enablement of AI, published in August 2025. It sets seven guiding principles, or sutras, for AI in regulated financial services: trust, people first, innovation over restraint, fairness and equity, accountability, understandable by design, and safety, resilience and sustainability."
   - q: "Has SEBI issued AI/ML guidelines?"
-    a: "Not yet, as of 2 October 2026. SEBI published a consultation paper in June 2025, and in August 2026 its chairman said final guidelines would be issued shortly and would require human-in-the-loop controls, kill-switches and data governance."
+    a: "Not yet, as of 4 November 2026. SEBI published a consultation paper in June 2025, and in August 2026 its chairman said final guidelines would be issued shortly and would require human-in-the-loop controls, kill-switches and data governance."
   - q: "Do AI-generated images and audio need labels in India?"
     a: "Yes. Amendments to the IT Rules in force from 20 February 2026 require synthetically generated content to carry prominent labels, and audio to carry a prefixed disclosure. Takedown windows were cut to three hours, and to two hours for non-consensual intimate imagery."
 sources:
@@ -58,7 +58,7 @@ The Ministry of Electronics and IT (MeitY) published the India AI Governance Gui
 
 ## What does the DPDP Act require from an AI product?
 
-**It requires valid consent for a stated purpose, clear notices, security safeguards, breach reporting and respect for user rights, with penalties of up to ₹250 crore per instance.**
+**It requires valid consent for a stated purpose, clear notices, security safeguards, breach reporting and respect for user rights, with penalties of up to ₹250 crore per instance.** ([DPDP timeline and penalties](https://www.sansalegal.com/post/dpdp-act-2023-and-rules-2025-phased-implementation-timeline-and-business-compliance-deadlines))
 
 For AI products the practical questions are specific. What personal data goes into prompts, logs, embeddings and fine-tuning sets? Can you delete it on request, including from a vector index? Is the purpose you collected it for the purpose you are using it for? From 13 November 2026, registered consent managers let people manage consent across services, so consent flows should be built to interoperate. Significant Data Fiduciaries face extra duties. The safest design is to keep personal data out of model inputs unless the feature needs it, and to log what was sent.
 
@@ -68,13 +68,13 @@ For AI products the practical questions are specific. What personal data goes in
 
 RBI's FREE-AI report of August 2025 sets seven principles: trust, people first, innovation over restraint, fairness and equity, accountability, understandable by design, and safety, resilience and sustainability. In product terms: name an owner for each model, keep an inventory, explain decisions that affect customers, and test for bias.
 
-SEBI consulted on responsible AI/ML use in June 2025. In August 2026 its chairman said final guidelines would follow shortly and would require human-in-the-loop controls, kill-switches and data governance. As of 2 October 2026 they had not been issued. Building those three controls now is low-regret. My [SEBI Circular RAG case study](/sebi-rag/) shows one way to design for this: citations on every claim, supersession checks and an abstention gate.
+SEBI consulted on responsible AI/ML use in June 2025. In August 2026 its chairman said final guidelines would follow shortly and would require human-in-the-loop controls, kill-switches and data governance. As of 4 November 2026 I could find no final circular. Building those three controls now is low-regret. My [SEBI Circular RAG case study](/sebi-rag/) shows one way to design for this: citations on every claim, supersession checks and an abstention gate.
 
 ## What are the rules for AI-generated content?
 
 **AI-generated images, video and audio must be clearly labelled, and unlawful content must come down within hours.** The IT Rules amendment in force from 20 February 2026 requires visible labels on synthetic visuals and a spoken disclosure at the start of synthetic audio.
 
-General takedown time fell from 36 hours to three. For non-consensual intimate imagery, including deepfakes, it is two hours. Large social platforms must ask users to declare synthetic content and use technical measures to verify it. If your product generates or hosts media, labelling and a fast takedown path are launch requirements, not later hardening.
+General takedown time fell from 36 hours to three ([IT Amendment Rules 2026](https://www.khaitanco.com/thought-leadership/MeitY-notifies-the-IT-Amendment-Rules-2026)). For non-consensual intimate imagery, including deepfakes, it is two hours. Large social platforms must ask users to declare synthetic content and use technical measures to verify it. If your product generates or hosts media, labelling and a fast takedown path are launch requirements, not later hardening.
 
 ## What should a product manager do now?
 
