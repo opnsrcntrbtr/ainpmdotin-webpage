@@ -1,60 +1,82 @@
-# DRAFT — upstream pull request for screenpipe (not opened)
+# Upstream screenpipe pull requests — review of the draft (not opened)
 
-> Prepared by the portfolio loop on 11 Nov 2026 for Ian to review. Nothing has been
-> pushed or opened. Source: branch `feat/lecture-capture` in ~/screenpipe-local
-> (commits 23a3dfe32, 444a9c545, 076ae7622), based on upstream main c88ffa4b2 (17 Sep 2026).
+> Reviewed 11 Nov 2026 against upstream `main` at 79c05c3fc (same day). Nothing has been
+> pushed, rebased or opened. Source: branch `feat/lecture-capture` in ~/screenpipe-local
+> (commits 23a3dfe32, 444a9c545, 076ae7622), based on c88ffa4b2 (17 Sep 2026).
 
-## Before opening
+## Verdict
 
-- [ ] Rebase on current upstream `main`. Upstream has since added
-      `any_drm_window_on_screen()` (CoreGraphics window list, no ScreenCaptureKit) in
-      `crates/screenpipe-engine/src/drm_detector.rs`; commit 076ae7622's
-      "keep pausing while a DRM page is visible" may overlap and should reuse it.
-- [ ] Split into two PRs (maintainers review smaller changes faster):
-      1. App audio tap (23a3dfe32)
-      2. Configurable DRM pages + keep audio + immediate release (444a9c545, 076ae7622)
-- [ ] Remove `Co-Authored-By` / `Claude-Session` trailers if the project prefers plain commits.
-- [ ] Remove any course- or vendor-specific names from commit messages (444a9c545 names the
-      course platform and video vendor; replace with "a course portal's DRM player").
-- [ ] Run `cargo test -p screenpipe-audio --lib app_tap` and the drm_detector unit tests.
-- [ ] Per CONTRIBUTING.md, confirm you are an active screenpipe user (you are) and follow
-      its PR template.
+Worth opening, as two PRs, after five fixes. Upstream has no equivalent of any of the three
+changes (no `app_tap`, `SCREENPIPE_DRM_URLS` or keep-audio option on `main`).
 
----
+## Corrections to the first draft
 
-## PR 1 — feat(audio): record one application's own output (app tap)
+- **Wrong:** "upstream has since added `any_drm_window_on_screen()`". It already existed at
+  the branch's base; commit 076ae7622 calls it and adds `extra_drm_browser_window_on_screen()`
+  beside it. No overlap to resolve.
+- **Wrong for this project:** the draft offered a ready-made PR description. screenpipe's
+  CONTRIBUTING.md has an AI-assisted contribution policy: the problem statement, rationale
+  and replies to maintainers must be in your own words, AI use must be disclosed (tool,
+  autonomy level, what you personally verified), and an autonomous agent must not submit the
+  PR. Use the notes below as facts to write from, not as text to paste.
 
-**Problem.** Recording audio from a browser lecture through the system output device also
-records every other sound on the machine; through the microphone it records the room.
+## Must fix before opening
 
-**Change.** Adds a session-scoped virtual device backed by the existing per-pid process tap
-(the one the meeting piggyback already uses), following the pids of configured apps.
+1. **Rebase: one real conflict.** The branch is 996 commits behind. Seven files merge
+   cleanly; `crates/screenpipe-audio/src/audio_manager/manager.rs` conflicts. Upstream
+   refactored `start_session_device` to call a new `ensure_recording_handle()`.
+   `start_app_tap_device()` still carries the old inline `record_device` /
+   `recording_handles.insert` block. Resolution: keep both functions, and replace that block
+   in `start_app_tap_device()` with the same `ensure_recording_handle(device)` call and
+   rollback that `start_session_device` now uses. DRM files were touched upstream by only one
+   commit since the base and merge cleanly.
+2. **Course and vendor names are in the code, not only a commit message.** In
+   `drm_detector.rs`: a doc comment (`upgrad.com/lxp/learner/player`), a comment about the
+   player's window title, and five lines of the unit test use the real course-portal host.
+   Commit 444a9c545's message names the platform and the video vendor. Replace all with
+   neutral hosts (`learn.example.edu/player`, `videos.example.org`), as the public Lecture
+   Lens repo already does.
+3. **Author email.** Commit 23a3dfe32 is authored with your personal Gmail address; the
+   other two use the GitHub noreply address. Rewrite the author during the rebase, or GitHub
+   will publish the address (and reject the push if email privacy is on).
+4. **Follow the PR template.** It asks for: description and related issue; the AI-assistance
+   block (tools, autonomy level, what you verified, two checkboxes); evidence type; and a
+   before/after recording for behaviour changes (attached to the PR, never committed).
+   For PR 2, the five-phase table below is the "before"; a short recording of the protected
+   player staying visible while capture is paused is the "after". Use a demo page, not the
+   course.
+5. **Re-run tests after the rebase** and quote the exact commands, since the policy says never
+   to claim testing you did not perform:
+   `cargo test -p screenpipe-audio --lib app_tap` and the `drm_detector` unit tests.
 
-- `core/device.rs`: `APP_TAP_DEVICE_NAME` and `is_per_pid_tap_device()`
-- `core/stream.rs`: the per-pid tap branch serves both virtual tap devices
-- `audio_manager/manager.rs`: `start_app_tap_device()` — `start_session_device` without
-  the meeting gate; all other guards kept
-- `audio_manager/app_tap.rs` (new): watcher that re-attaches when the owning process
-  restarts, backs off otherwise, and names the macOS permission when capture is refused
-- engine binary: spawns the watcher when `SCREENPIPE_AUDIO_TAP_APPS` is set
+## Suggested, not required
 
-**Why an environment variable?** Keeps the change small and opt-in; happy to move it to a
-CLI flag or the settings schema if maintainers prefer.
+- Open an issue first for each change and link it; both add opt-in behaviour that maintainers
+  may prefer as settings or CLI flags rather than environment variables. Say you are happy to
+  change that.
+- Keep the two PRs independent: PR 1 touches `screenpipe-audio` plus one spawn line in the
+  engine binary; PR 2 touches `drm_detector.rs`, `monitor_watcher.rs` and the engine binary.
+  Both edit `screenpipe-engine.rs`, so whichever lands second needs a trivial rebase.
+- The `Co-Authored-By` trailers are an honest disclosure; keep them or move the disclosure
+  into the template's AI block, whichever maintainers prefer.
 
-**Tests.** `cargo test -p screenpipe-audio --lib app_tap` (4 passed).
+## Facts to write from
 
----
+**PR 1 — record one application's own audio (app tap).** 4 unit tests. +245 lines in a new
+`audio_manager/app_tap.rs`, +67 in `manager.rs`, +14 in `core/device.rs`, small edits in
+`core/stream.rs`, `mod.rs` and the engine binary. Problem: the system output device records
+every sound on the machine and the microphone records the room. Change: a session-scoped
+virtual device on the existing per-pid process tap, following the pids of apps named in
+`SCREENPIPE_AUDIO_TAP_APPS`; it re-attaches when the app restarts and names the macOS
+permission when capture is refused. All existing guards kept (capture disabled, screen
+locked, device paused by the user).
 
-## PR 2 — feat(drm): user-configurable DRM pages, optional audio during pause, immediate release
+**PR 2 — configurable DRM pages, optional audio during the pause, immediate release.**
+`drm_detector.rs` +176, `monitor_watcher.rs` +13. Problem: `--pause-on-drm-content` knows a
+fixed list of streaming services and stops output audio too; and the pause flag could be set
+while ScreenCaptureKit stayed open for up to the watcher's 60-second backstop.
 
-**Problem.** Course and training portals stream DRM-protected video. While ScreenCaptureKit
-captures the screen, Chrome blanks it. `--pause-on-drm-content` fixes this only for a fixed
-list of streaming services, and it also stops output audio, which a controlled test showed
-does not blank protected video and is the part users want to keep.
-
-Controlled test (macOS, Chrome, DRM player focused):
-
-| Phase | Held by screenpipe | Video |
+| Phase | Held by screenpipe | Protected video |
 |---|---|---|
 | A | ScreenCaptureKit screen, no audio | black |
 | B | system audio via ScreenCaptureKit, no screen | visible |
@@ -62,20 +84,8 @@ Controlled test (macOS, Chrome, DRM player focused):
 | D | running, screen and audio off | visible |
 | E | text-only vision + audio | black |
 
-**Changes.**
-- `SCREENPIPE_DRM_URLS`: extra DRM pages as `host` or `host/path-prefix`, added to the
-  built-in list (unit test covers path matching and look-alike hosts)
-- `SCREENPIPE_DRM_KEEP_AUDIO=1`: keep audio devices running during the DRM pause
-- Wake the monitor watcher on every pause/resume transition; it previously slept up to its
-  60 s backstop with ScreenCaptureKit still open, so the pause flag was set but video stayed
-  black
-- For configured pages, treat an on-screen browser window showing one as DRM content before
-  capturing and before clearing the pause, so focusing another app no longer resumes capture
-  over a visible protected video (reuse `any_drm_window_on_screen()` after rebase)
-
-**Size.** +83/−5 in 3 files and +105/−1 in 2 files before rebase.
-
-**Not in scope.** No attempt to capture protected frames; the pause is the intended behaviour.
-
-**Verified.** Live on 30 Sep 2026: video visible, audio transcribed, sessions rebuilt from
-page markers.
+Changes: `SCREENPIPE_DRM_URLS` (host or host/path-prefix, with a look-alike-host test);
+`SCREENPIPE_DRM_KEEP_AUDIO=1`; a notify that wakes the monitor watcher on every pause or
+resume; and treating a visible browser window on a configured page as DRM content before
+capturing and before clearing the pause. Not in scope: capturing protected frames.
+Verified live on 30 Sep 2026 (video visible, audio transcribed).
