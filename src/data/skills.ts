@@ -113,6 +113,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'Merged fix with 5 regression tests (graphify #576)', href: 'https://github.com/Graphify-Labs/graphify/pull/576', kind: 'Contribution' },
       { label: 'Databricks Generative AI Fundamentals', href: 'https://www.credential.net/46362a83-a223-47bb-a783-1c522b65a1fd', kind: 'Credential' },
       { label: 'Judge calibration on a blind holdout (Lecture Lens origin)', href: '/work/lecture-lens/origin/#proved', kind: 'Case study' },
+      { label: 'Builder\'s note: is your LLM judge good enough?', href: '/articles/is-your-llm-judge-good-enough/', kind: 'Publication' },
     ],
   },
   {
@@ -177,6 +178,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'MLX AutoResearch agent (local MLX experiment loop)', href: 'https://github.com/opnsrcntrbtr/mlx-autoresearch-agent', kind: 'Open code' },
       { label: 'Free learning path, module 3: models and cost per task', href: '/learn/#m3', kind: 'Publication' },
       { label: 'Lecture Lens Studio: the model runs inside Chrome', href: 'https://opnsrcntrbtr.github.io/lecture-lens/studio/', kind: 'Live demo' },
+      { label: 'Lecture Lens architecture: local-first pipeline and decisions', href: '/work/lecture-lens/architecture/', kind: 'Case study' },
     ],
   },
   {
@@ -192,6 +194,7 @@ const BASE_SKILLS: Skill[] = [
       { label: 'What is AI-native PM?', href: '/articles/what-is-ai-native-product-management/', kind: 'Publication' },
       { label: 'ISB Product Management certificate', href: 'https://www.credential.net/cc9d4612-76c4-47b7-8c95-d6b81ebe53fe', kind: 'Credential' },
       { label: 'AI product strategy framework for Indian teams', href: '/articles/ai-product-strategy-framework-india/', kind: 'Publication' },
+      { label: 'Lecture Lens product bets: measures, results and decisions', href: '/work/lecture-lens/#bets', kind: 'Case study' },
     ],
   },
   {

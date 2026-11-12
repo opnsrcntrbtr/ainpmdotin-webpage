@@ -342,5 +342,13 @@
     "owner": "claude",
     "title": "Add the screenpipe PRs as open-PR evidence once Ian opens them",
     "accredible": "Contributions as evidence"
+  },
+  {
+    "id": "P36",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Skills matrix and llms.txt: link the new judge note, architecture page and product bets",
+    "accredible": "Clearer skill descriptions (44%)"
   }
 ]
