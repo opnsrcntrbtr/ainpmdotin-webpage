@@ -278,9 +278,11 @@
   {
     "id": "P29",
     "priority": 5,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Apply Ian's 12 Nov decisions: SFIA levels confirmed as listed; mentorship format confirmed (4 x 45-min 1:1, price on request); unverifiable credentials labelled honestly",
-    "accredible": "Verification (84% suspect exaggeration)"
+    "accredible": "Verification (84% suspect exaggeration)",
+    "commit": "b163424",
+    "doneOn": "2026-11-12"
   }
 ]
