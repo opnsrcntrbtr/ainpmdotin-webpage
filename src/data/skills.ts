@@ -198,7 +198,7 @@ const BASE_SKILLS: Skill[] = [
     id: 'program-delivery',
     name: 'Technical program delivery',
     claim: 'Run cross-team delivery of cloud-native platforms with clear scope, risk and release control.',
-    proof: 'Day-to-day work on mutual fund AMC products and platforms, backed by PMP and CSM certifications.',
+    proof: 'Day-to-day work on mutual fund AMC products and platforms, backed by PMP (verifiable on Credly) and CSM (certificate on request).',
     onet: ['Coordinating the Work and Activities of Others', 'Scheduling Work and Activities'],
     nace: 'Teamwork',
     evidence: [
@@ -253,11 +253,11 @@ export const CREDENTIALS: Credential[] = [
   { name: 'Build a Data Warehouse with BigQuery (skill badge)', issuer: 'Google Cloud', category: 'badge', verifyUrl: CREDLY, verification: 'issuer', platform: 'Credly', issued: '2024-11-19', skills: ['rag-product'] },
   { name: 'Streaming Analytics into BigQuery (skill badge)', issuer: 'Google Cloud', category: 'badge', verifyUrl: CREDLY, verification: 'issuer', platform: 'Credly', issued: '2024-12-01', skills: ['rag-product'] },
   { name: 'Data Science programme, Course 1', issuer: 'upGrad', category: 'certificate', verifyUrl: 'https://www.credential.net/e9075bc5-d4fb-4546-8933-d0247e45e1b6', verification: 'issuer', platform: 'Accredible', issued: '2020-08-18', note: 'Issued as "DS C18 Course 1 LOA"', skills: ['ai-evaluation'] },
-  { name: 'AI Product Management', issuer: 'IIT Kharagpur with upGrad', category: 'certificate', skills: ['product-strategy', 'ai-evaluation'] },
-  { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', category: 'certification', skills: ['program-delivery'] },
+  { name: 'AI Product Management', issuer: 'IIT Kharagpur with upGrad', category: 'certificate', note: 'Certificate available on request', skills: ['product-strategy', 'ai-evaluation'] },
+  { name: 'Certified ScrumMaster (CSM)', issuer: 'Scrum Alliance', category: 'certification', note: 'Certificate available on request', skills: ['program-delivery'] },
   { name: 'AWS Cloud Practitioner Essentials', issuer: 'Amazon Web Services', category: 'certificate', verifyUrl: 'https://www.credential.net/93e91ee4-acb1-4b14-b7ac-a452b086712c?username=ianpinto', verification: 'self-uploaded', platform: 'Accredible', note: 'Course completion, ID E-N0539V', skills: ['privacy-security'] },
   { name: 'MBA, Information Technology and Systems Management', issuer: 'NMIMS Global Access School for Continuing Education', category: 'degree', verifyUrl: 'https://www.credential.net/1d9b1ed0-221a-402e-80d2-42848a14d003?username=ianpinto', verification: 'self-uploaded', platform: 'Accredible', note: 'Semester transcripts uploaded by Ian', skills: ['product-strategy'] },
-  { name: 'BE (Information Technology)', category: 'degree', skills: ['privacy-security'] },
+  { name: 'BE (Information Technology)', category: 'degree', note: 'Certificate available on request', skills: ['privacy-security'] },
 ];
 
 export const credentialSchema = CREDENTIALS.map((c) => ({

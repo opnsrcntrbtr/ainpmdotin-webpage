@@ -173,7 +173,7 @@ const sources = [
               ? (c.verification === 'self-uploaded'
                   ? <a class="verify self" href={c.verifyUrl} target="_blank" rel="noopener">Self-uploaded record on {c.platform} ↗</a>
                   : <a class="verify ok" href={c.verifyUrl} target="_blank" rel="noopener">Verify on {c.platform} ↗</a>)
-              : <span class="verify">Verification link on request</span>}
+              : <span class="verify">No public verification link</span>}
           </article>
         ))}
       </div>

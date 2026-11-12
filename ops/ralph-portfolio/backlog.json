@@ -72,18 +72,20 @@
   {
     "id": "P8",
     "priority": 3,
-    "status": "open",
+    "status": "done",
     "owner": "ian",
-    "title": "Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording (8 Nov: public search found no match on Scrum Alliance or upGrad/IIT-KGP; links still needed from Ian)",
-    "accredible": "Verification"
+    "title": "Send verification links for IIT Kharagpur/upGrad AI PM, CSM (Scrum Alliance), BE; confirm MBA (NMIMS) wording (8 Nov: public search found no match on Scrum Alliance or upGrad/IIT-KGP; links still needed from Ian) — 12 Nov: Ian chose to label the three as \"No public verification link; certificate on request\"",
+    "accredible": "Verification",
+    "doneOn": "2026-11-12"
   },
   {
     "id": "P9",
     "priority": 2,
-    "status": "open",
+    "status": "dropped",
     "owner": "ian",
-    "title": "Review the anonymised AMC outcome draft in ops/ralph-portfolio/drafts/amc-outcome.md; publish only after Ian approves",
-    "accredible": "Relevant experience 76%"
+    "title": "Review the anonymised AMC outcome draft in ops/ralph-portfolio/drafts/amc-outcome.md; publish only after Ian approves — 12 Nov: Ian dropped it for now; draft kept unpublished",
+    "accredible": "Relevant experience 76%",
+    "doneOn": "2026-11-12"
   },
   {
     "id": "P10",
@@ -272,5 +274,13 @@
     "accredible": "Applied skills in a real-world context",
     "commit": "58f0586",
     "doneOn": "2026-11-11"
+  },
+  {
+    "id": "P29",
+    "priority": 5,
+    "status": "open",
+    "owner": "claude",
+    "title": "Apply Ian's 12 Nov decisions: SFIA levels confirmed as listed; mentorship format confirmed (4 x 45-min 1:1, price on request); unverifiable credentials labelled honestly",
+    "accredible": "Verification (84% suspect exaggeration)"
   }
 ]
