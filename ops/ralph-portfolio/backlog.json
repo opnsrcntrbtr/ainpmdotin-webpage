@@ -298,10 +298,12 @@
   {
     "id": "P31",
     "priority": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "PM-lens rework of /work/lecture-lens/: product bets table with eval evidence and intervals, riskiest assumptions, design review, scorecard with quality metrics",
-    "accredible": "Test results and applied skills (51%, 58%)"
+    "accredible": "Test results and applied skills (51%, 58%)",
+    "commit": "8978191",
+    "doneOn": "2026-11-12"
   },
   {
     "id": "P32",
