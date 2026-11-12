@@ -1,0 +1,143 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import BookCTA from '../../../../components/BookCTA.astro';
+import LectureLensPipeline from '../../../../components/LectureLensPipeline.astro';
+import { breadcrumb, faqSchema } from '../../../../data/site';
+
+const updated = new Date('2026-11-12');
+const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
+const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
+const decisions = [
+  { d: 'The app launches the recorder', why: 'macOS gives recording permission to the app that starts the recorder. Started from a terminal, it inherits no grants and waits on a prompt nobody sees.', ref: 'ADR-002', href: docs + 'decisions/ADR-002-native-app-integration' },
+  { d: 'The app calls the toolkit; it never re-implements it', why: 'One tested implementation of each capability. Every tool takes arguments, prints one JSON document and logs to stderr; spawning costs 100 to 300 ms per call.', ref: 'System design', href: docs + 'decisions/02-system-design' },
+  { d: 'Pause screen capture on protected pages, keep the audio', why: 'Any open screen stream blanks DRM video; audio never does. The lecture stays watchable and the transcript still gets built.', ref: 'ADR-004', href: docs + 'decisions/ADR-004-drm-video-black-screen' },
+  { d: 'Hash first, then structural similarity, to find distinct slides', why: 'Slides from one template look alike to a hash. Counting changed grid cells raised recall on synthetic decks from 0.17–0.58 to 1.00.', ref: 'ADR-005', href: docs + 'decisions/ADR-005-keyframe-ssim' },
+  { d: 'Describe slides with thinking off', why: 'On dense, high-resolution slides, thinking mode invented content in 3 of 5 checks; thinking off in none.', ref: 'ADR-001 (prototype)', href: '/work/lecture-lens/origin/#proved' },
+  { d: 'One model slot shared by generator and judge', why: 'The model server holds one large model. The eval runner swaps the judge in and always swaps back; evals refuse to start during a live class.', ref: 'Architecture', href: docs + 'concepts/architecture' },
+  { d: 'A model inside Chrome as a second engine', why: 'No model server or 20 to 40 GB of weights. Gemini Nano matched the local model on answers (89% vs 91% correct) but not on flashcards.', ref: 'ADR-006', href: docs + 'decisions/ADR-006-in-browser-llm' },
+  { d: 'Rewrite mode-owned settings before every start', why: 'The recorder keeps flags between runs. A site allowlist left from portal mode once made it skip every window in live mode.', ref: 'Architecture', href: docs + 'concepts/architecture' },
+];
+const tradeoffs = [
+  ['Tools called by the app, not rewritten in Swift', '100–300 ms process spawn per call', 'A call becomes latency-critical (then add a daemon)'],
+  ['Polling health every 5–60 s, not push', 'A small CPU cost', 'The recorder exposes the events needed'],
+  ['Append-only JSONL feedback, not SQLite', 'A full scan to read', 'Feedback passes about 50,000 rows'],
+  ['Unsandboxed app', 'No App Store', 'Never, for this use: it launches processes and reads the recorder database'],
+];
+const faq = [
+  { q: 'How does Lecture Lens keep everything on the Mac?', a: 'Every service it talks to listens on 127.0.0.1: the screenpipe recorder on port 3030 and an OpenAI-compatible local model server on 8001. The app sends no telemetry, and course content never leaves the machine. The only network traffic is the lecture itself streaming in.' },
+  { q: 'Why does the SwiftUI app shell out to Python and zsh tools?', a: 'So each capability has one tested implementation. The app runs a tool with arguments, reads exactly one JSON document from stdout and streams stderr into a job log. The cost is 100 to 300 ms of process start-up per call, which is acceptable for builds and evals.' },
+  { q: 'Can Lecture Lens run without a local model server?', a: 'Partly. Lecture Lens Studio runs Gemini Nano inside Chrome, with WebGPU models as a fallback. On the same evaluation suite it was close to the local model on answers and notes, but weaker on flashcards, so cards still use the local model.' },
+];
+const schema = [
+  { '@type': 'TechArticle', headline: 'Lecture Lens architecture: a local-first study pipeline', url: 'https://ainpm.in/work/lecture-lens/architecture/', datePublished: updated.toISOString(), dateModified: updated.toISOString(), author: { '@id': 'https://ainpm.in/about/#ian-pinto' }, isPartOf: { '@id': 'https://ainpm.in/#website' }, about: { '@id': 'https://ainpm.in/work/lecture-lens/#software' }, inLanguage: 'en-IN' },
+  breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Lecture Lens', path: '/work/lecture-lens/' }, { name: 'Architecture', path: '/work/lecture-lens/architecture/' }]),
+  faqSchema(faq),
+];
+const sources = [
+  { href: docs + 'decisions/02-system-design', label: 'Lecture Lens system design (requirements, contracts, trade-offs)' },
+  { href: docs + 'concepts/architecture', label: 'Lecture Lens architecture concepts' },
+  { href: docs + 'decisions/ADR-004-drm-video-black-screen', label: 'ADR-004: protected video goes black while capturing' },
+  { href: docs + 'decisions/ADR-005-keyframe-ssim', label: 'ADR-005: distinct slides with structural similarity' },
+  { href: docs + 'decisions/ADR-006-in-browser-llm', label: 'ADR-006: a model inside the browser' },
+  { href: repo, label: 'Lecture Lens repository' },
+];
+---
+<Base
+  title="Lecture Lens Architecture: Local-First Study Pipeline | AINPM.in"
+  description="How Lecture Lens turns a class into notes and flashcards on one Mac: the capture-to-build pipeline, the decisions behind it, and what each trade-off costs."
+  ogType="article"
+  schema={schema}
+  updated={updated}
+  published={updated}
+  sources={sources}
+  footnote="Independent open-source project, unaffiliated with any course provider or the makers of screenpipe."
+>
+  <div class="wrap crumb"><a href="/">AINPM.in</a> / <a href="/work/">Work</a> / <a href="/work/lecture-lens/">Lecture Lens</a> / Architecture</div>
+  <div class="wrap page-head">
+    <span class="eyebrow">Case study · Architecture · 12 Nov 2026</span>
+    <h1>Lecture Lens architecture: a class becomes study material without leaving the Mac</h1>
+    <p class="answer"><strong>Lecture Lens is a pipeline of four local parts: a recorder that captures screen and audio, a Python toolkit that builds each lecture, a model server with one slot shared by the generator and the judge, and a SwiftUI app that starts and watches them.</strong> Every service listens on 127.0.0.1, so the only traffic is the lecture streaming in.</p>
+    <ul class="toc" aria-label="On this page">
+      <li><a href="#pipeline">Pipeline</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#contract">Tool contract</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+
+  <section id="pipeline">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · Pipeline</span>
+        <h2>Where does the data go?</h2>
+        <p class="muted">Two ways in, one build, five files out. On narrow screens, scroll the diagram sideways.</p>
+      </div>
+      <LectureLensPipeline />
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · Decisions</span>
+        <h2>Which decisions shape it?</h2>
+        <p class="muted">Each one has a written record with the evidence and the alternatives considered.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Decision</th><th scope="col">Why</th><th scope="col">Record</th></tr></thead>
+          <tbody>
+            {decisions.map((x) => (<tr><td><strong>{x.d}</strong></td><td>{x.why}</td><td><a href={x.href}>{x.ref}</a></td></tr>))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="contract">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · Tool contract</span>
+        <h2>How do the app and the toolkit talk?</h2>
+        <p class="muted">Arguments in, exactly one JSON document out on stdout, progress on stderr. Exit code 0 is success, 1 a domain failure (JSON still printed, with <code>"ok": false</code>), 2 a usage error.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Command</th><th scope="col">Returns</th></tr></thead>
+          <tbody>
+            <tr><td><code>lecture doctor --json</code></td><td>Checks for the database, frames, app audio, ffmpeg, the vision model and the vault, each with a fix</td></tr>
+            <tr><td><code>lecture list --json</code></td><td>Sessions with start, end, minutes, frames and whether they are built</td></tr>
+            <tr><td><code>lecture build &lt;id&gt; --json</code></td><td>The lecture folder and its manifest: inputs, models and prompt versions</td></tr>
+            <tr><td><code>study ask "…" --json</code></td><td>The answer, its numbered sources with timestamps, the model and the latency</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-top:20px"><strong>Failure must be visible.</strong> Three of the worst faults were silent: frames skipped while the light stayed green, frame extraction returning nothing, and a restart waiting on a hidden permission prompt. The rule since then: compare attempts with results, and warn instead of returning an empty value.</div>
+    </div>
+  </section>
+
+  <section id="tradeoffs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · Trade-offs</span>
+        <h2>What does each choice cost, and when would it change?</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Chosen</th><th scope="col">Cost</th><th scope="col">Revisit when</th></tr></thead>
+          <tbody>
+            {tradeoffs.map(([a, b, c]) => (<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:16px">How well it works is on the <a href="/work/lecture-lens/#bets">case study's product bets</a>, and how the judge itself was checked is in <a href="/articles/is-your-llm-judge-good-enough/">this builder's note</a>.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">05 · FAQ</span><h2>Frequently asked questions</h2></div>
+      <div class="faq">
+        {faq.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+      <BookCTA id="lecture-lens-architecture" heading="Designing a local-first or private AI product?" text="Book a consultation on architecture, evaluation and trust boundaries before you build." />
+    </div>
+  </section>
+</Base>

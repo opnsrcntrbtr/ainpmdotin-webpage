@@ -1,0 +1,120 @@
+---
+// Lecture Lens pipeline: where data flows from a class to study material, all on 127.0.0.1.
+const box = 'fill:var(--surface);stroke:var(--line);stroke-width:1.5';
+const t = 'font:600 13px var(--sans);fill:var(--ink)';
+const s = 'font:400 12px var(--sans);fill:var(--ink-2)';
+const m = 'font:400 11.5px var(--mono);fill:var(--ink-2)';
+const lbl = 'font:500 11px var(--sans);fill:var(--ink-2)';
+const ln = 'stroke:var(--ink-2);stroke-width:1.5;fill:none';
+---
+<figure class="diagram">
+  <svg viewBox="0 0 960 530" style="max-width:960px" role="img" aria-labelledby="llpT llpD" xmlns="http://www.w3.org/2000/svg">
+    <title id="llpT">Lecture Lens pipeline, from a class to notes and flashcards</title>
+    <desc id="llpD">Video and audio stream in from the course portal or meeting service. Everything else happens inside a boundary on the Mac where traffic stays on 127.0.0.1. The browser lecture sends only audio to the screenpipe recorder because screen capture pauses on protected pages; the meeting app sends frames and audio. The lecture build reads the recorder's database, selects the session, transcribes, picks distinct slides, describes them and writes notes, cards and answers with citations, writing five files per lecture. It calls one local model server slot, or Gemini Nano in Chrome instead. The eval runner scores the outputs and swaps a judge model into the same slot, then back. The SwiftUI app launches the recorder, so permissions belong to it, and runs the build and evals.</desc>
+    <defs>
+      <marker id="llpA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink-2)" /></marker>
+    </defs>
+
+    <!-- outside the Mac -->
+    <rect x="20" y="60" width="120" height="60" rx="10" style={box} />
+    <text x="80" y="86" text-anchor="middle" style={t}>Course portal</text>
+    <text x="80" y="104" text-anchor="middle" style={s}>internet</text>
+    <rect x="20" y="190" width="120" height="60" rx="10" style={box} />
+    <text x="80" y="216" text-anchor="middle" style={t}>Meeting service</text>
+    <text x="80" y="234" text-anchor="middle" style={s}>internet</text>
+
+    <!-- the boundary -->
+    <rect x="185" y="20" width="760" height="500" rx="14" style="fill:none;stroke:var(--teal);stroke-width:1.5;stroke-dasharray:6 5" />
+    <text x="200" y="42" style="font:600 12px var(--sans);fill:var(--teal)">Your Mac · traffic stays on 127.0.0.1 · nothing is uploaded</text>
+
+    <line x1="140" y1="90" x2="203" y2="90" style={ln} marker-end="url(#llpA)" />
+    <text x="172" y="82" text-anchor="middle" style={lbl}>stream</text>
+    <line x1="140" y1="220" x2="203" y2="220" style={ln} marker-end="url(#llpA)" />
+    <text x="172" y="212" text-anchor="middle" style={lbl}>call</text>
+
+    <!-- sources on the Mac -->
+    <rect x="205" y="60" width="150" height="60" rx="10" style={box} />
+    <text x="280" y="86" text-anchor="middle" style={t}>Browser</text>
+    <text x="280" y="104" text-anchor="middle" style={s}>protected player</text>
+    <rect x="205" y="190" width="150" height="60" rx="10" style={box} />
+    <text x="280" y="216" text-anchor="middle" style={t}>Meeting app</text>
+    <text x="280" y="234" text-anchor="middle" style={s}>live class</text>
+
+    <line x1="355" y1="90" x2="428" y2="90" style={ln} marker-end="url(#llpA)" />
+    <text x="392" y="106" text-anchor="middle" style={lbl}>audio only</text>
+    <line x1="355" y1="220" x2="428" y2="220" style={ln} marker-end="url(#llpA)" />
+    <text x="392" y="236" text-anchor="middle" style={lbl}>frames, audio</text>
+
+    <!-- recorder -->
+    <rect x="430" y="55" width="170" height="200" rx="10" style={box} />
+    <text x="515" y="80" text-anchor="middle" style={t}>screenpipe recorder</text>
+    <text x="515" y="106" text-anchor="middle" style={s}>screen frames + OCR</text>
+    <text x="515" y="126" text-anchor="middle" style={s}>App Tap: one app's audio</text>
+    <text x="515" y="160" text-anchor="middle" style="font:600 12px var(--sans);fill:var(--saffron)">Protected page visible:</text>
+    <text x="515" y="178" text-anchor="middle" style="font:400 12px var(--sans);fill:var(--saffron)">screen paused, audio kept</text>
+    <text x="515" y="238" text-anchor="middle" style={m}>SQLite · :3030</text>
+
+    <line x1="600" y1="150" x2="638" y2="150" style={ln} marker-end="url(#llpA)" />
+    <text x="619" y="142" text-anchor="middle" style={lbl}>reads</text>
+
+    <!-- build -->
+    <rect x="640" y="55" width="150" height="200" rx="10" style={box} />
+    <text x="715" y="80" text-anchor="middle" style={t}>lecture build</text>
+    <text x="715" y="106" text-anchor="middle" style={s}>1 select session</text>
+    <text x="715" y="128" text-anchor="middle" style={s}>2 transcribe audio</text>
+    <text x="715" y="150" text-anchor="middle" style={s}>3 pick distinct slides</text>
+    <text x="715" y="172" text-anchor="middle" style={s}>4 describe slides</text>
+    <text x="715" y="194" text-anchor="middle" style={s}>5 notes, cards, answers</text>
+    <text x="715" y="238" text-anchor="middle" style={m}>Python toolkit</text>
+
+    <line x1="790" y1="150" x2="823" y2="150" style={ln} marker-end="url(#llpA)" />
+    <text x="807" y="142" text-anchor="middle" style={lbl}>writes</text>
+
+    <!-- outputs -->
+    <rect x="825" y="55" width="110" height="200" rx="10" style={box} />
+    <text x="880" y="80" text-anchor="middle" style={t}>per lecture</text>
+    <text x="880" y="106" text-anchor="middle" style={m}>transcript.md</text>
+    <text x="880" y="128" text-anchor="middle" style={m}>slides.md</text>
+    <text x="880" y="150" text-anchor="middle" style={m}>notes.md</text>
+    <text x="880" y="172" text-anchor="middle" style={m}>cards.tsv</text>
+    <text x="880" y="194" text-anchor="middle" style={m}>manifest.json</text>
+
+    <!-- model slot -->
+    <line x1="715" y1="257" x2="715" y2="298" style={ln} marker-end="url(#llpA)" marker-start="url(#llpA)" />
+    <text x="722" y="282" style={lbl}>prompts, outputs</text>
+    <rect x="630" y="300" width="170" height="80" rx="10" style="fill:var(--teal-soft);stroke:var(--teal);stroke-width:1.5" />
+    <text x="715" y="325" text-anchor="middle" style={t}>Local model server</text>
+    <text x="715" y="345" text-anchor="middle" style={s}>one slot: generator</text>
+    <text x="715" y="363" text-anchor="middle" style={s}>or judge · :8001</text>
+
+    <!-- studio alternative -->
+    <rect x="460" y="300" width="140" height="80" rx="10" style="fill:none;stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:5 4" />
+    <text x="530" y="325" text-anchor="middle" style={t}>Studio</text>
+    <text x="530" y="345" text-anchor="middle" style={s}>Gemini Nano</text>
+    <text x="530" y="363" text-anchor="middle" style={s}>inside Chrome</text>
+    <line x1="600" y1="340" x2="630" y2="340" style="stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:4 3" />
+    <text x="615" y="332" text-anchor="middle" style={lbl}>or</text>
+
+    <!-- evals -->
+    <line x1="880" y1="257" x2="880" y2="298" style={ln} marker-end="url(#llpA)" />
+    <text x="887" y="282" style={lbl}>scores</text>
+    <rect x="825" y="300" width="110" height="80" rx="10" style={box} />
+    <text x="880" y="325" text-anchor="middle" style={t}>eval runner</text>
+    <text x="880" y="345" text-anchor="middle" style={m}>summary.json</text>
+    <line x1="825" y1="340" x2="802" y2="340" style={ln} marker-end="url(#llpA)" />
+    <text x="627" y="398" style={lbl}>eval runner swaps the judge in, then back</text>
+
+    <!-- app -->
+    <rect x="205" y="430" width="730" height="74" rx="10" style={box} />
+    <text x="570" y="455" text-anchor="middle" style={t}>Lecture Lens.app (SwiftUI)</text>
+    <text x="570" y="475" text-anchor="middle" style={s}>launches the recorder, so macOS permissions belong to the app · runs every tool with arguments in, JSON out</text>
+    <text x="570" y="493" text-anchor="middle" style={s}>health lights come from frames actually written, not from what processes report</text>
+    <line x1="445" y1="428" x2="445" y2="258" style={ln} marker-end="url(#llpA)" />
+    <text x="438" y="350" text-anchor="end" style={lbl}>launches</text>
+    <polyline points="615,428 615,272 660,272 660,258" style={ln} marker-end="url(#llpA)" />
+    <text x="608" y="418" text-anchor="end" style={lbl}>runs build</text>
+    <line x1="880" y1="428" x2="880" y2="383" style={ln} marker-end="url(#llpA)" />
+    <text x="887" y="412" style={lbl}>runs evals</text>
+  </svg>
+  <figcaption>From a class to study material. The only arrows that cross the dashed boundary point in. Screen capture pauses on protected pages; the judge and the generator share one model slot.</figcaption>
+</figure>
