@@ -294,5 +294,45 @@
     "accredible": "Contributions as evidence",
     "commit": "b538d97",
     "doneOn": "2026-11-12"
+  },
+  {
+    "id": "P31",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "PM-lens rework of /work/lecture-lens/: product bets table with eval evidence and intervals, riskiest assumptions, design review, scorecard with quality metrics",
+    "accredible": "Test results and applied skills (51%, 58%)"
+  },
+  {
+    "id": "P32",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Builder's note: is your LLM judge good enough? (judge fixes, kappa vs agreement, checklist)",
+    "accredible": "Test or assessment results (51%)"
+  },
+  {
+    "id": "P33",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Architecture explainer /work/lecture-lens/architecture/ with pipeline diagram, contracts and ADR links",
+    "accredible": "Applied skills in a real-world context (58%)"
+  },
+  {
+    "id": "P34",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Short demo animation of the invented demo lecture on the case study",
+    "accredible": "Applied skills shown, not claimed"
+  },
+  {
+    "id": "P35",
+    "priority": 6,
+    "status": "open",
+    "owner": "claude",
+    "title": "Add the screenpipe PRs as open-PR evidence once Ian opens them",
+    "accredible": "Contributions as evidence"
   }
 ]
