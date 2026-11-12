@@ -346,9 +346,11 @@
   {
     "id": "P36",
     "priority": 6,
-    "status": "open",
+    "status": "done",
     "owner": "claude",
     "title": "Skills matrix and llms.txt: link the new judge note, architecture page and product bets",
-    "accredible": "Clearer skill descriptions (44%)"
+    "accredible": "Clearer skill descriptions (44%)",
+    "commit": "03304f4",
+    "doneOn": "2026-11-12"
   }
 ]
