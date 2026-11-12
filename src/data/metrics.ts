@@ -53,15 +53,17 @@ export const SCORECARDS: Record<string, Scorecard> = {
     ],
   },
   'lecture-lens': {
-    title: 'Measured limits and costs',
-    asOf: 'Project documentation, Oct 2026',
-    note: 'Transcript completeness is from one measured live class, against the meeting app’s own transcript.',
-    source: { label: 'Docs', href: 'https://opnsrcntrbtr.github.io/lecture-lens/' },
+    title: 'Quality, limits and costs',
+    asOf: 'Prototype full eval run, 14 Oct 2026 · project documentation, Oct 2026',
+    note: 'Tick = the 3 Oct baseline, before the judge scored the answer body only; same generator and prompt versions. Eval run summaries are in the private prototype; the harness and statistics are public. Transcript completeness is from one measured live class.',
+    source: { label: 'Evaluation guide', href: 'https://opnsrcntrbtr.github.io/lecture-lens/guides/evaluation' },
     metrics: [
+      { kind: 'rate', label: 'Answers faithful (43 of 43)', value: 1.0, floor: 0.86 },
+      { kind: 'rate', label: 'Answers relevant (41 of 43)', value: 0.953, floor: 0.721 },
+      { kind: 'rate', label: 'Flashcard quality (10 of 15)', value: 0.667, weak: true },
       { kind: 'rate', label: 'Words captured (one class)', value: 0.75, weak: true, display: '~75%' },
       { kind: 'stat', label: 'Bytes uploaded', value: '0' },
       { kind: 'stat', label: 'Build time, 90-min class', value: '~10 min' },
-      { kind: 'stat', label: 'Smoke-eval cases', value: '6' },
     ],
   },
   codesearchnet: {

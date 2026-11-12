@@ -7,7 +7,7 @@ import BookCTA from '../../../components/BookCTA.astro';
 import ProjectCards from '../../../components/ProjectCards.astro';
 import { breadcrumb, faqSchema } from '../../../data/site';
 
-const updated = new Date('2026-11-11');
+const updated = new Date('2026-11-12');
 const repo = 'https://github.com/opnsrcntrbtr/lecture-lens';
 const docs = 'https://opnsrcntrbtr.github.io/lecture-lens/';
 
@@ -112,6 +112,46 @@ const sources = [
             <tr><td>Change a prompt or a model</td><td>Runs a local evaluation so you can see whether quality moved</td></tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="bets">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Product bets</span>
+        <h2>What did I bet on, and what did the evidence say?</h2>
+        <p class="muted">Each bet had a measure before it had a feature. Numbers are pass counts from the prototype's eval runs, with 95% Wilson intervals because the samples are small.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Bet</th><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">Decision</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Fix the measurement before the model</strong></td><td>Answer relevancy and faithfulness, 43 questions, same generator and prompts</td><td>Relevancy 31 → 41 of 43 (72% → 95%; intervals 57–83% and 85–99% don't overlap). Faithfulness 37 → 43 of 43, 3 Oct to 14 Oct</td><td>Kept: the judge scores the answer body, not its source list. Errored judge calls are counted apart from failures (10 Oct)</td></tr>
+            <tr><td><strong>Notes you test yourself on beat summaries</strong></td><td>Notes coverage and faithfulness, 15 cases</td><td>15 of 15 on both (3 Oct and 14 Oct)</td><td>Shipped recall-first notes: three questions before the notes</td></tr>
+            <tr><td><strong>Flashcards worth reviewing</strong></td><td>G-Eval card quality, 15 cases</td><td>11 then 10 of 15 (67%, interval 42–85%)</td><td>Weak spot. Near-duplicate cards dropped (10 Oct); quality is the next prompt target</td></tr>
+            <tr><td><strong>Say "not covered yet" instead of guessing</strong></td><td>Questions the class had not answered yet, 8 cases</td><td>Hedging rose from 2 to 7 of 8, but agreement with the reference fell from 6 to 1 of 8</td><td>No winner on 8 cases. The suite exposes a real trade-off, so it stays and grows</td></tr>
+            <tr><td><strong>Questions to ask in a live class</strong></td><td>24 suggested questions</td><td>Teaching value 24 of 24; answerable from the class so far 10 of 24 (42%)</td><td>Open: good questions, but too many ask about material not yet shown</td></tr>
+            <tr><td><strong>A model inside Chrome instead of a model server</strong></td><td>Same suite, Gemini Nano, 36 questions and 12 card sets (5 Nov)</td><td>Correctness 32 of 36 (89%) vs 39 of 43 (91%) locally; notes 12 of 12; card quality 3 of 12</td><td>Studio ships for answers and notes; cards stay on the local model for now (<a href={docs + 'decisions/ADR-006-in-browser-llm'}>ADR-006</a>)</td></tr>
+            <tr><td><strong>Fast slide reading without "thinking"</strong></td><td>Slide-vision checks on dense, high-resolution slides</td><td>Invented content in 0 of 5 hallucination checks with thinking off, 3 of 5 with thinking on</td><td>Thinking off for slides (ADR-001)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid g2" style="margin-top:20px">
+        <div class="card">
+          <h3>Riskiest assumptions, and how they are tested</h3>
+          <ul class="md art-list">
+            <li><strong>The local judge is good enough to gate a release.</strong> It scored 100% on the first judge benchmark, which more likely means the benchmark was easy. A blind holdout gave 80% agreement and kappa 0.44, so the judge informs decisions but does not block them yet. <a href="/articles/is-your-llm-judge-good-enough/">How the judge was measured</a></li>
+            <li><strong>The recorder stays stable.</strong> Lecture Lens depends on a capture product it does not control, so the app checks frames written, not what processes report.</li>
+            <li><strong>I will actually review the cards.</strong> The review log exists to find out; if it stays empty, cards are the wrong output.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Design review of my own app</h3>
+          <p>I reviewed the six SwiftUI screens against usability heuristics and found 11 issues: 2 blockers, 5 major and 4 minor. The worst was a green "frames arriving" light driven by process status while nothing was being saved.</p>
+          <p>Three fixes (light driven by frames saved, no eval runs during a live class, show the settings in effect) cover every fault seen in the first live class.</p>
+          <p><a class="more-link" href={docs + 'project/design-review'}>Read the design review</a></p>
+        </div>
       </div>
     </div>
   </section>
