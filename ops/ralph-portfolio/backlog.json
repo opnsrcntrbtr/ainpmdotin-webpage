@@ -252,7 +252,7 @@
     "priority": 5,
     "status": "open",
     "owner": "ian",
-    "title": "Decide whether to open the screenpipe upstream PRs after the five fixes in ops/ralph-portfolio/drafts/screenpipe-pr.md (rebase, remove platform names from code and commit message, noreply author, PR template, re-run tests)",
+    "title": "Write the two screenpipe PR descriptions in your own words and open them from the compare links in ops/ralph-portfolio/drafts/screenpipe-pr.md (branches fixed, tested and pushed 12 Nov)",
     "accredible": "Contributions as evidence"
   },
   {
@@ -284,5 +284,13 @@
     "accredible": "Verification (84% suspect exaggeration)",
     "commit": "b163424",
     "doneOn": "2026-11-12"
+  },
+  {
+    "id": "P30",
+    "priority": 5,
+    "status": "open",
+    "owner": "claude",
+    "title": "Apply the five PR fixes, re-run tests on current upstream, push pr/app-tap and pr/drm-pages to fork opnsrcntrbtr/screenpipe-contrib",
+    "accredible": "Contributions as evidence"
   }
 ]

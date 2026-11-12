@@ -1,4 +1,56 @@
-# Upstream screenpipe pull requests — review of the draft (not opened)
+# Upstream screenpipe pull requests — ready for Ian to open
+
+## Status, 12 Nov 2026: all five fixes done, branches pushed, not opened
+
+screenpipe's CONTRIBUTING.md says "the accountable contributor must personally make the
+submission", and the problem statement and rationale must be in your own words. So the loop
+stopped before opening. You write the description from the facts below and click
+**Create pull request**.
+
+| | PR 1: App Tap | PR 2: configurable DRM pages |
+|---|---|---|
+| Branch (fork `opnsrcntrbtr/screenpipe-contrib`) | `pr/app-tap` (f71e4a21d) | `pr/drm-pages` (515810ac0) |
+| Base | upstream `main` 68689f835 (11 Nov 2026) | same |
+| Open it | https://github.com/screenpipe/screenpipe/compare/main...opnsrcntrbtr:screenpipe-contrib:pr/app-tap?expand=1 | https://github.com/screenpipe/screenpipe/compare/main...opnsrcntrbtr:screenpipe-contrib:pr/drm-pages?expand=1 |
+| Tests run 12 Nov on that base | `cargo test -p screenpipe-audio --lib app_tap` → 4 passed | `cargo test -p screenpipe-engine --lib drm_detector` → 20 passed, 2 ignored |
+| Author | noreply address (personal email removed) | noreply address |
+
+Fixes applied:
+1. Rebased onto today's upstream. In `manager.rs`, `start_app_tap_device()` now calls
+   upstream's `ensure_recording_handle()` and rolls back `session_devices` on failure, the same
+   way `start_session_device` does.
+2. Course platform, video vendor and private app names removed from code, tests and commit
+   messages (hosts are now `example.edu/courses/...` and `videos.example.org`).
+3. Author rewritten to `7788571+opnsrcntrbtr@users.noreply.github.com`.
+4. Template mapping below.
+5. Tests re-run on the rebased code (commands above).
+
+Local worktrees: `~/screenpipe-pr` (pr/app-tap) and `~/screenpipe-pr2` (pr/drm-pages).
+Yesterday's trial worktrees are in `/tmp/sp-pr*`.
+
+### Filling in the template (your words; these are prompts, not text)
+
+- **title:** `[pr] audio: record one app's own output (app tap)` and
+  `[pr] drm: configurable DRM pages, keep audio while paused, release capture immediately`
+- **description / related issue:** open an issue first if you want maintainers' view on
+  env vars vs settings, then link it. Otherwise write `none`.
+- **AI tool(s):** Claude (Claude Code / Cowork). **Autonomy level:** `agent`, because it
+  planned and edited files, rebased and ran tests. **What I personally verified:** only what
+  you have checked yourself, e.g. read the diff, re-ran the test command, and the live check on
+  30 Sep 2026 (video visible, audio transcribed).
+- Tick both ownership boxes only if they are true when you submit.
+- **evidence type:** PR 1 = Backend change (the tests above). PR 2 = UI or behaviour change +
+  Backend change. PR 2 needs a before/after recording: a browser page with protected video on
+  a demo site, black while capturing (before) and visible with capture paused (after). Attach
+  it to the PR; never commit it. No course page.
+- **how to test:** the exact commands above, plus for PR 2:
+  `SCREENPIPE_DRM_URLS=<demo host> SCREENPIPE_DRM_KEEP_AUDIO=1` with `--pause-on-drm-content`.
+- **desktop app checklist:** not applicable (no tauri commands changed).
+- PR 1 and PR 2 both touch `screenpipe-engine.rs`; whichever lands second needs a small rebase.
+
+---
+
+## Review of the first draft (11 Nov)
 
 > Reviewed 11 Nov 2026 against upstream `main` at 79c05c3fc (same day). Nothing has been
 > pushed, rebased or opened. Source: branch `feat/lecture-capture` in ~/screenpipe-local
